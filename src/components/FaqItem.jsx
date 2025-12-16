@@ -4,16 +4,15 @@ const FaqItem = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <div className="border border-main-color rounded py-3">
-      <button 
-        onClick={() => setIsOpen(!isOpen)} 
-        className="w-full flex justify-between items-center"
+    <div className="relative w-fit border border-main-color rounded-lg py-3 transition px-6 mb-4">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full font-medium text-main-color transition duration-300"
       >
-        <span className="font-medium text-main-color">{question}</span>
-        <span className="text-xl text-main-color">{isOpen ? "▲" : "▼"}</span>
+        {question}
       </button>
       {isOpen && (
-        <p className="mt-2 text-sm text-main-color">{answer}</p>
+        <p className="mt-2 text-sm text-main-color">{answer}</p> 
       )}
     </div>
   )

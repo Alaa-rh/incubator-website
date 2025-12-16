@@ -5,11 +5,11 @@ import logo from "../../assets/images/logo.png"
 const quickLinks = [
   { label: "الصفحة الرئيسية", to: "/", scrollId: "home" },
   { label: "من نحن", to: "/about", scrollId: "about" },
-  { label: "أهدافنا", to: "/", scrollId: "goals" },
-  { label: "أدوار الأعضاء", to: "/", scrollId: "roles" },
+  { label: "الأهداف", to: "/", scrollId: "goals" },
+  { label: "أدوار الحاضنة", to: "/", scrollId: "roles" },
   { label: "كن شريكاً بنجاحنا", to: "/", scrollId: "partners" },
   { label: "المعرض", to: "/about", scrollId: "exhibition" },
-  { label: "مراحل الأهداف", to: "/", scrollId: "stages" },
+  { label: "مراحل الاحتضان", to: "/", scrollId: "stages" },
   { label: "الخدمات", to: "/about", scrollId: "services" },
   { label: "الشروط والأحكام", to: "/", scrollId: "terms" },
   { label: "الأسئلة الشائعة", to: "/", scrollId: "faq" }
@@ -25,7 +25,7 @@ const joinLinks = [
 const Footer = () => {
   return (
     <footer className="bg-main-color text-white py-10 px-6 font-bold">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
          {/*اللوغو و التواصل*/}
         <div>
             <img src={logo} alt="Logo" className="w-45 h-35 mb-6" />
@@ -41,24 +41,23 @@ const Footer = () => {
                 <i className="fab fa-google"></i>
               </a>
             </div>
-        </div>
-      
-
+        </div> 
+        {/* انضم إلينا */}
+        <div>
+          <h3 className="text-second-color text-center text-lg font-bold mb-2">انضم إلينا</h3>
+          <NavLinksGroup options={joinLinks} className="flex flex-col items-center gap-2" />
+        </div> 
         {/* الوصول السريع */}
         <div>
-          <h3 className="text-second-color text-lg font-bold mb-2">الوصول السريع</h3>
-          <NavLinksGroup options={quickLinks} className="flex flex-col gap-2" />
+          <h3 className="text-second-color text-lg text-center font-bold mb-2">الوصول السريع</h3>
+          <NavLinksGroup options={quickLinks} className="flex flex-col items-center gap-2" />
         </div>
         {/* العنوان */}
-        <div>
+        <div className="text-center">
           <h3 className="text-second-color text-lg font-bold mb-2">العنوان</h3>
           <p>سوريا، جامعة حمص<br />خلف كلية العلوم</p>
         </div>
-       {/* انضم إلينا */}
-        <div>
-          <h3 className="text-second-color text-lg font-bold mb-2">انضم إلينا</h3>
-          <NavLinksGroup options={joinLinks} className="flex flex-col gap-2" />
-        </div> 
+      
         </div>
     </footer>
   )
