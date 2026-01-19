@@ -1,14 +1,14 @@
 import React from "react"
 import Footer from "./Footer"
 
-const Layout = ({ children, header }) => {
+const MainLayout = ({ children, header }) => {
   return (
     <div className="flex flex-col min-h-screen bg-white">
       {/* الهيدر */}
       {header}
 
       {/* المحتوى */}
-      <main className="flex-1">
+      <main className="flex-1 mt-20">
         {children}
       </main>
 
@@ -18,4 +18,4 @@ const Layout = ({ children, header }) => {
   )
 }
 
-export default Layout
+export default MainLayout

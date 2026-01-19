@@ -1,17 +1,29 @@
-import React from "react"
 import { Link, useLocation } from "react-router-dom"
 
-const NavLinkUniversal = ({ label, to, scrollId, className }) => {  
+const NavLinkUniversal = ({
+  label,
+  to,
+  scrollId,
+  className = "",
+  variant = "default",
+  isActive
+}) => {
   const location = useLocation()
 
+  const activeClass =
+    variant === "landing"
+      ? "text-second-color font-bold"
+      : variant === "mainpage"
+      ? "font-bold border-b-2 border-main-color"
+      : "text-second-color"
   const handleClick = (e) => {
-    // إذا الرابط داخلي بنفس الصفحة
     if (scrollId && location.pathname === to) {
       e.preventDefault()
       const el = document.getElementById(scrollId)
       if (el) {
         el.scrollIntoView({ behavior: "smooth" })
       }
+      window.history.replaceState(null, "", `${to}#${scrollId}`)
     }
   }
 
@@ -19,7 +31,11 @@ const NavLinkUniversal = ({ label, to, scrollId, className }) => {
     <Link
       to={scrollId ? `${to}#${scrollId}` : to}
       onClick={handleClick}
-      className={`px-3 py-2 text-lg text-white transition ${className}`}
+      className={`
+        px-3 py-2 text-lg transition
+        ${isActive ? activeClass : ""}
+        ${className}
+      `}
     >
       {label}
     </Link>

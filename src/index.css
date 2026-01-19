@@ -7,7 +7,9 @@
     --main-color:#35557C;
     --secondary-color:#00A6A6;
     --third-color:#D9D9D9;
-    --white-color:#FFFFFF;
+    --white-color:#F3F3F3;
+    --red-color:#E30909;
+    --green-color:#43A047;
 
   }}
 @layer utilities {
@@ -33,11 +35,26 @@
   .bg-third-color {
     background-color: var(--third-color);
   }
+  .bg-white-color {
+    background-color: var(--white-color);
+  }
+  .bg-red-color {
+    background-color: var(--red-color);
+  }
+  .bg-green-color {
+    background-color: var(--green-color);
+  }
   .text-main-color {
     color: var(--main-color);
   }
   .text-second-color {
     color: var(--secondary-color);
+  }
+  .text-red-color {
+    color: var(--red-color);
+  }
+  .text-green-color {
+    color: var(--green-color);
   }
   .border-main-color {
     border-color: var(--main-color);
@@ -48,13 +65,34 @@
   .section-bg{
     background-color: var(--third-color);
   }
-  .scene-bg{
-    background-image: url('./assets/images/blob-scene-haikei.png');
+  .services-bg{
+    background-image: url('./assets/images/Services.png');
     background-size: cover;
+    background-repeat: no-repeat;
   }
-  .wave-bg{
-    background-image: url('./assets/images/wave-haikei.png');
+  .partners-bg{
+    background-image: url('./assets/images/partners.png');
     background-size: cover;
+    background-repeat: no-repeat;
+  }
+  .goal p{
+    counter-increment: number;
+  }
+  .goal p::before{
+    content: counter(number);
+    border-radius: 50%;
+    background-color: var(--secondary-color);
+    color: white;
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    right: -64px;
+    top: -32px;
+    text-align: center;
+    line-height: 3;
+    font-weight: bold;
+    font-size: 32px;
+
   }
 
 }

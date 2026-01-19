@@ -1,0 +1,39 @@
+import React from 'react'
+import StageCard from '../components/StageCard';
+import Boy from '../assets/images/Boy.png';
+
+const Stages = ({id}) => {
+  return (
+    <div className='mb-40' id={id}>
+         <div className='container mx-25 h-[50%]'> 
+         <h1 className='text-second-color font-semibold text-[40px] p-5 my-10'>مراحل الاحتضان</h1>
+         <div className='flex gap-5'>
+         <StageCard 
+         title={"المرحلة الرابعة"}
+         description={"المعرض السنوي لعرض المشاريع امام المستثمرين والشركات والجهات الداعمة"}
+         className={"justify-start"} >
+            <div className='text-[100px]'>🏆</div>
+         </StageCard>
+         <StageCard 
+         title={"المرحلة الثالثة"}
+         description={"المعرض السنوي لعرض المشاريع امام المستثمرين والشركات والجهات الداعمة"}
+         className={"justify-center"} />
+         <StageCard 
+         title={"المرحلة الثانية"}
+         description={"المعرض السنوي لعرض المشاريع امام المستثمرين والشركات والجهات الداعمة"}
+         className={"justify-center"} >
+            <img src={Boy} alt="boy" className='w-50 h-50 m-0 p-0' />
+         </StageCard>
+
+         <StageCard 
+         title={"المرحلة الأولى"}
+         description={"المعرض السنوي لعرض المشاريع امام المستثمرين والشركات والجهات الداعمة"}
+          className={" justify-end mt-100"}/>
+         </div>
+         </div>
+
+    </div>
+  )
+}
+
+export default Stages

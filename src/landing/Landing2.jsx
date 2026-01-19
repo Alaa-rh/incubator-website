@@ -1,15 +1,21 @@
 import { useEffect } from "react"
 import { useLocation } from "react-router-dom"
-import Layout from "../components/Layout/Layout"
+import MainLayout from "../components/Layout/MainLayout"
 import Header from "../components/Layout/Header";
+import About from "./About";
+import Partners from "./Partners";
+import Services from "./Services";
+import Stages from "./Stages";
+import Exhibition from "./Exhibition";
+import Activities from "./Activities";
 
 const navLinkOptions = [
   { label: "من نحن", to: "/about", scrollId: "about" },
   { label: "المعرض", to: "/about", scrollId: "exhibition" },
+  { label: "النشاطات", to: "/about", scrollId: "activities" },
+  { label: "كن شريك نجاحنا", to: "/about", scrollId: "partners" },
   { label: "الخدمات", to: "/about", scrollId: "services" },
   { label: "مراحل الاحتضان", to: "/about", scrollId: "stages" },
-  { label: "كن شريك نجاحنا", to: "/about", scrollId: "partners" },
-
 
 ]
 
@@ -25,9 +31,15 @@ const Landing2 = () => {
   }, [location])
 
   return (
-    <Layout header={<Header navOptions={navLinkOptions} />}>
-      
-    </Layout>
+    <MainLayout header={<Header navOptions={navLinkOptions} />}>
+      <About id="about" />
+      <Exhibition id="exhibition" />
+      <Activities id="activities" />
+      <Partners id="partners" />
+      <Services id="services" />
+      <Stages id="stages" />
+
+    </MainLayout>
   )
 }
 

@@ -1,13 +1,17 @@
 import { useEffect } from "react"
 import { useLocation } from "react-router-dom"
-import Layout from "../components/Layout/Layout"
+import MainLayout from "../components/Layout/MainLayout"
 import Header from "../components/Layout/Header";
-
+import Home from "./Home";
+import Roles from "./Roles";
+import Goals from "./Goals";
+import FaQuestions from "./FaQuestions";
+import Terms from "./Terms";
 const navLinkOptions = [
-  { label: "الصفحة الرئيسية", to: "/", scrollId: "home" },
+  { label: "الصفحة الرئيسية", to: "/", scrollId: "home" }, 
+  { label: "أدوار الحاضنة", to: "/", scrollId: "roles" },
   { label: "من نحن", to: "/about", scrollId: "about" },
   { label: "الأهداف", to: "/", scrollId: "goals" },
-  { label: "أدوار الحاضنة", to: "/", scrollId: "roles" },
   { label: "الأسئلة الشائعة", to: "/", scrollId: "faq" },
   { label: "الشروط والأحكام", to: "/", scrollId: "terms" },
 ]
@@ -25,9 +29,14 @@ const Landing1 = () => {
 
   return (
     <>
-      <Layout header={<Header navOptions={navLinkOptions} />}>
+      <MainLayout header={<Header navOptions={navLinkOptions} />}>
+      <Home id="home" />
+      <Roles id="roles" />
+      <Goals id="goals" />
+      <FaQuestions id="faq" />
+      <Terms id="terms" />
      
-    </Layout>
+    </MainLayout>
     </>
   )
 }

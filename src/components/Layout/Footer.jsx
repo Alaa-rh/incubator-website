@@ -1,7 +1,9 @@
 import React from "react"
 import NavLinksGroup from "../NavLinksGroup"
 import logo from "../../assets/images/logo.png"
-
+import Facebook from "../../assets/images/Facebook.png"
+import Google from "../../assets/images/Google.jpeg"
+import Instagram from "../../assets/images/Instagram.jpeg"
 const quickLinks = [
   { label: "الصفحة الرئيسية", to: "/", scrollId: "home" },
   { label: "من نحن", to: "/about", scrollId: "about" },
@@ -30,31 +32,31 @@ const Footer = () => {
         <div>
             <img src={logo} alt="Logo" className="w-45 h-35 mb-6" />
             <p> تواصل معنا على الرقم : <br /> 0989838930</p>
-            <div className="flex gap-3 mt-2">
+            <div className="flex gap-3 mt-10">
               <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
-                
-              </a>
-              <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
-                <i className="fab fa-instagram"></i>
+                <img src={Facebook} alt="faceBook-Logo" className="w-10 h-10" />
               </a>
               <a href="https://www.google.com" target="_blank" rel="noopener noreferrer">
-                <i className="fab fa-google"></i>
+                <img src={Google} alt="Google-Logo"  className="w-10 h-10"/>
+              </a>
+              <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+                <img src={Instagram} alt="Instagram-Logo"  className="w-12 h-12"/>
               </a>
             </div>
         </div> 
         {/* انضم إلينا */}
         <div>
-          <h3 className="text-second-color text-center text-lg font-bold mb-2">انضم إلينا</h3>
+          <h3 className="text-second-color text-[30px] text-center text-lg font-bold mb-2">انضم إلينا</h3>
           <NavLinksGroup options={joinLinks} className="flex flex-col items-center gap-2" />
         </div> 
         {/* الوصول السريع */}
         <div>
-          <h3 className="text-second-color text-lg text-center font-bold mb-2">الوصول السريع</h3>
+          <h3 className="text-second-color text-[30px] text-center text-lg font-bold mb-2">الوصول السريع</h3>
           <NavLinksGroup options={quickLinks} className="flex flex-col items-center gap-2" />
         </div>
         {/* العنوان */}
         <div className="text-center">
-          <h3 className="text-second-color text-lg font-bold mb-2">العنوان</h3>
+          <h3 className="text-second-color text-[30px] font-bold mb-2">العنوان</h3>
           <p>سوريا، جامعة حمص<br />خلف كلية العلوم</p>
         </div>
       

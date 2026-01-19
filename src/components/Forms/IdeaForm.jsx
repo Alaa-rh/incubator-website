@@ -96,6 +96,7 @@ const IdeaForm = () => {
               value={form.tel}
               onChange={handleChange}
               error={errors.tel}
+              className="text-right"
             />
             <Input
               label="المحافظة"

@@ -4,12 +4,12 @@ import logo from "../../assets/images/logo.png"
 import '../../index.css';
 const Header = ({ navOptions }) => {
   return (
-    <header className="bg-main-color text-white px-6 py-4 flex items-center justify-between">
+    <header className="bg-main-color text-white px-6 py-2 mb-4 flex items-center justify-between fixed top-0 left-0 w-full z-50 shadow-lg">
       <div className="flex items-center gap-2">
         <img src={logo} alt="logo" className="w-20 h-20 object-contain" />
       </div>
 
-      <NavLinksGroup options={navOptions} className="flex gap-5" />
+      <NavLinksGroup options={navOptions} variant="landing" className="container flex justify-center gap-6 font-medium text-[30px]" />
 
       <NavLinkUniversal
         label="لنبدأ معاً"

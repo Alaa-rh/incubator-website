@@ -54,7 +54,7 @@ const VolunteerForm = ({ onCancel }) => {
     if (!form.expertition) newErrors.expertition = "يرجى إدخال الاختصاص"
     if (!form.volunteeringGoal) newErrors.volunteeringGoal = "يرجى إدخال الهدف من التطوع"
 
-    // ✅ تحقق من التوفر: لازم على الأقل يوم واحد فيه فترة مفعّلة وكاملة
+    //
     const availabilityValues = Object.values(form.availability || {})
     const hasAvailability = availabilityValues.some(day =>
       day.from && day.to && day.active
