@@ -3,8 +3,9 @@ import girl from "../assets/images/girl.jpg"
 import React, { useLocation } from "react"    
 const roleOptions = {
   visitor: [
-    { label: "الرئيسية", link: "/" },
-    { label: "تسجيل الدخول", link: "/login" },
+    { label: "تعديل الملف الشخصي", link: "/profile" },
+    { label: "تواصل معنا", link: "/contact" },
+    { label: "إعدادات الحساب", link: "/settings" },
   ],
   // باقي الأدوار...
 }

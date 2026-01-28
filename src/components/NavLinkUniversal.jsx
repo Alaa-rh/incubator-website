@@ -14,7 +14,7 @@ const NavLinkUniversal = ({
     variant === "landing"
       ? "text-second-color font-bold"
       : variant === "mainpage"
-      ? "font-bold border border-b-2 border-main-color"
+      ? "font-bold text-main-color after:absolute after:left-0 after:-bottom-1 after:w-full after:h-[2px] after:bg-main-color after:content-['']"
       : "text-second-color"
   const handleClick = (e) => {
     if (scrollId && location.pathname === to) {
@@ -32,7 +32,7 @@ const NavLinkUniversal = ({
       to={scrollId ? `${to}#${scrollId}` : to}
       onClick={handleClick}
       className={`
-        px-3 py-2 text-lg transition
+        relative inline-block px-3 py-2 text-lg transition
         ${isActive ? activeClass : ""}
         ${className}
       `}
@@ -43,3 +43,5 @@ const NavLinkUniversal = ({
 }
 
 export default NavLinkUniversal
+
+

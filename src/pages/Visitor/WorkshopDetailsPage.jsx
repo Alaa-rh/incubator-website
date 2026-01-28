@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
-import WorkshopDetailsCard from "../components/WorkshopDetailsCard"
-import workshop1 from "../assets/images/workShop1.png"
-import workshop2 from "../assets/images/workShop2.png"
+import WorkshopDetailsCard from "../../components/WorkshopDetailsCard"
+import workshop1 from "../../assets/images/workShop1.png"
+import workshop2 from "../../assets/images/workShop2.png"
 
 const WorkshopDetailsPage = () => {
   const { id } = useParams()

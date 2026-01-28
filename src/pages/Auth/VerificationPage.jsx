@@ -1,7 +1,6 @@
-import Input from '../components/Input';
-import Button from '../components/Button';
-import '../index.css'
-import Entercode from '../assets/images/PIN.png'
+import Input from '../../components/Input';
+import Button from '../../components/Button';
+import Entercode from '../../assets/images/PIN.png'
 
 import React, { useState} from 'react';
 

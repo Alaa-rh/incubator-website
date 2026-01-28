@@ -1,10 +1,9 @@
-import Input from "../components/Input";
-import Button from "../components/Button";
-import '../index.css'
+import Input from "../../components/Input";
+import Button from "../../components/Button";
 import { GiBoltEye } from "react-icons/gi";
 import { FcGoogle } from "react-icons/fc";
-import logIn from "../assets/images/logIn.png"
-import NavLinkUniversal from "../components/NavLinkUniversal";
+import logIn from "../../assets/images/logIn.png"
+import NavLinkUniversal from "../../components/NavLinkUniversal";
 const LoginPage = (handleSave) => {
   return (
     <div className="flex flex-col md:flex-row h-screen w-full font-sans">

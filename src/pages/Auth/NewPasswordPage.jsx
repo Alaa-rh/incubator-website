@@ -1,9 +1,8 @@
 import React from 'react';
-import Input from '../components/Input';
-import Button from '../components/Button';
+import Input from '../../components/Input';
+import Button from '../../components/Button';
 import { LuEyeClosed } from "react-icons/lu";
-import '../index.css'
-import  newpassword  from '../assets/images/newPassword.png'
+import  newpassword  from '../../assets/images/newPassword.png'
 const NewPasswordPage= (handleSave) => {
   return (
     <div className="flex h-screen w-full overflow-hidden font-sans">

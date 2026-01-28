@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
-import AllActivities from '../components/AllActivities';
-import SearchBar from '../components/SearchBar';
-import NavLinkUniversal from '../components/NavLinkUniversal';
-import activity1 from '../assets/images/activity-1.jpg';
-import activity2 from '../assets/images/activity-2.jpg';
-import activity3 from '../assets/images/activity-3.png';
+import AllActivities from '../../components/AllActivities';
+import SearchBar from '../../components/SearchBar';
+import activity1 from '../../assets/images/activity-1.jpg';
+import activity2 from '../../assets/images/activity-2.jpg';
+import activity3 from '../../assets/images/activity-3.png';
 import { LuFileStack } from "react-icons/lu";
 import { RxCountdownTimer } from "react-icons/rx";
-import CategoryFilterBar from '../components/CategoryFilterBar';
+import CategoryFilterBar from '../../components/CategoryFilterBar';
 import { IoRocketOutline } from "react-icons/io5";
 import { MdDoneAll } from "react-icons/md";
 const ActivitiesPage = () => {

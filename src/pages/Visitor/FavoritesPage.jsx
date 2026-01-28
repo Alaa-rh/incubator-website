@@ -1,6 +1,6 @@
-import { useFavorites } from "../hooks/useFavorites"
-import ProjectCard from "../components/ProjectCard"
-import SearchBar from "../components/SearchBar";
+import { useFavorites } from "../../hooks/useFavorites"
+import ProjectCard from "../../components/ProjectCard"
+import SearchBar from "../../components/SearchBar";
 
 const FavoritesPage = () => {
   const { favorites } = useFavorites()

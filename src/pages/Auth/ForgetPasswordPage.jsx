@@ -1,7 +1,6 @@
-import Input from '../components/Input';
-import Button from '../components/Button';
-import '../index.css'
-import forgetPassword from '../assets/images/forgetPassword.png'
+import Input from '../../components/Input';
+import Button from '../../components/Button';
+import forgetPassword from '../../assets/images/forgetPassword.png'
 
 const ForgotPasswordPage = (handleSave) => {
   return (

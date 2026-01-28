@@ -1,9 +1,8 @@
-import Input from '../components/Input';
-import Button from '../components/Button';
+import Input from '../../components/Input';
+import Button from '../../components/Button';
 import { LuEyeClosed } from "react-icons/lu";
-import '../index.css'
-import  signUp  from '../assets/images/signUp.png'
-import NavLinkUniversal from '../components/NavLinkUniversal';
+import  signUp  from '../../assets/images/signUp.png'
+import NavLinkUniversal from '../../components/NavLinkUniversal';
 import React from 'react';
 const SignupPage = (handleSave) => {
   return (

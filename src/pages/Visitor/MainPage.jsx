@@ -1,14 +1,14 @@
 import React from 'react'
-import NavLinkUniversal from '../components/NavLinkUniversal';
-import Button from '../components/Button';
-import workShop1 from "../assets/images/workShop1.png"
-import workShop2 from "../assets/images/workShop2.png"
-import workShop3 from "../assets/images/workShop3.png"
-import workShop4 from "../assets/images/workShop4.png"
-import Exhibition1 from "../assets/images/Exhibition1.jpg"
-import Exhibition2 from "../assets/images/exh2.jpg"
-import Exhibition3 from "../assets/images/exh3.jpg"
-import Exhibition4 from "../assets/images/exh4.jpg"
+import NavLinkUniversal from '../../components/NavLinkUniversal';
+import Button from '../../components/Button';
+import workShop1 from "../../assets/images/workShop1.png"
+import workShop2 from "../../assets/images/workShop2.png"
+import workShop3 from "../../assets/images/workShop3.png"
+import workShop4 from "../../assets/images/workShop4.png"
+import Exhibition1 from "../../assets/images/Exhibition1.jpg"
+import Exhibition2 from "../../assets/images/exh2.jpg"
+import Exhibition3 from "../../assets/images/exh3.jpg"
+import Exhibition4 from "../../assets/images/exh4.jpg"
 
 const MainPage = () => {
   const workshops = [

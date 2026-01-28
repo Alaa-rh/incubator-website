@@ -1,7 +1,7 @@
 import React from 'react'
-import SearchBar from '../components/SearchBar';
-import Projects from '../components/Projects';
-import CategoryFilterBar from '../components/CategoryFilterBar';
+import SearchBar from '../../components/SearchBar';
+import Projects from '../../components/Projects';
+import CategoryFilterBar from '../../components/CategoryFilterBar';
 import { useState } from 'react';
 import { LuFileStack } from "react-icons/lu";
 import { GrTechnology } from "react-icons/gr";
