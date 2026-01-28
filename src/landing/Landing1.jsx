@@ -7,6 +7,7 @@ import Roles from "./Roles";
 import Goals from "./Goals";
 import FaQuestions from "./FaQuestions";
 import Terms from "./Terms";
+import Footer from "../components/Layout/Footer";
 const navLinkOptions = [
   { label: "الصفحة الرئيسية", to: "/", scrollId: "home" }, 
   { label: "أدوار الحاضنة", to: "/", scrollId: "roles" },
@@ -29,7 +30,7 @@ const Landing1 = () => {
 
   return (
     <>
-      <MainLayout header={<Header navOptions={navLinkOptions} />}>
+      <MainLayout header={<Header navOptions={navLinkOptions}/>}  footer={<Footer />}>
       <Home id="home" />
       <Roles id="roles" />
       <Goals id="goals" />

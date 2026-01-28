@@ -14,7 +14,7 @@ const NavLinksGroup = ({ options, className = "", variant= "default" }) => {
 
       const rect = section.getBoundingClientRect()
 
-      const triggerLine = window.innerHeight * 0.20
+      const triggerLine = window.innerHeight * 0.5
 
       if (rect.top <= triggerLine && rect.bottom >= triggerLine) {
         setActiveSection(opt.label)

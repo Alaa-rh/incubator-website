@@ -10,6 +10,7 @@
     --white-color:#F3F3F3;
     --red-color:#E30909;
     --green-color:#43A047;
+    --yellow-color:#FEF9C3;
 
   }}
 @layer utilities {
@@ -43,6 +44,9 @@
   }
   .bg-green-color {
     background-color: var(--green-color);
+  }
+  .bg-yellow-color {
+    background-color: var(--yellow-color);
   }
   .text-main-color {
     color: var(--main-color);

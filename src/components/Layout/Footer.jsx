@@ -26,7 +26,7 @@ const joinLinks = [
 
 const Footer = () => {
   return (
-    <footer className="bg-main-color text-white py-10 px-6 font-bold">
+    <footer className=" bg-main-color text-white py-10 px-6 font-bold">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
          {/*اللوغو و التواصل*/}
         <div>

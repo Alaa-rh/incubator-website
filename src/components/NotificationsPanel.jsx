@@ -1,9 +1,8 @@
-// import React, { useEffect, useState } from "react"
-// import axios from "axios"
+import { useState } from "react"
 import NotificationItem from "./NotificationItem"
 import logo from "../assets/images/logo.png"
-// import LoadingOverlay from "./LoadingOverlay"
-const notifications = [
+
+const initialNotifications = [
   {
     id: 1,
     image: logo,
@@ -25,52 +24,43 @@ const notifications = [
       label: "عرض الملف الشخصي",
       link: "/profile"
     }
+  },
+  {
+    id: 3,
+    image: logo,
+    time: "1 ساعة",
+    status: "unread",
+    message: " بدء التسجيل في ورشة عمل أو دورة تدريبية (Soft Skills): ✨ ورشة عمل جديدة بعنوان: [عنوان الورشة]. سارع بالتسجيل المقاعد محدودة!",
+    action: {
+      label: "عرض الورشة",
+      link: "/workshop/1"
+    }
   }
 ]
 
 const NotificationsPanel = () => {
-//   const [notifications, setNotifications] = useState([])
-//   const [loading, setLoading] = useState(true)
+  const [notifications, setNotifications] = useState(initialNotifications)
 
-//   useEffect(() => {
-//     axios.get("/api/notifications/")
-//       .then(res => {
-//         // نضيف خاصية read=false افتراضياً
-//         const data = res.data.map(n => ({ ...n, read: false }))
-//         setNotifications(data)
-//         setLoading(false)
-//       })
-//       .catch(err => {
-//         console.error("فشل في جلب الإشعارات:", err)
-//         setLoading(false)
-//       })
-//   }, [])
-
-//   // دالة لتغيير حالة إشعار واحد إلى مقروء
-  // const markAsRead = (id) => {
-  //   setNotifications(prev =>
-  //     prev.map(n => n.id === id ? { ...n, read: true } : n)
-  //   )
-  // }
-
-//   if (loading) {
-//     return (
-//       <LoadingOverlay>
-//         جاري تحميل الإشعارات...
-//       </LoadingOverlay>
-//     )
-//   }
-
-//   if (notifications.length === 0) {
-//     return <div className="text-center py-6 text-gray-500">لا توجد إشعارات حالياً</div>
-//   }
+  const markAsRead = (id) => {
+    setNotifications((prev) =>
+      prev.map((notif) =>
+        notif.id === id
+          ? { ...notif, status: "read", read: true }
+          : notif
+      )
+    )
+  }
 
   return (
-    <div className="container overflow-hidden">
+    <div className="container overflow-hidden py-4">
+
+      {notifications.length === 0 && (
+        <p className="text-gray-500 text-center mt-10">لا يوجد إشعارات حالياً</p>
+      )}
       {notifications.map((notif) => (
         <div
           key={notif.id}
-          onClick={() => markAsRead(notif.id)} // عند الضغط يتغير لحالة مقروء
+          onClick={() => markAsRead(notif.id)}
           className="mb-4 cursor-pointer"
         >
           <NotificationItem
@@ -81,10 +71,11 @@ const NotificationsPanel = () => {
           >
             <div className="flex items-center justify-between">
               <span>{notif.message}</span>
+
               {notif.action && (
                 <button
                   onClick={(e) => {
-                    e.stopPropagation() // منع تغيير الحالة عند الضغط على الزر
+                    e.stopPropagation()
                     window.location.href = notif.action.link
                   }}
                   className="bg-main-color text-white px-3 py-1 rounded text-sm"

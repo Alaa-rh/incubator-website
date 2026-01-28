@@ -1,8 +1,10 @@
 import React from 'react'
+import AllActivities from '../components/AllActivities';
+import SignupLink from '../components/SignupLink';
 import activity1 from '../assets/images/activity-1.jpg';
 import activity2 from '../assets/images/activity-2.jpg';
 import activity3 from '../assets/images/activity-3.png';
-import ActivityCard from '../components/ActivityCard';
+
 const activities = [
   {
     image: activity1,
@@ -16,7 +18,7 @@ const activities = [
     image: activity2,
     title: "هل ترغب بأن تكون جزءاً من المستقبل التكنولوجي؟",
     description: "دورة تدريب مدربين روبوت سبارك",
-    status: "منتهية",
+    status: "لم تبدأ بعد",
     trainer: "محمد احمد",
     count: 25,
   },
@@ -24,7 +26,7 @@ const activities = [
     image: activity3,
     title: "هل ترغب بأن تكون جزءاً من المستقبل التكنولوجي؟",
     description: "دورة تدريب مدربين روبوت سبارك",
-    status: "منتهية",
+    status: "بدأت حديثاً",
     trainer: "محمد احمد",
     count: 25,
   },
@@ -38,26 +40,14 @@ const activities = [
   },
   
 ]
-
 const Activities = ({id}) => {
   return (
     <div className='bg-white-color p-4 mb-40' id={id}>
          <div className="container">
         <h1 className='text-second-color font-semibold text-[40px] mb-10'>النشاطات</h1>
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
-      {activities.map((activity, index) => (
-        <div key={index}>
-          <ActivityCard
-            image={activity.image}
-            title={activity.title}
-            description={activity.description}
-            status={activity.status}
-            trainer={activity.trainer}
-            count={activity.count}
-          />
-        </div>
-      ))}
-    </div>
+        <AllActivities activities={activities}>
+          <SignupLink />
+        </AllActivities>
     </div>
     </div>
   )

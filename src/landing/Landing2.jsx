@@ -8,6 +8,7 @@ import Services from "./Services";
 import Stages from "./Stages";
 import Exhibition from "./Exhibition";
 import Activities from "./Activities";
+import Footer from "../components/Layout/Footer";
 
 const navLinkOptions = [
   { label: "من نحن", to: "/about", scrollId: "about" },
@@ -31,7 +32,7 @@ const Landing2 = () => {
   }, [location])
 
   return (
-    <MainLayout header={<Header navOptions={navLinkOptions} />}>
+    <MainLayout header={<Header navOptions={navLinkOptions} />} footer={<Footer />}>
       <About id="about" />
       <Exhibition id="exhibition" />
       <Activities id="activities" />

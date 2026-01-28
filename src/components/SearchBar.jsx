@@ -7,7 +7,7 @@ const SearchBar = ({ placeholder = "ابحث...", onSearch }) => {
   }
 
   return (
-    <div className="flex items-center gap-2 mb-4">
+    <div className="flex items-center gap-2 my-4">
       <Input
         type="text"
         onChange={handleChange}

@@ -5,7 +5,7 @@ const NavLinkUniversal = ({
   to,
   scrollId,
   className = "",
-  variant = "default",
+  variant = "",
   isActive
 }) => {
   const location = useLocation()
@@ -14,7 +14,7 @@ const NavLinkUniversal = ({
     variant === "landing"
       ? "text-second-color font-bold"
       : variant === "mainpage"
-      ? "font-bold border-b-2 border-main-color"
+      ? "font-bold border border-b-2 border-main-color"
       : "text-second-color"
   const handleClick = (e) => {
     if (scrollId && location.pathname === to) {
