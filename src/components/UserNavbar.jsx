@@ -24,21 +24,21 @@ const UserNavbar = ({ navOptions }) => {
         <NavLinksGroup
           options={navOptions}
           variant="mainpage"
-          className="flex items-center gap-10 text-lg font-medium"
+          className="flex items-center gap-15 text-lg font-medium"
         />
 
         {/* Right actions */}
         <div className="flex items-center gap-4">
           <NavLinkUniversal
-            label={<FaRegMessage size={20} />}
-            to="/messages"
-            className="text-gray-600 hover:text-main-color transition"
+            label={<FaRegMessage size={22} />}
+            to="/messagespage"
+            className="font-bold hover:scale-105 transition"
           />
 
           <NavLinkUniversal
-            label={<IoIosNotificationsOutline size={28} />}
+            label={<IoIosNotificationsOutline size={30} />}
             to="/notificationspage"
-            className="text-gray-600 hover:text-main-color transition"
+            className="font-bold hover:scale-105 transition"
           />
 
           <NavLinkUniversal
@@ -46,11 +46,11 @@ const UserNavbar = ({ navOptions }) => {
               <img
                 src={girl}
                 alt="avatar"
-                className="h-10 w-10 rounded-full object-cover border"
+                className="h-12 w-12 rounded-full object-cover border"
               />
             }
             to="/VisitorSettings"
-            className="hover:ring-2 hover:ring-main-color rounded-full transition"
+            className="hover:scale-105  transition"
           />
         </div>
 

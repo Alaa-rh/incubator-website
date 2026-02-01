@@ -16,6 +16,7 @@ import ActivitiesPage from "./pages/Visitor/ActivitiesPage";
 import MainLayout from "./components/Layout/MainLayout";
 import WorkshopDetailsPage from "./pages/Visitor/WorkshopDetailsPage";
 import NotificationsPage from "./pages/Visitor/NotificationsPage";
+import MessagesPage from "./pages/Visitor/MessagesPage";
 import UserNavbar from "./components/UserNavbar";
 
 const VisitorNavOptions = [
@@ -43,11 +44,14 @@ function App() {
       <Route path="/mainpage" element={<MainPage />} />
       <Route path="/projectspage" element={<ProjectsPage />} />
       <Route path="/activitiespage" element={<ActivitiesPage />} />
-      <Route path="/favoritespage" element={<FavoritesPage />} />
+      <Route path="/favoritespage" element={<FavoritesPage />} /> 
+      <Route path="/notificationspage" element={<NotificationsPage />} />
+      <Route path="/messagespage" element={<MessagesPage />} />
       </Route>
 
       <Route path="/workshops/:id" element={<WorkshopDetailsPage />} />
-      <Route path="/notificationspage" element={<NotificationsPage />} />
+      
+     
     </Routes>
    </FavoritesProvider>
     </>

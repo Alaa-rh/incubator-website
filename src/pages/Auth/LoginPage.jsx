@@ -34,8 +34,10 @@ const LoginPage = (handleSave) => {
               </div>
               <NavLinkUniversal label="هل نسيت كلمة المرور؟" to="/forgetpassword" className="font-bold text-third-color mt-2 hover:underline text-right" />
             </div>
+            <div className="flex flex-col">
             <Button label="تسجيل الدخول" onClick={handleSave} className=" flex justify-center max-w-[300px] bg-main-color mt-10 mx-auto w-full" />
-            <NavLinkUniversal label="انشاء حساب" to="/signup" className=" flex justify-center max-w-[300px] bg-third-color font-bold py-2 px-4 rounded  mt-5 mx-auto w-full text-black hover:scale-105 transition" />
+            <NavLinkUniversal label="انشاء حساب" to="/signup" className="flex justify-center max-w-[300px]  text-center bg-third-color mt-5 mx-auto w-full font-bold hover:scale-105 transition" />
+            </div>
             <div className="flex items-center my-8">
               <div className="flex-grow border-t border-second-color"></div>
               <span className="px-4 font-bold text-black text-sm">او عن طريق</span>
