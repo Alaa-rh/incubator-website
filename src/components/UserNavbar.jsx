@@ -49,7 +49,7 @@ const UserNavbar = ({ navOptions }) => {
                 className="h-12 w-12 rounded-full object-cover border"
               />
             }
-            to="/VisitorSettings"
+            to="/Profile"
             className="hover:scale-105  transition"
           />
         </div>

@@ -1,21 +1,48 @@
 import { Link, useLocation } from "react-router-dom"
+import { useEffect, useState } from "react"
 
 const NavLinkUniversal = ({
   label,
   to,
   scrollId,
   className = "",
-  variant = "",
-  isActive
+  variant = ""
 }) => {
   const location = useLocation()
+  const [isActive, setIsActive] = useState(false)
+
+  // تحديد الـ active للـ landing + mainpage
+  useEffect(() => {
+    // إذا لم يكن scrollId
+    if (!scrollId) {
+      setIsActive(location.pathname === to)
+      return
+    }
+
+    //إذا الرابط   Scroll
+    const handleScroll = () => {
+      const section = document.getElementById(scrollId)
+      if (!section) return
+
+      const rect = section.getBoundingClientRect()
+      const inView = rect.top <= 150 && rect.bottom >= 150
+
+      setIsActive(inView)
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    handleScroll()
+
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [location, scrollId, to])
 
   const activeClass =
     variant === "landing"
       ? "text-second-color font-bold"
       : variant === "mainpage"
-      ? "font-bold text-main-color after:absolute after:left-0 after:-bottom-1 after:w-full after:h-[2px] after:bg-main-color after:content-['']"
+      ? "font-bold border-b-2 border-main-color"
       : "text-second-color"
+
   const handleClick = (e) => {
     if (scrollId && location.pathname === to) {
       e.preventDefault()
@@ -43,5 +70,3 @@ const NavLinkUniversal = ({
 }
 
 export default NavLinkUniversal
-
-

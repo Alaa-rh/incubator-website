@@ -18,6 +18,13 @@ import WorkshopDetailsPage from "./pages/Visitor/WorkshopDetailsPage";
 import NotificationsPage from "./pages/Visitor/NotificationsPage";
 import MessagesPage from "./pages/Visitor/MessagesPage";
 import UserNavbar from "./components/UserNavbar";
+import Sidebar from "./components/Sidebar";
+import DashboardLayout from "./components/Layout/DashboardLayout";
+import ProfilePage from "./pages/Visitor/ProfilePage";
+import ContactPage from "./pages/Visitor/ContactPage";
+import SettingsPage from "./pages/Visitor/SettingsPage";
+import ChangePasswordPage from "./pages/Visitor/ChangePasswordPage";
+import ProjectDetailsPage from "./pages/ProjectDetailsPage";
 
 const VisitorNavOptions = [
   { label: " الرئيسية", to: "/mainpage", scrollId: "" }, 
@@ -30,6 +37,9 @@ function App() {
     <>
     {/* <VolunteerForm /> */}
     {/* <IdeaForm /> */}
+    
+  
+
    <FavoritesProvider>
    <Routes>
       <Route path="/" element={<LandingPage1 />} />
@@ -49,11 +59,18 @@ function App() {
       <Route path="/messagespage" element={<MessagesPage />} />
       </Route>
 
+      <Route path="/projectDetails/:id" element={<ProjectDetailsPage />} />
       <Route path="/workshops/:id" element={<WorkshopDetailsPage />} />
-      
-     
+      <Route element={<DashboardLayout role="visitor" userName="أسماء محمد" email="assmaa@example.com"/>}>
+      <Route path="/profile" element={<ProfilePage userName="أسماء محمد" email="assmaa@example.com"/>} />
+      <Route path="/contact" element={<ContactPage />} />
+      <Route path="/settings" element={<SettingsPage />} />
+      <Route path="/change-password" element={<ChangePasswordPage />} /> 
+  
+    </Route>
     </Routes>
    </FavoritesProvider>
+    
     </>
   )
 }

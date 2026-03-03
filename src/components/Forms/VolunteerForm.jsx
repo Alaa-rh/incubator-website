@@ -1,27 +1,46 @@
-import React, { useState } from "react"
-import Input from "../Input"
-import Select from "../Select"
+import React, { useReducer, useState } from "react"
 import Button from "../Button"
 import LinearProgress from "../LinearProgress"
 import Modal from "../Modal"
-import Textarea from "../Textarea"
-import AvailabilityScheduler from "../AvailabilityScheduler"
+import StepExperience from "./StepExperience"
+import StepPreferences from "./StepPreferences"
+import StepAvailability from "./StepAvailability"
+
+// الحالة الابتدائية
+const initialForm = {
+  experienceYears: "",
+  expertiseArea: "",
+  employer: "",
+  profileLink: "",
+  consultationPreferences: "",
+  location: "",
+  expertition: "",
+  volunteeringGoal: "",
+  availability: Object.fromEntries(
+    ["الاثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت","الأحد"]
+      .map(d => [d, { from: "", to: "", active: false }])
+  )
+}
+
+// ال reducer
+function formReducer(state, action) {
+  switch (action.type) {
+    case "UPDATE_FIELD":
+      return { ...state, [action.field]: action.value }
+
+    case "UPDATE_AVAILABILITY":
+      return { ...state, availability: action.value }
+
+    case "RESET":
+      return initialForm
+
+    default:
+      return state
+  }
+}
 
 const VolunteerForm = ({ onCancel }) => {
-  const [form, setForm] = useState({
-    experienceYears: "",
-    expertiseArea: "",
-    employer: "",
-    profileLink: "",
-    consultationPreferences: "",
-    location: "",
-    expertition: "",
-    volunteeringGoal: "",
-    availability: Object.fromEntries(
-      ["الاثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت","الأحد"].map(d => [d, { from: "", to: "", active: false }])
-    )
-  })
-
+  const [form, dispatch] = useReducer(formReducer, initialForm)
   const [errors, setErrors] = useState({})
   const [step, setStep] = useState(0)
   const [showSuccess, setShowSuccess] = useState(false)
@@ -34,27 +53,40 @@ const VolunteerForm = ({ onCancel }) => {
   ]
 
   const handleChange = (e) => {
-    const { name, value } = e.target
-    setForm((prev) => ({ ...prev, [name]: value }))
+    dispatch({
+      type: "UPDATE_FIELD",
+      field: e.target.name,
+      value: e.target.value
+    })
   }
 
   const handleAvailabilityChange = (availability) => {
-    setForm(prev => ({ ...prev, availability }))
+    dispatch({
+      type: "UPDATE_AVAILABILITY",
+      value: availability
+    })
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
     const newErrors = {}
 
-    if (!form.experienceYears) newErrors.experienceYears = "يرجى إدخال عدد سنوات الخبرة"
-    if (!form.expertiseArea) newErrors.expertiseArea = "يرجى اختيار مجال الخبرة"
-    if (!form.employer) newErrors.employer = "يرجى إدخال جهة العمل الحالية"
-    if (!form.consultationPreferences) newErrors.consultationPreferences = "يرجى إدخال تفضيلات الاستشارة"
-    if (!form.location) newErrors.location = "يرجى إدخال السكن"
-    if (!form.expertition) newErrors.expertition = "يرجى إدخال الاختصاص"
-    if (!form.volunteeringGoal) newErrors.volunteeringGoal = "يرجى إدخال الهدف من التطوع"
+    // الحقول المطلوبة
+    const requiredFields = [
+      "experienceYears",
+      "expertiseArea",
+      "employer",
+      "consultationPreferences",
+      "location",
+      "expertition",
+      "volunteeringGoal"
+    ]
 
-    //
+    requiredFields.forEach((field) => {
+      if (!form[field]) newErrors[field] = "هذا الحقل مطلوب"
+    })
+
+    // التوفر
     const availabilityValues = Object.values(form.availability || {})
     const hasAvailability = availabilityValues.some(day =>
       day.from && day.to && day.active
@@ -72,93 +104,34 @@ const VolunteerForm = ({ onCancel }) => {
   return (
     <div>
       <form onSubmit={handleSubmit} className="max-w-xl mx-auto my-6 space-y-6">
-        {/* خط التقدم */}
         <LinearProgress steps={3} current={step} className="mb-6" />
 
-        {/* الخطوة 0 */}
+        
         {step === 0 && (
-          <div className="grid grid-cols-2 gap-4">
-            <Input
-              label="عدد سنوات الخبرة"
-              name="experienceYears"
-              type="number"
-              value={form.experienceYears}
-              onChange={handleChange}
-              error={errors.experienceYears}
-            />
-            <Select
-              label="مجالات الخبرة"
-              name="expertiseArea"
-              value={form.expertiseArea}
-              onChange={handleChange}
-              options={expertiseOptions}
-              error={errors.expertiseArea}
-            />
-            <Input
-              label="جهة العمل الحالية"
-              name="employer"
-              value={form.employer}
-              onChange={handleChange}
-              error={errors.employer}
-            />
-            <Input
-              label="رابط الملف المهني (اختياري)"
-              type="url"
-              name="profileLink"
-              value={form.profileLink}
-              onChange={handleChange}
-            />
-          </div>
+          <StepExperience
+            form={form}
+            errors={errors}
+            handleChange={handleChange}
+            expertiseOptions={expertiseOptions}
+          />
         )}
 
-        {/* الخطوة 1 */}
         {step === 1 && (
-          <>
-            <Input
-              label="تفضيلات الاستشارة"
-              name="consultationPreferences"
-              value={form.consultationPreferences}
-              onChange={handleChange}
-              error={errors.consultationPreferences}
-            />
-            <Input
-              label="السكن"
-              name="location"
-              value={form.location}
-              onChange={handleChange}
-              error={errors.location}
-            />
-            <Input
-              label="الاختصاص"
-              name="expertition"
-              value={form.expertition}
-              onChange={handleChange}
-              error={errors.expertition}
-            />
-            <Textarea
-              label="الهدف من التطوع"
-              name="volunteeringGoal"
-              value={form.volunteeringGoal}
-              onChange={handleChange}
-              error={errors.volunteeringGoal}
-            />
-          </>
+          <StepPreferences
+            form={form}
+            errors={errors}
+            handleChange={handleChange}
+          />
         )}
 
-        {/* الخطوة 2 */}
         {step === 2 && (
-          <div>
-            <AvailabilityScheduler
-              value={form.availability}
-              onChange={handleAvailabilityChange}
-            />
-            {errors.availability && (
-              <p className="text-red-500 text-sm mt-2">{errors.availability}</p>
-            )}
-          </div>
+          <StepAvailability
+            form={form}
+            errors={errors}
+            handleAvailabilityChange={handleAvailabilityChange}
+          />
         )}
 
-        {/* أزرار التنقل */}
         <div className="flex justify-between mt-6">
           <Button
             label="إلغاء"
@@ -166,6 +139,7 @@ const VolunteerForm = ({ onCancel }) => {
             onClick={onCancel}
             className="bg-main-color text-white"
           />
+
           {step < 2 ? (
             <Button
               label="التالي"
@@ -183,7 +157,6 @@ const VolunteerForm = ({ onCancel }) => {
         </div>
       </form>
 
-      {/* المودل بعد الإرسال */}
       <Modal
         isOpen={showSuccess}
         onClose={() => setShowSuccess(false)}

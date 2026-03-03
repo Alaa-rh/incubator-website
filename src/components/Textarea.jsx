@@ -12,7 +12,7 @@ const Textarea = ({ label, name, value, onChange, placeholder = "", error = "", 
         placeholder={placeholder}
         disabled={disabled}
         rows={rows}
-        className={`w-full border border-second-color rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-700 ${disabled ? "bg-gray-100" : ""} ${className}`}
+        className={`resize-none border border-second-color rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-700  ${className}`}
       />
       {error && <p className="text-xs text-red-500">{error}</p>}
     </div>

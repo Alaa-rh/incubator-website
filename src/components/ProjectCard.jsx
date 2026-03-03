@@ -23,7 +23,7 @@ const ProjectCard = ({project, showImage = true, showFavorites = false}) => {
             <p><span className='text-xl font-bold'>أعضاء الفريق:</span>{project.members.join(", ")}</p>
             {showFavorites && (
               <div className='flex justify-between items-center mt-6'>
-               <NavLinkUniversal to={`/project/${project.id}`} label="عرض التفاصيل" className="text-xl bg-main-color text-white rounded-xl"/> 
+               <NavLinkUniversal to={`/ProjectDetails/${project.id}`} label="عرض التفاصيل" className="text-xl bg-main-color text-white rounded-xl"/> 
                <button
                   onClick={() => toggleFavorite(project)}
                   className= "text-2xl">
