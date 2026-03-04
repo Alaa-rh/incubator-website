@@ -10,6 +10,7 @@ const StepPreferences = ({ form, errors, handleChange }) => {
         value={form.consultationPreferences}
         onChange={handleChange}
         error={errors.consultationPreferences}
+        className="bg-white"
       />
 
       <Input
@@ -18,6 +19,7 @@ const StepPreferences = ({ form, errors, handleChange }) => {
         value={form.location}
         onChange={handleChange}
         error={errors.location}
+        className="bg-white"
       />
 
       <Input
@@ -26,6 +28,7 @@ const StepPreferences = ({ form, errors, handleChange }) => {
         value={form.expertition}
         onChange={handleChange}
         error={errors.expertition}
+        className="bg-white"
       />
 
       <Textarea
@@ -34,6 +37,7 @@ const StepPreferences = ({ form, errors, handleChange }) => {
         value={form.volunteeringGoal}
         onChange={handleChange}
         error={errors.volunteeringGoal}
+        className="bg-white"
       />
     </>
   )

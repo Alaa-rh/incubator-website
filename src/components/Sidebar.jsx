@@ -1,39 +1,38 @@
 import { NavLink } from "react-router-dom"
 import girl from "../assets/images/girl.jpg"
 import { useLocation } from "react-router-dom"
-import { BsPersonFillGear } from "react-icons/bs"; 
-import { BsPersonCircle } from "react-icons/bs";  
-import { IoCall } from "react-icons/io5"; 
-const roleOptions = {
-  visitor: [
-    { label: "تعديل الملف الشخصي", link: "/profile", icon: <BsPersonCircle /> },
-    { label: "تواصل معنا", link: "/contact", icon: <IoCall /> },
-    { label: "إعدادات الحساب", link: "/settings", icon: <BsPersonFillGear /> },
-  ],
-  // باقي الأدوار...
-}
+import { RoleOptions } from "../config/RoleOptions"
 
 const Sidebar = ({ role, userName, email }) => {
-  const options = roleOptions[role] || roleOptions.visitor
+  const options = RoleOptions[role] || RoleOptions.visitor
   const location = useLocation()
 
   return (
     <aside className="fixed top-0 right-0 h-screen w-90 bg-white shadow-md p-4">
+      
+      {/* معلومات المستخدم */}
       <div className="flex items-center gap-4 mb-8">
         <img src={girl} alt="avatar" className="w-16 h-16 rounded-full mb-2" />
         <div>
-        <p className="font-semibold">{userName}</p>
-        <p>{email}</p>
+          <p className="font-semibold">{userName}</p>
+          <p>{email}</p>
         </div>
       </div>
+
+      {/* الروابط */}
       <nav className="flex flex-col gap-3">
         {options.map((opt, idx) => (
-          <div key={idx} className={`flex items-center gap-2 ${location.pathname === opt.link ? 'bg-main-color text-white rounded' : ''}`}>
+          <div
+            key={idx}
+            className={`flex items-center gap-2 ${
+              location.pathname === opt.link
+                ? "bg-main-color text-white rounded"
+                : ""
+            }`}
+          >
             <span className="inline-block text-2xl pr-2">{opt.icon}</span>
-            <NavLink
-              to={opt.link}
-              className="py-4 px-3"
-            >
+
+            <NavLink to={opt.link} className="py-4 px-3">
               {opt.label}
             </NavLink>
           </div>
@@ -42,4 +41,5 @@ const Sidebar = ({ role, userName, email }) => {
     </aside>
   )
 }
+
 export default Sidebar

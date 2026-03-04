@@ -40,9 +40,9 @@ const AvailabilityScheduler = ({ value, onChange }) => {
       </p>
 
       {daysOfWeek.map((day) => (
-        <div key={day} className="mb-6">
-          <h2 className="text-md font-semibold mb-2">{day}</h2>
-          <div className="flex items-center gap-2 mb-2">
+        <div key={day} className="mb-3 ">
+          <div className="flex items-center gap-4 mb-2">
+            <h2 className="text-md font-semibold mb-2">{day}</h2>
             <Input
               type="time"
               value={availability[day].from}

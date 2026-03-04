@@ -3,7 +3,7 @@ import Select from "../Select"
 
 const StepExperience = ({ form, errors, handleChange, expertiseOptions }) => {
   return (
-    <div className="grid grid-cols-2 gap-4">
+    <div className="grid grid-cols-2 gap-15">
       <Input
         label="عدد سنوات الخبرة"
         name="experienceYears"
@@ -11,6 +11,7 @@ const StepExperience = ({ form, errors, handleChange, expertiseOptions }) => {
         value={form.experienceYears}
         onChange={handleChange}
         error={errors.experienceYears}
+        className="bg-white"
       />
 
       <Select
@@ -20,6 +21,7 @@ const StepExperience = ({ form, errors, handleChange, expertiseOptions }) => {
         onChange={handleChange}
         options={expertiseOptions}
         error={errors.expertiseArea}
+        className="bg-white"
       />
 
       <Input
@@ -28,6 +30,7 @@ const StepExperience = ({ form, errors, handleChange, expertiseOptions }) => {
         value={form.employer}
         onChange={handleChange}
         error={errors.employer}
+        className="bg-white"  
       />
 
       <Input
@@ -36,6 +39,7 @@ const StepExperience = ({ form, errors, handleChange, expertiseOptions }) => {
         name="profileLink"
         value={form.profileLink}
         onChange={handleChange}
+        className="bg-white"
       />
     </div>
   )

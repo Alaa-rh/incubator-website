@@ -2,27 +2,13 @@ import React from "react"
 
 const ProjectDetailsCard = ({ project }) => {
   return (
-    <div className="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-6 space-y-6">
-
-      {/* صورة المشروع */}
-      {project.image && (
-        <img
-          src={project.image}
-          alt={project.title}
-          className="w-full h-64 object-cover rounded-lg"
-        />
-      )}
-
-      <h2 className="text-2xl text-second-color font-bold">تفاصيل المشروع</h2>
-
-      <div className="space-y-3 text-gray-700">
-
-        <p><span className="font-bold">اسم المشروع:</span> {project.title}</p>
-
-        <p><span className="font-bold">الفئة:</span> {project.category}</p>
-
-        <p><span className="font-bold">اسم الفريق:</span> {project.teamName}</p>
-
+    <div className="container">
+       <h2 className="text-2xl text-second-color font-bold mb-10">تفاصيل المشروع</h2>
+       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+         <div className="space-y-5 text-gray-700">
+           <p><span className="font-bold">اسم المشروع:</span> {project.title}</p>
+           <p><span className="font-bold">الفئة:</span> {project.category}</p>
+           <p><span className="font-bold">اسم الفريق:</span> {project.teamName}</p>
         <div>
           <p className="font-bold">أعضاء الفريق:</p>
           <ul className="list-disc pr-6">
@@ -58,8 +44,17 @@ const ProjectDetailsCard = ({ project }) => {
           </p>
         )}
       </div>
-
-      <button className="bg-main-color text-white px-6 py-2 rounded-lg w-full">
+      
+       {/* صورة المشروع */}
+      {project.image && (
+        <img
+          src={project.image}
+          alt={project.title}
+          className="w-full object-cover rounded-lg"
+        />
+      )}
+      </div>
+      <button className="bg-main-color text-white px-6 py-2 rounded-lg w-fit">
         تواصل معنا
       </button>
     </div>

@@ -103,8 +103,8 @@ const VolunteerForm = ({ onCancel }) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className="max-w-xl mx-auto my-6 space-y-6">
-        <LinearProgress steps={3} current={step} className="mb-6" />
+      <form onSubmit={handleSubmit} className="max-w-4xl my-6 space-y-8">
+        <LinearProgress steps={3} current={step} className="py-6" />
 
         
         {step === 0 && (
@@ -132,12 +132,12 @@ const VolunteerForm = ({ onCancel }) => {
           />
         )}
 
-        <div className="flex justify-between mt-6">
+        <div className="flex justify-between">
           <Button
             label="إلغاء"
             type="button"
             onClick={onCancel}
-            className="bg-main-color text-white"
+            className="w-50 bg-main-color text-white"
           />
 
           {step < 2 ? (
@@ -145,13 +145,13 @@ const VolunteerForm = ({ onCancel }) => {
               label="التالي"
               type="button"
               onClick={() => setStep(step + 1)}
-              className="bg-main-color text-white px-4 py-2 rounded"
+              className="w-50 bg-main-color text-white px-4 py-2 rounded"
             />
           ) : (
             <Button
               label="إرسال"
               type="submit"
-              className="bg-main-color text-white px-4 py-2 rounded"
+              className="w-50 bg-main-color text-white px-4 py-2 rounded"
             />
           )}
         </div>

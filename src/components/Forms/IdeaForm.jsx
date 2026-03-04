@@ -106,7 +106,7 @@ const IdeaForm = () => {
               label="التالي"
               type="button"
               onClick={() => setStep(step + 1)}
-              className="bg-main-color text-white px-4 py-2 rounded"
+              className="w-50 bg-main-color text-white px-4 py-2 rounded"
             />
           )}
           {step > 0 && (
@@ -114,14 +114,14 @@ const IdeaForm = () => {
               label="رجوع"
               type="button"
               onClick={() => setStep(step - 1)}
-              className="bg-main-color px-4 py-2 rounded"
+              className="w-50 bg-main-color px-4 py-2 rounded"
             />
           )}
           {step === 3 && (
             <Button
               label="إرسال"
               type="submit"
-              className="bg-main-color text-white px-4 py-2 rounded"
+              className="w-50 bg-main-color text-white px-4 py-2 rounded"
             />
           )}
         </div>

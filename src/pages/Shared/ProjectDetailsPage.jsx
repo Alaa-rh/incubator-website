@@ -1,8 +1,8 @@
 import React from "react"
 import { useParams } from "react-router-dom"
-import ProjectDetailsCard from "../components/ProjectDetailsCard"
-import project1 from "../assets/images/project1.png"
-import project2 from "../assets/images/project2.png"
+import ProjectDetailsCard from "../../components/ProjectDetailsCard"
+import project1 from "../../assets/images/project-det.jpg"
+import project2 from "../../assets/images/project2.png"
 
 const ProjectDetailsPage = () => {
     const {id} = useParams()
@@ -40,7 +40,7 @@ const ProjectDetailsPage = () => {
     projectLink: "https://youtu.be/Vq4C2hv3YiC?si=ajBgnYDy-lpr_lO"
   }
 ]
-  const project = projects.find(p => p.id === id)
+  const project = projects.find(p => p.id ===  Number(id))
   return (
     <div className="container py-10">
         {project ? (

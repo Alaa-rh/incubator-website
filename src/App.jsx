@@ -11,20 +11,22 @@ import VolunteerForm from "./components/Forms/VolunteerForm";
 import IdeaForm from "./components/Forms/IdeaForm";
 import FavoritesPage from "./pages/Visitor/FavoritesPage";
 import { FavoritesProvider } from "./components/FavoritesContext";
-import ProjectsPage from "./pages/Visitor/ProjectsPage";
-import ActivitiesPage from "./pages/Visitor/ActivitiesPage";
+import ProjectsPage from "./pages/Shared/ProjectsPage";
+import ActivitiesPage from "./pages/Shared/ActivitiesPage";
 import MainLayout from "./components/Layout/MainLayout";
-import WorkshopDetailsPage from "./pages/Visitor/WorkshopDetailsPage";
-import NotificationsPage from "./pages/Visitor/NotificationsPage";
-import MessagesPage from "./pages/Visitor/MessagesPage";
+import WorkshopDetailsPage from "./pages/Shared/WorkshopDetailsPage";
+import NotificationsPage from "./pages/Shared/NotificationsPage";
+import MessagesPage from "./pages/Shared/MessagesPage";
 import UserNavbar from "./components/UserNavbar";
 import Sidebar from "./components/Sidebar";
 import DashboardLayout from "./components/Layout/DashboardLayout";
-import ProfilePage from "./pages/Visitor/ProfilePage";
-import ContactPage from "./pages/Visitor/ContactPage";
-import SettingsPage from "./pages/Visitor/SettingsPage";
-import ChangePasswordPage from "./pages/Visitor/ChangePasswordPage";
-import ProjectDetailsPage from "./pages/ProjectDetailsPage";
+import ProfilePage from "./pages/Shared/ProfilePage";
+import ContactPage from "./pages/Shared/ContactPage";
+import SettingsPage from "./pages/Shared/SettingsPage";
+import ChangePasswordPage from "./pages/Shared/ChangePasswordPage";
+import ProjectDetailsPage from "./pages/Shared/ProjectDetailsPage";
+import IdeaFormPage from "./pages/Shared/IdeaFormPage";
+import VolunteerFormPage from "./pages/Shared/VolunteerFormPage";
 
 const VisitorNavOptions = [
   { label: " الرئيسية", to: "/mainpage", scrollId: "" }, 
@@ -49,7 +51,12 @@ function App() {
       <Route path="/forgetpassword" element={<ForgotPasswordPage />} />
       <Route path="/verification" element={<VerificationPage />} />
       <Route path="/newpassword" element={<NewPasswordPage />} />
+      <Route path="/ProjectDetails/:id" element={<ProjectDetailsPage />} />
+      <Route path="/workshops/:id" element={<WorkshopDetailsPage />} />
+      <Route path="/ideaform" element={<IdeaFormPage />} />
+      <Route path="/volunteerform" element={<VolunteerFormPage />} />
 
+       {/* visitor routes */}
       <Route element={<MainLayout header={<UserNavbar navOptions={VisitorNavOptions}/>} footer={null}/>}>
       <Route path="/mainpage" element={<MainPage />} />
       <Route path="/projectspage" element={<ProjectsPage />} />
@@ -59,8 +66,7 @@ function App() {
       <Route path="/messagespage" element={<MessagesPage />} />
       </Route>
 
-      <Route path="/projectDetails/:id" element={<ProjectDetailsPage />} />
-      <Route path="/workshops/:id" element={<WorkshopDetailsPage />} />
+      {/*visitor settings routes */}
       <Route element={<DashboardLayout role="visitor" userName="أسماء محمد" email="assmaa@example.com"/>}>
       <Route path="/profile" element={<ProfilePage userName="أسماء محمد" email="assmaa@example.com"/>} />
       <Route path="/contact" element={<ContactPage />} />
