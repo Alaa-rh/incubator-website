@@ -8,10 +8,9 @@ const StepExperience = ({ form, errors, handleChange, expertiseOptions }) => {
         label="عدد سنوات الخبرة"
         name="experienceYears"
         type="number"
-        value={form.experienceYears}
+        value={form.experienceYears > 0 ? form.experienceYears : ""}
         onChange={handleChange}
         error={errors.experienceYears}
-        className="bg-white"
       />
 
       <Select
@@ -21,7 +20,6 @@ const StepExperience = ({ form, errors, handleChange, expertiseOptions }) => {
         onChange={handleChange}
         options={expertiseOptions}
         error={errors.expertiseArea}
-        className="bg-white"
       />
 
       <Input
@@ -29,8 +27,7 @@ const StepExperience = ({ form, errors, handleChange, expertiseOptions }) => {
         name="employer"
         value={form.employer}
         onChange={handleChange}
-        error={errors.employer}
-        className="bg-white"  
+        error={errors.employer}  
       />
 
       <Input
@@ -39,7 +36,6 @@ const StepExperience = ({ form, errors, handleChange, expertiseOptions }) => {
         name="profileLink"
         value={form.profileLink}
         onChange={handleChange}
-        className="bg-white"
       />
     </div>
   )

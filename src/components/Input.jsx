@@ -12,7 +12,7 @@ const Input = ({ label, name, type = "text", value, onChange, placeholder = "", 
         onChange={onChange}
         placeholder={placeholder}
         disabled={disabled}
-        className={`border border-second-color rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-700 ${disabled ? "bg-gray-100" : ""} ${className}`}
+        className={`bg-white border border-second-color rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-700 ${disabled ? "bg-gray-100" : ""} ${className}`}
       />
       {error && <p className="text-xs text-red-500">{error}</p>}
     </div>

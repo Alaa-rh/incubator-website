@@ -10,7 +10,7 @@ const Select = ({ label, name, value, onChange, options = [], placeholder = "", 
         value={value}
         onChange={onChange}
         disabled={disabled}
-        className={`border border-second-color rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-700 ${className}`}
+        className={`bg-white border border-second-color rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-700 ${className}`}
       >
         <option value="" disabled hidden>{placeholder}</option>
         {options.map(opt => (

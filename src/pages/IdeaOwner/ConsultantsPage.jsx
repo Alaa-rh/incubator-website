@@ -4,32 +4,34 @@ import { RiBrushAiLine } from "react-icons/ri";
 import { FaArrowTrendUp } from "react-icons/fa6";
 import { MdWorkOutline } from "react-icons/md";
 import { FaLaptopCode } from "react-icons/fa";
+import Button from "../../components/Button";
 const ConsultantsPage = () => {
   const categories = [
-    { id: "uiux", label: "UI UX", icon: <RiBrushAiLine /> },
-    { id: "legal", label: "قانوني", icon: <GiInjustice /> },
-    { id: "marketing", label: "تسويق", icon: <FaArrowTrendUp /> },
-    { id: "business", label: "إدارة أعمال", icon: <MdWorkOutline /> },
-    { id: "frontend", label: "Front End", icon: <FaLaptopCode /> },
-    { id: "backend", label: "Back End", icon: <FaLaptopCode /> },
-  ]
+  { id: "uiux", label: "UI UX", icon: <RiBrushAiLine />, link: "/consultantslist/uiux" },
+  { id: "legal", label: "قانوني", icon: <GiInjustice />, link: "/consultantslist/legal" },
+  { id: "marketing", label: "تسويق", icon: <FaArrowTrendUp />, link: "/consultantslist/marketing" },
+  { id: "business", label: "إدارة أعمال", icon: <MdWorkOutline />, link: "/consultantslist/business" },
+  { id: "frontend", label: "Front End", icon: <FaLaptopCode />, link: "/consultantslist/frontend" },
+  { id: "backend", label: "Back End", icon: <FaLaptopCode />, link: "/consultantslist/backend" },
+]
+
+
 
   return (
-    <div className="container py-6">
-
-      {/* عنوان الصفحة */}
-      <h2 className="text-xl font-bold mb-4">اختر الاختصاص</h2>
+    <div>
+       {/* عنوان الصفحة */}
+      <h1 className='text-3xl font-bold text-second-color pt-10 mr-25 mb-20'>اختر الاختصاص</h1>
+      <div className="container">
 
       {/* مكوّن الفئات */}
-      <CategoryGrid categories={categories} />
+      <CategoryGrid items={categories} />
 
       {/* زر طلب مستشار آخر */}
       <div className="flex justify-center mt-6">
-        <button className="bg-main-color text-white px-6 py-3 rounded-xl text-lg">
-          طلب مستشار آخر
-        </button>
+        <Button label="طلب مستشار آخر" className="bg-main-color"/>
       </div>
-    </div>
+    </div>    
+  </div>
   )
 }
 

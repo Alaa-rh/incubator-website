@@ -50,7 +50,7 @@ const UserNavbar = ({ navOptions }) => {
               />
             }
             to="/Profile"
-            className="hover:scale-105  transition"
+            className="hover:scale-105 transition"
           />
         </div>
 

@@ -8,7 +8,7 @@ import StepExtraDetails from "./StepExtraDetails"
 import StepTeamInfo from "./StepTeamInfo"
 import { initialForm, ideaReducer } from "../../hooks/useIdeaReducer"
 
-const IdeaForm = () => {
+const IdeaForm = ({ onSubmit }) => {
   const [form, dispatch] = useReducer(ideaReducer, initialForm)
   const [errors, setErrors] = useState({})
   const [step, setStep] = useState(0)
@@ -59,8 +59,15 @@ const IdeaForm = () => {
 
     setErrors(newErrors)
 
+    // إذا ما في أخطاء
     if (Object.keys(newErrors).length === 0) {
       console.log("Form submitted:", form)
+
+      // — استدعاء onSubmit المرسلة من الصفحة الأم
+      if (onSubmit) {
+        onSubmit(form)
+      }
+
       setShowSuccess(true)
     }
   }
@@ -68,38 +75,48 @@ const IdeaForm = () => {
   return (
     <>
       <form onSubmit={handleSubmit} className="container space-y-6">
+        
+        {/* الخطوات */}
         <Stepper steps={[1, 2, 3, 4]} current={step} />
 
-        
+        {/* الخطوة 1 */}
         {step === 0 && (
           <StepPersonalInfo 
-          form={form} 
-          errors={errors} 
-          handleChange={handleChange} />
+            form={form} 
+            errors={errors} 
+            handleChange={handleChange} 
+          />
         )}
 
+        {/* الخطوة 2 */}
         {step === 1 && (
           <StepIdeaInfo 
-          form={form} 
-          errors={errors} 
-          handleChange={handleChange} 
-          sectors={sectors} />
+            form={form} 
+            errors={errors} 
+            handleChange={handleChange} 
+            sectors={sectors} 
+          />
         )}
 
+        {/* الخطوة 3 */}
         {step === 2 && (
           <StepExtraDetails 
-          form={form} 
-          errors={errors} 
-          handleChange={handleChange} />
+            form={form} 
+            errors={errors} 
+            handleChange={handleChange} 
+          />
         )}
 
+        {/* الخطوة 4 */}
         {step === 3 && (
           <StepTeamInfo 
-          form={form} 
-          errors={errors} 
-          handleChange={handleChange} />
+            form={form} 
+            errors={errors} 
+            handleChange={handleChange} 
+          />
         )}
 
+        {/* أزرار التنقل */}
         <div className="flex gap-4">
           {step < 3 && (
             <Button
@@ -109,6 +126,7 @@ const IdeaForm = () => {
               className="w-50 bg-main-color text-white px-4 py-2 rounded"
             />
           )}
+
           {step > 0 && (
             <Button
               label="رجوع"
@@ -117,6 +135,7 @@ const IdeaForm = () => {
               className="w-50 bg-main-color px-4 py-2 rounded"
             />
           )}
+
           {step === 3 && (
             <Button
               label="إرسال"
@@ -127,17 +146,17 @@ const IdeaForm = () => {
         </div>
       </form>
 
+      {/* نافذة النجاح */}
       <Modal
         isOpen={showSuccess}
         onClose={() => setShowSuccess(false)}
         title="تم إرسال الفكرة بنجاح!"
         footer={
-          <button
+          <Button
+            label="حسناً"
             onClick={() => setShowSuccess(false)}
-            className="bg-main-color text-white px-4 py-2 rounded"
-          >
-            حسناً
-          </button>
+            className="bg-main-color"
+          />
         }
       >
         <p className="text-sm">شكراً لمشاركتك! سيتم مراجعة فكرتك قريباً.</p>

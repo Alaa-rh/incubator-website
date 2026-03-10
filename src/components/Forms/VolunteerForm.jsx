@@ -165,7 +165,7 @@ const VolunteerForm = ({ onCancel }) => {
           <Button
             label="إغلاق"
             onClick={() => setShowSuccess(false)}
-            className="bg-main-color text-white"
+            className="bg-main-color"
           />
         }
       >

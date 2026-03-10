@@ -47,7 +47,7 @@ const StepTeamInfo = ({ form, errors, handleChange }) => {
         placeholder="المدة المتوقعة لانجاز المشروع بالأشهر"
         type="number"
         name="projectDuration"
-        value={form.projectDuration}
+        value={form.projectDuration > 0 ? form.projectDuration : ""}
         onChange={handleChange}
         error={errors.projectDuration}
         className="w-1/2"
