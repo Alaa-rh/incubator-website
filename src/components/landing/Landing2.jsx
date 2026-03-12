@@ -1,14 +1,14 @@
 import { useEffect } from "react"
 import { useLocation } from "react-router-dom"
-import MainLayout from "../components/Layout/MainLayout"
-import Header from "../components/Layout/Header";
+import MainLayout from "../Layout/MainLayout"
+import Header from "../Layout/Header";
 import About from "./About";
 import Partners from "./Partners";
 import Services from "./Services";
 import Stages from "./Stages";
 import Exhibition from "./Exhibition";
 import Activities from "./Activities";
-import Footer from "../components/Layout/Footer";
+import Footer from "../Layout/Footer";
 
 const navLinkOptions = [
   { label: "من نحن", to: "/about", scrollId: "about" },

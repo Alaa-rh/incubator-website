@@ -1,9 +1,9 @@
 import React from 'react'
-import AllActivities from '../components/AllActivities';
-import SignupLink from '../components/SignupLink';
-import activity1 from '../assets/images/activity-1.jpg';
-import activity2 from '../assets/images/activity-2.jpg';
-import activity3 from '../assets/images/activity-3.png';
+import AllActivities from '../AllActivities';
+import SignupLink from '../SignupLink';
+import activity1 from '../../assets/images/activity-1.jpg';
+import activity2 from '../../assets/images/activity-2.jpg';
+import activity3 from '../../assets/images/activity-3.png';
 
 const activities = [
   {

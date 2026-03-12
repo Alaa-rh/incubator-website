@@ -1,8 +1,8 @@
 import React from 'react'
-import Landing1 from '../assets/images/landing-1.png';
-import Landing2 from '../assets/images/landing-2.jpg';
-import logo from '../assets/images/logo.png'
-import SignupLink from '../components/SignupLink';
+import Landing1 from '../../assets/images/landing-1.png';
+import Landing2 from '../../assets/images/landing-2.jpg';
+import logo from '../../assets/images/logo.png'
+import SignupLink from '../SignupLink';
 
 const Home = ({id}) => {
     const IctOutputs = [

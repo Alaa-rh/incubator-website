@@ -1,13 +1,13 @@
 import { NavLink } from "react-router-dom"
 
-const CategoryGrid = ({ items }) => {
+const CategoryGrid = ({ items, className }) => {
   return (
-    <div className="grid grid-cols-3 gap-4 mt-4">
+    <div className={`w-200 grid gap-6 mt-4 ${className}`}>
       {items.map(item => (
         <NavLink
           key={item.id}
           to={item.link}
-          className="py-10 rounded-xl shadow-md flex flex-col items-center bg-white 
+          className="w-50 py-10 rounded-xl shadow-md flex flex-col items-center bg-white 
                      hover:bg-main-color hover:text-white transition-all duration-200"
         >
           <span className="text-5xl text-main-color">{item.icon}</span>

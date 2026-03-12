@@ -1,5 +1,5 @@
 import React from 'react'
-import Landing2 from '../landing/Landing2';
+import Landing2 from '../components/landing/Landing2';
 
 const LandingPage2 = () => {
   return (

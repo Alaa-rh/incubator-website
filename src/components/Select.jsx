@@ -1,5 +1,5 @@
 import React from "react"
-
+import { GiHighlighter } from "react-icons/gi";
 const Select = ({ label, name, value, onChange, options = [], placeholder = "", error = "", disabled = false, className = "" }) => {
   return (
     <div className="flex flex-col gap-1">

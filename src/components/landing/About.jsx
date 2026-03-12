@@ -1,6 +1,6 @@
 import React from 'react'
-import about from "../assets/images/about.jpg"
-import SignupLink from '../components/SignupLink';
+import about from "../../assets/images/about.jpg"
+import SignupLink from '../SignupLink';
 const About = ({id}) => {
   return (
         <div className="container relative flex justify-between items-center gap-8 mt-20 mb-40" id={id}>

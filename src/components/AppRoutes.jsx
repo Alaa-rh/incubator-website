@@ -41,6 +41,13 @@ import TeamPage from "../pages/IdeaOwner/TeamPage";
 import IdeaOwnerMainPage from "../pages/IdeaOwner/IdeaOwnerMainPage";
 import TeamRequestPage from "../pages/IdeaOwner/TeamRequestPage";
 import IncubationStagesPage from "../pages/IdeaOwner/IncubationStagesPage";
+import VolunteerCenterPage from "../pages/Volunteer/VolunteerCenterPage";
+import VolunteerRequestsPage from "../pages/Volunteer/VolunteerRequestsPage";
+import ScheduleManagementPage from "../pages/Volunteer/ScheduleManagementPage";
+import AddWorkshopPage from "../pages/Volunteer/AddWorkshopPage";
+import WorkshopsPage from "../pages/Volunteer/WorkshopsPage";
+import WorkshopInfoPage from "../pages/Volunteer/WorkshopInfoPage";
+import VolunteerRequestDetailsPage from "../pages/Volunteer/VolunteerRequestDetailsPage";
 const AppRoutes = () => {
   const { role } = useRole();
 
@@ -63,6 +70,7 @@ const AppRoutes = () => {
       <Route path="/volunteerform" element={<VolunteerFormPage />} />
 
       {/* Visitor Main Layout */}
+      {role === "visitor" &&
       <Route element={<MainLayout header={<UserNavbar navOptions={navOptions["visitor"]} />} footer={null} />}>
         <Route path="/visitor-mainpage" element={<VisitorMainPage />} />
         <Route path="/projectspage" element={<ProjectsPage />} />
@@ -71,7 +79,7 @@ const AppRoutes = () => {
         <Route path="/notificationspage" element={<NotificationsPage />} />
         <Route path="/messagespage" element={<MessagesPage />} />
       </Route>
-
+}
       {/* Profile Info */}
       <Route path="/profileinfo" element={<ProfileInfoPage />} />
 
@@ -85,6 +93,7 @@ const AppRoutes = () => {
         </Route>
       )}
       {/*ideaOwner Main Layout*/}
+      {role === "ideaOwner" &&
       <Route element={<MainLayout header={<UserNavbar navOptions={navOptions["ideaOwner"]} footer={null}/>} />}>
         <Route path="/ideaowner-mainpage" element={<IdeaOwnerMainPage />} />
         <Route path="/projectspage" element={<ProjectsPage />} />
@@ -94,8 +103,9 @@ const AppRoutes = () => {
         <Route path="/incubation-stages" element={<IncubationStagesPage />} />
        
       </Route>
+}
        <Route path="/TeamRequestPage" element={<TeamRequestPage />} />
-      
+       <Route path="/consultantslist/:categoryId" element={<ConsultantsListPage />} />
       {/* Idea Owner Dashboard */}
       {role === "ideaOwner" && (
         <Route element={<DashboardLayout role="ideaOwner" userName="مريم أحمد" email="maryam@example.com" />}>
@@ -104,12 +114,25 @@ const AppRoutes = () => {
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/change-password" element={<ChangePasswordPage />} />
           <Route path="/consultants" element={<ConsultantsPage />} />
-          <Route path="/consultantslist/:categoryId" element={<ConsultantsListPage />} />
-          <Route path="/team" element={<TeamPage />} />
           
+          <Route path="/team" element={<TeamPage />} />
         </Route>
       )}
-
+      {/* Volunteer Dashboard */}
+      {role === "volunteer" && (
+        <Route element={<DashboardLayout role="volunteer" userName="مايا محمد" email="maya@example.com" />}>
+          <Route path="/profile" element={<ProfilePage userName="مايا محمد" email="maya@example.com"/>} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/change-password" element={<ChangePasswordPage />} />
+          <Route path="/volunteer-center" element={<VolunteerCenterPage />} />
+        </Route>
+      )}
+          <Route path="/volunteer-request/:id" element={<VolunteerRequestDetailsPage />} />
+          <Route path="/requests-page" element={<VolunteerRequestsPage />} />
+          <Route path="/schedule-page" element={<ScheduleManagementPage />} />
+          <Route path="/workshop-page" element={<WorkshopsPage />} />
+          <Route path="/workshopinfo/:id" element={<WorkshopInfoPage />} />
     </Routes>
   );
 };

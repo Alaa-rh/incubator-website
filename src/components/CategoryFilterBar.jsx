@@ -8,7 +8,7 @@ const CategoryFilterBar = ({ categories, selected, onSelect, className = "" }) =
           key={cat.id}
           onClick={() => onSelect(cat.id)}
           className={`
-            flex items-center justify-center min-w-[80px] px-4 py-2 rounded-md transition
+            flex items-center justify-center min-w-[80px] px-4 py-2 rounded-md transition cursor-pointer
             ${selected === cat.id ? "bg-second-color text-white font-bold" : "border border-second-color"}
           `}
         >

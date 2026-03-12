@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaQuestion } from "react-icons/fa";
-import FaqItem from "../components/FaqItem";
-import SignupLink from '../components/SignupLink';
+import FaqItem from "../FaqItem";
+import SignupLink from '../SignupLink';
 
 const FaQuestions = ({id}) => {
     const FAQS = [

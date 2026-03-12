@@ -6,7 +6,7 @@ const Button = ({ label, onClick, type = "button", disabled = false, className =
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`btn text-white font-bold py-2 px-4 rounded transition ${className}`}
+      className={`btn cursor-pointer text-white font-bold py-2 px-4 rounded transition ${className}`}
     >
       {label}
     </button>

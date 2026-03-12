@@ -4,7 +4,7 @@ const TeamRequestPage = () => {
   return (
     <div className='bg-white-color min-h-screen py-8'>
       <h1 className="text-3xl font-bold text-second-color m-6">معلومات عن الفريق المطلوب</h1>
-      <div className="container">
+      <div className="container mt-20">
         <TeamRequestForm />
       </div>
     </div>

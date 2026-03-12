@@ -1,5 +1,5 @@
 import React from 'react'
-import RoleCard from '../components/RoleCard';
+import RoleCard from '../RoleCard';
 import { FaRegCircleCheck } from "react-icons/fa6";
 
 const Roles = ({ id }) => {

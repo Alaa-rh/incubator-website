@@ -1,8 +1,8 @@
 import React from 'react'
-import ProjectCard from '../components/ProjectCard';
-import project1 from '../assets/images/project1.png';
-import project2 from '../assets/images/project2.png';
-import project3 from '../assets/images/project3.png';
+import ProjectCard from '../ProjectCard';
+import project1 from "../../assets/images/project1.png"
+import project2 from '../../assets/images/project2.png';
+import project3 from '../../assets/images/project3.png';
 const projects = [
   {
     name: "موقع للتواصل الاجتماعي",
@@ -34,7 +34,7 @@ const Exhibition = ({id}) => {
         <h1 className='text-second-color font-semibold text-[40px] mb-10'>المعرض</h1>
         <div className='flex flex-col gap-5 m-10'>
         {projects.map((project, index) => (
-          <ProjectCard key={index} project={project} showImage={true} showFavorites={false} />
+          <ProjectCard key={index} project={project} forceShowImage={true} forceHideFavorite={true}/>
         ))}
         </div>
       </div>

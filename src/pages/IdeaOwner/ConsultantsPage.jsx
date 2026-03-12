@@ -24,12 +24,12 @@ const ConsultantsPage = () => {
       <div className="container">
 
       {/* مكوّن الفئات */}
-      <CategoryGrid items={categories} />
+      <CategoryGrid items={categories} className="grid-cols-3" />
 
       {/* زر طلب مستشار آخر */}
-      <div className="flex justify-center mt-6">
+      {/* <div className="flex justify-center items-center mt-20">
         <Button label="طلب مستشار آخر" className="bg-main-color"/>
-      </div>
+      </div> */}
     </div>    
   </div>
   )

@@ -4,7 +4,7 @@ import { FaRegHandPeace } from "react-icons/fa6";
 import { TbHandTwoFingers } from "react-icons/tb";
 import { TbHandThreeFingers } from "react-icons/tb";
 import { TbHandStop } from "react-icons/tb";
-import SignupLink from '../components/SignupLink';
+import SignupLink from '../SignupLink';
 const Terms = ({id}) => {
     const Conditions = [
         {

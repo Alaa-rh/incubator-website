@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 export const RoleContext = createContext();
 
 export const RoleProvider = ({ children }) => {
-  const [role, setRole] = useState(localStorage.getItem("role") || "ideaOwner");
+  const [role, setRole] = useState(localStorage.getItem("role") || "volunteer");
 
   const updateRole = (newRole) => {
     setRole(newRole);

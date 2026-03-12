@@ -1,6 +1,6 @@
 import React from 'react'
-import partner from '../assets/images/men.png'
-import SignupLink from '../components/SignupLink';
+import partner from '../../assets/images/men.png'
+import SignupLink from '../SignupLink';
 const Partners = ({id}) => {
   return (
     <div className='partners-bg w-full h-screen mb-40' id={id}>

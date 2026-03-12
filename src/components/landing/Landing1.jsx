@@ -1,13 +1,13 @@
 import { useEffect } from "react"
 import { useLocation } from "react-router-dom"
-import MainLayout from "../components/Layout/MainLayout"
-import Header from "../components/Layout/Header";
+import MainLayout from "../Layout/MainLayout"
+import Header from "../Layout/Header";
 import Home from "./Home";
 import Roles from "./Roles";
 import Goals from "./Goals";
 import FaQuestions from "./FaQuestions";
 import Terms from "./Terms";
-import Footer from "../components/Layout/Footer";
+import Footer from "../Layout/Footer";
 const navLinkOptions = [
   { label: "الصفحة الرئيسية", to: "/", scrollId: "home" }, 
   { label: "أدوار الحاضنة", to: "/", scrollId: "roles" },

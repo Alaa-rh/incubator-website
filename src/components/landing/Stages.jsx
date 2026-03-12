@@ -1,6 +1,6 @@
 import React from 'react'
-import StageCard from '../components/StageCard';
-import Boy from '../assets/images/Boy.png';
+import StageCard from '../StageCard';
+import Boy from '../../assets/images/Boy.png';
 
 const Stages = ({id}) => {
   return (

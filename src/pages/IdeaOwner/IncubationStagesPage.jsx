@@ -1,10 +1,9 @@
 import { useState } from "react"
-import CampStage from "../../components/Stages/CampStage"
-import CommitteeStage from "../../components/Stages/CommitteeStage"
-import FollowupStage from "../../components/Stages/FollowupStage"
-import ExhibitionStage from "../../components/Stages/ExhibitionStage"
-import SubmitRequestStage from "../../components/Stages/SubmitRequestStage"
-// استيراد الـ Stepper
+import CampStage from "../../components/Incubation Stages/CampStage"
+import CommitteeStage from "../../components/Incubation Stages/CommitteeStage"
+import FollowupStage from "../../components/Incubation Stages/FollowupStage"
+import ExhibitionStage from "../../components/Incubation Stages/ExhibitionStage"
+import SubmitRequestStage from "../../components/Incubation Stages/SubmitRequestStage"
 import Stepper from "../../components/Stepper"
 
 const IncubationStagesPage = () => {
@@ -29,7 +28,7 @@ const IncubationStagesPage = () => {
     <div className="bg-white-color h-screen p-6 space-y-8">
 
       {/* العنوان */}
-      <h1 className="text-3xl font-bold text-second-color">
+      <h1 className="text-2xl font-bold text-main-color">
         تابع تقدم مشروعك خلال مراحل الاحتضان من المعسكر حتى المعرض النهائي
       </h1>
 
@@ -40,7 +39,7 @@ const IncubationStagesPage = () => {
         className="mt-4" />
 
       {/* المرحلة الحالية */}
-      <div className="mt-10">
+      <div className="container mt-10">
         {stages[currentStage]}
       </div>
 
