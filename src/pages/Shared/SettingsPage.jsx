@@ -26,7 +26,7 @@ const SettingsPage = () => {
 
       <div className='container'>
 
-        <div className='w-200 h-40 bg-white p-6 rounded'>
+        <div className='w-200 h-40 bg-white p-6 rounded-lg'>
           <h2 className='text-2xl font-bold mb-4'>الأمان وتسجيل الدخول</h2>
 
           <div className="flex justify-between items-center">
@@ -39,7 +39,7 @@ const SettingsPage = () => {
           </div>
         </div>
 
-        <div className="w-200 h-40 bg-white flex justify-between items-center p-4 rounded mt-6">
+        <div className="w-200 h-40 bg-white flex justify-between items-center p-4 rounded-lg mt-6">
 
           <Button 
             label="حذف الحساب" 

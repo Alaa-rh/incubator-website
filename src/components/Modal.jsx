@@ -12,7 +12,7 @@ const Modal = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-      <div className={`border border-second-color bg-white rounded-lg shadow-lg p-6 relative max-w-md w-full ${className}`}>
+      <div className={`border-2 border-second-color bg-white rounded-lg shadow-lg p-6 relative max-w-md w-full ${className}`}>
         
         {/* زر الإغلاق */}
         <button 

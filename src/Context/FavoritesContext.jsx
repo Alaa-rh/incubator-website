@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect} from "react";
+// eslint-disable-next-line
 export const FavoritesContext = createContext();
 
 export const FavoritesProvider = ({ children }) => {

@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+// eslint-disable-next-line
 export const RoleContext = createContext();
 
 export const RoleProvider = ({ children }) => {

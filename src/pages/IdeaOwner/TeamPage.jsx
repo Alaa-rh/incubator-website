@@ -28,7 +28,7 @@ const TeamPage = () => {
       <div className="flex gap-4 mb-6">
         <button
           onClick={() => setActiveTab("current")}
-          className={`px-4 py-2 rounded-xl border ${
+          className={`px-4 py-2 rounded-xl border cursor-pointer ${
             activeTab === "current" ? "bg-second-color text-white" : "bg-white"
           }`}
         >
@@ -37,7 +37,7 @@ const TeamPage = () => {
 
         <button
           onClick={() => setActiveTab("suggested")}
-          className={`px-4 py-2 rounded-xl border ${
+          className={`px-4 py-2 rounded-xl border cursor-pointer ${
             activeTab === "suggested" ? "bg-second-color text-white" : "bg-white"
           }`}
         >

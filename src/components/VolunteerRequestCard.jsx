@@ -4,7 +4,7 @@ import Button from "./Button"
 
 const VolunteerRequestCard = ({ request }) => {
   return (
-    <div className="bg-white border border-second-color rounded-xl p-6 shadow flex flex-col gap-3">
+    <div className="bg-white w-120 border border-second-color rounded-xl px-8 py-6 shadow flex flex-col gap-3">
 
       <p><span className="font-bold text-xl">الاسم: </span>{request.name}</p>
       <p><span className="font-bold text-xl">البريد الإلكتروني: </span>{request.email}</p>

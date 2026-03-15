@@ -1,6 +1,6 @@
 const ProfileHeader = ({ profile }) => {
   return (
-    <div className="relative bg-main-color text-white p-6 flex flex-col md:flex-row items-center gap-6">
+    <div className="relative bg-main-color text-white py-6 px-25 flex flex-col md:flex-row items-center gap-6">
 
       {/* صورة المستشار */}
       <img 

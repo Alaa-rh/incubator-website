@@ -5,7 +5,7 @@ const ProjectsSection = ({ projects }) => {
     <div>
 
       {/* العنوان */}
-      <div className="flex gap-3 font-bold mx-8">
+      <div className="flex gap-3 font-bold mr-25">
       <SlScreenDesktop className="text-4xl text-second-color" />
       <h3 className="text-4xl">مشاريعي</h3>
       </div>

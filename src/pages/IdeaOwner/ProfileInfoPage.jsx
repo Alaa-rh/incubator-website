@@ -5,6 +5,7 @@ import GeneralInfoBox from '../../components/GeneralInfoBox';
 import Button from '../../components/Button';
 import ProjectsSection from '../../components/ProjectsSection';
 import avatar from "../../assets/images/avatar.jpg"
+import ConsultationRequest from '../../components/ConsultationRequest';
 const ProfileInfoPage = () => {
 
   const profileData = {
@@ -12,7 +13,7 @@ const ProfileInfoPage = () => {
     name: "MAYA ALMOHAMAD",
     city: "حمص",
     specialty: "BACKEND",
-    bio: "مطور Backend بخبرة ٤ سنوات. شغوف ببناء منصات ناشئة، ويحب مساعدة الفرق التقنية الجديدة على تأسيس البنية الأساسية لمشاريعها.",
+    bio: "مطور Backendبخبرة ٤ سنوات. شغوف ببناء منصات ناشئة،  ويحب مساعدة الفرق التقنية الجديدةا.",
     github: "https://github.com/username",
     linkedin: "https://linkedin.com/in/username",
     behance: "https://behance.net/username"
@@ -42,25 +43,22 @@ const ProfileInfoPage = () => {
   ]
 
   return (
-    <div className="relative h-full">
+    <div className="h-full">
 
       {/* الهيدر */}
       <ProfileHeader profile={profileData} />
 
       {/* المحتوى */}
-      <div className="flex justify-between gap-2 mt-6">
-
-        {/* العمود الأيسر */}
+      <div className="container flex justify-center items-center mt-6">
 
           <AvailabilityBox availability={availabilityData} />
-
-          <div className="flex items-center gap-3 mr-10">
-            <Button label="طلب انضمام" className="bg-main-color" />
-            <Button label="طلب استشارة" className="bg-main-color" />
-
           <GeneralInfoBox info={generalInfo} />
 
         </div>
+
+      <div className="flex items-center gap-3 mr-25">
+            <Button label="طلب انضمام" className="bg-main-color" />
+            <ConsultationRequest/>
 
       </div>
 

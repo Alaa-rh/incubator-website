@@ -68,7 +68,7 @@ const VolunteerRequestsPage = () => {
         className="bg-white-color"
       />
 
-      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
 
         {/* طلبات الاستشارة */}
         {selected === "consultations" &&
@@ -78,6 +78,7 @@ const VolunteerRequestsPage = () => {
               request={req}
               onApprove={() => console.log("approve", req.id)}
               onReject={() => console.log("reject", req.id)}
+              mode="request"
             />
           ))}
 
@@ -96,6 +97,7 @@ const VolunteerRequestsPage = () => {
                 request={req}
                 onApprove={() => console.log("approve", req.id)}
                 onReject={() => console.log("reject", req.id)}
+                mode="request"
               />
             ))}
 

@@ -1,0 +1,38 @@
+import React from 'react'
+import NearestWorkshopCard from '../../components/Workshop/NearestWorkshopCard';
+import LastWorkshops from '../../components/LastWorkshops';
+import LastExhibition from '../../components/LastExhibition';
+import { NavLink } from 'react-router-dom';
+import NavLinkUniversal from '../../components/NavLinkUniversal';
+
+const EvaluatedMainPage = () => {
+    const sessionInfo = {
+        date: '2023-05-01',
+        time: '10:00 AM',
+    }
+  return (
+    <div className='bg-white-color min-h-screen py-8'>
+        <div className="container">
+             <div className="max-w-[50%] mb-8">
+            <h1 className="text-3xl font-bold">انقل فكرتك من <span className="text-second-color"> الحلم</span> إلى <span className="text-second-color">الحقيقة</span>...</h1>
+            <p className='mt-4 text-xl'>تبدأ فترة الاحتضان من 15 الشهر الجاري وحتى نهايته قدم فكرتك الآن واجعلنا نحتضن نجاحك</p>
+            <NavLinkUniversal to="/ideaform" label={<Button className="mt-4 text-xl bg-main-color hover:scale-105 transition" label="قدم فكرتك الآن"/>} />
+         </div> 
+         <NearestWorkshopCard />
+         <div className='bg-white p-6 rounded-lg flex justify-between items-center shadow-lg mb-8'>
+          <div>
+            <h3 className='font-bold text-2xl mb-2'>لديك جلسة تقييم :</h3>
+            <p><span className='font-bold text-xl'>بتاريخ :</span>{sessionInfo.date}</p>
+            <p><span className='font-bold text-xl'>الوقت :</span>{sessionInfo.time}</p>
+            </div>
+            <NavLinkUniversal to="/evaluation-center" label={<Button className="bg-main-color" label="الاطلاع على المشاريع"/>} />
+            </div>
+         <LastWorkshops />
+         <LastExhibition />
+        </div>
+        
+    </div>
+  )
+}
+
+export default EvaluatedMainPage

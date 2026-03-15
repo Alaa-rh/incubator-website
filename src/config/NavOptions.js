@@ -18,4 +18,10 @@ export const navOptions = {
     { label: "المشاريع", to: "/projectspage", scrollId: "" },
     { label: "النشاطات", to: "/activitiespage", scrollId: "" },
   ],
-}
+  // volunteer_evaluator:[
+  //   ...navOptions.volunteer,
+  // ],
+  // volunteer_incubated:[
+  //   ...navOptions.volunteer,
+  // ]
+};

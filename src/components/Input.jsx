@@ -3,7 +3,7 @@ import React from "react"
 const Input = ({ label, name, type = "text", value, onChange, placeholder = "", error = "", disabled = false, className = "" }) => {
   return (
     <div className="flex flex-col gap-1">
-      {label && <label htmlFor={name} className="text-sm font-medium">{label}</label>}
+      {label && <label htmlFor={name} className="text-sm font-bold">{label}</label>}
       <input
         id={name}
         name={name}

@@ -69,7 +69,7 @@ const ProjectsPage = () => {
       />
     </div>
         <SearchBar onSearch={setSearchQuery} />
-       <Projects projects={filteredProjects} />
+       <Projects projects={filteredProjects}/>
       </div>
   );
 }
