@@ -62,8 +62,8 @@ const EditVolunteerProfilePage = () => {
           <Input label="الرقم" name="phone" value={state.phone} onChange={handleChange("phone")} />
           <Input label="تقيم في" name="city" value={state.city} onChange={handleChange("city")} />
 
-          <Input label="عدد المشاريع التي ساعدت فيها" name="projectsCount" type="number" value={state.projectsCount} onChange={handleChange("projectsCount")} />
-          <Input label="الخبرة (بالسنوات)" name="experience" type="number" value={state.experience} onChange={handleChange("experience")} />
+          <Input label="عدد المشاريع التي ساعدت فيها" name="projectsCount" type="number" value={state.projectsCount > 0 ? state.projectsCount : ""} onChange={handleChange("projectsCount")} />
+          <Input label="الخبرة (بالسنوات)" name="experience" type="number" value={state.experience > 0 ? state.experience : ""} onChange={handleChange("experience")} />
 
           <Input label="نوع التطوع" name="volunteerType" value={state.volunteerType} onChange={handleChange("volunteerType")} />
           <Input label="متاح لتعاون" name="collaborationType" value={state.collaborationType} onChange={handleChange("collaborationType")} />

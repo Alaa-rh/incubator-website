@@ -7,6 +7,7 @@ import { IoIosNotificationsOutline } from "react-icons/io"
 import { FaRegMessage } from "react-icons/fa6"
 
 const UserNavbar = ({ navOptions }) => {
+
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-white shadow-md">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 h-20">

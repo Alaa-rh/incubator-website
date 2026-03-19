@@ -7,8 +7,8 @@ const CategoryGrid = ({ items, className }) => {
         <NavLink
           key={item.id}
           to={item.link}
-          className="w-50 py-10 rounded-xl shadow-md flex flex-col items-center bg-white 
-                     hover:bg-main-color hover:text-white transition-all duration-200"
+          className="w-50 py-10 rounded-xl shadow-lg flex flex-col items-center bg-white 
+                     hover:scale-105 hover:text-white transition-all duration-200"
         >
           <span className="text-5xl text-main-color">{item.icon}</span>
           <span className="mt-2 font-medium text-main-color">{item.label}</span>

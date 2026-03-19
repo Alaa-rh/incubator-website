@@ -1,13 +1,17 @@
 import { useState, useEffect } from "react"
 import Button from "../Button"
 import Input from "../Input"
-import ConsultationRequest from "../ConsultationRequest"
 import AlertBox from "../AlertBox"
+
 const CampStage = ({ onComplete }) => {
   const [absenceReason, setAbsenceReason] = useState("")
-//   const [lastSessionAttended, setLastSessionAttended] = useState(false)
-  const lastSessionAttended = false
 
+  // بيانات الحضور
+  const totalSessions = 8
+  const attendedSessions = 2
+
+  // حساب نسبة الحضور
+  const attendanceRate = (attendedSessions / totalSessions) * 100
 
   // بيانات الجلسة القادمة
   const nextSession = {
@@ -18,7 +22,6 @@ const CampStage = ({ onComplete }) => {
     description: "وصف بسيط عن الجلسة"
   }
 
-  // جدول الجلسات السابقة
   const sessions = [
     {
       title: "روبوت سيباك",
@@ -41,24 +44,18 @@ const CampStage = ({ onComplete }) => {
   const handleAbsenceRequest = () => {
     console.log("سبب الغياب:", absenceReason)
 
-    
-
-    onComplete()
   }
 
   useEffect(() => {
-  if (lastSessionAttended) {
-    onComplete()
-  }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-}, [lastSessionAttended])
-
+    if (attendanceRate >= 75) {
+      onComplete()
+    }
+  }, [attendanceRate, onComplete])
 
   return (
-    <div className="p-6 space-y-8"> 
+    <div className="p-6 space-y-8">
 
-    {/*تنبيه*/}
-    <AlertBox message="تأكد من حضور الجلسات بنسبة 75% وعدم تأخير تسليم المهام المطلوبة لتجنب التأثير على استمرارك في الحاضنة." />
+      <AlertBox message="تأكد من حضور الجلسات بنسبة 75% وعدم تأخير تسليم المهام المطلوبة لتجنب التأثير على استمرارك في الحاضنة." />
 
       {/* معلومات الجلسة القادمة */}
       <div className="bg-white p-4 rounded-lg shadow-lg space-y-2 w-100">
@@ -69,7 +66,6 @@ const CampStage = ({ onComplete }) => {
         <p><span className="font-bold">وصف بسيط:</span> {nextSession.description}</p>
       </div>
 
-     
       {/* طلب غياب */}
       <div className="space-y-3">
         <p className="font-bold">هل ستغيب عن الجلسة الحالية؟</p>
@@ -94,7 +90,7 @@ const CampStage = ({ onComplete }) => {
         <h3 className="text-xl font-bold text-second-color mb-3">جدول الجلسات</h3>
 
         <table className="w-full text-center bg-white rounded-lg">
-          <thead className="">
+          <thead>
             <tr>
               <th className="p-2">عنوان الجلسة</th>
               <th className="p-2">التاريخ</th>
@@ -107,7 +103,7 @@ const CampStage = ({ onComplete }) => {
 
           <tbody>
             {sessions.map((s, i) => (
-              <tr key={i} className="border-t border-second-color" >
+              <tr key={i} className="border-t border-second-color">
                 <td className="p-2">{s.title}</td>
                 <td className="p-2">{s.date}</td>
                 <td className="p-2">{s.trainer}</td>
@@ -119,6 +115,7 @@ const CampStage = ({ onComplete }) => {
           </tbody>
         </table>
       </div>
+
     </div>
   )
 }

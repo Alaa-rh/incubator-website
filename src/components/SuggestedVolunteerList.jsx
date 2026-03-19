@@ -8,6 +8,7 @@ const SuggestedVolunteersList = ({ volunteers }) => {
           key={v.id}
           name={v.name}
           email={v.email}
+          role={v.role}
           buttonLabel="إضافة للفريق"
           onButtonClick={() => console.log("إضافة", v.name)}
         />

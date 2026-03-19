@@ -15,6 +15,7 @@ const NavLinkUniversal = ({
   useEffect(() => {
     // إذا لم يكن scrollId
     if (!scrollId) {
+      //eslint-disable-next-line
       setIsActive(location.pathname === to)
       return
     }

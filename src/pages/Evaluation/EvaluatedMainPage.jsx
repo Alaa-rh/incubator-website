@@ -2,7 +2,7 @@ import React from 'react'
 import NearestWorkshopCard from '../../components/Workshop/NearestWorkshopCard';
 import LastWorkshops from '../../components/LastWorkshops';
 import LastExhibition from '../../components/LastExhibition';
-import { NavLink } from 'react-router-dom';
+import Button from '../../components/Button';
 import NavLinkUniversal from '../../components/NavLinkUniversal';
 
 const EvaluatedMainPage = () => {

@@ -1,19 +1,23 @@
 import { createContext, useState } from "react";
+
 // eslint-disable-next-line
 export const RoleContext = createContext();
 
 export const RoleProvider = ({ children }) => {
-  const [role, setRole] = useState(localStorage.getItem("role") || "volunteer");
+  
+  const storedRoles = JSON.parse(localStorage.getItem("roles")) || ["volunteer", "ideaOwner"];
 
-  const updateRole = (newRole) => {
-    setRole(newRole);
-    localStorage.setItem("role", newRole);
+  const [roles, setRoles] = useState(storedRoles);
+
+  
+  const updateRoles = (newRoles) => {
+    setRoles(newRoles);
+    localStorage.setItem("roles", JSON.stringify(newRoles));
   };
 
   return (
-    <RoleContext.Provider value={{ role, updateRole }}>
+    <RoleContext.Provider value={{ roles, updateRoles }}>
       {children}
     </RoleContext.Provider>
   );
 };
-

@@ -1,13 +1,13 @@
 import Sidebar from "../Sidebar"
 import { Outlet } from "react-router-dom"
 
-const DashboardLayout = ({ role, userName, email }) => {
+const DashboardLayout = ({ roles, userName, email }) => {
   return (
     <div className="flex min-h-screen">
 
       {/* Sidebar */}
       <div className="w-64 bg-white shadow-sm">
-        <Sidebar role={role} userName={userName} email={email} />
+        <Sidebar roles={roles} userName={userName} email={email} />
       </div>
 
       {/* Page Content */}

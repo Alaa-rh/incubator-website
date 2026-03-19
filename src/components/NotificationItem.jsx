@@ -3,7 +3,7 @@ import React from "react"
 const NotificationItem = ({ image, time, status, read = false, children }) => {
   return (
     <div
-      className={`flex items-start gap-4 p-4 border-b border-gray-200 relative 
+      className={`flex items-start gap-4 p-4 border-b border-gray-200 shadow-sm relative 
         ${read ? "bg-white" : "bg-white-color shadow"}`}
     >
       {/* صورة أو شعار */}

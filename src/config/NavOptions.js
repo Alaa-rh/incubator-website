@@ -1,4 +1,5 @@
-export const navOptions = {
+
+const baseNav = {
   visitor: [
     { label: "الرئيسية", to: "/visitor-mainpage", scrollId: "" },
     { label: "المشاريع", to: "/projectspage", scrollId: "" },
@@ -18,10 +19,20 @@ export const navOptions = {
     { label: "المشاريع", to: "/projectspage", scrollId: "" },
     { label: "النشاطات", to: "/activitiespage", scrollId: "" },
   ],
-  // volunteer_evaluator:[
-  //   ...navOptions.volunteer,
-  // ],
-  // volunteer_incubated:[
-  //   ...navOptions.volunteer,
-  // ]
+};
+
+export const navOptions = {
+  ...baseNav,
+
+  volunteer_evaluator: [
+     { label: "الرئيسية", to: "/volunteer-evaluated-mainpage", scrollId: "" },
+    { label: "المشاريع", to: "/projectspage", scrollId: "" },
+    { label: "النشاطات", to: "/activitiespage", scrollId: "" },
+  ],
+
+  volunteer_incubated: [
+     { label: "الرئيسية", to: "/volunteer-incubated-mainpage", scrollId: "" },
+    { label: "المشاريع", to: "/projectspage", scrollId: "" },
+    { label: "النشاطات", to: "/activitiespage", scrollId: "" },
+  ],
 };

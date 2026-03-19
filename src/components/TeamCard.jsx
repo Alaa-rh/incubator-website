@@ -1,9 +1,9 @@
 import Button from "./Button"
 const TeamCard = ({ name, email, role, buttonLabel, onButtonClick }) => {
   return (
-    <div className="p-6 border border-second-color rounded-xl shadow">
+    <div className="p-8 border border-second-color rounded-xl shadow">
       
-      <div className="flex flex-col items-center gap-6 mb-4">
+      <div className="flex flex-col items-start gap-6 mb-4">
         <p className="font-bold">الاسم: {name}</p>
         <p className="font-bold">البريد الإلكتروني: {email}</p>
 

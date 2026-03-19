@@ -27,7 +27,7 @@ const IncubationStagesPage = () => {
   return (
     <div className="bg-white-color h-screen p-6 space-y-8">
 
-      {/* العنوان */}
+      
       <h1 className="text-2xl font-bold text-main-color">
         تابع تقدم مشروعك خلال مراحل الاحتضان من المعسكر حتى المعرض النهائي
       </h1>

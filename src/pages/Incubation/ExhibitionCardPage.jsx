@@ -26,11 +26,11 @@ const ExhibitionCardPage = () => {
   });
   return (
     <div className="min-h-screen bg-white-color p-8 ">
-      <div className="container">
+      <div>
         <h1 className="text-second-color text-3xl font-bold mb-2 mt-2">بطاقة المعرض</h1>
         <p className="font-bold text-lg">تاريخ المعرض: {data.exhibitionDate}</p>
       </div>
-      <div className="bg-white shadow-md border border-gray-100 p-12 rounded-sm">
+      <div className="container bg-white shadow-md border border-gray-100 p-6 rounded-sm">
         <InfoRow label="اسم المشروع :">{data.projectName}</InfoRow>
         <InfoRow label="اسم الفريق :">{data.teamName}</InfoRow>
         <InfoRow label="بريد للتواصل (للفريق) :">
