@@ -1,9 +1,9 @@
 import { useState } from "react"
-import CampStage from "../../components/Incubation Stages/CampStage"
-import CommitteeStage from "../../components/Incubation Stages/CommitteeStage"
-import FollowupStage from "../../components/Incubation Stages/FollowupStage"
-import ExhibitionStage from "../../components/Incubation Stages/ExhibitionStage"
-import SubmitRequestStage from "../../components/Incubation Stages/SubmitRequestStage"
+import CampStage from "../../components/Incubation_Stages/CampStage"
+import CommitteeStage from "../../components/Incubation_Stages/CommitteeStage"
+import FollowupStage from "../../components/Incubation_Stages/FollowupStage"
+import ExhibitionStage from "../../components/Incubation_Stages/ExhibitionStage"
+import SubmitRequestStage from "../../components/Incubation_Stages/SubmitRequestStage"
 import Stepper from "../../components/Stepper"
 
 const IncubationStagesPage = () => {

@@ -4,7 +4,7 @@ import Modal from "./Modal"
 import Select from "./Select"
 import Input from "./Input"
 
-const ConsultationRequest = ({ consultant }) => {
+const ConsultationRequestBtn = ({ consultant }) => {
   const [isOpen, setIsOpen] = useState(false)
 
   const open = () => setIsOpen(true)
@@ -58,4 +58,4 @@ const ConsultationRequest = ({ consultant }) => {
   )
 }
 
-export default ConsultationRequest
+export default ConsultationRequestBtn

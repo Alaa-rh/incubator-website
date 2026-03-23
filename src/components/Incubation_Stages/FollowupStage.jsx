@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import ConsultationRequest from "../ConsultationRequest"
+import ConsultationRequestBtn from "../ConsultationRequestBtn"
 import AlertBox from "../AlertBox"
 const FollowupStage = ({ onComplete, notes = [], allNotesResolved }) => {
   
@@ -58,7 +58,7 @@ const FollowupStage = ({ onComplete, notes = [], allNotesResolved }) => {
 
       {/* زر طلب الاستشارة */}
       <div className="flex justify-end">
-        <ConsultationRequest />
+        <ConsultationRequestBtn />
       </div>
 
     </div>

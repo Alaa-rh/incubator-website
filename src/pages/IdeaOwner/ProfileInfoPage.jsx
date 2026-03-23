@@ -5,7 +5,7 @@ import GeneralInfoBox from '../../components/GeneralInfoBox';
 import Button from '../../components/Button';
 import ProjectsSection from '../../components/ProjectsSection';
 import avatar from "../../assets/images/avatar.jpg"
-import ConsultationRequest from '../../components/ConsultationRequest';
+import ConsultationRequestBtn from '../../components/ConsultationRequestBtn';
 const ProfileInfoPage = () => {
 
   const profileData = {
@@ -58,7 +58,7 @@ const ProfileInfoPage = () => {
 
       <div className="flex items-center gap-3 mr-25">
             <Button label="طلب انضمام" className="bg-main-color" />
-            <ConsultationRequest/>
+            <ConsultationRequestBtn/>
 
       </div>
 

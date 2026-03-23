@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import ConsultationRequest from "../ConsultationRequest"
+import ConsultationRequestBtn from "../ConsultationRequestBtn"
 
 const CommitteeStage = ({ onComplete, committeeResult }) => {
  
@@ -36,7 +36,7 @@ const CommitteeStage = ({ onComplete, committeeResult }) => {
 
       {/* زر طلب الاستشارة */}
       <div className="flex">
-        <ConsultationRequest />
+        <ConsultationRequestBtn />
       </div>
 
     </div>

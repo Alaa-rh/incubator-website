@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import AlertBox from '../../components/AlertBox';
-import ConsultationRequest from '../../components/ConsultationRequest';
+import ConsultationRequestBtn from '../../components/ConsultationRequestBtn';
 const IncubationInfoPage = () => {
    // eslint-disable-next-line 
   const [projectData, setProjectData] = useState({
@@ -44,7 +44,7 @@ const IncubationInfoPage = () => {
         </div>
 
         <div className="flex justify-start mt-12">
-        <ConsultationRequest />
+        <ConsultationRequestBtn />
         </div>
 
       </div>

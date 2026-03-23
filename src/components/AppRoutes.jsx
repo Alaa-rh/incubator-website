@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { useRole } from "../hooks/useRole";
 
 import DashboardLayout from "./layout/DashboardLayout";
+import AdminLayout from "./Layout/AdminLayout";
 
 import LandingPage1 from "../pages/LandingPage1";
 import LandingPage2 from "../pages/LandingPage2";
@@ -59,6 +60,9 @@ import EvaluationFormPage from "../pages/Evaluation/EvaluationFormPage";
 import NotesPage from "../pages/Evaluation/NotesPage";
 import ExhibitionCardPage from "../pages/Incubation/ExhibitionCardPage";
 import IncubatedMainPage from "../pages/Incubation/IncubatedMainPage";
+
+import AdminMainPage from "../pages/Admin/AdminMainPage";
+import StatisticsPage from "../pages/Admin/StatisticsPage";
 
 const AppRoutes = () => {
     const { roles } = useRole();
@@ -218,6 +222,14 @@ const AppRoutes = () => {
       <Route path="/assigned-projects-page" element={<AssignedProjectsPage />} />
       <Route path="/projectinfo/:id" element={<ProjectInfoPage />} />
       <Route path="/incubationinfo" element={<IncubationInfoPage />} />
+
+     {/* ---------------- Admin ---------------- */}
+      {roles.includes("admin") && (
+        <Route element={<AdminLayout adminName="مايا محمد" email="maya@example.com" />}>
+          <Route path="/admin-mainpage" element={<AdminMainPage />} />
+          <Route path="/admin/statistics" element={<StatisticsPage />} />
+        </Route>
+      )}  
 
     </Routes>
   );

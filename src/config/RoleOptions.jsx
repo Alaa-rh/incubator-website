@@ -1,8 +1,19 @@
 import { BsPersonFillGear, BsPersonCircle, BsPersonWorkspace } from "react-icons/bs";
 import { IoCall } from "react-icons/io5";
 import { GrGroup } from "react-icons/gr";
-import { MdOutlineHomeWork } from "react-icons/md";
 import { ImStatsDots } from "react-icons/im";
+import {
+  MdDashboard,
+  MdBarChart,
+  MdManageAccounts,
+  MdPeople,
+  MdAssignment,
+  MdSchool,
+  MdWork,
+  MdChecklist,
+  MdPhotoLibrary,
+  MdOutlineHomeWork
+} from "react-icons/md";
 
 const baseRoles = {
   visitor: [
@@ -25,7 +36,7 @@ const baseRoles = {
     { label: "تواصل معنا", link: "/contact", icon: <IoCall /> },
     { label: "مركز التطوع", link: "/volunteer-center", icon: <MdOutlineHomeWork /> },
     { label: "إعدادات الحساب", link: "/settings", icon: <BsPersonFillGear /> },
-  ],
+  ], 
 };
 
 export const RoleOptions = {
@@ -42,3 +53,15 @@ export const RoleOptions = {
     { label: "مركز التقييم", link: "/evaluation-center", icon: <ImStatsDots /> },
   ],
 };
+ const admin = [
+  { label: "الرئيسية", link: "/admin-mainpage", icon: <MdDashboard/> },
+  { label: "الإحصائيات", link: "/admin/statistics", icon: <MdBarChart/> },
+  { label: "إدارة المستخدمين", link: "/admin/users", icon: <MdPeople/> },
+  { label: "إدارة المتطوعين", link: "/admin/volunteers", icon: <MdPeople/> },
+  { label: "مواسم الاحتضان", link: "/admin/seasons", icon: <MdAssignment /> },
+  { label: "الورشات التدريبية", link: "/admin/workshops", icon: <MdSchool /> },
+  { label: "التقييم", link: "/admin/evaluation", icon: <MdChecklist /> },
+  { label: "المشاريع المحتضنة", link: "/admin/assigned-projects", icon: <MdWork /> },
+  { label: "المعرض", link: "/admin/gallery", icon: <MdPhotoLibrary /> },
+]
+export default admin

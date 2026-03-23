@@ -2,7 +2,7 @@ import React from 'react'
 import NearestWorkshopCard from '../../components/Workshop/NearestWorkshopCard';
 import LastWorkshops from '../../components/LastWorkshops';
 import LastExhibition from '../../components/LastExhibition';
-import ConsultationRequest from '../../components/ConsultationRequest';
+import ConsultationRequestBtn from '../../components/ConsultationRequestBtn';
 
 const IncubatedMainPage = () => {
   return (
@@ -17,7 +17,7 @@ const IncubatedMainPage = () => {
                 يمكنك طلب استشارة من المتطوعين في أي وقت.
                 الالتزام بإنجاز المهام ضروري للاستمرار في الاحتضان.<br/>
                 في حال عدم إحراز تقدّم في المراجعة القادمة، قد يتم إلغاء الاحتضان.</p>
-             <ConsultationRequest />   
+             <ConsultationRequestBtn />   
         </div>
         </div>
         </div>

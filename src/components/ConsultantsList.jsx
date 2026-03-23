@@ -1,4 +1,4 @@
-import ConsultationRequest from "./ConsultationRequest";
+import ConsultationRequestBtn from "./ConsultationRequestBtn";
 
 const ConsultantsList = ({ consultants }) => {
   return (
@@ -11,7 +11,7 @@ const ConsultantsList = ({ consultants }) => {
             <p className="font-bold">{c.specialty}</p>
             <p className="font-bold">أوقات النشاط: {c.activeTime}</p>
           </div>
-          <ConsultationRequest consultant={c} />
+          <ConsultationRequestBtn consultant={c} />
         </div>
       ))}
       </div>
