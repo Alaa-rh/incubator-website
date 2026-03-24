@@ -16,18 +16,18 @@ const Stages = ({id}) => {
          </StageCard>
          <StageCard 
          title={"المرحلة الثالثة"}
-         description={"المعرض السنوي لعرض المشاريع امام المستثمرين والشركات والجهات الداعمة"}
+         description={"التقييم الدوري يتم كل 3 اشهر لقياس تقدم المشروع وتحديد سيره بالشكل المطلوب"}
          className={"justify-center"} />
          <StageCard 
          title={"المرحلة الثانية"}
-         description={"المعرض السنوي لعرض المشاريع امام المستثمرين والشركات والجهات الداعمة"}
+         description={"التقييم الأولي المرحلة التي يحسم فيها قرار قبول او رفض المشروع"}
          className={"justify-center"} >
             <img src={Boy} alt="boy" className='w-50 h-50 m-0 p-0' />
          </StageCard>
 
          <StageCard 
          title={"المرحلة الأولى"}
-         description={"المعرض السنوي لعرض المشاريع امام المستثمرين والشركات والجهات الداعمة"}
+         description={"تحضير الفرق من خلال ورشات تدريبية،في المعسكر التدريبي"}
           className={" justify-end mt-100"}/>
          </div>
          </div>

@@ -29,10 +29,10 @@ const projects = [
 ]
 const Exhibition = ({id}) => {
   return (
-    <div className='bg-white-color p-4 mb-40' id={id}>
+    <div className='p-4 mb-40' id={id}>
       <div className="container">
         <h1 className='text-second-color font-semibold text-[40px] mb-10'>المعرض</h1>
-        <div className='flex flex-col gap-5 m-10'>
+        <div className='flex flex-col gap-5'>
         {projects.map((project, index) => (
           <ProjectCard key={index} project={project} ShowImage={true} />
         ))}

@@ -63,6 +63,9 @@ import IncubatedMainPage from "../pages/Incubation/IncubatedMainPage";
 
 import AdminMainPage from "../pages/Admin/AdminMainPage";
 import StatisticsPage from "../pages/Admin/StatisticsPage";
+import UsersPage from "../pages/Admin/UsersPage";
+import UserDetailsPage from "../pages/Admin/UserDetailsPage";
+import TaskDetailsPage from "../pages/Admin/TaskDetailsPage";
 
 const AppRoutes = () => {
     const { roles } = useRole();
@@ -228,8 +231,17 @@ const AppRoutes = () => {
         <Route element={<AdminLayout adminName="مايا محمد" email="maya@example.com" />}>
           <Route path="/admin-mainpage" element={<AdminMainPage />} />
           <Route path="/admin/statistics" element={<StatisticsPage />} />
+          <Route path="/admin/users" element={<UsersPage />} />
         </Route>
-      )}  
+      )} 
+      <Route path="/admin/users/visitor/:id" element={<UserDetailsPage />} />
+      <Route path="/admin/users/volunteer/:id" element={<UserDetailsPage />} />
+      <Route path="/admin/users/incubated/:id" element={<UserDetailsPage />} />
+      <Route path="/admin/users/graduated/:id" element={<UserDetailsPage />} />
+      <Route path="/admin/users/idea-owner/:id" element={<UserDetailsPage />} />
+      <Route path="/admin/tasks/:taskId" element={<TaskDetailsPage />} />
+
+
 
     </Routes>
   );
