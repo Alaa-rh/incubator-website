@@ -4,6 +4,7 @@ import Button from "../../Button";
 import girl from "../../../assets/images/girl.jpg";
 import Checkbox from "../../CheckBox";
 import Input from "../../Input";
+import NavLinkUniversal from "../../NavLinkUniversal";
 
 const UserHeaderActions = ({ user }) => {
   // حالات فتح/إغلاق المودالات
@@ -42,8 +43,12 @@ const UserHeaderActions = ({ user }) => {
 
           {/* يظهر فقط للمتطوع */}
           {user.role === "متطوع" && (
-            <Button label="طلب التطوع" className="bg-main-color"/>
-          )}
+           <NavLinkUniversal 
+              label={<Button label="طلب التطوع" className="bg-main-color" />}
+              to={`/admin/details/${user.id}?type="request"`}
+            />
+)}
+
         </div>
       </div>
 
@@ -97,9 +102,9 @@ const UserHeaderActions = ({ user }) => {
           <Button label="حفظ التعديلات" className="bg-main-color"/>
         }
       >
-        <p className="mb-4">يرجى اختيار الدور الجديد للمستخدم:</p>
+        <p className="mb-4 text-black font-medium">يرجى اختيار الدور الجديد للمستخدم {user.name} :</p>
 
-        <div className="flex flex-col gap-2 text-right">
+        <div className="flex flex-col gap-2 text-right font-bold">
             <Checkbox label="مدير" name="manager" /> 
             <Checkbox label="زائر" name="visitor" /> 
             <Checkbox label="متطوع" name="volunteer" /> 

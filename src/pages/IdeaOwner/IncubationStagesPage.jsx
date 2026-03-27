@@ -25,7 +25,7 @@ const IncubationStagesPage = () => {
   ]
 
   return (
-    <div className="bg-white-color h-screen p-6 space-y-8">
+    <div className="bg-white-color h-min-screen p-6 space-y-8">
 
       
       <h1 className="text-2xl font-bold text-main-color">

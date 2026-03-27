@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { useRole } from "../hooks/useRole";
+import { buildUserNavOptions } from"../Utils/BulidUserNavOptions";
 
 import DashboardLayout from "./layout/DashboardLayout";
 import AdminLayout from "./Layout/AdminLayout";
@@ -20,7 +21,7 @@ import VolunteerFormPage from "../pages/Shared/VolunteerFormPage";
 
 import MainLayout from "./Layout/MainLayout";
 import UserNavbar from "./UserNavbar";
-import { navOptions } from "../config/NavOptions";
+
 
 import VisitorMainPage from "../pages/Visitor/VisitorMainPage";
 import ProjectsPage from "../pages/Shared/ProjectsPage";
@@ -66,22 +67,12 @@ import StatisticsPage from "../pages/Admin/StatisticsPage";
 import UsersPage from "../pages/Admin/UsersPage";
 import UserDetailsPage from "../pages/Admin/UserDetailsPage";
 import TaskDetailsPage from "../pages/Admin/TaskDetailsPage";
+import VolunteerRequestPage from "../pages/Admin/VolunteerRequestPage";
+import VolunteersPage from "../pages/Admin/VolunteersPage";
 
 const AppRoutes = () => {
     const { roles } = useRole();
-   const mergedOptions = roles.flatMap((role) => navOptions[role] || []);
-  const withoutHome = mergedOptions.filter(opt => opt.label !== "الرئيسية");
-
-  let homeLink = null;
-  if (roles.includes("ideaOwner")) {
-    homeLink = { label: "الرئيسية", to: "/ideaowner-mainpage" };
-  } 
-  const cleanedOptions = Array.from(
-    new Map(withoutHome.map(opt => [opt.to, opt])).values()
-  );
-
-  const userNavOptions = [homeLink, ...cleanedOptions];
-
+    const userNavOptions = buildUserNavOptions(roles);
   return (
     <Routes>
 
@@ -173,6 +164,7 @@ const AppRoutes = () => {
           <Route path="/activitiespage" element={<ActivitiesPage />} />
           <Route path="/notificationspage" element={<NotificationsPage />} />
           <Route path="/messagespage" element={<MessagesPage />} />
+          
         </Route>
       )}
 
@@ -225,6 +217,7 @@ const AppRoutes = () => {
       <Route path="/assigned-projects-page" element={<AssignedProjectsPage />} />
       <Route path="/projectinfo/:id" element={<ProjectInfoPage />} />
       <Route path="/incubationinfo" element={<IncubationInfoPage />} />
+      <Route path="/profileinfo" element={<ProfileInfoPage />} />
 
      {/* ---------------- Admin ---------------- */}
       {roles.includes("admin") && (
@@ -232,14 +225,22 @@ const AppRoutes = () => {
           <Route path="/admin-mainpage" element={<AdminMainPage />} />
           <Route path="/admin/statistics" element={<StatisticsPage />} />
           <Route path="/admin/users" element={<UsersPage />} />
+          <Route path="/admin/volunteers" element={<VolunteersPage />} />
         </Route>
       )} 
+      {roles.includes("admin") && (
+      <Route>
       <Route path="/admin/users/visitor/:id" element={<UserDetailsPage />} />
       <Route path="/admin/users/volunteer/:id" element={<UserDetailsPage />} />
       <Route path="/admin/users/incubated/:id" element={<UserDetailsPage />} />
       <Route path="/admin/users/graduated/:id" element={<UserDetailsPage />} />
       <Route path="/admin/users/idea-owner/:id" element={<UserDetailsPage />} />
       <Route path="/admin/tasks/:taskId" element={<TaskDetailsPage />} />
+      <Route path="/admin/details/:id" element={<VolunteerRequestPage />} />
+      <Route path="/messagespage" element={<MessagesPage />} />
+      <Route path="/notificationspage" element={<NotificationsPage />} />
+      </Route>
+      )}
 
 
 

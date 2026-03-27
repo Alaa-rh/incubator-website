@@ -10,8 +10,8 @@ const QuickAccess = () => {
   ];
 
   return (
-    <div>
-      <h2 className="text-xl font-bold mb-4">الوصول السريع</h2>
+    <div className=" mt-8">
+      <h2 className="text-xl font-bold mb-4">الوصول السريع :</h2>
 
       <div className="grid grid-cols-4 gap-6">
         {items.map((item, idx) => (
