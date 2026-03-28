@@ -45,9 +45,8 @@ const Activities = ({id}) => {
     <div className='bg-white-color p-4 mb-40' id={id}>
          <div className="container">
         <h1 className='text-second-color font-semibold text-[40px] mb-10'>النشاطات</h1>
-        <AllActivities activities={activities}>
-          <SignupLink />
-        </AllActivities>
+        <AllActivities activities={activities}/>
+          
     </div>
     </div>
   )

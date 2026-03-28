@@ -14,13 +14,15 @@
 
   }}
 @layer utilities {
-  .container{
-    width: 1200px;
-    margin-right: auto;
-    margin-left: auto;
-    padding-right: 15px;
-    padding-left: 15px;
-  }
+  .container {
+  width: 100%;
+  max-width: 1200px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
   .bg-main-color {
     background-color: var(--main-color);
   }
@@ -79,25 +81,32 @@
     background-size: cover;
     background-repeat: no-repeat;
   }
-  .goal p{
-    counter-increment: number;
-  }
-  .goal p::before{
-    content: counter(number);
-    border-radius: 50%;
-    background-color: var(--secondary-color);
-    color: white;
-    position: absolute;
-    width: 90px;
-    height: 90px;
-    right: -64px;
-    top: -32px;
-    text-align: center;
-    line-height: 3;
-    font-weight: bold;
-    font-size: 32px;
+  .goal {
+  counter-reset: number;
+}
 
-  }
+.goal p {
+  counter-increment: number;
+  position: relative;
+}
+
+.goal p::before {
+  content: counter(number);
+  position: absolute;
+  right: -60px;
+  top: 50%;
+  transform: translateY(-80%);
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background-color: var(--secondary-color);
+  color: white;
+  font-weight: bold;
+  font-size: 32px;
+  text-align: center;
+  line-height: 90px;
+}
+
 
 }
 html {
@@ -115,17 +124,17 @@ body {
   -moz-box-sizing: border-box;
 } 
 @media(min-width: 768px){
-    .container{
-      width: 800px;
-    }
+  .container{
+    max-width: 800px;
   }
-  @media(min-width: 992px){
-    .container{
-      width: 1000px;
-    }
+}
+@media(min-width: 992px){
+  .container{
+    max-width: 1000px;
   }
-  @media(min-width: 1200px){
-    .container{
-      width: 1200px;
-    }
-  } 
+}
+@media(min-width: 1200px){
+  .container{
+    max-width: 1200px;
+  }
+}

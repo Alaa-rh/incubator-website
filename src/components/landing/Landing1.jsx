@@ -36,7 +36,6 @@ const Landing1 = () => {
       <Goals id="goals" />
       <FaQuestions id="faq" />
       <Terms id="terms" />
-     
     </MainLayout>
     </>
   )

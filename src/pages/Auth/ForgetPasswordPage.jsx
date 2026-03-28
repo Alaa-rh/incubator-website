@@ -25,7 +25,7 @@ const ForgotPasswordPage = () => {
 
     // await api.forgotPassword({ email });
 
-    navigate("/verify");
+    navigate("/verification");
   };
 
   return (

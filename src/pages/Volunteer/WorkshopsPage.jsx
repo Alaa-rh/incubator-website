@@ -48,7 +48,7 @@ const WorkshopsPage = () => {
                     <td className="py-6 px-2">
                       <span className={
                         item.status === "مقبولة" ? "text-green-600" : 
-                        item.status === "مرفوضة" ? "text-red-600" : "text-black"
+                        item.status === "مرفوضة" ? "text-red-600" : "text-yellow-600"
                       }>
                         {item.status}
                       </span>

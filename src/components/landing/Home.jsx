@@ -23,14 +23,14 @@ const Home = ({id}) => {
     <div className="container mt-10">
         <h2 className=' text-main-color text-center text-[40px] font-semibold mb-5'>انقل فكرتك <span className='text-second-color'>من الحلم الى الحقيقة</span></h2>
         <div className='relative h-150 mb-20'>
-         <div className='absolute left-15 top-[20%] text-[40px] text-main-color text-lg leading-normal'><br/>شارك<span className='text-second-color p-4'> <br/>بخبرتك</span>  <br/>واصنع <br/> الفرق!</div>   
+         <div className='absolute left-15 top-[20%] text-[50px] text-main-color text-lg leading-normal'><br/>شارك<span className='text-second-color p-4'> <br/>بخبرتك</span>  <br/>واصنع <br/> الفرق!</div>   
         <img src={Landing2} alt="Dream to real" className='w-full h-full' />
         </div>
        <SignupLink label="انطلق بمشروعك الآن" className="my-10"/>
     </div>
 
     {/* الحاضنة عن قرب */}
-    <div className="container p-10 bg-main-color text-white">
+    <div className="container p-10 bg-main-color text-white rounded-lg">
         <div className="flex justify-between mt-5">
             <div className='px-4'>
             <h2 className='mt-7 pb-0 text-[40px] font-bold border-b-10 rounded-sm border-second-color'>الحاضنة عن قرب</h2>

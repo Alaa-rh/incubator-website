@@ -83,7 +83,7 @@ const AppRoutes = () => {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/forgetpassword" element={<ForgotPasswordPage />} />
       <Route path="/verification" element={<VerificationPage />} />
-      <Route path="/newpassword" element={<NewPasswordPage />} />
+      <Route path="/new-password" element={<NewPasswordPage />} />
 
       <Route path="/ProjectDetails/:id" element={<ProjectDetailsPage />} />
       <Route path="/workshops/:id" element={<WorkshopDetailsPage />} />
@@ -187,6 +187,7 @@ const AppRoutes = () => {
           <Route path="/activitiespage" element={<ActivitiesPage />} />
           <Route path="/notificationspage" element={<NotificationsPage />} />
           <Route path="/messagespage" element={<MessagesPage />} />
+           <Route path="/incubation-stages" element={<IncubationStagesPage />} />
         </Route>
       )}
 

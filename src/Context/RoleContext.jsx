@@ -5,7 +5,7 @@ export const RoleContext = createContext();
 
 export const RoleProvider = ({ children }) => {
   
-  const storedRoles = JSON.parse(localStorage.getItem("roles")) || ["volunteer", "ideaOwner"];
+  const storedRoles = JSON.parse(localStorage.getItem("roles")) || ["volunteer_evaluator"];
 
   const [roles, setRoles] = useState(storedRoles);
 
