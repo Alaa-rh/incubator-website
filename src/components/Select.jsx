@@ -3,7 +3,7 @@ import { GiHighlighter } from "react-icons/gi";
 const Select = ({ label, name, value, onChange, options = [], placeholder = "", error = "", disabled = false, className = "" }) => {
   return (
     <div className="flex flex-col gap-1">
-      {label && <label htmlFor={name} className="text-sm font-medium">{label}</label>}
+      {label && <label htmlFor={name} className="text-sm font-bold mb-2">{label}</label>}
       <select
         id={name}
         name={name}
@@ -14,7 +14,7 @@ const Select = ({ label, name, value, onChange, options = [], placeholder = "", 
       >
         <option value="" disabled hidden>{placeholder}</option>
         {options.map(opt => (
-          <option key={opt.value} value={opt.value} className="bg-main-color text-white hover:bg-white hover:text-main-color">{opt.label}</option>
+          <option key={opt.value} value={opt.value} className="bg-main-color text-white font-medium hover:bg-white hover:text-main-color">{opt.label}</option>
         ))}
       </select>
       {error && <p className="text-xs text-red-500">{error}</p>}

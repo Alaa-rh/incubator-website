@@ -2,10 +2,12 @@ import React, { useState } from "react"
 import WorkshopImage from "../../components/Workshop/WorkshopImage"
 import WorkshopStepOne from "../../components/Workshop/WorkshopStepOne"
 import WorkshopStepTwo from "../../components/Workshop/WorkshopStepTwo"
+// import workShop3 from "../../assets/images/workShop3.png"
 
 const AddWorkshopPage = () => {
 
   const [step, setStep] = useState(1)
+  const [error, setError] = useState("")
 
   const [formData, setFormData] = useState({
     startTime: "",
@@ -20,7 +22,30 @@ const AddWorkshopPage = () => {
     image: null
   })
 
+
+
   const handleSubmit = () => {
+    const newError = {}
+    const requiredFields = [
+      "startTime", 
+      "endTime", 
+      "description", 
+      "targetGroup", 
+      "title", 
+      "category", 
+      "startDate", 
+      "endDate", 
+      "days"
+    ]
+   requiredFields.forEach((field) => {
+      if (!formData[field]) newError[field] = "هذا الحقل مطلوب"
+    })
+
+    if (Object.keys(newError).length > 0) {
+      setError(newError)
+      return
+    }
+
     console.log("بيانات الورشة:", formData)
     alert("تم حفظ الورشة بنجاح")
   }
@@ -40,6 +65,7 @@ const AddWorkshopPage = () => {
             formData={formData}
             setFormData={setFormData}
             onNext={() => setStep(2)}
+            error={error}
           />
         )}
 
@@ -49,6 +75,7 @@ const AddWorkshopPage = () => {
             setFormData={setFormData}
             onBack={() => setStep(1)}
             onSubmit={handleSubmit}
+            error={error}
           />
         )}
 

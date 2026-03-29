@@ -6,7 +6,7 @@ import Button from "./Button"
 const daysOfWeek = ["الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت", "الأحد"]
 
 const AvailabilityScheduler = ({ value, onChange }) => {
-  // إذا ما تم تمرير قيمة من الأب، نعمل قيمة افتراضية: فترة واحدة فارغة لكل يوم
+  //  قيمة افتراضية: فترة واحدة فارغة لكل يوم
   const availability = value && Object.keys(value).length
     ? value
     : Object.fromEntries(daysOfWeek.map(day => [day, { from: "", to: "", active: false }]))
@@ -29,7 +29,7 @@ const AvailabilityScheduler = ({ value, onChange }) => {
 
   const handleSave = () => {
     console.log("تم الحفظ:", availability)
-    // إرسال لـ Django أو أي API هنا
+    //API 
   }
 
   return (
@@ -40,30 +40,43 @@ const AvailabilityScheduler = ({ value, onChange }) => {
       </p>
 
       {daysOfWeek.map((day) => (
-        <div key={day} className="mb-3 ">
-          <div className="flex items-center gap-4 mb-2">
-            <h2 className="text-md font-semibold mb-2">{day}</h2>
-            <Input
-              type="time"
-              value={availability[day].from}
-              onChange={(e) => handleChange(day, "from", e.target.value)}
-            />
-            <span>إلى</span>
-            <Input
-              type="time"
-              value={availability[day].to}
-              onChange={(e) => handleChange(day, "to", e.target.value)}
-            />
-            <label className="flex items-center gap-1 text-sm">
-              <CheckBox
-                label={"مفعّل"}
-                name={`${day}-active`}
-                checked={availability[day].active}
-                onChange={() => handleToggle(day)}
+        <div key={day} className="mb-4">
+            <div className="
+              flex flex-col sm:flex-row 
+              items-start sm:items-center 
+              gap-3 sm:gap-4
+            ">
+              
+              <h2 className="text-md font-semibold w-24">{day}</h2>
+
+              <Input
+                type="time"
+                value={availability[day].from}
+                onChange={(e) => handleChange(day, "from", e.target.value)}
+                className="w-full sm:w-auto"
               />
-            </label>
+
+              <span className="hidden sm:block">إلى</span>
+              <span className="sm:hidden">إلى:</span>
+
+              <Input
+                type="time"
+                value={availability[day].to}
+                onChange={(e) => handleChange(day, "to", e.target.value)}
+                className="w-full sm:w-auto"
+              />
+
+              <label className="flex items-center gap-2 text-sm mt-2 sm:mt-0">
+                <CheckBox
+                  label="مفعّل"
+                  name={`${day}-active`}
+                  checked={availability[day].active}
+                  onChange={() => handleToggle(day)}
+                />
+              </label>
+            </div>
           </div>
-        </div>
+
       ))}
 
       <div className="text-end mt-6">

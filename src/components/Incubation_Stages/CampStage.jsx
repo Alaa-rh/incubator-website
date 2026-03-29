@@ -53,7 +53,7 @@ const CampStage = ({ onComplete }) => {
   }, [attendanceRate, onComplete])
 
   return (
-    <div className="p-6 space-y-8">
+    <div className="p-6 space-y-8 min-h-screen">
 
       <AlertBox message="تأكد من حضور الجلسات بنسبة 75% وعدم تأخير تسليم المهام المطلوبة لتجنب التأثير على استمرارك في الحاضنة." />
 
@@ -89,7 +89,7 @@ const CampStage = ({ onComplete }) => {
       <div>
         <h3 className="text-xl font-bold text-second-color mb-3">جدول الجلسات</h3>
 
-        <table className="w-full text-center bg-white rounded-lg">
+        <table className="w-full text-center bg-white rounded-lg border-collapse border border-second-color shadow-lg">
           <thead>
             <tr>
               <th className="p-2">عنوان الجلسة</th>

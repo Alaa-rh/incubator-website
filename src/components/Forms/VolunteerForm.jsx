@@ -5,42 +5,10 @@ import Modal from "../Modal"
 import StepExperience from "./StepExperience"
 import StepPreferences from "./StepPreferences"
 import StepAvailability from "./StepAvailability"
-
-// الحالة الابتدائية
-const initialForm = {
-  experienceYears: "",
-  expertiseArea: "",
-  employer: "",
-  profileLink: "",
-  consultationPreferences: "",
-  location: "",
-  expertition: "",
-  volunteeringGoal: "",
-  availability: Object.fromEntries(
-    ["الاثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت","الأحد"]
-      .map(d => [d, { from: "", to: "", active: false }])
-  )
-}
-
-// ال reducer
-function formReducer(state, action) {
-  switch (action.type) {
-    case "UPDATE_FIELD":
-      return { ...state, [action.field]: action.value }
-
-    case "UPDATE_AVAILABILITY":
-      return { ...state, availability: action.value }
-
-    case "RESET":
-      return initialForm
-
-    default:
-      return state
-  }
-}
+import { initialVolunteerForm, volunteerReducer } from "../../hooks/useVolunteerReducer";
 
 const VolunteerForm = ({ onCancel }) => {
-  const [form, dispatch] = useReducer(formReducer, initialForm)
+  const [form, dispatch] = useReducer(volunteerReducer, initialVolunteerForm)
   const [errors, setErrors] = useState({})
   const [step, setStep] = useState(0)
   const [showSuccess, setShowSuccess] = useState(false)
@@ -145,13 +113,13 @@ const VolunteerForm = ({ onCancel }) => {
               label="التالي"
               type="button"
               onClick={() => setStep(step + 1)}
-              className="w-50 bg-main-color text-white px-4 py-2 rounded"
+              className="w-50 bg-main-color px-4 py-2"
             />
           ) : (
             <Button
               label="إرسال"
               type="submit"
-              className="w-50 bg-main-color text-white px-4 py-2 rounded"
+              className="w-50 bg-main-color px-4 py-2"
             />
           )}
         </div>

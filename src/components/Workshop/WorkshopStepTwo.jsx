@@ -5,6 +5,7 @@ const WorkshopStepTwo = ({
   formData,
   setFormData,
   onBack,
+  error,
   onSubmit
 }) => {
 
@@ -15,6 +16,7 @@ const WorkshopStepTwo = ({
         <Input
           type="text"
           value={formData.title}
+          error={error.title} 
           onChange={(e) => setFormData({ ...formData, title: e.target.value })}
           className="w-full"
         />
@@ -25,6 +27,7 @@ const WorkshopStepTwo = ({
         <Input
           type="text"
           value={formData.category}
+          error={error.category}  
           onChange={(e) => setFormData({ ...formData, category: e.target.value })}
           className="w-full"
         />
@@ -35,6 +38,7 @@ const WorkshopStepTwo = ({
         <Input
           type="date"
           value={formData.startDate}
+          error={error.startDate}
           onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
           className="w-full"
         />
@@ -45,6 +49,7 @@ const WorkshopStepTwo = ({
         <Input
           type="text"
           value={formData.days}
+          error={error.days}  
           onChange={(e) => setFormData({ ...formData, days: e.target.value })}
           className="w-full"
         />
@@ -55,6 +60,7 @@ const WorkshopStepTwo = ({
         <Input
           type="date"
           value={formData.endDate}
+          error={error.endDate}
           onChange={(e) => setFormData({ ...formData, endDate: e.target.value })}
           className="w-full"
         />

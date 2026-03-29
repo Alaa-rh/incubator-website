@@ -10,7 +10,7 @@ const CommitteeStage = ({ onComplete, committeeResult }) => {
   }, [committeeResult, onComplete])
 
   return (
-    <div className="p-6 rounded-xl space-y-8">
+    <div className="p-6 rounded-xl space-y-8 min-h-screen bg-white-color">
 
       {/* عنوان المرحلة */}
       <h2 className="text-2xl font-bold text-second-color">

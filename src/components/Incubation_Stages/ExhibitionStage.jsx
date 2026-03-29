@@ -29,7 +29,7 @@ const ExhibitionStage = ({ onComplete }) => {
   }
 
   return (
-    <div className="p-6 space-y-8">
+    <div className="p-6 space-y-8 min-h-screen bg-white-color">
       {/* تاريخ المعرض */}
       <p className="font-bold">
         تاريخ المعرض:

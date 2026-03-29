@@ -12,7 +12,7 @@ const SearchBar = ({ placeholder = "ابحث...", onSearch }) => {
         type="text"
         onChange={handleChange}
         placeholder={placeholder}
-        className="flex-grow"
+        className="flex-grow w-80 sm:w-64"
       />
     </div>
   )

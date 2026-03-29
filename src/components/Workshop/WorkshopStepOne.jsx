@@ -6,18 +6,36 @@ import Button from "../Button"
 const WorkshopStepOne = ({
   formData,
   setFormData,
-  onNext
+  onNext,
+  error
 }) => {
 
   return (
     <div className="flex flex-col gap-6 w-full">
+      {/* صورة الدورة */}
+      <div>
+        <Input
+          label="صورة للورشة (اختياري)"
+          type="file"
+          accept="image/*"
+          onChange={(e) => {
+            const file = e.target.files[0];
+            if (file) {
+              const imageURL = URL.createObjectURL(file);
+              setFormData(prev => ({ ...prev, image: imageURL }));
+            }
+          }}
+          className="w-full"
+        />
+      </div>
 
       {/* وقت الدورة */}
       <div className="flex gap-4">
         <div>
-          <label className="font-bold">من</label>
           <Input 
+            label={"من"}
             type="time"
+            error={error.startTime}
             value={formData.startTime}
             onChange={(e) => setFormData({ ...formData, startTime: e.target.value })}
             className="w-full"
@@ -25,9 +43,10 @@ const WorkshopStepOne = ({
         </div>
 
         <div>
-          <label className="font-bold">إلى</label>
           <Input 
+          label={"إلى"}
             type="time"
+            error={error.endTime}
             value={formData.endTime}
             onChange={(e) => setFormData({ ...formData, endTime: e.target.value })}
             className="w-full"
@@ -40,6 +59,7 @@ const WorkshopStepOne = ({
         <label className="font-bold">الوصف الذي يظهر للطالب</label>
         <Textarea
           value={formData.description}
+          error={error.description}
           onChange={(e) => setFormData({ ...formData, description: e.target.value })}
           className="w-full"
         />
@@ -50,6 +70,7 @@ const WorkshopStepOne = ({
         <label className="font-bold">حدد الأشخاص الذين تخصص لهم هذه الورشة</label>
         <Input
           type="text"
+          error={error.targetGroup}
           value={formData.targetGroup}
           onChange={(e) => setFormData({ ...formData, targetGroup: e.target.value })}
           className="w-full"
