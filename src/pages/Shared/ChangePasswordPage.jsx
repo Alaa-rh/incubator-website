@@ -54,11 +54,13 @@ const ChangePasswordPage = () => {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold text-second-color pt-10 mr-30 mb-20">
+     
+
+      <div className="container"> 
+        
+        <h1 className="text-3xl font-bold text-second-color pt-10 mb-20">
         تغيير كلمة المرور
       </h1>
-
-      <div className="container">
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
 
           <div>

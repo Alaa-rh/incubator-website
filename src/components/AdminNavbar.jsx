@@ -14,9 +14,10 @@ const AdminNavbar = ({BtnLabel, onBtnClick}) => {
         <NavLinkUniversal label={<IoNotificationsOutline size={26} className="cursor-pointer text-gray-600" />} to="/notificationspage" />
         <NavLinkUniversal label={<FaRegMessage size={26} className="cursor-pointer text-gray-600" />} to="/messagespage" />
         <NavLinkUniversal label={<FiSettings size={24} className="cursor-pointer text-gray-600" />} to="/admin/settings" />
-        <Button label={BtnLabel} onClick={onBtnClick} className="bg-main-color"/>
+        {BtnLabel && onBtnClick && (
+          <Button label={BtnLabel} onClick={onBtnClick} className="bg-main-color"/>
+        )}
       </div>
-      
 
     </header>
   )

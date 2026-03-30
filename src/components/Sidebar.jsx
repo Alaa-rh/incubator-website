@@ -41,5 +41,4 @@ const Sidebar = ({ roles = [], userName, email }) => {
   );
 };
 
-export default Sidebar
-
+export default Sidebar;

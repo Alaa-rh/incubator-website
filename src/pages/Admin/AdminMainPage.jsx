@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import StatsCards from "../../components/Admin_Dashboard/StatsCards";
-import ProjectsChart from "../../components/Admin_Dashboard/ProjectsChart";
+import ProjectsChart from "../../components/Admin_Dashboard/Charts/ProjectsChart";
 import RecentActivity from "../../components/Admin_Dashboard/RecentActivity";
 import QuickAccess from "../../components/Admin_Dashboard/QuickAccess"
 import AdminNavbar from "../../components/AdminNavbar";

@@ -42,9 +42,9 @@ const EditVolunteerProfilePage = () => {
   }
 
   return (
-    <div className="container mx-auto py-6" dir="rtl"> 
+    <div className="container mx-auto" dir="rtl"> 
 
-    <div className="bg-white w-1/2 flex items-center gap-4 mb-4 p-4 rounded-lg">
+    <div className="bg-white w-1/2 flex items-center gap-4 mt-4 mb-2 p-4 rounded-lg">
              <img src={girl} alt="avatar" className="w-16 h-16 rounded-full mb-2" />
                 <div>
                  <p className="font-semibold">{state.name}</p>
@@ -84,7 +84,7 @@ const EditVolunteerProfilePage = () => {
           </div>
 
           {/* الأزرار */}
-          <div className="col-span-2 flex justify-center gap-6 mt-8">
+          <div className="col-span-2 flex justify-center gap-6 mt-4">
             <NavLinkUniversal label={ <Button  label="عرض كما يظهر للآخرين" className="bg-main-color"/>}
             to={"/profileinfo"}/>
            

@@ -7,7 +7,7 @@ const FaqItem = ({ question, answer }) => {
     <div className="relative border border-main-color rounded-lg py-3 transition px-6 mb-4">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-100 text-right text-main-color text-[28px] transition duration-300"
+        className="w-100 cursor-pointer text-right text-main-color text-[28px] transition duration-300"
       >
         {question}
       </button>

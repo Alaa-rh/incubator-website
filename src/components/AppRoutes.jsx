@@ -69,6 +69,7 @@ import UserDetailsPage from "../pages/Admin/UserDetailsPage";
 import TaskDetailsPage from "../pages/Admin/TaskDetailsPage";
 import VolunteerRequestPage from "../pages/Admin/VolunteerRequestPage";
 import VolunteersPage from "../pages/Admin/VolunteersPage";
+import AdminSettingsPage from "../pages/Admin/AdminSettingsPage";
 
 const AppRoutes = () => {
     const { roles } = useRole();
@@ -227,6 +228,9 @@ const AppRoutes = () => {
           <Route path="/admin/statistics" element={<StatisticsPage />} />
           <Route path="/admin/users" element={<UsersPage />} />
           <Route path="/admin/volunteers" element={<VolunteersPage />} />
+          <Route path="/admin/settings" element={<AdminSettingsPage />} />
+          <Route path="/change-password" element={<ChangePasswordPage />} />
+
         </Route>
       )} 
       {roles.includes("admin") && (

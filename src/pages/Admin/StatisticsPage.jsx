@@ -1,15 +1,15 @@
 import React from 'react'
+import { useState } from 'react'
 import AdminNavbar from '../../components/AdminNavbar'
 import Modal from '../../components/Modal'
 import Select from '../../components/Select'
 import Button from '../../components/Button'
 import Input from '../../components/Input'
 import StatsCards from '../../components/Admin_Dashboard/StatsCards'
-import { useState } from 'react'
-import SectorAnalysisChart from '../../components/Admin_Dashboard/SectorAnalysisChart';
-import ProjectLifecycleChart from '../../components/Admin_Dashboard/ProjectLifecycleChart';
-import ExpertiseFieldsChart from '../../components/Admin_Dashboard/ExpertiseFieldsChart';
-import IncubationSeasonsChart from '../../components/Admin_Dashboard/IncubationSeasonsChart';
+import SectorAnalysisChart from '../../components/Admin_Dashboard/Charts/SectorAnalysisChart';
+import ProjectLifecycleChart from '../../components/Admin_Dashboard/Charts/ProjectLifecycleChart';
+import ExpertiseFieldsChart from '../../components/Admin_Dashboard/Charts/ExpertiseFieldsChart';
+import IncubationSeasonsChart from '../../components/Admin_Dashboard/Charts/IncubationSeasonsChart';
 
 const StatisticsPage = () => {
     const [open, setOpen] = useState(false);
