@@ -13,8 +13,8 @@ const AdminNavbar = ({BtnLabel, onBtnClick}) => {
       <SearchBar />
       <div className="flex items-center gap-6 pl-6">
         <NotificationsIcon />
-        <NavLinkUniversal label={<FaRegMessage size={26} className="cursor-pointer text-gray-600" />} to="/messagespage" />
-        <NavLinkUniversal label={<FiSettings size={24} className="cursor-pointer text-gray-600" />} to="/admin/settings" />
+        <NavLinkUniversal label={<FaRegMessage size={26} className="cursor-pointer" />} to="/messagespage" />
+        <NavLinkUniversal label={<FiSettings size={24} className="cursor-pointer" />} to="/admin/settings" />
         {BtnLabel && onBtnClick && (
           <Button label={BtnLabel} onClick={onBtnClick} className="bg-main-color"/>
         )}

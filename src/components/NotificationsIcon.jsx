@@ -8,7 +8,7 @@ const NotificationsIcon = () => {
   return (
     <div className="relative">
       <NavLinkUniversal
-        label={<IoIosNotificationsOutline size={30} />}
+        label={<IoIosNotificationsOutline size={35} />}
         to="/notificationspage"
         className="font-bold hover:scale-105 transition"
       />

@@ -26,8 +26,12 @@ const ChangePasswordPage = () => {
     if (!form.newPassword)
       newErrors.newPassword = "الرجاء إدخال كلمة المرور الجديدة";
 
-    if (form.newPassword && form.newPassword.length < 6)
-      newErrors.newPassword = "يجب أن تكون كلمة المرور 6 أحرف على الأقل";
+     if (form.password.length < 8)
+      newErrors.password = "كلمة المرور يجب أن تكون 8 أحرف على الأقل";
+    if (!/[A-Z]/.test(form.password))
+      newErrors.password = "كلمة المرور يجب أن تحتوي على حرف كبير واحد على الأقل";
+    if (!/[0-9]/.test(form.password))
+      newErrors.password = "كلمة المرور يجب أن تحتوي على رقم واحد على الأقل";
 
     if (!form.confirmPassword)
       newErrors.confirmPassword = "الرجاء تأكيد كلمة المرور الجديدة";

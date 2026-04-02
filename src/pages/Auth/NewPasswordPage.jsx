@@ -20,8 +20,12 @@ const NewPasswordPage = () => {
     const newErrors = {};
 
     if (!form.password) newErrors.password = "كلمة المرور مطلوبة";
-    if (form.password.length < 6)
-      newErrors.password = "كلمة المرور يجب أن تكون 6 أحرف على الأقل";
+    if (form.password.length < 8)
+      newErrors.password = "كلمة المرور يجب أن تكون 8 أحرف على الأقل";
+    if (!/[A-Z]/.test(form.password))
+      newErrors.password = "كلمة المرور يجب أن تحتوي على حرف كبير واحد على الأقل";
+    if (!/[0-9]/.test(form.password))
+      newErrors.password = "كلمة المرور يجب أن تحتوي على رقم واحد على الأقل";
 
     if (form.confirmPassword !== form.password)
       newErrors.confirmPassword = "كلمتا المرور غير متطابقتين";

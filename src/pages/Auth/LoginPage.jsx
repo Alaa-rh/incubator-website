@@ -80,11 +80,6 @@ const LoginPage = () => {
               className="flex justify-center max-w-[300px] bg-main-color mt-10 mx-auto w-full"
             />
 
-            {/* <NavLinkUniversal
-              label="انشاء حساب"
-              to="/signup"
-              className="flex justify-center max-w-[300px] text-center bg-third-color mt-5 mx-auto w-full font-bold hover:scale-105 transition"
-            /> */}
             <div className="flex items-center my-8">
               <div className="flex-grow border-t border-second-color"></div>
               <span className="px-4 font-bold text-black text-sm">او عن طريق</span>
@@ -93,7 +88,7 @@ const LoginPage = () => {
 
             <div className="relative">
               <a
-                href="#"
+                href="http://localhost:8080/api/auth/google"
                 className="flex justify-center font-bold border border-second-color px-10 py-2 rounded mt-5 mx-auto hover:bg-gray-50"
               >
                 تسجيل الدخول باستخدام Google
