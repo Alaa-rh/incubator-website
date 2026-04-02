@@ -11,7 +11,7 @@ const UserDetailsPage = () => {
   const user = {
     id,
     name: "مايا المحمد",
-    role: "متطوع", //"متطوع" - "صاحب فكرة" - "زائر" - "متخرج"
+    role: "مختضن", //"متطوع" - "صاحب فكرة" - "زائر" - "متخرج"
     email: "ahmadalmo12@gmail.com",
     phone: "093883273883",
     joinedAt: "12/3/2025",

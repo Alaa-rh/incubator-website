@@ -3,8 +3,11 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { RoleProvider } from "./Context/RoleContext";
+import { Provider } from "react-redux";
+import store from "./Redux/store"
 
 ReactDOM.createRoot(document.getElementById("root")).render(
+  <Provider store={store}>
   <React.StrictMode>
     <BrowserRouter>
       <RoleProvider>
@@ -12,4 +15,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       </RoleProvider>
     </BrowserRouter>
   </React.StrictMode>
+  </Provider>
 );

@@ -1,57 +1,66 @@
-import { useState } from "react"
-import NotificationItem from "./NotificationItem"
-import CategoryFilterBar from "./CategoryFilterBar"
-import logo from "../assets/images/logo.png"
-import { useRole } from "../hooks/useRole"
-
-const initialNotifications = [
-  { id: 1, image: logo, time: "2 دقيقة", status: "unread", category: "general", message: "لديك رسالة جديدة", action: { label: "عرض الرسالة", link: "/messagespage" }},
-  { id: 2, image: logo, time: "1 ساعة", status: "unread", category: "general", message: "تمت مشاهدة ملفك الشخصي", action: { label: "عرض الملف الشخصي", link: "/profileinfo" }},
-  { id: 10, image: logo, time: "10 دقائق", status: "unread", category: "incubation", message: "تم تحديث حالة مشروعك", action: { label: "عرض المرحلة", link: "/incubation-stages" }},
-  { id: 11, image: logo, time: "20 دقيقة", status: "unread", category: "evaluation", message: "لديك تقييم جديد", action: { label: "عرض التقييم", link: "/evaluation-center" }},
-]
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import NotificationItem from "./NotificationItem";
+import CategoryFilterBar from "./CategoryFilterBar";
+import { useRole } from "../hooks/useRole";
+import { markAsRead } from "../Redux/notificationsSlice";
 
 const NotificationsPanel = () => {
-  const [filter, setFilter] = useState("all")
-  const { roles } = useRole()
+  const dispatch = useDispatch();
+  const { roles } = useRole();
 
-  //تحديد أنواع الإشعارات حسب الدور
-  const roleCategories = new Set(["general"])
+  // الإشعارات تأتي الآن من App.jsx
+  const notifications = useSelector((state) => state.notifications.items);
 
-  if (roles.includes("ideaOwner")) roleCategories.add("incubation")
-  if (roles.includes("volunteer")) roleCategories.add("volunteer")
-  if (roles.includes("volunteer_evaluator")) roleCategories.add("evaluation")
-  if (roles.includes("volunteer_incubated")) roleCategories.add("incubation")
+  const [filter, setFilter] = useState("all");
 
-  // الإشعارات التي تخص المستخدم فقط
-  const userNotifications = initialNotifications.filter(n =>
-    roleCategories.has(n.category)
-  )
+  // الفئات حسب الدور
+  const roleCategories = new Set(["general"]);
 
-  //دور رئيسي ليس له فلترة
-  const basicRoles = ["ideaOwner", "visitor", "volunteer"]
+  if (roles.includes("ideaOwner")) roleCategories.add("incubation");
+  if (roles.includes("volunteer")) roleCategories.add("volunteer");
+  if (roles.includes("volunteer_evaluator")) roleCategories.add("evaluation");
+  if (roles.includes("volunteer_incubated")) roleCategories.add("incubation");
 
-  const shouldShowFilter = !(
-    roles.length === 1 && basicRoles.includes(roles[0])
-  )
+  // مؤقتًا: عرض كل الإشعارات حتى لا تختفي بعد القراءة
+  const userNotifications = notifications;
 
-  // بناء قائمة الفئات حسب الدور
+  const basicRoles = ["ideaOwner", "visitor", "volunteer"];
+  const shouldShowFilter =
+    !(roles.length === 1 && basicRoles.includes(roles[0]));
+
   const categories = [
     { id: "all", label: "الكل" },
-    roleCategories.has("incubation") && { id: "incubation", label: "إشعارات الاحتضان" },
-    roleCategories.has("evaluation") && { id: "evaluation", label: "إشعارات التقييم" },
-    roleCategories.has("volunteer") && { id: "volunteer", label: "إشعارات التطوع" },
-  ].filter(Boolean)
+    roleCategories.has("incubation") && {
+      id: "incubation",
+      label: "إشعارات الاحتضان",
+    },
+    roleCategories.has("evaluation") && {
+      id: "evaluation",
+      label: "إشعارات التقييم",
+    },
+    roleCategories.has("volunteer") && {
+      id: "volunteer",
+      label: "إشعارات التطوع",
+    },
+  ].filter(Boolean);
 
-  //
   const filteredNotifications =
     filter === "all"
       ? userNotifications
-      : userNotifications.filter(n => n.category === filter)
+      : userNotifications.filter((n) => n.category === filter);
+
+  const handleNotificationClick = (notif) => {
+    dispatch(markAsRead(notif.id));
+
+    if (notif.action?.link) {
+      //eslint-disable-next-line
+      window.location.href = notif.action.link;
+    }
+  };
 
   return (
     <div className="overflow-hidden">
-
       {shouldShowFilter && (
         <CategoryFilterBar
           categories={categories}
@@ -62,7 +71,9 @@ const NotificationsPanel = () => {
       )}
 
       {filteredNotifications.length === 0 && (
-        <p className="text-gray-500 text-center mt-10">لا يوجد إشعارات حالياً</p>
+        <p className="text-gray-500 text-center mt-10">
+          لا يوجد إشعارات حالياً
+        </p>
       )}
 
       {filteredNotifications.map((notif) => (
@@ -71,14 +82,13 @@ const NotificationsPanel = () => {
           image={notif.image}
           time={notif.time}
           status={notif.status}
-          read={notif.read}
         >
           <div className="flex items-center justify-between">
             <span>{notif.message}</span>
 
             {notif.action && (
               <button
-                onClick={() => (window.location.href = notif.action.link)}
+                onClick={() => handleNotificationClick(notif)}
                 className="bg-main-color text-white px-3 py-1 rounded text-sm"
               >
                 {notif.action.label}
@@ -88,7 +98,7 @@ const NotificationsPanel = () => {
         </NotificationItem>
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default NotificationsPanel
+export default NotificationsPanel;

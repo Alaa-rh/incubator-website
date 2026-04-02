@@ -20,11 +20,10 @@ const SettingsPage = () => {
 
   return (
     <div>
-      <h1 className='text-3xl font-bold text-second-color pt-10 mr-25 mb-20'>
+      <div className='container'> 
+        <h1 className='text-3xl font-bold text-second-color my-10'>
         اعدادات الحساب
       </h1>
-
-      <div className='container'>
 
         <div className='w-200 h-40 bg-white p-6 rounded-lg'>
           <h2 className='text-2xl font-bold mb-4'>الأمان وتسجيل الدخول</h2>

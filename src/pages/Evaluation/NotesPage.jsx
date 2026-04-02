@@ -15,10 +15,9 @@ const NotesPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white-color md:p-15 flex flex-col">
-          <h2 className="text-second-color text-2xl font-bold">الملاحظات</h2>
+    <div className="min-h-screen bg-white-color md:p-15 flex flex-col">  
       <div className="container">
-
+        <h2 className="text-second-color text-2xl font-bold my-10">الملاحظات</h2>
         <div className="mb-12">
           <label className="block text-black font-semibold mb-3 text-lg text-right">اكتب الملاحظة هنا :</label>
           < Textarea

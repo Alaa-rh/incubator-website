@@ -133,6 +133,7 @@ const AppRoutes = () => {
           <Route path="/change-password" element={<ChangePasswordPage />} />
           <Route path="/consultants" element={<ConsultantsPage />} />
           <Route path="/team" element={<TeamPage />} />
+          <Route path="/consultantslist/:categoryId" element={<ConsultantsListPage />} />
         </Route>
       )}
 
@@ -144,6 +145,12 @@ const AppRoutes = () => {
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/change-password" element={<ChangePasswordPage />} />
           <Route path="/volunteer-center" element={<VolunteerCenterPage />} />
+          <Route path="/requests-page" element={<VolunteerRequestsPage />} />
+          <Route path="/workshop-page" element={<WorkshopsPage />} />
+          <Route path="/schedule-page" element={<ScheduleManagementPage />} />
+          <Route path="/workshopinfo/:id" element={<WorkshopInfoPage />} />
+          <Route path="/assigned-projects-page" element={<AssignedProjectsPage />} />
+          <Route path="/volunteer-request/:id" element={<VolunteerRequestDetailsPage />} />
         </Route>
       )}
 
@@ -177,6 +184,14 @@ const AppRoutes = () => {
           <Route path="/change-password" element={<ChangePasswordPage />} />
           <Route path="/evaluation-center" element={<EvaluationCenterPage />} />
           <Route path="/volunteer-center" element={<VolunteerCenterPage />} />
+           <Route path="/requests-page" element={<VolunteerRequestsPage />} />
+          <Route path="/workshop-page" element={<WorkshopsPage />} />
+           <Route path="/workshopinfo/:id" element={<WorkshopInfoPage />} />
+           <Route path="/schedule-page" element={<ScheduleManagementPage />} />
+            <Route path="/evaluationform" element={<EvaluationFormPage />} />
+            <Route path="/notes" element={<NotesPage />} />
+           <Route path="/assigned-projects-page" element={<AssignedProjectsPage />} />
+          <Route path="/volunteer-request/:id" element={<VolunteerRequestDetailsPage />} />
         </Route>
       )}
 
@@ -199,8 +214,15 @@ const AppRoutes = () => {
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/change-password" element={<ChangePasswordPage />} />
           <Route path="/volunteer-center" element={<VolunteerCenterPage />} />
+          <Route path="/volunteer-request/:id" element={<VolunteerRequestDetailsPage />} />
           <Route path="/consultants" element={<ConsultantsPage />} />
           <Route path="/team" element={<TeamPage />} />
+          <Route path="/assigned-projects-page" element={<AssignedProjectsPage />} />
+           <Route path="/requests-page" element={<VolunteerRequestsPage />} />
+          <Route path="/workshop-page" element={<WorkshopsPage />} />
+           <Route path="/workshopinfo/:id" element={<WorkshopInfoPage />} />
+           <Route path="/schedule-page" element={<ScheduleManagementPage />} />
+          <Route path="/consultantslist/:categoryId" element={<ConsultantsListPage />} />
         </Route>
       )}
 
@@ -209,14 +231,7 @@ const AppRoutes = () => {
       <Route path="/notes" element={<NotesPage />} />
       <Route path="/exhibition-card" element={<ExhibitionCardPage />} />
       <Route path="/TeamRequestPage" element={<TeamRequestPage />} />
-      <Route path="/consultantslist/:categoryId" element={<ConsultantsListPage />} />
-      <Route path="/volunteer-request/:id" element={<VolunteerRequestDetailsPage />} />
-      <Route path="/requests-page" element={<VolunteerRequestsPage />} />
-      <Route path="/schedule-page" element={<ScheduleManagementPage />} />
-      <Route path="/workshop-page" element={<WorkshopsPage />} />
       <Route path="/AddworkshopPage" element={<AddWorkshopPage />} />
-      <Route path="/workshopinfo/:id" element={<WorkshopInfoPage />} />
-      <Route path="/assigned-projects-page" element={<AssignedProjectsPage />} />
       <Route path="/projectinfo/:id" element={<ProjectInfoPage />} />
       <Route path="/incubationinfo" element={<IncubationInfoPage />} />
       <Route path="/profileinfo" element={<ProfileInfoPage />} />

@@ -37,8 +37,8 @@ const VolunteerRequestDetailsPage = () => {
 
   return (
     <div className="bg-white-color h-screen p-6">
-      <h1 className="text-3xl text-second-color font-bold mb-6">تفاصيل طلب التطوع</h1>
       <div className="container">
+        <h1 className="text-3xl text-second-color font-bold mb-6">تفاصيل طلب التطوع</h1>
         <VolunteerRequestDetails
           request={request}
           onApprove={approveVolunteer}

@@ -3,7 +3,7 @@ import logo from "../assets/images/logo.png"
 import girl from "../assets/images/girl.jpg"
 import NavLinksGroup from "./NavLinksGroup"
 import NavLinkUniversal from "./NavLinkUniversal"
-import { IoIosNotificationsOutline } from "react-icons/io"
+import NotificationsIcon from "./NotificationsIcon";
 import { FaRegMessage } from "react-icons/fa6"
 
 const UserNavbar = ({ navOptions }) => {
@@ -36,11 +36,7 @@ const UserNavbar = ({ navOptions }) => {
             className="font-bold hover:scale-105 transition"
           />
 
-          <NavLinkUniversal
-            label={<IoIosNotificationsOutline size={30} />}
-            to="/notificationspage"
-            className="font-bold hover:scale-105 transition"
-          />
+           <NotificationsIcon />         
 
           <NavLinkUniversal
             label={

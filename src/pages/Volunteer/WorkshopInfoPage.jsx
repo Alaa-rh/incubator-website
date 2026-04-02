@@ -77,8 +77,8 @@ const WorkshopInfoPage = () => {
 
   return (
     <div className="bg-white-color min-h-screen bg-gray-50 p-8">
-    <h2 className="text-second-color text-2xl font-bold m-6">تفاصيل الورشة</h2>
     <div className="container">
+      <h2 className="text-second-color text-2xl font-bold m-6">تفاصيل الورشة</h2>
       <WorkshopCard 
         workshop={workshop}
         status={workshop.status}

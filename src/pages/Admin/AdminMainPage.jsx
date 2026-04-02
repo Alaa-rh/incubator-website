@@ -8,6 +8,9 @@ import Modal from "../../components/Modal";
 import Select from "../../components/Select";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
+import { FaHandHoldingHeart } from "react-icons/fa";
+import { BsFillFolderFill, BsFillPersonFill } from "react-icons/bs";
+
 const AdminMainPage = () => {  
     const [open, setOpen] = useState(false);
   return (
@@ -45,9 +48,9 @@ const AdminMainPage = () => {
         showIcons={true}
         stats={[
           { label: "المشاريع المنجزة", value: 32, icon: "🏆" },
-          { label: "عدد المتطوعين", value: 32, icon: "🤝" },
-          { label: "المتقدمين للموسم الحالي", value: 32, icon: "✍" },
-          { label: "المشاريع المنجزة", value: 32, icon: "📝" },
+          { label: "عدد المتطوعين", value: 32, icon: <FaHandHoldingHeart className="text-purple-400"/> },
+          { label: "المتقدمين للموسم الحالي", value: 32, icon: <BsFillPersonFill className="text-orange-400"/> },
+          { label: "المشاريع المنجزة", value: 32, icon: <BsFillFolderFill className="text-blue-400"/> },
         ]}
     />
 

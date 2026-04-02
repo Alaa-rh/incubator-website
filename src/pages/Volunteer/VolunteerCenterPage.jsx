@@ -13,8 +13,9 @@ const VolunteerCenterPage = () => {
     ]
   return (
     <div>
-        <h1 className='text-3xl font-bold text-second-color pt-10 mr-25 mb-20'>  مركز التطوع </h1>
+        
         <div className="container">
+          <h1 className='text-3xl font-bold text-second-color my-10'>  مركز التطوع </h1>
             <CategoryGrid items={categories} className="grid-cols-2" />
         </div>
     </div>

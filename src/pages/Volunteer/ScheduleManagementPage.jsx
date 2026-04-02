@@ -72,9 +72,8 @@ const ScheduleManagementPage = () => {
 
   return (
     <div className="bg-white-color min-h-screen flex flex-col font-sans">
-        <h1 className="text-4xl font-bold text-second-color m-6">إدارة الجدولة</h1>
-
-    <div className="container">
+    <div className="container"> 
+      <h1 className="text-4xl font-bold text-second-color my-6">إدارة الجدولة</h1>
       <div>
         <div className="bg-white p-6 rounded-xl shadow-sm mb-6 border border-gray-200">
           <h3 className="font-bold text-third-color mb-2 text-[20px]">حدد توفرك الاسبوعي</h3>

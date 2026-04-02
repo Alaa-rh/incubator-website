@@ -21,7 +21,7 @@ const WorkshopCard = ({ workshop, status }) => {
       {/* الحالة */} 
      
       <p className={`font-bold px-2 ${statusStyles[status]}`}> 
-      <span className="font-bold text-black">حالة الورشة:</span>
+      <span className="font-bold text-black pl-2">حالة الورشة:</span>
         {status === "pending" && "قيد المراجعة"}
         {status === "rejected" && "مرفوضة"}
         {status === "accepted" && "مقبولة"}

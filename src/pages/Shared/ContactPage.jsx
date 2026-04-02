@@ -15,8 +15,9 @@ const ContactPage = () => {
 
   return (
      <div>
-        <h1 className='text-3xl font-bold text-second-color pt-10 mr-30 mb-20'>تواصل معنا</h1>
-        <div className="container">
+       
+        <div className="container"> 
+            <h1 className='text-3xl font-bold text-second-color my-10'>تواصل معنا</h1>
         <Select 
         label= " نوع الاستفسار:" 
         placeholder="اختر نوع الاستفسار"
