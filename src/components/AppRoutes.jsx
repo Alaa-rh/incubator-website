@@ -73,6 +73,8 @@ import AdminSettingsPage from "../pages/Admin/AdminSettingsPage";
 import IncubationSeasonsPage from "../pages/Admin/IncubationSeasonsPage";
 import SeasonDetailsPage from "../pages/Admin/SeasonDetailsPage"
 import IncubationRequestDetails from "../pages/Admin/IncubationRequestDetails";
+import CreateSeasonPage from "../pages/Admin/CreateSeasonPage";
+import PreviewFormPage from "../pages/Admin/PreviewFormPage";
 
 const AppRoutes = () => {
     const { roles } = useRole();
@@ -250,6 +252,8 @@ const AppRoutes = () => {
           <Route path="/change-password" element={<ChangePasswordPage />} />
           <Route path="/admin/seasons" element={<IncubationSeasonsPage />} />
           <Route path="/incubation-seasons/:id" element={<SeasonDetailsPage />} />
+          <Route path="/admin/create-season" element={<CreateSeasonPage />} />
+          <Route path="/admin/preview-form" element={<PreviewFormPage />} />
         </Route>
       )} 
       {roles.includes("admin") && (
@@ -264,6 +268,7 @@ const AppRoutes = () => {
       <Route path="/admin/details/:id" element={<VolunteerRequestPage />} />
       <Route path="/messagespage" element={<MessagesPage />} />
       <Route path="/notificationspage" element={<NotificationsPage />} />
+      
       </Route>
       )}
 

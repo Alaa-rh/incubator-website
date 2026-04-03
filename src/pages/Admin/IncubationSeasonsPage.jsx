@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import DataTable from "../../components/Admin_Dashboard/DataTable"
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import NavLinkUniversal from "../../components/NavLinkUniversal";
 import Button from "../../components/Button";
 import AdminNavbar from "../../components/AdminNavbar";
 
 const IncubationSeasonsPage = () => {
   const [year, setYear] = useState("2024");
-
+  const navigate = useNavigate();
   const seasons = [
     {
       id: 1,
@@ -85,12 +85,16 @@ const IncubationSeasonsPage = () => {
     
     
   ];
+   const createSeason = () => {
+    navigate("/admin/create-season");
+  };
+
 
   return (
     <>
     <AdminNavbar
     BtnLabel={"إضافة موسم"}
-    onBtnClick={() => console.log("Add season")}
+    onBtnClick={createSeason}
     />
 
     <div className="container mt-30">
