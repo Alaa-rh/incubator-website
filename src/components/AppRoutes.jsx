@@ -75,6 +75,9 @@ import SeasonDetailsPage from "../pages/Admin/SeasonDetailsPage"
 import IncubationRequestDetails from "../pages/Admin/IncubationRequestDetails";
 import CreateSeasonPage from "../pages/Admin/CreateSeasonPage";
 import PreviewFormPage from "../pages/Admin/PreviewFormPage";
+import AddSessionPage from "../pages/Admin/AddSessionPage";
+import CampManagementPage from "../pages/Admin/CampManagementPage";
+import IncubatedPage from "../pages/Admin/IncubatedPage";
 
 const AppRoutes = () => {
     const { roles } = useRole();
@@ -254,6 +257,9 @@ const AppRoutes = () => {
           <Route path="/incubation-seasons/:id" element={<SeasonDetailsPage />} />
           <Route path="/admin/create-season" element={<CreateSeasonPage />} />
           <Route path="/admin/preview-form" element={<PreviewFormPage />} />
+          <Route path="/admin/add-session" element={<AddSessionPage />} />
+          <Route path="/admin/camp-management" element={<CampManagementPage />} />
+          <Route path="/admin/incubated" element={<IncubatedPage />} />
         </Route>
       )} 
       {roles.includes("admin") && (
@@ -271,9 +277,7 @@ const AppRoutes = () => {
       
       </Route>
       )}
-
-
-
+      
     </Routes>
   );
 };

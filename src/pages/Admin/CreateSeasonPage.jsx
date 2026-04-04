@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import NewSeasonSettings from "../../components/Admin_Dashboard/IncubationSeasons/Create-Season/NewSeasonSettings";
 import FormBuilder from "../../components/Admin_Dashboard/IncubationSeasons/Create-Season/FormBuilder";
+import NavLinkUniversal from "../../components/NavLinkUniversal";
 
 const CreateSeasonPage = () => {
   const [activeTab, setActiveTab] = useState("settings");
 
   return (
     <div className="bg-white-color min-h-screen w-full p-10">
+      <div className="flex justify-end">
+        <NavLinkUniversal 
+        to={"/admin/camp-management"} 
+        label="ادارة المعسكر" 
+        className="bg-main-color text-white rounded px-3 py-1" />
+      </div>
         <div className="container">
       {/* التبويبات */}
       <div className="flex gap-4 mb-6 border-b pb-2">

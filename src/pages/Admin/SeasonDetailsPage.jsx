@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import SeasonSettings from "../../components/Admin_Dashboard/IncubationSeasons/SeasonSettings";
 import FormBuilder from "../../components/Admin_Dashboard/IncubationSeasons/FormBuilder";
 import ApplicationsReview from "../../components/Admin_Dashboard/IncubationSeasons/ApplicationsReview";
-
+import NavLinkUniversal from "../../components/NavLinkUniversal";
 const SeasonDetailsPage = () => {
   const season = {
     id: 1,
@@ -44,6 +44,12 @@ const SeasonDetailsPage = () => {
     <div className="w-full min-h-screen bg-white-color pt-10">
 
     <div className="container">
+       <div className="flex justify-end">
+        <NavLinkUniversal 
+        to={"/admin/camp-management"} 
+        label="ادارة المعسكر" 
+        className="bg-main-color text-white rounded px-3 py-1" />
+      </div>
 
       {/* عنوان الصفحة */}
       <h1 className="text-xl font-bold mb-6">تفاصيل الموسم</h1>
