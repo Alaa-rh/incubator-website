@@ -1,0 +1,135 @@
+import React, { useState } from "react";
+import avatar from "../../../assets/images/avatar.jpg";
+import Modal from "../../Modal";
+import Button from "../../Button";
+
+const EvaluationDetails = ({ evaluators = [], onBack }) => {
+  const [isAcceptModalOpen, setIsAcceptModalOpen] = useState(false);
+  const [isRejectModalOpen, setIsRejectModalOpen] = useState(false);
+
+  const currentDate = "12/4/2026";
+
+  return (
+    <div className="p-6 min-h-screen relative font-sans" dir="rtl">
+
+      {/* مودال القبول */}
+      <Modal
+        isOpen={isAcceptModalOpen}
+        onClose={() => setIsAcceptModalOpen(false)}
+        title="تأكيد قبول التقييم"
+        footer={
+          <button
+            onClick={() => setIsAcceptModalOpen(false)}
+            className="bg-green-600 text-white px-6 py-2 rounded-lg font-bold"
+          >
+            تأكيد
+          </button>
+        }
+      >
+        <p className="text-gray-700">هل أنت متأكد من قبول التقييم؟</p>
+      </Modal>
+
+      {/* مودال الرفض */}
+      <Modal
+        isOpen={isRejectModalOpen}
+        onClose={() => setIsRejectModalOpen(false)}
+        title="سبب الرفض"
+        footer={
+          <button
+            onClick={() => setIsRejectModalOpen(false)}
+            className="bg-red-600 text-white px-6 py-2 rounded-lg font-bold"
+          >
+            إرسال
+          </button>
+        }
+      >
+        <textarea
+          placeholder="اكتب سبب الرفض..."
+          className="w-full border border-gray-300 rounded-lg p-3 text-right"
+        />
+      </Modal>
+
+      {/* العنوان */}
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-xl font-bold text-main-color">
+          تاريخ التقييم {currentDate}
+        </h1>
+
+        <button
+          onClick={onBack}
+          className="text-2xl text-black px-2 border rounded-full"
+        >
+          ←
+        </button>
+      </div>
+
+      {/* بطاقات المقيمين */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+        {evaluators.length > 0 ? (
+          evaluators.map((ev, index) => (
+            <div
+              key={index}
+              className="p-6 rounded-xl shadow-xl border border-gray-100 bg-white flex flex-col"
+            >
+              {/* الاسم + الصورة */}
+              <div className="flex items-start justify-between mb-4">
+                <div className="flex-1">
+                  <h2 className="font-bold text-md text-second-color mb-1">
+                    {ev.name}
+                  </h2>
+                  <p className="text-sm text-black">
+                    <span className="font-bold">اختصاص:</span>{" "}
+                    {ev.spec || ev.specialty}
+                  </p>
+                </div>
+
+                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-gray-100 shadow-md">
+                  <img
+                    src={avatar}
+                    alt="avatar"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+
+              {/* الملاحظات */}
+              <div className="text-right">
+                <p className="text-md font-bold text-black mb-1">الملاحظات:</p>
+
+                <div className="text-sm text-black leading-relaxed space-y-1">
+                  <p>تكتب هنا ملاحظات المقيم {ev.name.split(" ")[0]}</p>
+                  <p className="text-black">
+                    "{ev.notes || "لا يوجد ملاحظات إضافية"}"
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))
+        ) : (
+          <div className="col-span-full py-10 text-center bg-white rounded-2xl border-gray-300">
+            <p className="text-gray-700 font-medium text-md">
+              لم يتم اختيار أي مقيمين لعرض تفاصيلهم.
+            </p>
+          </div>
+        )}
+      </div>
+
+      {/* أزرار القبول والرفض */}
+      <div className="flex flex-col sm:flex-row gap-3 mt-6 w-full max-w-sm mx-auto">
+        <Button
+        label={"رفض"}
+          onClick={() => setIsRejectModalOpen(true)}
+          className="bg-red-color w-50"
+        />
+
+        <Button
+        label={"قبول"}
+          onClick={() => setIsAcceptModalOpen(true)}
+          className="bg-green-color w-50"
+        />
+      </div>
+    </div>
+  );
+};
+
+export default EvaluationDetails;

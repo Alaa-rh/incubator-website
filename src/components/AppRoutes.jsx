@@ -78,7 +78,10 @@ import PreviewFormPage from "../pages/Admin/PreviewFormPage";
 import AddSessionPage from "../pages/Admin/AddSessionPage";
 import CampManagementPage from "../pages/Admin/CampManagementPage";
 import IncubatedPage from "../pages/Admin/IncubatedPage";
-
+import WorkshopsTablePage from "../pages/Admin/WorkshopsTablePage";
+import EvaluationManagementPage from "../pages/Admin/EvaluationManagementPage";
+import AssignEvaluatorsPage from "../pages/Admin/AssignEvaluatorsPage";
+import ProjectsManagementPage from "../pages/Admin/ProjectsManagementPage";
 const AppRoutes = () => {
     const { roles } = useRole();
     const userNavOptions = buildUserNavOptions(roles);
@@ -260,6 +263,11 @@ const AppRoutes = () => {
           <Route path="/admin/add-session" element={<AddSessionPage />} />
           <Route path="/admin/camp-management" element={<CampManagementPage />} />
           <Route path="/admin/incubated" element={<IncubatedPage />} />
+          <Route path="/admin/workshops" element={<WorkshopsTablePage />} />
+          <Route path="/workshops/:id" element={<WorkshopDetailsPage />} />
+          <Route path="/admin/evaluation" element={<EvaluationManagementPage/>} />
+          <Route path= "/admin/assign-evaluators/:id" element={<AssignEvaluatorsPage />} />
+          <Route path="/admin/assigned-projects" element={<ProjectsManagementPage />} />
         </Route>
       )} 
       {roles.includes("admin") && (

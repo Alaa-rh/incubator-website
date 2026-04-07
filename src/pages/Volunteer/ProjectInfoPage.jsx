@@ -28,8 +28,8 @@ const ProjectInfoPage = () => {
 
   return (
     <div className="min-h-screen bg-white-color p-4">
-          <h1 className="text-second-color text-2xl font-bold">تفاصيل المشروع</h1>
-          <div className="container">
+      <div className="container"> 
+        <h1 className="text-second-color text-2xl font-bold mb-2">تفاصيل المشروع</h1>
         <div className="bg-white p-8 rounded-sm shadow-md border border-gray-100 mb-6">
           <InfoRow label="اسم المشروع :">{projectData.header.projectName}</InfoRow>
           <InfoRow label="مسؤول التعديل (القائد) :">{projectData.header.manager}</InfoRow>

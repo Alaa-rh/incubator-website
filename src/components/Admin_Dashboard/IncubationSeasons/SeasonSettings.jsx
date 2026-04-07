@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Input from "../../Input"
 import Textarea from "../../Textarea";
 import Button from "../../Button";
-import NavLinkUniversal from "../../NavLinkUniversal";
 
 const SeasonSettings = ({ season, onSave, onCloseSubmission }) => {
  
@@ -11,9 +10,6 @@ const SeasonSettings = ({ season, onSave, onCloseSubmission }) => {
   const [endDate, setEndDate] = useState(season.endDate || "");
   const [name, setName] = useState(season.name || "");
   const [description, setDescription] = useState(season.description || "");
-  const [successMessage, setSuccessMessage] = useState(
-    season.successMessage || ""
-  );
 
   const isOpen = season.statusType === "open";
 
@@ -24,7 +20,6 @@ const SeasonSettings = ({ season, onSave, onCloseSubmission }) => {
       endDate,
       name,
       description,
-      successMessage,
     };
 
     onSave && onSave(updated);
@@ -93,16 +88,6 @@ const SeasonSettings = ({ season, onSave, onCloseSubmission }) => {
           />
         </div>
 
-        {/* رسالة نجاح التقديم */}
-        <div className="mb-6">
-          <Textarea
-            label="رسالة نجاح تقديم للمقدم"
-            name="successMessage"
-            value={successMessage}
-            onChange={(e) => setSuccessMessage(e.target.value)}
-            rows={3}
-          />
-        </div>
 
         {/* الأزرار */}
         <div className="flex flex-wrap gap-3 justify-between items-center">

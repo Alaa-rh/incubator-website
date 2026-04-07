@@ -3,10 +3,10 @@ import { NavLink } from "react-router-dom";
 
 const QuickAccess = () => {
   const items = [
-    { label: "طلبات المشاريع", link: "/admin/project-requests", icon: <MdWork /> },
-    { label: "طلبات التطوع", link: "/admin/volunteer-requests", icon: <MdPeople /> },
-    { label: "طلبات الورشات", link: "/admin/workshop-requests", icon: <MdSchool /> },
-    { label: "إضافة مستخدم", link: "/admin/add-user", icon: <MdPersonAdd /> },
+    { label: "طلبات المشاريع", link: "/admin/assigned-projects", icon: <MdWork /> },
+    { label: "طلبات التطوع", link: "/admin/volunteers", icon: <MdPeople /> },
+    { label: "طلبات الورشات", link: "/admin/workshops", icon: <MdSchool /> },
+    { label: "إضافة مستخدم", link: "/admin/users", icon: <MdPersonAdd /> },
   ];
 
   return (

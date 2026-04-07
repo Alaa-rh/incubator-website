@@ -9,7 +9,7 @@ const PageTabs = ({ tabs, activeTab, onChange }) => {
           onClick={() => onChange(tab.id)}
           className={`px-4 py-2 text-xl font-semibold ${
             activeTab === tab.id
-              ? "text-white bg-main-color cursor-pointer border border-main-color rounded"
+              ? "text-main-color bg-gray-300 cursor-pointer border border-main-color rounded"
               : "text-black"
           }`}
         >
