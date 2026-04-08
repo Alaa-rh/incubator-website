@@ -16,7 +16,7 @@ const SessionsSection = () => {
       time: "2-5",
       date: "12/2/2024",
       tasks: "task",
-      status: "منتهية",
+      location: "الحاضنة",
     },
     // ...
   ];
@@ -30,7 +30,7 @@ const SessionsSection = () => {
   const columns = [
     { key: "date", label: "تاريخ الجلسة" },
     { key: "tasks", label: "المهام المطلوبة" },
-    { key: "status", label: "الحالة" },
+    { key: "location", label: "موقع الجلسة" },
     { key: "time", label: "الوقت" }, 
     { key: "trainer", label: "المدرب" },
     { key: "title", label: "عنوان الجلسة" },

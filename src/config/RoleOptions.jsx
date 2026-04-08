@@ -62,6 +62,6 @@ export const RoleOptions = {
   { label: "الورشات التدريبية", link: "/admin/workshops", icon: <MdSchool /> },
   { label: "التقييم", link: "/admin/evaluation", icon: <MdChecklist /> },
   { label: "المشاريع المحتضنة", link: "/admin/assigned-projects", icon: <MdWork /> },
-  { label: "المعرض", link: "/admin/gallery", icon: <MdPhotoLibrary /> },
+  { label: "المعرض", link: "/admin/exhibition", icon: <MdPhotoLibrary /> },
 ]
 export default admin

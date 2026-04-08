@@ -18,9 +18,9 @@ const AdminSidebar = ({adminName, email }) => {
        {/*الروابط */}
       <nav className="flex flex-col gap-8">
         {admin.map((opt, idx) => (
-          <>
+          <div key={idx}>
           <NavLink
-            key={idx}
+          
             to={opt.link}
             className={({ isActive }) =>
               `flex items-center gap-3 p-3 rounded-lg transition-all duration-200 ${
@@ -33,7 +33,7 @@ const AdminSidebar = ({adminName, email }) => {
             <span className="text-2xl text-second-color">{opt.icon}</span>
             <span className="text-lg">{opt.label}</span>
           </NavLink>
-          </>
+          </div>
         ))}
       </nav>
 

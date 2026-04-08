@@ -82,6 +82,8 @@ import WorkshopsTablePage from "../pages/Admin/WorkshopsTablePage";
 import EvaluationManagementPage from "../pages/Admin/EvaluationManagementPage";
 import AssignEvaluatorsPage from "../pages/Admin/AssignEvaluatorsPage";
 import ProjectsManagementPage from "../pages/Admin/ProjectsManagementPage";
+import CardRequestDetailsPage from "../pages/Admin/CardRequestDetailsPage";
+import ExhibitionManagementPage from "../pages/Admin/ExhibitionManagementPage";
 const AppRoutes = () => {
     const { roles } = useRole();
     const userNavOptions = buildUserNavOptions(roles);
@@ -268,6 +270,7 @@ const AppRoutes = () => {
           <Route path="/admin/evaluation" element={<EvaluationManagementPage/>} />
           <Route path= "/admin/assign-evaluators/:id" element={<AssignEvaluatorsPage />} />
           <Route path="/admin/assigned-projects" element={<ProjectsManagementPage />} />
+          <Route path="/admin/exhibition" element={<ExhibitionManagementPage/>} />
         </Route>
       )} 
       {roles.includes("admin") && (
@@ -282,6 +285,8 @@ const AppRoutes = () => {
       <Route path="/admin/details/:id" element={<VolunteerRequestPage />} />
       <Route path="/messagespage" element={<MessagesPage />} />
       <Route path="/notificationspage" element={<NotificationsPage />} />
+      <Route path="/requests-details/:id" element={<CardRequestDetailsPage />} />
+       <Route path="/projectspage" element={<ProjectsPage />} />
       
       </Route>
       )}

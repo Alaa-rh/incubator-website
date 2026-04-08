@@ -31,7 +31,7 @@ const FormBuilderCanvas = ({ fields, updateField, deleteField }) => {
   };
 
   return (
-    <div className="flex-1 bg-white rounded-lg shadow p-6">
+    <div className="flex-1 bg-white rounded-lg shadow p-6 border-t-4 border-main-color">
       <h2 className="text-base font-bold mb-4">نموذج التسجيل</h2>
 
       <div className="flex flex-col gap-4">
