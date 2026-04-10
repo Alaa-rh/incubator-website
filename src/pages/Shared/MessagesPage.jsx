@@ -1,58 +1,25 @@
-import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Chat from "../../components/Chat";
 import ContactsList from "../../components/ContactsList";
+import { selectContact, markAsRead, updatePreview } from "../../Redux/MessagesSlice";
 
 const MessagesPage = () => {
-  const [contacts, setContacts] = useState([
-    {
-      id: 1,
-      name: "green banda",
-      role: "فريق",
-      time: "م6:56",
-      preview: "مرحباً، اطلعت على فكرتك وأعجبتني جداً...",
-      unread: 3,
-    },
-    {
-      id: 2,
-      name: "سارة الأحمد",
-      role: "متطوعة",
-      time: "م5:20",
-      preview: "هل يمكننا مناقشة فكرتك؟",
-      unread: 1,
-    },
-    {
-      id: 3,
-      name: "علي العلي",
-      role: "مطور",
-      time: "م4:10",
-      preview: "هل تحتاج دعم تقني؟",
-      unread: 0,
-    },
-  ]);
+  const dispatch = useDispatch();
 
-  const [selectedId, setSelectedId] = useState(contacts[0].id);
+  // جلب البيانات من Redux
+  const contacts = useSelector((state) => state.messages.contacts);
+  const selectedId = useSelector((state) => state.messages.selectedId);
 
   const selectedContact = contacts.find((c) => c.id === selectedId);
 
-  // عند اختيار محادثة → تصفير unread
+  // عند اختيار محادثة
   const handleSelect = (id) => {
-    setContacts((prev) =>
-      prev.map((c) =>
-        c.id === id ? { ...c, unread: 0 } : c
-      )
-    );
-    setSelectedId(id);
+    dispatch(markAsRead(id));      // تصفير unread
+    dispatch(selectContact(id));   // تغيير المحادثة المفتوحة
   };
 
-  // تحديث preview عند إرسال رسالة جديدة
   const handleSendMessage = (text) => {
-    setContacts((prev) =>
-      prev.map((c) =>
-        c.id === selectedId
-          ? { ...c, preview: text, time: "الآن" }
-          : c
-      )
-    );
+    dispatch(updatePreview({ id: selectedId, text }));
   };
 
   return (

@@ -271,6 +271,7 @@ const AppRoutes = () => {
           <Route path= "/admin/assign-evaluators/:id" element={<AssignEvaluatorsPage />} />
           <Route path="/admin/assigned-projects" element={<ProjectsManagementPage />} />
           <Route path="/admin/exhibition" element={<ExhibitionManagementPage/>} />
+          <Route path="/requests-details/:id" element={<CardRequestDetailsPage />} />
         </Route>
       )} 
       {roles.includes("admin") && (
@@ -285,7 +286,7 @@ const AppRoutes = () => {
       <Route path="/admin/details/:id" element={<VolunteerRequestPage />} />
       <Route path="/messagespage" element={<MessagesPage />} />
       <Route path="/notificationspage" element={<NotificationsPage />} />
-      <Route path="/requests-details/:id" element={<CardRequestDetailsPage />} />
+      
        <Route path="/projectspage" element={<ProjectsPage />} />
       
       </Route>

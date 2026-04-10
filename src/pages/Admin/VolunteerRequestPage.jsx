@@ -37,7 +37,7 @@ const UserDetailsPage = () => {
 
   return (
     <div className="p-6 bg-white-color min-h-screen">
-
+     <div className="container">
       <h2 className="text-3xl font-bold text-second-color mb-6">
         {type === "request"
           ? "طلب التطوع"
@@ -48,7 +48,6 @@ const UserDetailsPage = () => {
           : "طلب التطوع"}
       </h2>
 
-      <div className="container">
 
         {/* القسم الأول */}
         <div className="bg-white p-4 rounded-lg shadow-lg mb-6">

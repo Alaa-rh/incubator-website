@@ -1,15 +1,26 @@
 import React from 'react'
 import { useNavigate } from "react-router-dom"
 import IdeaForm from '../../components/Forms/IdeaForm'
+import Modal from '../../components/Modal'
+import Button from '../../components/Button'
+import { useUpgradeToIdeaOwnerMutation } from '../../api/endpoints/rolesApi'
+import { useState } from 'react'
 
 const IdeaFormPage = () => {
   const navigate = useNavigate()
+  const [upgradeToIdeaOwner] = useUpgradeToIdeaOwnerMutation()
+  const [showPendingModal, setShowPendingModal] = useState(false)
 
-  const handleSubmit = (formData) => {
-    console.log("Idea submitted :", formData)
+  const handleSubmit = async (formData) => {
+    try {
+      const res = await upgradeToIdeaOwner(formData).unwrap()
 
-    // الانتقال لصفحة مراحل الاحتضان مع تخطي مرحلة تقديم الطلب
-    navigate("/incubation", { state: { requestSubmitted: true } })
+      if (res.status === "ideaOwner_pending") {
+        setShowPendingModal(true)
+      }
+    } catch (error) {
+      console.log("Error:", error)
+    }
   }
 
   return (
@@ -20,6 +31,21 @@ const IdeaFormPage = () => {
       </div>
 
       <IdeaForm onSubmit={handleSubmit} />
+
+      <Modal
+        isOpen={showPendingModal}
+        onClose={() => setShowPendingModal(false)}
+        title="تم إرسال الفكرة!"
+        footer={
+          <Button
+            label="حسناً"
+            onClick={() => navigate("/pending-review")}
+            className="bg-main-color"
+          />
+        }
+      >
+        <p className="text-sm">شكراً لك! طلبك قيد المراجعة من قبل الإدارة.</p>
+      </Modal>
     </div>
   )
 }

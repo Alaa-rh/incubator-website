@@ -21,7 +21,9 @@ const ContactsList = ({ contacts, onSelect, selectedId }) => {
 
               <div className="flex flex-col">
                 <span className="font-semibold">{contact.name}</span>
-                <span className="text-xs text-gray-600">{contact.preview}</span>
+                <span className="text-xs text-gray-600 truncate max-w-[120px]">
+                  {contact.preview}
+                </span>
               </div>
             </div>
 
@@ -41,5 +43,4 @@ const ContactsList = ({ contacts, onSelect, selectedId }) => {
     </div>
   );
 };
-
 export default ContactsList;

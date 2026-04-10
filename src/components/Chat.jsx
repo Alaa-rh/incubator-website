@@ -1,14 +1,17 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Input from "./Input";
 import Button from "./Button";
+import { addMessage, updatePreview } from "../Redux/MessagesSlice";
 
-const Chat = ({ contactName, role, onSendMessage }) => {
-  const [messages, setMessages] = useState([
-    { from: "other", text: "مرحباً، اطلعت على فكرتك وأعجبتني جداً..." },
-    { from: "me", text: "أهلاً وسهلاً يسعدني إن الفكرة نالت إعجابك!" },
-    { from: "other", text: "بفكر ندخل بتعاون جزئي، شو رأيك؟" },
-    { from: "me", text: "ممتاز جداً، عندي تصور أولي للهيكل الفني..." }
-  ]);
+const Chat = ({ contactName, role }) => {
+  const dispatch = useDispatch();
+
+  // جلب المحادثة المفتوحة
+  const selectedId = useSelector((state) => state.messages.selectedId);
+
+  // جلب الرسائل الخاصة بالمحادثة الحالية
+  const messages = useSelector((state) => state.messages.messages[selectedId]);
 
   const [newMessage, setNewMessage] = useState("");
 
@@ -17,11 +20,13 @@ const Chat = ({ contactName, role, onSendMessage }) => {
 
     const msg = { from: "me", text: newMessage };
 
-    setMessages([...messages, msg]);
+    // 1) إضافة الرسالة للـ history
+    dispatch(addMessage({ id: selectedId, message: msg }));
 
-    // تحديث preview في القائمة
-    onSendMessage(msg.text);
+    // 2) تحديث preview في قائمة الكونتاكتس
+    dispatch(updatePreview({ id: selectedId, text: newMessage }));
 
+    // 3) تفريغ الحقل
     setNewMessage("");
   };
 
@@ -34,9 +39,15 @@ const Chat = ({ contactName, role, onSendMessage }) => {
         </div>
       </div>
 
+      {/* الرسائل */}
       <div className="space-y-3 mb-4 max-h-96 overflow-y-auto">
         {messages.map((msg, i) => (
-          <div key={i} className={`flex ${msg.from === "me" ? "justify-end" : "justify-start"}`}>
+          <div
+            key={i}
+            className={`flex ${
+              msg.from === "me" ? "justify-end" : "justify-start"
+            }`}
+          >
             <div
               className={`max-w-xs p-3 rounded-lg text-sm ${
                 msg.from === "me"
@@ -50,6 +61,7 @@ const Chat = ({ contactName, role, onSendMessage }) => {
         ))}
       </div>
 
+      {/* إدخال رسالة جديدة */}
       <div className="flex items-center gap-2">
         <Input
           type="text"
