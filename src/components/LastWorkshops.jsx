@@ -5,12 +5,14 @@ import workShop3 from "../assets/images/workShop3.png"
 import workShop4 from "../assets/images/workShop4.png"
 import NavLinkUniversal from './NavLinkUniversal';
 const LastWorkshops = () => {
-    const workshops = [
-        { id: 1, image: workShop1 },
-        { id: 2, image: workShop2 },
-        { id: 3, image: workShop3 },
-        { id: 4, image: workShop4 },
-      ] 
+    // لاحقًا: const { data, isLoading } = useGetLatestWorkshopsQuery();
+
+  const workshops = /*data ||*/ [
+    { id: 1, image: workShop1 },
+    { id: 2, image: workShop2 },
+    { id: 3, image: workShop3 },
+    { id: 4, image: workShop4 },
+  ];
   return (
     <div>
         <h2 className='text-2xl font-bold'>آخر ورشات العمل و الفعاليات :</h2>

@@ -4,12 +4,14 @@ import Exhibition2 from "../assets/images/exh2.jpg"
 import Exhibition3 from "../assets/images/exh3.jpg"
 import Exhibition4 from "../assets/images/exh4.jpg"
 const LastExhibition = () => {
-    const exhibitions = [
-        { id: 1, image: Exhibition1 },
-        { id: 2, image: Exhibition2 },
-        { id: 3, image: Exhibition3 },
-        { id: 4, image: Exhibition4 },
-      ]
+    // لاحقًا: const { data, isLoading } = useGetLatestExhibitionQuery();
+
+  const exhibitions = /*data ||*/ [
+    { id: 1, image: Exhibition1 },
+    { id: 2, image: Exhibition2 },
+    { id: 3, image: Exhibition3 },
+    { id: 4, image: Exhibition4 },
+  ];
   return (
     <div>
          <h2 className='text-2xl font-bold mt-5'>آخر معرض "مشاريع رواد الأعمال" :</h2>

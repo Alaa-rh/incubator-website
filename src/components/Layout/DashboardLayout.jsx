@@ -6,12 +6,12 @@ const DashboardLayout = ({ roles, userName, email }) => {
     <div className="flex min-h-screen">
 
       {/* Sidebar */}
-      <div className="w-64 bg-white shadow-sm">
+      <div className="">
         <Sidebar roles={roles} userName={userName} email={email} />
       </div>
 
       {/* Page Content */}
-      <main className="flex-grow bg-white-color mr-15 w-full h-screen ">
+      <main className="flex-grow bg-white-color lg:mr-15 w-full h-screen ">
         <Outlet />
       </main>
 

@@ -13,6 +13,11 @@ const ChangePasswordPage = () => {
   const [errors, setErrors] = useState({});
   const [successMsg, setSuccessMsg] = useState("");
 
+   
+  // لاحقًا: استدعاء API تغيير كلمة المرور
+  // const [changePassword] = useChangePasswordMutation();
+   
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -26,12 +31,15 @@ const ChangePasswordPage = () => {
     if (!form.newPassword)
       newErrors.newPassword = "الرجاء إدخال كلمة المرور الجديدة";
 
-     if (form.password.length < 8)
-      newErrors.password = "كلمة المرور يجب أن تكون 8 أحرف على الأقل";
-    if (!/[A-Z]/.test(form.password))
-      newErrors.password = "كلمة المرور يجب أن تحتوي على حرف كبير واحد على الأقل";
-    if (!/[0-9]/.test(form.password))
-      newErrors.password = "كلمة المرور يجب أن تحتوي على رقم واحد على الأقل";
+     
+    if (form.newPassword.length < 8)
+      newErrors.newPassword = "كلمة المرور يجب أن تكون 8 أحرف على الأقل";
+
+    if (!/[A-Z]/.test(form.newPassword))
+      newErrors.newPassword = "كلمة المرور يجب أن تحتوي على حرف كبير واحد على الأقل";
+
+    if (!/[0-9]/.test(form.newPassword))
+      newErrors.newPassword = "كلمة المرور يجب أن تحتوي على رقم واحد على الأقل";
 
     if (!form.confirmPassword)
       newErrors.confirmPassword = "الرجاء تأكيد كلمة المرور الجديدة";
@@ -42,7 +50,7 @@ const ChangePasswordPage = () => {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setSuccessMsg("");
 
@@ -51,20 +59,31 @@ const ChangePasswordPage = () => {
 
     if (Object.keys(validationErrors).length > 0) return;
 
-    console.log(" بيانات تغيير كلمة المرور:", form);
+     
+    // لاحقًا: استدعاء API تغيير كلمة المرور
+    // try {
+    //   await changePassword({
+    //     old_password: form.oldPassword,
+    //     new_password: form.newPassword,
+    //   }).unwrap();
+    //
+    //   setSuccessMsg("تم تحديث كلمة المرور بنجاح");
+    // } catch (err) {
+    //   setErrors({ oldPassword: "كلمة المرور الحالية غير صحيحة" });
+    // }
+     
 
-    setSuccessMsg("تم تحديث كلمة المرور (محاكاة) ");
+    console.log("بيانات تغيير كلمة المرور:", form);
+    setSuccessMsg("تم تحديث كلمة المرور (محاكاة)");
   };
 
   return (
     <div>
-     
-
-      <div className="container"> 
-        
+      <div className="container">
         <h1 className="text-3xl font-bold text-second-color pt-10 mb-20">
-        تغيير كلمة المرور
-      </h1>
+          تغيير كلمة المرور
+        </h1>
+
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
 
           <div>

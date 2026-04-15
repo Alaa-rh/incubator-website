@@ -10,20 +10,15 @@ import { GiStethoscope } from "react-icons/gi";
 
 const ProjectsPage = () => {
   const location = useLocation();
-  const exhibitionYear = location.state?.year; // ← السنة القادمة من سجل المعارض
+  const exhibitionYear = location.state?.year;
 
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const categories = [
-    { id: "all", label: "الكل", icon: <LuFileStack /> },
-    { id: "تكنولوجي", label: "تكنولوجي", icon: <GrTechnology /> },
-    { id: "تعليمي", label: "تعليمي", icon: <SlBookOpen /> },
-    { id: "طبي", label: "طبي", icon: <GiStethoscope /> },
-  ];
+  // const { data: projectsFromApi, isLoading } = useGetProjectsQuery();
 
-  // كل المشاريع (مثال)
-  const projects = [
+  // static مؤقتة
+  const fallbackProjects = [
     {
       id: 1,
       name: "موقع للتواصل الاجتماعي",
@@ -58,12 +53,13 @@ const ProjectsPage = () => {
     },
   ];
 
-  //  فلترة حسب سنة المعرض إذا وصلت من سجل المعارض
+  // projects = projectsFromApi
+  const projects = fallbackProjects;
+
   const filteredByYear = exhibitionYear
     ? projects.filter((p) => p.year === exhibitionYear)
     : projects;
 
-  //  فلترة حسب الفئة والبحث
   const filteredProjects = filteredByYear.filter((project) => {
     const matchCategory =
       selectedCategory === "all" || project.category === selectedCategory;
@@ -74,10 +70,15 @@ const ProjectsPage = () => {
     return matchCategory && matchSearch;
   });
 
+  const categories = [
+    { id: "all", label: "الكل", icon: <LuFileStack /> },
+    { id: "تكنولوجي", label: "تكنولوجي", icon: <GrTechnology /> },
+    { id: "تعليمي", label: "تعليمي", icon: <SlBookOpen /> },
+    { id: "طبي", label: "طبي", icon: <GiStethoscope /> },
+  ];
+
   return (
     <div className='container'>
-
-      {/* عنوان الصفحة يتغير حسب وجود سنة معرض */}
       <h2 className="text-xl font-bold mt-6 mb-4 text-main-color">
         {exhibitionYear ? `مشاريع معرض ${exhibitionYear}` : "جميع المشاريع"}
       </h2>

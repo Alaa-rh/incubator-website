@@ -6,7 +6,10 @@ import workshop2 from "../../assets/images/workShop2.png"
 const WorkshopDetailsPage = () => {
   const { id } = useParams()
 
-  const workshops = [
+  // const { data: workshop, isLoading } = useGetWorkshopByIdQuery(id);
+
+  // static مؤقتة
+  const fallbackWorkshops = [
     {
       id: "1",
       title: "دورة تدريب مدربين روبوت سبايك Spike TOT!",
@@ -36,17 +39,18 @@ const WorkshopDetailsPage = () => {
         "اليوتيوبرز المهتمين بالتعليم",
         "الأشخاص الذين يسعون لإضافة مهارات جديدة إلى سيرتهم الذاتية"
       ],
-        image: workshop2,
+      image: workshop2,
       registrationLink: "#"
-    },
-    // ورش أخرى...
+    }
   ]
 
-  const workshop = workshops.find(w => w.id === id)
+  // workshop = data
+  const workshop = fallbackWorkshops.find(w => w.id === id)
 
   return (
     <div className="container mt-10">
       <h1 className="text-3xl font-bold mb-4 text-second-color">تفاصيل الورشة</h1>
+
       <div className="p-4">
         {workshop ? (
           <WorkshopDetailsCard workshop={workshop} />

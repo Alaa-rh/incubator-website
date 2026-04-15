@@ -9,17 +9,15 @@ import { RxCountdownTimer } from "react-icons/rx";
 import CategoryFilterBar from '../../components/CategoryFilterBar';
 import { IoRocketOutline } from "react-icons/io5";
 import { MdDoneAll } from "react-icons/md";
+
 const ActivitiesPage = () => {
   const [selectedStatus, setSelectedStatus] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
-  const status=[
-    { id: "all", label: "الكل", icon: <LuFileStack /> },
-    { id: "منتهية", label: "منتهية", icon: <MdDoneAll /> },
-    { id: "لم تبدأ بعد", label: "لم تبدأ بعد", icon: <RxCountdownTimer/> },
-    { id: "بدأت حديثاً", label: "بدأت حديثاً", icon: <IoRocketOutline /> },
-  ]
 
-  const activities = [
+  // const { data: activitiesFromApi: activities [], isLoading } = useGetActivitiesQuery();
+
+  //static مؤقتة
+  const fallbackActivities = [
     {
       image: activity1,
       title: "هل ترغب بأن تكون جزءاً من المستقبل التكنولوجي",
@@ -52,31 +50,41 @@ const ActivitiesPage = () => {
       trainer: "محمد احمد",
       count: 25,
     },
-    
   ];
-   const filteredActivities = activities.filter((activity) => {
-    const matchCategory =
-      selectedStatus === "all" || activity.status === selectedStatus
+
+  // activities = activitiesFromApi
+  const activities = fallbackActivities;
+
+  const filteredActivities = activities.filter((activity) => {
+    const matchStatus =
+      selectedStatus === "all" || activity.status === selectedStatus;
 
     const matchSearch =
-      activity.description.toLowerCase().includes(searchQuery.toLowerCase())
+      activity.description.toLowerCase().includes(searchQuery.toLowerCase());
 
-    return matchCategory && matchSearch
-  })
+    return matchStatus && matchSearch;
+  });
 
+  const status = [
+    { id: "all", label: "الكل", icon: <LuFileStack /> },
+    { id: "منتهية", label: "منتهية", icon: <MdDoneAll /> },
+    { id: "لم تبدأ بعد", label: "لم تبدأ بعد", icon: <RxCountdownTimer /> },
+    { id: "بدأت حديثاً", label: "بدأت حديثاً", icon: <IoRocketOutline /> },
+  ];
 
   return (
     <div className='container mt-10'>
-      <div>
-        <CategoryFilterBar categories={status} 
-        selected={selectedStatus} 
-        onSelect={setSelectedStatus} 
-        />
-      </div>
-        <SearchBar onSearch={setSearchQuery} />
-        <AllActivities activities={filteredActivities} />
-        </div>
-  )
-}
+      <CategoryFilterBar
+        categories={status}
+        selected={selectedStatus}
+        onSelect={setSelectedStatus}
+      />
 
-export default ActivitiesPage
+      <SearchBar onSearch={setSearchQuery} />
+
+      <AllActivities activities={filteredActivities} />
+    </div>
+  );
+};
+
+export default ActivitiesPage;

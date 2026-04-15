@@ -122,7 +122,7 @@ export default function EvalStatusTable() {
   const [schedule, setSchedule] = useState(null);
 
   return (
-    <div className="p-4" dir="rtl">
+    <div className="p-4">
 
       <div className="w-60 mb-4">
         <Select

@@ -2,13 +2,12 @@ import { BsPersonFillGear, BsPersonCircle, BsPersonWorkspace } from "react-icons
 import { IoCall } from "react-icons/io5";
 import { GrGroup } from "react-icons/gr";
 import { ImStatsDots } from "react-icons/im";
+import { FaHandHoldingHeart } from "react-icons/fa";
 import {
   MdDashboard,
   MdBarChart,
-  MdManageAccounts,
   MdPeople,
   MdAssignment,
-  MdSchool,
   MdWork,
   MdChecklist,
   MdPhotoLibrary,
@@ -57,9 +56,9 @@ export const RoleOptions = {
   { label: "الرئيسية", link: "/admin-mainpage", icon: <MdDashboard/> },
   { label: "الإحصائيات", link: "/admin/statistics", icon: <MdBarChart/> },
   { label: "إدارة المستخدمين", link: "/admin/users", icon: <MdPeople/> },
-  { label: "إدارة المتطوعين", link: "/admin/volunteers", icon: <MdPeople/> },
+  { label: "إدارة المتطوعين", link: "/admin/volunteers", icon: <FaHandHoldingHeart/> },
   { label: "مواسم الاحتضان", link: "/admin/seasons", icon: <MdAssignment /> },
-  { label: "الورشات التدريبية", link: "/admin/workshops", icon: <MdSchool /> },
+  { label: "الورشات التدريبية", link: "/admin/workshops", icon: <BsPersonWorkspace /> },
   { label: "التقييم", link: "/admin/evaluation", icon: <MdChecklist /> },
   { label: "المشاريع المحتضنة", link: "/admin/assigned-projects", icon: <MdWork /> },
   { label: "المعرض", link: "/admin/exhibition", icon: <MdPhotoLibrary /> },

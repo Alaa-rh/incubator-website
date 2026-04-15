@@ -14,7 +14,7 @@ const Select = ({ label, name, value, onChange, options = [], placeholder = "", 
       >
         <option value="" disabled hidden>{placeholder}</option>
         {options.map(opt => (
-          <option key={opt.value} value={opt.value} className="bg-main-color text-white font-medium hover:bg-white hover:text-main-color">{opt.label}</option>
+          <option key={opt.value} value={opt.value} className="bg-main-color text-white font-medium">{opt.label}</option>
         ))}
       </select>
       {error && <p className="text-xs text-red-500">{error}</p>}

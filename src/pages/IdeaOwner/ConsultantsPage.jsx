@@ -19,10 +19,11 @@ const ConsultantsPage = () => {
 
   return (
     <div>
-       {/* عنوان الصفحة */}
-      <h1 className='text-3xl font-bold text-second-color pt-10 mr-25 mb-20'>اختر الاختصاص</h1>
+       
       <div className="container">
 
+      {/* عنوان الصفحة */}
+      <h1 className='text-3xl font-bold text-second-color pt-10 mb-20'>اختر الاختصاص</h1>
       {/* مكوّن الفئات */}
       <CategoryGrid items={categories} className="grid-cols-3" />
 

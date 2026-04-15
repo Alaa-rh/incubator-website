@@ -46,7 +46,7 @@ export default function CardRequests() {
             <img
               src={req.avatar}
               alt={req.name}
-              className="w-20 h-20 rounded-full object-cover border"
+              className="w-20 h-20 rounded-full object-cover border border-second-color"
             />
 
             <div className="flex flex-col gap-4">

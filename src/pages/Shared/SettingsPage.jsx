@@ -8,12 +8,27 @@ const SettingsPage = () => {
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
 
-  const handleLogout = () => {
+  // لاحقًا: استدعاء API تسجيل الخروج
+  // const [logout] = useLogoutMutation();
+  //
+  //لاحقًا: استدعاء API حذف الحساب
+  // const [deleteAccount] = useDeleteAccountMutation();
+
+  const handleLogout = async () => {
+
+    // لاحقًا: استدعاء API تسجيل الخروج
+    // await logout().unwrap();
+
     console.log("تم تسجيل الخروج")
     setIsLogoutModalOpen(false)
   }
 
-  const handleDeleteAccount = () => {
+  const handleDeleteAccount = async () => {
+
+    // لاحقًا: استدعاء API حذف الحساب
+    // await deleteAccount().unwrap();
+   
+
     console.log("تم حذف الحساب")
     setIsDeleteModalOpen(false)
   }
@@ -22,8 +37,8 @@ const SettingsPage = () => {
     <div>
       <div className='container'> 
         <h1 className='text-3xl font-bold text-second-color my-10'>
-        اعدادات الحساب
-      </h1>
+          اعدادات الحساب
+        </h1>
 
         <div className='w-200 h-40 bg-white p-6 rounded-lg'>
           <h2 className='text-2xl font-bold mb-4'>الأمان وتسجيل الدخول</h2>
@@ -90,11 +105,12 @@ const SettingsPage = () => {
               className="bg-red-color px-6"
               onClick={handleDeleteAccount}
             />
-            <Button 
-              label="إلغاء" 
-              className="bg-gray-600 px-6"
+            <button
+              className="border border-second-color px-4 rounded"
               onClick={() => setIsDeleteModalOpen(false)}
-            />
+            >
+              إلغاء
+            </button>
           </div>
         }
       >

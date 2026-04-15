@@ -4,7 +4,7 @@ import LastExhibition from '../../components/LastExhibition';
 import LastWorkshops from '../../components/LastWorkshops';
 import NavLinkUniversal from '../../components/NavLinkUniversal';
 
-const MainPage = () => {
+const VisitorMainPage = () => {
   
   return (
     <div className='pt-[10px]'>
@@ -31,4 +31,4 @@ const MainPage = () => {
   )
 }
 
-export default MainPage
+export default VisitorMainPage

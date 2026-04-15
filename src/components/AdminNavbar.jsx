@@ -9,7 +9,7 @@ import NotificationsIcon from "../components/NotificationsIcon";
 
 const AdminNavbar = ({BtnLabel, onBtnClick}) => {
   return (
-    <header className="fixed top-0 right-90 w-400 h-20 bg-white shadow-md flex justify-between items-center px-20">
+    <header className="fixed top-0 right-75 w-400 h-20 bg-white shadow-md flex justify-between items-center px-20">
       <SearchBar />
       <div className="flex items-center gap-6 pl-6">
         <NotificationsIcon />

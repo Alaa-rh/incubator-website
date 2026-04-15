@@ -40,7 +40,7 @@ const ParticipantsSection = () => {
       key: "actions",
       label: "الإجراءات",
       render: () => (
-        <div className="flex justify-end gap-3">
+        <div className="flex justify-center gap-3">
           <Button
             label="رفض"
             className="bg-red-color"

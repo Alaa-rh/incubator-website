@@ -124,8 +124,8 @@ const AdminSettingsPage = () => {
             title="تأكيد تسجيل الخروج"
             footer={
                 <div className="flex justify-center gap-4">
-                <Button label="تأكيد" onClick={handleLogout} className="bg-main-color" />
-                <Button label="إلغاء" onClick={() => setOpenLogout(false)} className="bg-gray-600" />
+                <Button label="تأكيد" onClick={handleLogout} className="bg-main-color w-30" />
+                <button onClick={() => setOpenLogout(false)} className="w-30 border border-second-color px-4 rounded">إلغاء</button>
                 </div>
             }
           >

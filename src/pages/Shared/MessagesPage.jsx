@@ -5,9 +5,14 @@ import { selectContact, markAsRead, updatePreview } from "../../Redux/MessagesSl
 
 const MessagesPage = () => {
   const dispatch = useDispatch();
+  // لاحقًا:
+// const { data: contactsFromApi } = useGetContactsQuery();
+// const { data: messagesFromApi } = useGetMessagesByContactQuery(selectedId);
 
   // جلب البيانات من Redux
   const contacts = useSelector((state) => state.messages.contacts);
+  //const contacts = contactsFromApi || useSelector((state) => state.messages.contacts);
+
   const selectedId = useSelector((state) => state.messages.selectedId);
 
   const selectedContact = contacts.find((c) => c.id === selectedId);

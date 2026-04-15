@@ -60,12 +60,13 @@ const UserHeaderActions = ({ user }) => {
         title="هل أنت متأكد من تجميد الحساب؟"
         footer={
           <div className="flex gap-3">
-            <Button label="تجميد" className="bg-red-color"/>
-            <Button
-              label="إلغاء"
+            <Button label="تجميد" className="bg-red-color w-30"/>
+            <button
               onClick={() => setFreezeOpen(false)}
-              className="bg-gray-600"
-            />
+              className="w-30 border border-second-color px-4 rounded"
+            >
+              إلغاء
+            </button>
           </div>
         }
       >
@@ -80,12 +81,13 @@ const UserHeaderActions = ({ user }) => {
         title="تفعيل الحساب"
         footer={
           <div className="flex gap-3">
-            <Button label="تفعيل" className="bg-green-color"/>
-            <Button
-              label="إلغاء"
+            <Button label="تفعيل" className="bg-green-color w-30"/>
+            <button
               onClick={() => setActivateOpen(false)}
-              className="bg-gray-600"
-            />
+              className="w-30 border border-second-color px-4 rounded"
+            >
+              إلغاء
+            </button>
           </div>
         }
       >

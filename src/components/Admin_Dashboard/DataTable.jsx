@@ -1,11 +1,11 @@
 const DataTable = ({ columns, data }) => {
   return (
     <div className="bg-white rounded-lg shadow p-4">
-      <table className="w-full text-right" dir="ltr">
+      <table className="w-full text-center" dir="ltr">
         <thead>
           <tr className="border-b border-second-color">
             {columns.map((col) => (
-              <th key={col.key} className="p-3">
+              <th key={col.key} className="">
                 {col.label}
               </th>
             ))}

@@ -25,7 +25,9 @@ const ConsultationRequestBtn = ({ consultant }) => {
         footer={
           <>
             <Button label="إرسال الطلب" className="bg-main-color ml-2" />
-            <Button label="إلغاء" className="bg-gray-400" onClick={close} />
+            <button className="border border-second-color px-4 rounded" onClick={close}>
+              إلغاء
+            </button>
           </>
         }
       >
