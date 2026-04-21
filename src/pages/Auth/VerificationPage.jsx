@@ -1,12 +1,20 @@
 import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
-import { useNavigate } from "react-router-dom";
 import Entercode from "../../assets/images/PIN.png";
+import { useVerifyOtpMutation } from "../../api/endpoints/authApi";
 
 const VerificationPage = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [verifyOtp, { isLoading }] = useVerifyOtpMutation();
+
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [error, setError] = useState("");
-  const navigate = useNavigate();
+  const [apiError, setApiError] = useState("");
+
+  // جلب email من الـ state (اللي جاي من صفحة forgot password)
+  const { email } = location.state || {};
 
   const handleChange = (e, index) => {
     const value = e.target.value;
@@ -16,6 +24,10 @@ const VerificationPage = () => {
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
+
+    // مسح الأخطاء عند البدء بالكتابة
+    if (error) setError("");
+    if (apiError) setApiError("");
 
     if (value && e.target.nextElementSibling) {
       e.target.nextElementSibling.focus();
@@ -30,21 +42,38 @@ const VerificationPage = () => {
 
   const handlePaste = (e) => e.preventDefault();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // التحقق من إدخال جميع الأرقام
     if (otp.some((digit) => digit === "")) {
       setError("الرجاء إدخال الرمز الكامل");
       return;
     }
 
-    setError("");
+    // التحقق من وجود email
+    if (!email) {
+      setApiError("بيانات غير مكتملة. يرجى العودة إلى صفحة استعادة كلمة المرور");
+      return;
+    }
 
-    // const code = otp.join("");
+    const code = otp.join("");
 
-    // await api.verifyOtp({ code });
+    try {
+      await verifyOtp({
+        email: email,
+        otp: code,
+      }).unwrap();
 
-    navigate("/new-password");
+      // تم التحقق بنجاح، التوجيه إلى صفحة إدخال كلمة المرور الجديدة
+      navigate("/new-password", { 
+        state: { email: email, otp: code } 
+      });
+      
+    } catch (error) {
+      console.error("OTP verification error:", error);
+      setApiError(error?.data?.message || "الرمز غير صحيح أو منتهي الصلاحية. حاول مرة أخرى");
+    }
   };
 
   return (
@@ -74,11 +103,14 @@ const VerificationPage = () => {
               ))}
             </div>
 
-            {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+            {/* عرض أخطاء التحقق */}
+            {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
+            {apiError && <p className="text-red-500 text-sm mb-2">{apiError}</p>}
 
             <Button
-              label="تأكيد"
+              label={isLoading ? "جاري التحقق..." : "تأكيد"}
               type="submit"
+              disabled={isLoading}
               className="flex justify-center max-w-[300px] bg-main-color mt-10 mx-auto w-full"
             />
           </form>

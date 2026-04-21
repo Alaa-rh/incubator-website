@@ -2,8 +2,16 @@ import { useNavigate } from "react-router-dom";
 import DataTable from "../DataTable";
 import Button from "../../Button";
 
-const VolunteerWorkshopsSection = ({ workshops }) => {
+const VolunteerWorkshopsSection = ({ workshops, onTaskClick }) => {
   const navigate = useNavigate();
+
+  const handleClick = (row) => {
+    if (onTaskClick) {
+      onTaskClick(row);
+    } else {
+      navigate(`/admin/tasks/${row.id}`);
+    }
+  };
 
   const columns = [
     {
@@ -13,7 +21,7 @@ const VolunteerWorkshopsSection = ({ workshops }) => {
         <Button
           label="تفاصيل المهمة"
           className="bg-main-color"
-          onClick={() => navigate(`/admin/tasks/${row.id}`)}
+          onClick={() => handleClick(row)}
         />
       ),
     },

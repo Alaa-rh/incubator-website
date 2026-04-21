@@ -9,12 +9,13 @@ import { RxCountdownTimer } from "react-icons/rx";
 import CategoryFilterBar from '../../components/CategoryFilterBar';
 import { IoRocketOutline } from "react-icons/io5";
 import { MdDoneAll } from "react-icons/md";
+// import { useGetActivitiesQuery } from '../../api/endpoints/activitiesApi';
 
 const ActivitiesPage = () => {
   const [selectedStatus, setSelectedStatus] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
 
-  // const { data: activitiesFromApi: activities [], isLoading } = useGetActivitiesQuery();
+  // const { data: activitiesFromApi, isLoading } = useGetActivitiesQuery();
 
   //static مؤقتة
   const fallbackActivities = [

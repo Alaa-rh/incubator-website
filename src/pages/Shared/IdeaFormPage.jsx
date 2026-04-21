@@ -9,14 +9,15 @@ import { useState } from 'react'
 const IdeaFormPage = () => {
   const navigate = useNavigate()
   const [upgradeToIdeaOwner] = useUpgradeToIdeaOwnerMutation()
-  const [showPendingModal, setShowPendingModal] = useState(false)
+  const [showSuccessModal, setShowSuccessModal] = useState(false)
 
   const handleSubmit = async (formData) => {
     try {
       const res = await upgradeToIdeaOwner(formData).unwrap()
 
-      if (res.status === "ideaOwner_pending") {
-        setShowPendingModal(true)
+      // صاحب الفكرة يصبح فوراً Idea Owner، يظهر رسالة نجاح مباشرة
+      if (res.status === "ideaOwner_approved" || res.status === "success") {
+        setShowSuccessModal(true)
       }
     } catch (error) {
       console.log("Error:", error)
@@ -33,18 +34,18 @@ const IdeaFormPage = () => {
       <IdeaForm onSubmit={handleSubmit} />
 
       <Modal
-        isOpen={showPendingModal}
-        onClose={() => setShowPendingModal(false)}
-        title="تم إرسال الفكرة!"
+        isOpen={showSuccessModal}
+        onClose={() => setShowSuccessModal(false)}
+        title="🎉 تم تسجيلك كصاحب فكرة!"
         footer={
           <Button
-            label="حسناً"
-            onClick={() => navigate("/pending-review")}
+            label="اذهب إلى لوحة التحكم"
+            onClick={() => navigate("/dashboard")}
             className="bg-main-color"
           />
         }
       >
-        <p className="text-sm">شكراً لك! طلبك قيد المراجعة من قبل الإدارة.</p>
+        <p className="text-sm">مبروك! أنت الآن صاحب فكرة معتمد ويمكنك البدء فوراً.</p>
       </Modal>
     </div>
   )

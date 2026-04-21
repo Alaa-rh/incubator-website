@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { useLocation } from "react-router-dom";
 import SearchBar from '../../components/SearchBar';
 import Projects from '../../components/Projects';
@@ -8,6 +8,8 @@ import { GrTechnology } from "react-icons/gr";
 import { SlBookOpen } from "react-icons/sl";
 import { GiStethoscope } from "react-icons/gi";
 
+import { useGetPublicProjectsQuery } from "../../api/endpoints/publicProjectsApi";
+
 const ProjectsPage = () => {
   const location = useLocation();
   const exhibitionYear = location.state?.year;
@@ -15,9 +17,10 @@ const ProjectsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
 
-  // const { data: projectsFromApi, isLoading } = useGetProjectsQuery();
+  // 1) جلب المشاريع من API
+  const { data: projectsFromApi, isLoading } = useGetPublicProjectsQuery();
 
-  // static مؤقتة
+  // 2) fallback مؤقت
   const fallbackProjects = [
     {
       id: 1,
@@ -53,13 +56,14 @@ const ProjectsPage = () => {
     },
   ];
 
-  // projects = projectsFromApi
-  const projects = fallbackProjects;
+  const projects = projectsFromApi || fallbackProjects;
 
+  // 3) فلترة حسب سنة المعرض
   const filteredByYear = exhibitionYear
     ? projects.filter((p) => p.year === exhibitionYear)
     : projects;
 
+  // 4) فلترة حسب الفئة والبحث
   const filteredProjects = filteredByYear.filter((project) => {
     const matchCategory =
       selectedCategory === "all" || project.category === selectedCategory;
@@ -76,6 +80,8 @@ const ProjectsPage = () => {
     { id: "تعليمي", label: "تعليمي", icon: <SlBookOpen /> },
     { id: "طبي", label: "طبي", icon: <GiStethoscope /> },
   ];
+
+  if (isLoading) return <p className="text-center mt-10">جاري التحميل...</p>;
 
   return (
     <div className='container'>

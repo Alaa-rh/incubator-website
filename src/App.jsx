@@ -1,30 +1,52 @@
 import AppRoutes from "./components/AppRoutes";
 import { FavoritesProvider } from "./Context/FavoritesContext";
 import { RoleProvider } from "./Context/RoleContext";
-import store from "./Redux/store";
-import { Provider, useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { setNotifications } from "./Redux/notificationsSlice";
+import { Provider, useDispatch } from "react-redux";
+import { useEffect, useRef } from "react";
+import store from "./redux/store";
+import { setNotifications } from "./redux/notificationsSlice";
 import logo from "./assets/images/logo.png";
+
+// TODO: بعد الربط استخدمي هذه الـ hooks
+// import { useGetNotificationsQuery } from "./api/endpoints/notificationsApi";
+// import { connectWebSocket } from "./api/websocket";
+// import { useRole } from "./hooks/useRole";
 
 function NotificationsLoader({ children }) {
   const dispatch = useDispatch();
-  const notifications = useSelector((state) => state.notifications.items);
+  const hasLoaded = useRef(false); // ✅ منع التحميل المتكرر
+
+  // TODO: بعد الربط استخدمي token من useRole
+  // const { token } = useRole();
+
+  // TODO: بعد الربط استخدمي هذا السطر لجلب الإشعارات من API
+  // const { data: apiNotifications } = useGetNotificationsQuery(undefined, {
+  //   skip: !token,
+  // });
+
+  // TODO: بعد الربط استخدمي هذا الـ useEffect لتشغيل WebSocket
+  // useEffect(() => {
+  //   if (token) {
+  //     connectWebSocket(token);
+  //   }
+  // }, [token]);
 
   useEffect(() => {
     async function loadNotifications() {
-      // -----------------------------------------
-      // مثال جاهز للربط الحقيقي:
-      //
-      // const res = await fetch("https://api.example.com/notifications", {
-      //   headers: { Authorization: `Bearer ${token}` }
-      // });
-      // const data = await res.json();
-      // dispatch(setNotifications(data));
-      //
-      // -----------------------------------------
+      // =========================================
+      // TODO: بعد الربط الحقيقي استخدمي هذا الكود:
+      // =========================================
+      // if (apiNotifications && apiNotifications.length > 0) {
+      //   dispatch(setNotifications(apiNotifications));
+      // } else if (!hasLoaded.current) {
+      //   // بيانات ثابتة احتياطية في حال كان API فارغ
+      //   dispatch(setNotifications(initialNotifications));
+      // }
 
-      if (notifications.length === 0) {
+      // =========================================
+      // حالياً: بيانات ثابتة (تشيليها بعد الربط)
+      // =========================================
+      if (!hasLoaded.current) {
         const initialNotifications = [
           {
             id: 1,
@@ -65,11 +87,12 @@ function NotificationsLoader({ children }) {
         ];
 
         dispatch(setNotifications(initialNotifications));
+        hasLoaded.current = true; // ✅ منع التحميل مرة ثانية
       }
     }
 
     loadNotifications();
-  }, [dispatch, notifications.length]);
+  }, [dispatch]); // ✅ إزالة notifications.length من الـ dependencies
 
   return children;
 }

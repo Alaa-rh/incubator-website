@@ -1,19 +1,18 @@
-import React, { useState } from "react"
-import Button from "./Button"
+import React, { useState } from "react";
+import Button from "./Button";
 
 const ApprovalActions = ({ onApprove, onReject }) => {
-  const [status, setStatus] = useState("pending") 
-  // pending | approved | rejected
+  const [status, setStatus] = useState("pending");
 
   const handleApprove = async () => {
-    if (onApprove) await onApprove()  
-    setStatus("approved")
-  }
+    if (onApprove) await onApprove();
+    setStatus("approved");
+  };
 
   const handleReject = async () => {
-    if (onReject) await onReject()
-    setStatus("rejected")
-  }
+    if (onReject) await onReject();
+    setStatus("rejected");
+  };
 
   return (
     <div className="mt-4">
@@ -47,7 +46,7 @@ const ApprovalActions = ({ onApprove, onReject }) => {
       )}
 
     </div>
-  )
-}
+  );
+};
 
-export default ApprovalActions
+export default ApprovalActions;

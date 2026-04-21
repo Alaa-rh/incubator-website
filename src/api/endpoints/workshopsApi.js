@@ -1,0 +1,47 @@
+// src/api/endpoints/workshopsApi.js
+import { apiSlice } from "../apiSlice";
+
+export const workshopsApi = apiSlice.injectEndpoints({
+  endpoints: (builder) => ({
+
+    // جلب آخر 4 ورشات للصفحة الرئيسية
+    getLatestWorkshops: builder.query({
+      query: () => '/workshops/latest/',
+      providesTags: ['Workshop'],
+    }),
+
+    // جلب ورشة محددة بواسطة ID
+    getWorkshopById: builder.query({
+      query: (id) => `/workshops/${id}/`,
+      providesTags: (result, error, id) => [{ type: 'Workshop', id }],
+    }),
+
+    // جلب جميع الورشات (لصفحة WorkshopsPage)
+    getAllWorkshops: builder.query({
+      query: (params = {}) => {
+        const queryString = new URLSearchParams(params).toString();
+        return `/workshops/${queryString ? `?${queryString}` : ''}`;
+      },
+      providesTags: ['Workshop'],
+    }),
+
+    // إضافة ورشة جديدة
+    addWorkshop: builder.mutation({
+      query: (workshopData) => ({
+        url: '/workshops/',
+        method: 'POST',
+        body: workshopData,
+      }),
+      invalidatesTags: ['Workshop'],
+    }),
+
+
+  }),
+});
+
+export const {
+  useGetLatestWorkshopsQuery,
+  useGetWorkshopByIdQuery,
+  useGetAllWorkshopsQuery,  
+  useAddWorkshopMutation,
+} = workshopsApi;

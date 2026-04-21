@@ -1,7 +1,7 @@
 import { ResponsiveBar } from "@nivo/bar";
 
-const ProjectsChart = () => {
-  const data = [
+const ProjectsChart = ({ data }) => {
+  const chartData = data || [
     { year: "2025", value: 20, color: "#19E45E" },
     { year: "2022", value: 15, color: "#9FF3C0" },
     { year: "2024", value: 10, color: "#9FF3C0" },
@@ -16,7 +16,7 @@ const ProjectsChart = () => {
 
       <div style={{ height: 300 }}>
         <ResponsiveBar
-          data={data}
+          data={chartData}
           keys={["value"]}
           indexBy="year"
           margin={{ top: 20, right: 20, bottom: 40, left: 40 }}

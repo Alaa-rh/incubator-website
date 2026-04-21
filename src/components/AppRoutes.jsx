@@ -101,6 +101,7 @@ const AppRoutes = () => {
 
       <Route path="/ProjectDetails/:id" element={<ProjectDetailsPage />} />
       <Route path="/workshops/:id" element={<WorkshopDetailsPage />} />
+      <Route path="/messagespage/:id" element={<MessagesPage />} />
 
       <Route path="/ideaform" element={<IdeaFormPage />} />
       <Route path="/volunteerform" element={<VolunteerFormPage />} />
@@ -247,7 +248,7 @@ const AppRoutes = () => {
       <Route path="/AddworkshopPage" element={<AddWorkshopPage />} />
       <Route path="/projectinfo/:id" element={<ProjectInfoPage />} />
       <Route path="/incubationinfo" element={<IncubationInfoPage />} />
-      <Route path="/profileinfo" element={<ProfileInfoPage />} />
+      <Route path="/profileinfo/:userId" element={<ProfileInfoPage />} />
 
      {/* ---------------- Admin ---------------- */}
       {roles.includes("admin") && (
@@ -286,8 +287,7 @@ const AppRoutes = () => {
       <Route path="/admin/details/:id" element={<VolunteerRequestPage />} />
       <Route path="/messagespage" element={<MessagesPage />} />
       <Route path="/notificationspage" element={<NotificationsPage />} />
-      
-       <Route path="/projectspage" element={<ProjectsPage />} />
+      <Route path="/projectspage" element={<ProjectsPage />} />
       
       </Route>
       )}

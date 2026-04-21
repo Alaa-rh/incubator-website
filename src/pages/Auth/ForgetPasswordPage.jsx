@@ -3,29 +3,54 @@ import Input from "../../components/Input";
 import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
 import forgetPassword from "../../assets/images/forgetPassword.png";
+import { useForgotPasswordMutation } from "../../api/endpoints/authApi";
 
 const ForgotPasswordPage = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
+  const [apiError, setApiError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const navigate = useNavigate();
+  
+  const [forgotPassword, { isLoading }] = useForgotPasswordMutation();
 
   const validate = () => {
     if (!email.trim()) {
       setError("البريد الإلكتروني مطلوب");
       return false;
     }
+    // التحقق من صيغة البريد الإلكتروني
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError("البريد الإلكتروني غير صحيح");
+      return false;
+    }
     setError("");
     return true;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!validate()) return;
 
-    // await api.forgotPassword({ email });
-
-    navigate("/verification");
+    try {
+      const response = await forgotPassword({ email }).unwrap();
+      
+      // تم الإرسال بنجاح
+      setSuccessMessage(response?.message || "تم إرسال رمز التحقق إلى بريدك الإلكتروني");
+      setApiError("");
+      
+      //التوجيه إلى صفحة إدخال الرمز بعد ثانية
+      setTimeout(() => {
+        navigate("/verification", { state: { email: email } });
+      }, 1000);
+      
+    } catch (error) {
+      console.error("Forgot password error:", error);
+      setApiError(error?.data?.message || "فشل إرسال رمز التحقق. تأكد من البريد الإلكتروني");
+      setSuccessMessage("");
+    }
   };
 
   return (
@@ -40,18 +65,37 @@ const ForgotPasswordPage = () => {
             هل نسيت كلمة المرور؟
           </h1>
 
+          {/* عرض رسالة النجاح */}
+          {successMessage && (
+            <div className="bg-green-100 text-green-700 p-3 rounded mb-4 text-center">
+              {successMessage}
+            </div>
+          )}
+
+          {/* عرض خطأ API */}
+          {apiError && (
+            <div className="bg-red-100 text-red-700 p-3 rounded mb-4 text-center">
+              {apiError}
+            </div>
+          )}
+
           <form className="space-y-6" onSubmit={handleSubmit}>
             <Input
               type="email"
               label="البريد الالكتروني"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                if (error) setError("");
+                if (apiError) setApiError("");
+              }}
               error={error}
             />
 
             <Button
-              label="إرسال رمز التحقق"
+              label={isLoading ? "جاري الإرسال..." : "إرسال رمز التحقق"}
               type="submit"
+              disabled={isLoading}
               className="flex justify-center max-w-[300px] bg-main-color mt-10 mx-auto w-full"
             />
           </form>

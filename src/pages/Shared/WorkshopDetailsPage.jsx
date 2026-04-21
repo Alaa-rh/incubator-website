@@ -2,13 +2,14 @@ import { useParams } from "react-router-dom"
 import WorkshopDetailsCard from "../../components/WorkshopDetailsCard"
 import workshop1 from "../../assets/images/workShop1.png"
 import workshop2 from "../../assets/images/workShop2.png"
+// import { useGetWorkshopByIdQuery } from "../../api/endpoints/workshopsApi"; // TODO: اشتغل بعد الربط
 
 const WorkshopDetailsPage = () => {
   const { id } = useParams()
 
-  // const { data: workshop, isLoading } = useGetWorkshopByIdQuery(id);
+  // const { data: workshop, isLoading, error } = useGetWorkshopByIdQuery(id);
 
-  // static مؤقتة
+  // بيانات ثابتة حالياً
   const fallbackWorkshops = [
     {
       id: "1",
@@ -44,8 +45,11 @@ const WorkshopDetailsPage = () => {
     }
   ]
 
-  // workshop = data
+  // TODO: بعد الربط استخدمي workshop من API بدل هذا السطر
   const workshop = fallbackWorkshops.find(w => w.id === id)
+
+  // if (isLoading) return <div>جاري التحميل...</div>
+  // if (error) return <div>حدث خطأ</div>
 
   return (
     <div className="container mt-10">

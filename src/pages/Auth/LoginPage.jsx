@@ -1,11 +1,20 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import { FcGoogle } from "react-icons/fc";
 import logIn from "../../assets/images/logIn.png";
 import NavLinkUniversal from "../../components/NavLinkUniversal";
+import { useLoginMutation } from "../../api/endpoints/authApi";
+import { setCredentials } from "../../redux/authSlice";
+import { getMainPageByRole } from "../../Utils/getMainPageByRole";
 
 const LoginPage = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [login, { isLoading }] = useLoginMutation();
+
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -27,14 +36,35 @@ const LoginPage = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!validate()) return;
 
-    // const response = await api.login(form)
-
-    console.log("Login submitted:", form);
+    try {
+      const response = await login({
+        email: form.email,
+        password: form.password,
+      }).unwrap();
+      
+      // حفظ بيانات المستخدم في Redux
+      dispatch(setCredentials({
+        user: response.user,
+        token: response.token,
+        userId: response.user?.id,
+      }));
+      
+      // الحصول على المسار الرئيسي حسب أولوية الأدوار
+      const userRoles = response.user?.roles || ["visitor"];
+      const mainPage = getMainPageByRole(userRoles);
+      
+      // التوجيه إلى الصفحة الرئيسية حسب الدور
+      navigate(mainPage);
+      
+    } catch (error) {
+      console.error("Login error:", error);
+      setErrors({ general: "فشل تسجيل الدخول. تأكد من البريد وكلمة المرور" });
+    }
   };
 
   return (
@@ -44,6 +74,13 @@ const LoginPage = () => {
           <h1 className="text-3xl font-bold text-second-color mb-8 text-center">
             تسجيل الدخول
           </h1>
+
+          {/* عرض خطأ عام */}
+          {errors.general && (
+            <div className="bg-red-100 text-red-700 p-3 rounded mb-4 text-center">
+              {errors.general}
+            </div>
+          )}
 
           <form className="space-y-4" onSubmit={handleSubmit}>
             <Input
@@ -64,9 +101,7 @@ const LoginPage = () => {
                 onChange={handleChange}
                 error={errors.password}
               />
-
             </div>
-
 
             <NavLinkUniversal
               label="هل نسيت كلمة المرور؟"
@@ -75,8 +110,9 @@ const LoginPage = () => {
             />
 
             <Button
-              label="تسجيل الدخول"
+              label={isLoading ? "جاري تسجيل الدخول..." : "تسجيل الدخول"}
               type="submit"
+              disabled={isLoading}
               className="flex justify-center max-w-[300px] bg-main-color mt-10 mx-auto w-full"
             />
 

@@ -1,11 +1,11 @@
 import Button from "../../Button";
-const UserMessagesSection = ({ user }) => {
+
+const UserMessagesSection = ({ user, onMessageClick }) => {
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg mb-6">
       
       <h3 className="text-2xl font-bold mb-4">المراسلات</h3>
 
-      
       <p className="text-lg text-gray-500 mb-2">:آخر رسالة</p>
 
       {/* صندوق الرسالة */}
@@ -15,7 +15,11 @@ const UserMessagesSection = ({ user }) => {
         </p>
       </div>
 
-      <Button label="مراسلة" className="bg-main-color" />
+      <Button 
+        label="مراسلة" 
+        className="bg-main-color"
+        onClick={onMessageClick}
+      />
     </div>
   );
 };

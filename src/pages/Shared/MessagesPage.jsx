@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import Chat from "../../components/Chat";
 import ContactsList from "../../components/ContactsList";
-import { selectContact, markAsRead, updatePreview } from "../../Redux/MessagesSlice";
+import { selectContact, markAsRead, updatePreview } from "../../redux/MessagesSlice";
 
 const MessagesPage = () => {
   const dispatch = useDispatch();

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Input from "./Input";
 import Button from "./Button";
-import { addMessage, updatePreview } from "../Redux/MessagesSlice";
+import { addMessage, updatePreview } from "../redux/MessagesSlice";
 
 const Chat = ({ contactName, role }) => {
   const dispatch = useDispatch();

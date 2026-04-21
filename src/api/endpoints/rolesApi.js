@@ -4,7 +4,7 @@ export const rolesApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
 
     // ---------------------------------------------------
-    // 1) Idea Owner Form → Pending (لا يعطي دور)
+    // 1) Idea Owner Form → يصبح فوراً Idea Owner (بدون موافقة)
     // ---------------------------------------------------
     upgradeToIdeaOwner: builder.mutation({
       query: (data) => ({
@@ -12,12 +12,11 @@ export const rolesApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      // فقط نعمل invalidate لبيانات المستخدم
       invalidatesTags: ["User"],
     }),
 
     // ---------------------------------------------------
-    // 2) Volunteer Form → Pending (لا يعطي دور)
+    // 2) Volunteer Form → يبقى Pending (ينتظر موافقة الإدارة)
     // ---------------------------------------------------
     upgradeToVolunteer: builder.mutation({
       query: (data) => ({
@@ -29,18 +28,7 @@ export const rolesApi = apiSlice.injectEndpoints({
     }),
 
     // ---------------------------------------------------
-    // 3) Admin Approves Idea → يعطي دور ideaOwner
-    // ---------------------------------------------------
-    adminApproveIdea: builder.mutation({
-      query: (userId) => ({
-        url: `admin/approve-idea/${userId}/`,
-        method: "PATCH",
-      }),
-      invalidatesTags: ["User", "Roles"],
-    }),
-
-    // ---------------------------------------------------
-    // 4) Admin Approves Volunteer → يعطي دور volunteer
+    // 3) Admin Approves Volunteer → يعطي دور volunteer
     // ---------------------------------------------------
     adminApproveVolunteer: builder.mutation({
       query: (userId) => ({
@@ -51,7 +39,7 @@ export const rolesApi = apiSlice.injectEndpoints({
     }),
 
     // ---------------------------------------------------
-    // 5) Admin Assign Evaluator Role
+    // 4) Admin Assign Evaluator Role
     // ---------------------------------------------------
     adminAssignEvaluator: builder.mutation({
       query: (userId) => ({
@@ -62,7 +50,7 @@ export const rolesApi = apiSlice.injectEndpoints({
     }),
 
     // ---------------------------------------------------
-    // 6) Admin Approves Incubation (صاحب فكرة → محتضن)
+    // 5) Admin Approves Incubation (صاحب فكرة → محتضن)
     // ---------------------------------------------------
     adminApproveIncubation: builder.mutation({
       query: (userId) => ({
@@ -78,7 +66,6 @@ export const rolesApi = apiSlice.injectEndpoints({
 export const {
   useUpgradeToIdeaOwnerMutation,
   useUpgradeToVolunteerMutation,
-  useAdminApproveIdeaMutation,
   useAdminApproveVolunteerMutation,
   useAdminAssignEvaluatorMutation,
   useAdminApproveIncubationMutation,

@@ -1,7 +1,14 @@
 import Button from "../../Button";
 import NavLinkUniversal from "../../NavLinkUniversal";
 
-const EvaluationSection = ({ evaluations, notes = null, attendanceRate = null, project }) => {
+const EvaluationSection = ({
+  evaluations,
+  notes = null,
+  attendanceRate = null,
+  project,
+  onEvaluationClick,
+  onViewProject,
+}) => {
   return (
     <div className="flex justify-between items-start">
 
@@ -25,6 +32,7 @@ const EvaluationSection = ({ evaluations, notes = null, attendanceRate = null, p
             )}
           </div>
         )}
+
         {/* نسبة حضور المعسكر لصاحب الفكرة */}
         {attendanceRate !== null && (
           <div className="mt-6">
@@ -32,17 +40,21 @@ const EvaluationSection = ({ evaluations, notes = null, attendanceRate = null, p
             <p className="text-main-color font-bold text-2xl">{attendanceRate}%</p>
           </div>
         )}
+
+        {/* زر عرض تفاصيل المشروع */}
         <NavLinkUniversal
           to={`/projectinfo/${project.id}`}
           label={
             <Button 
               label="عرض تفاصيل المشروع" 
               className="bg-main-color w-full"
+              onClick={onViewProject}
             />
           }
         />
-        </div>
-       {/* التقييم الأولي */}
+      </div>
+
+      {/* التقييم الأولي */}
       <div className="overflow-x-auto mb-6 w-2/3">
         <h3 className="text-2xl font-bold mb-4">التقييم الأولي</h3>
 
@@ -57,7 +69,11 @@ const EvaluationSection = ({ evaluations, notes = null, attendanceRate = null, p
 
           <tbody>
             {evaluations.map((e, index) => (
-              <tr key={index} className="hover:bg-gray-50">
+              <tr
+                key={index}
+                className="hover:bg-gray-50 cursor-pointer"
+                onClick={() => onEvaluationClick && onEvaluationClick(e)}
+              >
                 <td className="p-3 border-b border-second-color">{e.evaluator}</td>
                 <td className="p-3 border-b border-second-color">{e.score}</td>
                 <td className="p-3 border-b border-second-color">{e.note}</td>
@@ -66,6 +82,7 @@ const EvaluationSection = ({ evaluations, notes = null, attendanceRate = null, p
           </tbody>
         </table>
       </div>
+
     </div>
   );
 };

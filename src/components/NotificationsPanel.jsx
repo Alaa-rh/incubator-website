@@ -1,20 +1,56 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import NotificationItem from "./NotificationItem";
 import CategoryFilterBar from "./CategoryFilterBar";
 import { useRole } from "../hooks/useRole";
-import { markAsRead } from "../Redux/notificationsSlice";
+import { markAsRead } from "../redux/notificationsSlice";
+
+// ============= WebSocket =============
+import { connectWebSocket, subscribeToNotifications } from "../api/websocket";
+// ============= REST API (للإشعارات القديمة) =============
+// import { useGetNotificationsQuery, useMarkNotificationAsReadMutation } from "../api/endpoints/notificationsApi";
 
 const NotificationsPanel = () => {
   const dispatch = useDispatch();
-  const { roles } = useRole();
+  const { roles, token } = useRole();
 
-  // الإشعارات تأتي الآن من App.jsx
+  // ============= REST API: جلب الإشعارات القديمة =============
+  // const { data: oldNotifications, refetch } = useGetNotificationsQuery(undefined, {
+  //   skip: !token,
+  // });
+
+  // ============= WebSocket: استقبال الإشعارات الجديدة =============
+  useEffect(() => {
+    if (!token) return;
+
+    // تشغيل WebSocket
+    connectWebSocket(token);
+
+    // الاشتراك في الإشعارات الجديدة
+    const unsubscribe = subscribeToNotifications((newNotification) => {
+      // addNotification موجود مسبقاً في الـ slice
+      // store.dispatch(addNotification(newNotification));
+      console.log("إشعار جديد من WebSocket:", newNotification);
+    });
+
+    // تنظيف عند إغلاق المكون
+    return unsubscribe;
+  }, [token]);
+
+  // ============= تحميل الإشعارات القديمة عند أول تحميل =============
+  // useEffect(() => {
+  //   if (oldNotifications) {
+  //     // setNotifications موجود مسبقاً في الـ slice
+  //     // store.dispatch(setNotifications(oldNotifications));
+  //   }
+  // }, [oldNotifications, dispatch]);
+
+  // ============= بيانات الإشعارات من Redux =============
   const notifications = useSelector((state) => state.notifications.items);
 
   const [filter, setFilter] = useState("all");
 
-  // الفئات حسب الدور
+  // ============= الفئات حسب الدور =============
   const roleCategories = new Set(["general"]);
 
   if (roles.includes("ideaOwner")) roleCategories.add("incubation");
@@ -22,7 +58,6 @@ const NotificationsPanel = () => {
   if (roles.includes("volunteer_evaluator")) roleCategories.add("evaluation");
   if (roles.includes("volunteer_incubated")) roleCategories.add("incubation");
 
-  // مؤقتًا: عرض كل الإشعارات حتى لا تختفي بعد القراءة
   const userNotifications = notifications;
 
   const basicRoles = ["ideaOwner", "visitor", "volunteer"];
@@ -50,14 +85,23 @@ const NotificationsPanel = () => {
       ? userNotifications
       : userNotifications.filter((n) => n.category === filter);
 
-  const handleNotificationClick = (notif) => {
+  // ============= معالجة الضغط على الإشعار =============
+  const handleNotificationClick = async (notif) => {
+    // تحديث Redux محلياً
     dispatch(markAsRead(notif.id));
 
+    // await markAsReadAPI(notif.id);
+
+    // التوجيه إذا موجود رابط
     if (notif.action?.link) {
       //eslint-disable-next-line
       window.location.href = notif.action.link;
     }
   };
+
+  // ============= حالات التحميل والخطأ (للـ REST API) =============
+  // if (isLoading) return <div className="text-center p-4">جاري تحميل الإشعارات...</div>
+  // if (error) return <div className="text-center p-4 text-red-500">حدث خطأ في تحميل الإشعارات</div>
 
   return (
     <div className="overflow-hidden">
@@ -84,7 +128,9 @@ const NotificationsPanel = () => {
           status={notif.status}
         >
           <div className="flex items-center justify-between">
-            <span>{notif.message}</span>
+            <span className={notif.status === "unread" ? "font-semibold" : ""}>
+              {notif.message}
+            </span>
 
             {notif.action && (
               <button

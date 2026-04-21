@@ -1,8 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
+// import { useParams } from 'react-router-dom';
 import InfoRow from '../../components/InfoRow';
+// import { useGetProjectInfoQuery } from '../../api/endpoints/projectsInfoApi';
+
 const ProjectInfoPage = () => {
-    // eslint-disable-next-line
-  const [projectData, setProjectData] = useState({
+  // const { id } = useParams();
+
+  // TODO: بعد الربط استخدمي هذا السطر بدل البيانات الثابتة
+  // const { data: projectData, isLoading, error } = useGetProjectInfoQuery(id);
+
+  // بيانات ثابتة حالياً
+  const projectData = {
     header: {
       projectName: "منصة الشراكة الرقمية (Digital Partnership Platform)",
       manager: "ريم العلي",
@@ -24,7 +32,10 @@ const ProjectInfoPage = () => {
       "أحمد محمد (أنت): خبير/مطور AI - (المتطوع المُضاف حديثاً)",
       "سارة محمود: مصمم UX/UI - (مرشح للانضمام بانتظار الموافقة)"
     ]
-  });
+  };
+
+  // if (isLoading) return <div>جاري التحميل...</div>
+  // if (error) return <div>حدث خطأ</div>
 
   return (
     <div className="min-h-screen bg-white-color p-4">
@@ -43,12 +54,14 @@ const ProjectInfoPage = () => {
           <InfoRow label="الاختصاص :">{projectData.personalInfo.specialization} </InfoRow>
           <InfoRow label="البريد الإلكتروني :">{projectData.personalInfo.email} </InfoRow>
         </div>
-      <div className="bg-white p-8 rounded-sm shadow-sm border border-gray-100 mb-6">
+
+        <div className="bg-white p-8 rounded-sm shadow-sm border border-gray-100 mb-6">
           <h2 className="text-lg font-bold text-black mb-4 border-b border-second-color pb-2">2. معلومات عن الفكرة</h2>
           <InfoRow label="عنوان الفكرة :">{projectData.ideaInfo.title}</InfoRow>
           <InfoRow label="القطاع المستهدف :" >{projectData.ideaInfo.targetSector}</InfoRow>
           <InfoRow label="وصف مختصر للفكرة :">{projectData.ideaInfo.description}</InfoRow>
         </div>
+
         <div className="bg-white p-8 rounded-sm shadow-sm border border-gray-100">
           <h2 className="text-lg font-bold text-black mb-4 border-b border-second-color pb-2">3. أعضاء الفريق</h2>
           <div className="flex justify-between items-start text-right">
@@ -57,12 +70,10 @@ const ProjectInfoPage = () => {
                 <p key={index} className="leading-relaxed">- {member}</p>
               ))}
             </div>
-            
           </div>
         </div>
-        </div>
-
       </div>
+    </div>
   );
 };
 

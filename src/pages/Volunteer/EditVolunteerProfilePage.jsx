@@ -3,13 +3,24 @@ import { profileReducer, initialProfileState } from "../../hooks/ProfileReducer"
 import Input from "../../components/Input"
 import Button from "../../components/Button"
 import girl from "../../assets/images/girl.jpg"
-import NavLinkUniversal from "../../components/NavLinkUniversal";
+import { useSelector } from "react-redux" 
+import NavLinkUniversal from "../../components/NavLinkUniversal"
+// import { useUpdateVolunteerProfileMutation, useGetVolunteerProfileQuery } from "../../api/endpoints/volunteerprofileApi"
 
 const EditVolunteerProfilePage = () => {
 
   const [state, dispatch] = useReducer(profileReducer, initialProfileState)
+  const userId = useSelector((state) => state.auth.userId)
+  // const { data: profileData, isLoading } = useGetVolunteerProfileQuery()
+  // const [updateProfile, { isLoading: isUpdating }] = useUpdateVolunteerProfileMutation()
 
   useEffect(() => {
+    // TODO: بعد الربط  هذا الكود بدل الـ mock
+    // if (profileData) {
+    //   dispatch({ type: "SET_ALL", payload: profileData })
+    // }
+
+    // بيانات ثابتة حالياً
     const mock = {
       name: "مايا المحمد",
       email: "maya123@gmail.com",
@@ -26,7 +37,7 @@ const EditVolunteerProfilePage = () => {
     }
 
     dispatch({ type: "SET_ALL", payload: mock })
-  }, [])
+  }, []) // TODO: بعد الربط أضيفي profileData إلى الـ dependencies
 
   const handleChange = (field) => (e) => {
     dispatch({ type: "SET_FIELD", field, value: e.target.value })
@@ -36,24 +47,44 @@ const EditVolunteerProfilePage = () => {
     dispatch({ type: "SET_FILE", file: e.target.files[0] })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    
+    // TODO: بعد الربط استخدمي هذا الكود بدل console.log
+    // try {
+    //   const formData = new FormData()
+    //   Object.keys(state).forEach(key => {
+    //     if (state[key] !== null && key !== 'cv') {
+    //       formData.append(key, state[key])
+    //     }
+    //   })
+    //   if (state.cv) {
+    //     formData.append('cv', state.cv)
+    //   }
+    //   await updateProfile(formData).unwrap()
+    //   alert("تم حفظ التعديلات بنجاح")
+    // } catch (error) {
+    //   console.error("خطأ في حفظ التعديلات:", error)
+    //   alert("حدث خطأ في حفظ التعديلات")
+    // }
+
     console.log("بيانات الملف الشخصي:", state)
   }
+
+  // if (isLoading) return <div className="container mx-auto text-center mt-20">جاري تحميل البيانات...</div>
 
   return (
     <div className="container mx-auto" dir="rtl"> 
 
-    <div className="bg-white w-1/2 flex items-center gap-4 mt-4 mb-2 p-4 rounded-lg">
-             <img src={girl} alt="avatar" className="w-16 h-16 rounded-full mb-2" />
-                <div>
-                 <p className="font-semibold">{state.name}</p>
-                 <p>{state.email}</p>
-                </div>
-        </div>  
+      <div className="bg-white w-1/2 flex items-center gap-4 mt-4 mb-2 p-4 rounded-lg">
+        <img src={girl} alt="avatar" className="w-16 h-16 rounded-full mb-2" />
+        <div>
+          <p className="font-semibold">{state.name}</p>
+          <p>{state.email}</p>
+        </div>
+      </div>  
 
       <div className="bg-white-900 border border-second-color rounded-xl p-8 shadow-lg">
-
         <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-5">
 
           <Input label="الاسم" name="name" value={state.name} onChange={handleChange("name")} />
@@ -85,9 +116,11 @@ const EditVolunteerProfilePage = () => {
 
           {/* الأزرار */}
           <div className="col-span-2 flex justify-center gap-6 mt-4">
-            <NavLinkUniversal label={ <Button  label="عرض كما يظهر للآخرين" className="bg-main-color"/>}
-            to={"/profileinfo"}/>
-           
+           <NavLinkUniversal 
+            label={<Button label="عرض كما يظهر للآخرين" className="bg-main-color"/>}
+            to={`/profileinfo/${userId}`}  // يوجه إلى صفحة الملف الشخصي مع id المستخدم
+           />
+            
             <Button 
               type="submit"
               label="حفظ التعديلات"
@@ -97,7 +130,6 @@ const EditVolunteerProfilePage = () => {
 
         </form>
       </div>
-
     </div>
   )
 }

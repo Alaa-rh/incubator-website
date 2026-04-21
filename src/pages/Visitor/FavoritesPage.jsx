@@ -1,14 +1,17 @@
 import { useFavorites } from "../../hooks/useFavorites"
 import ProjectCard from "../../components/ProjectCard"
 import SearchBar from "../../components/SearchBar";
+// import { useGetFavoritesQuery } from "../../api/endpoints/favoritesApi";
 
 const FavoritesPage = () => {
-  // const { data: favoritesFromApi : list =[], isLoading } = useGetFavoritesQuery();
+  
+  // const { data: list = [], isLoading, error } = useGetFavoritesQuery();
 
   const { favorites } = useFavorites();
-
-  // const list = favoritesFromApi || favorites;
   const list = favorites;
+
+  // if (isLoading) return <div>جاري التحميل...</div>
+  // if (error) return <div>حدث خطأ</div>
 
   return (
     <div className="container mt-10">
