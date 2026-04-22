@@ -1,14 +1,74 @@
-import { useState } from "react"
-import Button from "./Button"
-import Modal from "./Modal"
-import Select from "./Select"
-import Input from "./Input"
+import { useState } from "react";
+import Button from "./Button";
+import Modal from "./Modal";
+import Select from "./Select";
+import Input from "./Input";
+import { useSelector } from "react-redux";
+// import { useSendConsultationRequestMutation } from "../api/endpoints/consultationsApi";
 
 const ConsultationRequestBtn = ({ consultant }) => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
+  const [consultationType, setConsultationType] = useState("");
+  const [description, setDescription] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
-  const open = () => setIsOpen(true)
-  const close = () => setIsOpen(false)
+// const [sendRequest, { isLoading }] = useSendConsultationRequestMutation();
+
+  // جلب userId من Redux
+  const userId = useSelector((state) => state.auth.userId);
+
+  const open = () => {
+    setIsOpen(true);
+    setError("");
+    setSuccess("");
+  };
+  const close = () => {
+    setIsOpen(false);
+    setConsultationType("");
+    setDescription("");
+    setError("");
+    setSuccess("");
+  };
+
+  const handleSubmit = async () => {
+    // التحقق من الحقول
+    if (!consultationType) {
+      setError("الرجاء اختيار نوع الاستشارة");
+      return;
+    }
+    if (!description.trim()) {
+      setError("الرجاء إدخال شرح مختصر");
+      return;
+    }
+
+    // TODO: بعد الربط هذا الكود
+    // try {
+    //   await sendRequest({
+    //     consultantId: consultant?.id,
+    //     userId: userId,
+    //     consultationType: consultationType,
+    //     description: description,
+    //   }).unwrap();
+    //   setSuccess("تم إرسال طلب الاستشارة بنجاح");
+    //   setTimeout(() => {
+    //     close();
+    //   }, 1500);
+    // } catch (err) {
+    //   console.error("Error sending consultation request:", err);
+    //   setError(err?.data?.message || "حدث خطأ في إرسال الطلب");
+    // }
+
+    // حالياً: محاكاة للإرسال
+    console.log("إرسال طلب استشارة:", {
+      consultantId: consultant?.id,
+      userId: userId,
+      consultationType,
+      description,
+    });
+    alert("تم إرسال طلب الاستشارة بنجاح (محاكاة)");
+    close();
+  };
 
   return (
     <>
@@ -24,15 +84,23 @@ const ConsultationRequestBtn = ({ consultant }) => {
         title="يرجى تحديد نوع الاستشارة وشرح ما تحتاجه"
         footer={
           <>
-            <Button label="إرسال الطلب" className="bg-main-color ml-2" />
-            <button className="border border-second-color px-4 rounded" onClick={close}>
+            <Button 
+              // label={isLoading ? "جاري الإرسال..." : "إرسال الطلب"} 
+              label="إرسال الطلب"
+              className="bg-main-color ml-2" 
+              onClick={handleSubmit}
+              // disabled={isLoading}
+            />
+            <button 
+              className="border border-second-color px-4 rounded" 
+              onClick={close}
+            >
               إلغاء
             </button>
           </>
         }
       >
         <form className="flex flex-col gap-4">
-
           {consultant && (
             <p className="font-bold text-second-color">
               المستشار: {consultant.name}
@@ -42,9 +110,14 @@ const ConsultationRequestBtn = ({ consultant }) => {
           <Select
             placeholder="اختر نوع الاستشارة"
             label="نوع الاستشارة"
+            value={consultationType}
+            onChange={(e) => {
+              setConsultationType(e.target.value);
+              setError("");
+            }}
             options={[
               { label: "استشارة", value: "استشارة" },
-              { label: "متابعة دورية", value: "متابعة دورية" }
+              { label: "متابعة دورية", value: "متابعة دورية" },
             ]}
           />
 
@@ -52,12 +125,19 @@ const ConsultationRequestBtn = ({ consultant }) => {
             type="text"
             label="شرح مختصر"
             placeholder="شرح ما تحتاجه"
+            value={description}
+            onChange={(e) => {
+              setDescription(e.target.value);
+              setError("");
+            }}
           />
 
+          {error && <p className="text-red-500 text-sm">{error}</p>}
+          {success && <p className="text-green-500 text-sm">{success}</p>}
         </form>
       </Modal>
     </>
-  )
-}
+  );
+};
 
-export default ConsultationRequestBtn
+export default ConsultationRequestBtn;

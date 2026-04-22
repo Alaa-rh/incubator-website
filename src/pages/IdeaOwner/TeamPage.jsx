@@ -1,35 +1,61 @@
-import React, { useState } from "react"
-import CurrentTeamList from "../../components/CurrentTeamList"
-import SuggestedVolunteersList from "../../components/SuggestedVolunteerList"
+import React, { useState } from "react";
+import CurrentTeamList from "../../components/CurrentTeamList";
+import SuggestedVolunteersList from "../../components/SuggestedVolunteerList";
+// import { useGetTeamQuery, useGetSuggestedVolunteersQuery } from "../../api/endpoints/teamApi";
 
 const TeamPage = () => {
+  const [activeTab, setActiveTab] = useState("current");
 
-  // حالياً ثابت للتجربة
+  // TODO: بعد الربط هذا السطر بدل البيانات الثابتة
+  // const { data: teamData, isLoading: isTeamLoading, error: teamError } = useGetTeamQuery();
+  // const { data: suggestedData, isLoading: isSuggestedLoading, error: suggestedError } = useGetSuggestedVolunteersQuery();
+
+  // -----------------------------
+  // بيانات ثابتة حالياً (تتحذف بعد الربط)
+  // -----------------------------
   const hasTeam = false;
-
-  const [activeTab, setActiveTab] = useState("current")
 
   const currentTeam = [
     { id: 1, name: "مايا المحمد", email: "maya123@gmail.com" },
     { id: 2, name: "مايا المحمد", email: "maya123@gmail.com" },
     { id: 3, name: "مايا المحمد", email: "maya123@gmail.com" },
-  ]
+  ];
 
   const suggestedVolunteers = [
     { id: 1, name: "مايا المحمد", email: "maya123@gmail.com", role: "backend" },
     { id: 2, name: "مايا المحمد", email: "maya123@gmail.com", role: "frontend" },
     { id: 3, name: "مايا المحمد", email: "مايا المحمد", role: "design" },
     { id: 4, name: "مايا المحمد", email: "مايا المحمد", role: "testing" },
-  ]
+  ];
+
+  // TODO: بعد الربط  هذا الكود لاستخراج البيانات من API
+  // const hasTeam = teamData?.hasTeam || false;
+  // const currentTeam = teamData?.members || [];
+  // const suggestedVolunteers = suggestedData?.volunteers || [];
+
+  // TODO: بعد الربط حالة التحميل والخطأ
+  // if (isTeamLoading || isSuggestedLoading) {
+  //   return (
+  //     <div className="container py-6">
+  //       <p className="text-center text-gray-500 mt-20">جاري تحميل البيانات...</p>
+  //     </div>
+  //   );
+  // }
+
+  // if (teamError || suggestedError) {
+  //   return (
+  //     <div className="container py-6">
+  //       <p className="text-center text-red-500 mt-20">حدث خطأ في تحميل البيانات</p>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="container py-6">
-
       <h1 className="text-3xl font-bold text-second-color mb-6">الفريق</h1>
 
       {/* التبويبات */}
       <div className="flex gap-4 mb-6">
-
         {/* تبويب الفريق الحالي */}
         <button
           onClick={() => setActiveTab("current")}
@@ -40,7 +66,7 @@ const TeamPage = () => {
           الفريق الحالي
         </button>
 
-        {/*تبويب المتطوعين المقترحين يظهر فقط إذا صاحب الفكرة ليس لديه فريق */}
+        {/* تبويب المتطوعين المقترحين يظهر فقط إذا صاحب الفكرة ليس لديه فريق */}
         {!hasTeam && (
           <button
             onClick={() => setActiveTab("suggested")}
@@ -51,7 +77,6 @@ const TeamPage = () => {
             المتطوعون المقترحون
           </button>
         )}
-
       </div>
 
       {/* المحتوى */}
@@ -61,7 +86,7 @@ const TeamPage = () => {
         <SuggestedVolunteersList volunteers={suggestedVolunteers} />
       )}
     </div>
-  )
-}
+  );
+};
 
-export default TeamPage
+export default TeamPage;

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import girl from "../../assets/images/girl.jpg"
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-
+//import { useGetCurrentUserQuery, useUpdateUserMutation } from '../../api/endpoints/userApi';
 const ProfilePage = ({ userName, email }) => {
 
   // لاحقًا:

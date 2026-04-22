@@ -8,8 +8,6 @@ import Button from '../../components/Button';
 import ProjectsSection from '../../components/ProjectsSection';
 import avatar from "../../assets/images/avatar.jpg";
 import ConsultationRequestBtn from '../../components/ConsultationRequestBtn';
-
-// TODO: بعد الربط استخدمي هذا الـ hook
 // import { useGetProfileByIdQuery } from '../../api/endpoints/profileInfoApi';
 
 const ProfileInfoPage = () => {
@@ -18,7 +16,6 @@ const ProfileInfoPage = () => {
   
   // const targetUserId = userId || currentUserId;
 
-  // TODO: بعد الربط استخدمي هذا السطر
   // const { data:profileData, isLoading, error } = useGetProfileByIdQuery(targetUserId);
 
   // بيانات ثابتة حالياً
@@ -56,7 +53,6 @@ const ProfileInfoPage = () => {
     { name: "GreenApp" }
   ];
 
-  // TODO: بعد الربط شغلي حالة التحميل والخطأ
   // if (isLoading) return <div>جاري التحميل...</div>
   // if (error) return <div>حدث خطأ</div>
 
