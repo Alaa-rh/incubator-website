@@ -4,8 +4,8 @@ import { createContext, useState } from "react";
 export const RoleContext = createContext();
 
 export const RoleProvider = ({ children }) => {
-  
-  const storedRoles = JSON.parse(localStorage.getItem("roles")) || ["ideaOwner"];
+
+  const storedRoles = JSON.parse(localStorage.getItem("roles")) || ["admin"];
 
   const [roles, setRoles] = useState(storedRoles);
 

@@ -33,7 +33,7 @@ const EvaluationDetails = ({ evaluators = [], onBack }) => {
       <Modal
         isOpen={isRejectModalOpen}
         onClose={() => setIsRejectModalOpen(false)}
-        title="سبب الرفض"
+        title="هل انت متأكد من الرفض؟"
         footer={
           <button
             onClick={() => setIsRejectModalOpen(false)}
@@ -43,10 +43,7 @@ const EvaluationDetails = ({ evaluators = [], onBack }) => {
           </button>
         }
       >
-        <textarea
-          placeholder="اكتب سبب الرفض..."
-          className="w-full border border-gray-300 rounded-lg p-3 text-right"
-        />
+       <p>سيتم ارسال اشعار بالرفض</p>
       </Modal>
 
       {/* العنوان */}

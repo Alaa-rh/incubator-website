@@ -1,6 +1,7 @@
 import React, { useReducer, useEffect } from "react"
 import { profileReducer, initialProfileState } from "../../hooks/ProfileReducer"
 import Input from "../../components/Input"
+import Textarea from "../../components/Textarea"
 import Button from "../../components/Button"
 import girl from "../../assets/images/girl.jpg"
 import { useSelector } from "react-redux" 
@@ -33,7 +34,6 @@ const EditVolunteerProfilePage = () => {
       mainSkills: "UI UX",
       extraSkills: "UI UX",
       cv: null,
-      link: "http://example.com"
     }
 
     dispatch({ type: "SET_ALL", payload: mock })
@@ -77,14 +77,14 @@ const EditVolunteerProfilePage = () => {
     <div className="container mx-auto" dir="rtl"> 
 
       <div className="bg-white w-1/2 flex items-center gap-4 mt-4 mb-2 p-4 rounded-lg">
-        <img src={girl} alt="avatar" className="w-16 h-16 rounded-full mb-2" />
+        <img src={girl} alt="avatar" className="w-16 h-16 rounded-full" />
         <div>
           <p className="font-semibold">{state.name}</p>
           <p>{state.email}</p>
         </div>
       </div>  
 
-      <div className="bg-white-900 border border-second-color rounded-xl p-8 shadow-lg">
+      <div className="bg-white-900 h-full border border-second-color rounded-xl px-8 py-2 shadow-lg">
         <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-5">
 
           <Input label="الاسم" name="name" value={state.name} onChange={handleChange("name")} />
@@ -101,19 +101,14 @@ const EditVolunteerProfilePage = () => {
 
           <Input label="المهارات الأساسية" name="mainSkills" value={state.mainSkills} onChange={handleChange("mainSkills")} />
           <Input label="المهارات الإضافية" name="extraSkills" value={state.extraSkills} onChange={handleChange("extraSkills")} />
-
-          <Input label="إضافة رابط" name="link" value={state.link} onChange={handleChange("link")} />
-
-          {/* رفع السيرة الذاتية */}
-          <div className="col-span-2">
-            <label className="font-bold mb-1 block">السيرة الذاتية</label>
-            <input 
-              type="file" 
+            <Textarea 
+              label="السيرة الذاتية"
+              name="cv"
+              value={state.cv ? state.cv.name : ""}
+              placeholder="اكتب سيرتك الذاتية"
               onChange={handleFile}
               className="border border-second-color rounded-md px-4 py-2 bg-white"
             />
-          </div>
-
           {/* الأزرار */}
           <div className="col-span-2 flex justify-center gap-6 mt-4">
            <NavLinkUniversal 

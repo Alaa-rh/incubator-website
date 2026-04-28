@@ -1,26 +1,58 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import DataTable from "../DataTable";
 import Button from "../../Button";
-import { useNavigate } from "react-router-dom";
 
-const projects = [  
-    { id: 1,
-      name: "منصة الكترونية", 
-      sector: "الالكترونيات", 
-      targetGroup: "التجار", 
-      email: "Ayahalaboud021@gmail.com", 
-      score : "30" },
-    { id: 2, 
-      name: "تطبيق موبايل", 
-      sector: "البرمجيات", 
-      targetGroup: "الشباب", 
-      email: "Ayahalaboud021@gmail.com",
-      score : "30"  },
-  ];
+// import { useGetProjectsForEvaluationQuery } from "../../api/endpoints/admin/evaluationApi";
 
-const DistributionTable = ({assignedEvaluators}) => {
+const projectsData = [  
+  {
+    id: 1,
+    name: "منصة الكترونية",
+    sector: "الالكترونيات",
+    targetGroup: "التجار",
+    email: "Ayahalaboud021@gmail.com",
+  },
+  {
+    id: 2,
+    name: "تطبيق موبايل",
+    sector: "البرمجيات",
+    targetGroup: "الشباب",
+    email: "Ayahalaboud021@gmail.com",
+  },
+];
+
+const assignedEvaluatorsData = {
+  1: [
+    { id: 1, name: "أحمد محمد" },
+    { id: 2, name: "سارة خالد" },
+    { id:3, name: "حلا أحمد"}
+  ],
+  2: [],
+};
+
+const DistributionTable = () => {
   const navigate = useNavigate();
-  const columns = [ 
+
+  // const { data: projectsFromApi, isLoading, error, refetch } = useGetProjectsForEvaluationQuery();
+  // const assignedEvaluators = projectsFromApi?.assignedEvaluators || {};
+
+  // حالياً: استخدام بيانات ثابتة
+  const projects = projectsData;
+  const assignedEvaluators = assignedEvaluatorsData;
+  // const isLoading = false;
+  // const error = null;
+
+  // معالجة شكل البيانات إذا كانت من API
+  let projectsList = Array.isArray(projects) ? projects : [];
+  if (projects?.results && Array.isArray(projects.results)) {
+    projectsList = projects.results;
+  }
+  if (projects?.data && Array.isArray(projects.data)) {
+    projectsList = projects.data;
+  }
+
+  const columns = [
     {
       key: "actions",
       label: "الإجراءات",
@@ -28,14 +60,12 @@ const DistributionTable = ({assignedEvaluators}) => {
         <div className="text-center">
           <Button
             label="تعيين المقيمين"
-            onClick={() => navigate (`/admin/assign-evaluators/${row.id}`)}
+            onClick={() => navigate(`/admin/assign-evaluators/${row.id}`)}
             className="bg-main-color text-white px-4 py-2 rounded-md text-xs md:text-sm"
           />
         </div>
       ),
     },
-    
-
     {
       key: "sector",
       label: "القطاع المستهدف",
@@ -43,7 +73,6 @@ const DistributionTable = ({assignedEvaluators}) => {
         <span className="text-center block">{row.sector}</span>
       ),
     },
-
     {
       key: "targetGroup",
       label: "الفئة المستهدفة",
@@ -51,12 +80,11 @@ const DistributionTable = ({assignedEvaluators}) => {
         <span className="text-center block">{row.targetGroup}</span>
       ),
     },
-
     {
       key: "evaluators",
       label: "المقيمون الحاليون",
       render: (row) => {
-        const evaluators = assignedEvaluators?.[row.id] || [];
+        const evaluators = assignedEvaluators[row.id] || assignedEvaluators[row.id] || [];
 
         if (evaluators.length === 0) {
           return (
@@ -67,11 +95,11 @@ const DistributionTable = ({assignedEvaluators}) => {
         }
 
         return (
-          <div className="flex flex-wrap gap-1 max-w-[200px]">
+          <div className="flex flex-wrap justify-center items-center gap-2">
             {evaluators.map((ev, idx) => (
               <span
-                key={idx}
-                className="bg-blue-50 text-blue-800 px-2 py-1 rounded text-[10px] md:text-xs border border-blue-200 whitespace-nowrap"
+                key={ev.id || idx}
+                className="bg-blue-50 text-blue-800 p-1 rounded text-xl md:text-xs border border-blue-200 whitespace-nowrap"
               >
                 {ev.name}
               </span>
@@ -81,12 +109,43 @@ const DistributionTable = ({assignedEvaluators}) => {
       },
     },
     { key: "name", label: "اسم المشروع" },
-   
   ];
+
+  // if (isLoading) {
+  //   return (
+  //     <div className="p-4">
+  //       <div className="space-y-4">
+  //         {[1, 2].map((i) => (
+  //           <div key={i} className="h-16 bg-gray-100 rounded animate-pulse"></div>
+  //         ))}
+  //       </div>
+  //     </div>
+  //   );
+  // }
+
+  // if (error) {
+  //   return (
+  //     <div className="p-4 text-center">
+  //       <p className="text-red-500 mb-3">حدث خطأ في تحميل المشاريع</p>
+  //       <button
+  //         onClick={refetch}
+  //         className="bg-main-color text-white px-4 py-2 rounded"
+  //       >
+  //         إعادة المحاولة
+  //       </button>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="p-4">
-      <DataTable columns={columns} data={projects} />
+      {projectsList.length === 0 ? (
+        <div className="text-center py-10 text-gray-500">
+          لا توجد مشاريع متاحة للتقييم
+        </div>
+      ) : (
+        <DataTable columns={columns} data={projectsList} />
+      )}
     </div>
   );
 };

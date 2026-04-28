@@ -1,68 +1,94 @@
-import React, { useReducer, useState } from "react"
-import Button from "../Button"
-import LinearProgress from "../LinearProgress"
-import StepExperience from "./StepExperience"
-import StepPreferences from "./StepPreferences"
-import StepAvailability from "./StepAvailability"
+import React, { useReducer, useState } from "react";
+import Button from "../Button";
+import LinearProgress from "../LinearProgress";
+import StepExperience from "./StepExperience";
+import StepPreferences from "./StepPreferences";
+import StepAvailability from "./StepAvailability";
 import { initialVolunteerForm, volunteerReducer } from "../../hooks/useVolunteerReducer";
 
-const VolunteerForm = ({ onSubmit, onCancel }) => {
-  const [form, dispatch] = useReducer(volunteerReducer, initialVolunteerForm)
-  const [errors, setErrors] = useState({})
-  const [step, setStep] = useState(0)
+// -----------------------------
+// خيارات الخبرات (ثابتة)
+// -----------------------------
+const EXPERTISE_OPTIONS = [
+  { value: "ui ux", label: "تصميم واجهات وتجربة المستخدم" },
+  { value: "development", label: "تطوير برمجيات" },
+  { value: "marketing", label: "التسويق الرقمي" },
+  { value: "training", label: "تقديم ورشات تدريبية" }
+];
 
-  const expertiseOptions = [
-    { value: "ui ux", label: "تصميم واجهات وتجربة المستخدم" },
-    { value: "development", label: "تطوير برمجيات" },
-    { value: "marketing", label: "التسويق الرقمي" },
-    { value: "training", label: "تقديم ورشات تدريبية" }
-  ]
+const VolunteerForm = ({ onSubmit, onCancel }) => {
+  const [form, dispatch] = useReducer(volunteerReducer, initialVolunteerForm);
+  const [errors, setErrors] = useState({});
+  const [step, setStep] = useState(0);
 
   const handleChange = (e) => {
     dispatch({
       type: "UPDATE_FIELD",
       field: e.target.name,
       value: e.target.value
-    })
-  }
+    });
+    // مسح الخطأ عند التعديل
+    if (errors[e.target.name]) {
+      setErrors(prev => ({ ...prev, [e.target.name]: "" }));
+    }
+  };
 
   const handleAvailabilityChange = (availability) => {
     dispatch({
       type: "UPDATE_AVAILABILITY",
       value: availability
-    })
-  }
+    });
+    if (errors.availability) {
+      setErrors(prev => ({ ...prev, availability: "" }));
+    }
+  };
+
+  const validateStep = () => {
+    const newErrors = {};
+
+    if (step === 0) {
+      // التحقق من خطوة الخبرات والمهارات
+      if (!form.experienceYears) newErrors.experienceYears = "سنوات الخبرة مطلوبة";
+      if (!form.expertiseArea) newErrors.expertiseArea = "مجال الخبرة الرئيسي مطلوب";
+      if (!form.employer) newErrors.employer = "جهة العمل مطلوبة";
+    } 
+    else if (step === 1) {
+      // التحقق من خطوة التفضيلات
+      if (!form.consultationPreferences) newErrors.consultationPreferences = "تفضيلات الاستشارة مطلوبة";
+      if (!form.location) newErrors.location = "الموقع مطلوب";
+      if (!form.expertition) newErrors.expertition = "الخبرات الإضافية مطلوبة";
+      if (!form.volunteeringGoal) newErrors.volunteeringGoal = "هدف التطوع مطلوب";
+    }
+    else if (step === 2) {
+      // التحقق من خطوة أوقات التوفر
+      const availabilityValues = Object.values(form.availability || {});
+      const hasAvailability = availabilityValues.some(day =>
+        day.from && day.to && day.active
+      );
+      if (!hasAvailability) newErrors.availability = "يرجى تحديد أوقات التوفر";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleNext = () => {
+    if (validateStep()) {
+      setStep(step + 1);
+    }
+  };
+
+  const handlePrevious = () => {
+    setStep(step - 1);
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    const newErrors = {}
-
-    const requiredFields = [
-      "experienceYears",
-      "expertiseArea",
-      "employer",
-      "consultationPreferences",
-      "location",
-      "expertition",
-      "volunteeringGoal"
-    ]
-
-    requiredFields.forEach((field) => {
-      if (!form[field]) newErrors[field] = "هذا الحقل مطلوب"
-    })
-
-    const availabilityValues = Object.values(form.availability || {})
-    const hasAvailability = availabilityValues.some(day =>
-      day.from && day.to && day.active
-    )
-    if (!hasAvailability) newErrors.availability = "يرجى تحديد أوقات التوفر"
-
-    setErrors(newErrors)
-
-    if (Object.keys(newErrors).length === 0) {
-      onSubmit(form) // ← نرسل البيانات للصفحة الأم
+    e.preventDefault();
+    
+    if (validateStep()) {
+      onSubmit(form);
     }
-  }
+  };
 
   return (
     <div>
@@ -74,7 +100,7 @@ const VolunteerForm = ({ onSubmit, onCancel }) => {
             form={form}
             errors={errors}
             handleChange={handleChange}
-            expertiseOptions={expertiseOptions}
+            expertiseOptions={EXPERTISE_OPTIONS}
           />
         )}
 
@@ -94,32 +120,43 @@ const VolunteerForm = ({ onSubmit, onCancel }) => {
           />
         )}
 
-        <div className="flex justify-between">
+        <div className="flex justify-between items-center">
           <Button
             label="إلغاء"
             type="button"
             onClick={onCancel}
-            className="w-50 bg-main-color text-white"
+            className="bg-main-color text-white px-6 py-2 rounded"
           />
 
-          {step < 2 ? (
-            <Button
-              label="التالي"
-              type="button"
-              onClick={() => setStep(step + 1)}
-              className="w-50 bg-main-color px-4 py-2"
-            />
-          ) : (
-            <Button
-              label="إرسال"
-              type="submit"
-              className="w-50 bg-main-color px-4 py-2"
-            />
-          )}
+          <div className="flex gap-4">
+            {step > 0 && (
+              <Button
+                label="رجوع"
+                type="button"
+                onClick={handlePrevious}
+                className="bg-main-color text-white px-6 py-2 rounded"
+              />
+            )}
+
+            {step < 2 ? (
+              <Button
+                label="التالي"
+                type="button"
+                onClick={handleNext}
+                className="bg-main-color text-white px-6 py-2 rounded"
+              />
+            ) : (
+              <Button
+                label="إرسال"
+                type="submit"
+                className="bg-main-color text-white px-6 py-2 rounded"
+              />
+            )}
+          </div>
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default VolunteerForm
+export default VolunteerForm;

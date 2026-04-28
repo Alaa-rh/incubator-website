@@ -15,18 +15,10 @@ export const formConfigApi = apiSlice.injectEndpoints({
       query: () => '/admin/form-config/idea/',
       providesTags: ['FormConfig'],
     }),
-
-    // جلب هيكل فورم المتطوع
-    getVolunteerFormConfig: builder.query({
-      query: () => '/admin/form-config/volunteer/',
-      providesTags: ['FormConfig'],
-    }),
-
   }),
 });
 
 export const {
   useGetExhibitionFormConfigQuery,
   useGetIdeaFormConfigQuery,
-  useGetVolunteerFormConfigQuery,
 } = formConfigApi;

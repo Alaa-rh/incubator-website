@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from 'react';
 
-const ExpertReview = ({ criteria}) => {
-  
-  const [scores, setScores] = useState(criteria || []);
+const ExpertReview = ({ criteria, onBack }) => {
+  const [scores, setScores] = useState([]);
 
   useEffect(() => {
-    //eslint-disable-next-line
-    if (criteria) setScores(criteria);
+    // تحويل المعايير الواردة إلى نفس الشكل المطلوب للتقييم
+    if (criteria && criteria.length > 0) {
+      const initialScores = criteria.map(item => ({
+        id: item.id,
+        name: item.name,
+        value: item.value || 0
+      }));
+      //eslint-disable-next-line
+      setScores(initialScores);
+    }
   }, [criteria]);
 
   const handleScoreChange = (id, newVal) => {
@@ -20,8 +27,15 @@ const ExpertReview = ({ criteria}) => {
 
   const total = scores.reduce((sum, item) => sum + (Number(item.value) || 0), 0);
 
+  const handlePublish = () => {
+    console.log("نشر المعايير:", scores);
+    // TODO: بعد الربط، إرسال البيانات للباك
+    alert("تم نشر المعايير بنجاح (محاكاة)");
+  };
+
   return (
     <div className="p-8 max-w-4xl mx-auto font-sans" dir="ltr">
+     
 
       {/* Table */}
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
@@ -31,17 +45,23 @@ const ExpertReview = ({ criteria}) => {
         </div>
 
         <div className="p-6 space-y-6">
-          {scores.map((item) => (
-            <div key={item.id} className="flex justify-between items-center">
-              <input
-                type="number"
-                value={item.value}
-                onChange={(e) => handleScoreChange(item.id, e.target.value)}
-                className="w-24 border-2 border-second-color rounded-md p-2 text-center font-bold focus:outline-none focus:border-cyan-400"
-              />
-              <span className="text-black font-medium">{item.name}</span>
-            </div>
-          ))}
+          {scores.length === 0 ? (
+            <p className="text-center text-gray-500 py-6">
+              لا توجد معايير لعرضها
+            </p>
+          ) : (
+            scores.map((item) => (
+              <div key={item.id} className="flex justify-between items-center">
+                <input
+                  type="number"
+                  value={item.value}
+                  onChange={(e) => handleScoreChange(item.id, e.target.value)}
+                  className="w-24 border-2 border-second-color rounded-md p-2 text-center font-bold focus:outline-none focus:border-cyan-400"
+                />
+                <span className="text-black font-medium">{item.name}</span>
+              </div>
+            ))
+          )}
         </div>
       </div>
 
@@ -54,11 +74,23 @@ const ExpertReview = ({ criteria}) => {
       </div>
 
       {/* Submit */}
-      <div className="mt-10 flex justify-center">
-        <button className="bg-main-color text-white px-12 py-2 rounded-md font-bold text-lg hover:bg-[#2e4361] transition shadow-lg">
+      <div className="mt-10 flex justify-center items-center gap-4">
+        <button
+          onClick={handlePublish}
+          className="bg-main-color text-white px-12 py-2 rounded-md font-bold text-lg hover:bg-[#2e4361] transition shadow-lg"
+        >
           نشر وإرسال للجنة
+        </button> 
+
+        {/* زر رجوع */}
+        <button
+          onClick={onBack}
+          className="bg-main-color text-white px-4 py-2 rounded-md font-bold text-lg hover:bg-[#2e4361] transition shadow-lg"
+        >
+           رجوع إلى التعديل
         </button>
-      </div>
+      </div> 
+     
     </div>
   );
 };

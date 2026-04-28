@@ -1,0 +1,28 @@
+// src/api/endpoints/campApi.js
+import { apiSlice } from "../../apiSlice";
+
+export const campApi = apiSlice.injectEndpoints({
+  endpoints: (builder) => ({
+
+    // إنهاء المعسكر وإرسال إشعارات للجميع
+    endCamp: builder.mutation({
+      query: () => ({
+        url: '/admin/camp/end/',
+        method: 'POST',
+      }),
+      invalidatesTags: ['Camp', 'Notifications'],
+    }),
+
+    // جلب حالة المعسكر
+    getCampStatus: builder.query({
+      query: () => '/admin/camp/status/',
+      providesTags: ['Camp'],
+    }),
+
+  }),
+});
+
+export const {
+  useEndCampMutation,
+  useGetCampStatusQuery,
+} = campApi;

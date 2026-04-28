@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import EvaluationDetails from "./EvaluationDetails";
 import Modal from "../../Modal";
-import Textarea from "../../Textarea";
 import DataTable from "../DataTable";
 
-const ResultsTable = () => {
+// import { useGetProjectsResultsQuery, useApproveProjectMutation, useRejectProjectMutation } from "../../api/endpoints/evaluationApi";
 
-  // بيانات تجريبية للمشاريع
-  const projects = [
+const ResultsTable = () => {
+  
+  const projectsData = [
     {
       id: 1,
       name: "منصة إلكترونية",
@@ -24,8 +24,7 @@ const ResultsTable = () => {
     }
   ];
 
-  // بيانات تجريبية للمقيمين
-  const allAssignments = {
+  const allAssignmentsData = {
     1: [
       {
         name: "أحمد المحمد",
@@ -47,22 +46,75 @@ const ResultsTable = () => {
     ]
   };
 
+  // TODO: بعد الربط  هذا السطر بدل البيانات الثابتة
+  // const { data: projectsFromApi, isLoading, error, refetch } = useGetProjectsResultsQuery();
+  // const [approveProject, { isLoading: isApproving }] = useApproveProjectMutation();
+  // const [rejectProject, { isLoading: isRejecting }] = useRejectProjectMutation();
+
+  const projects = projectsData;
+  const allAssignments = allAssignmentsData;
+
   const [view, setView] = useState("table");
   const [selectedProject, setSelectedProject] = useState(null);
   const [activeDropdown, setActiveDropdown] = useState(null);
 
   const [isAcceptModalOpen, setIsAcceptModalOpen] = useState(false);
   const [isRejectModalOpen, setIsRejectModalOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const toggleDropdown = (id) => {
     setActiveDropdown(activeDropdown === id ? null : id);
+  };
+
+  const handleAccept = async () => {
+    setIsSubmitting(true);
+
+    // try {
+    //   await approveProject(selectedProject.id).unwrap();
+    //   alert("تم قبول المشروع بنجاح. سيتم إرسال إشعار للمستخدم.");
+    //   setIsAcceptModalOpen(false);
+    // } catch (error) {
+    //   console.error("Error accepting project:", error);
+    //   alert(error?.data?.message || "حدث خطأ في قبول المشروع");
+    // } finally {
+    //   setIsSubmitting(false);
+    // }
+
+    console.log("قبول المشروع:", selectedProject);
+    setTimeout(() => {
+      alert("تم قبول المشروع بنجاح (محاكاة)");
+      setIsAcceptModalOpen(false);
+      setIsSubmitting(false);
+    }, 500);
+  };
+
+  const handleReject = async () => {
+    setIsSubmitting(true);
+
+    // try {
+    //   await rejectProject(selectedProject.id).unwrap();
+    //   alert("تم رفض المشروع. سيتم إرسال إشعار للمستخدم.");
+    //   setIsRejectModalOpen(false);
+    // } catch (error) {
+    //   console.error("Error rejecting project:", error);
+    //   alert(error?.data?.message || "حدث خطأ في رفض المشروع");
+    // } finally {
+    //   setIsSubmitting(false);
+    // }
+
+    console.log("رفض المشروع:", selectedProject);
+    setTimeout(() => {
+      alert("تم رفض المشروع بنجاح (محاكاة)");
+      setIsRejectModalOpen(false);
+      setIsSubmitting(false);
+    }, 500);
   };
 
   // فتح صفحة التفاصيل
   if (view === "details") {
     return (
       <EvaluationDetails
-        evaluators={allAssignments[selectedProject.id] || []}
+        evaluators={allAssignments[selectedProject?.id] || []}
         onBack={() => setView("table")}
       />
     );
@@ -84,7 +136,6 @@ const ResultsTable = () => {
 
           {activeDropdown === row.id && (
             <div className="absolute right-0 top-full mt-1 w-44 bg-white shadow-2xl rounded-lg p-2 flex flex-col gap-2 z-50">
-
               {/* تفاصيل التقييم */}
               <button
                 onClick={() => {
@@ -125,7 +176,6 @@ const ResultsTable = () => {
         </div>
       ),
     },
-
     {
       key: "email",
       label: "البريد الإلكتروني",
@@ -133,7 +183,6 @@ const ResultsTable = () => {
         <span className="underline text-blue-500">{row.email}</span>
       ),
     },
-
     {
       key: "status",
       label: "حالة التقييم",
@@ -152,18 +201,15 @@ const ResultsTable = () => {
         );
       },
     },
-
     {
       key: "score",
       label: "نتيجة التقييم",
       render: (row) => <span className="font-semibold">{row.score ?? "-"}</span>,
     },
-
     {
       key: "sector",
       label: "القطاع المستهدف",
     },
-
     {
       key: "name",
       label: "اسم المشروع",
@@ -172,46 +218,52 @@ const ResultsTable = () => {
 
   return (
     <div className="p-4" dir="rtl">
-
-      {/* مودال القبول */}
+      {/* مودال القبول - فقط تأكيد */}
       <Modal
         isOpen={isAcceptModalOpen}
         onClose={() => setIsAcceptModalOpen(false)}
-        title="تأكيد قبول التقييم"
+        title="تأكيد قبول المشروع"
         footer={
           <button
-            onClick={() => setIsAcceptModalOpen(false)}
-            className="bg-green-600 text-white px-6 py-2 rounded-lg font-bold"
+            onClick={handleAccept}
+            disabled={isSubmitting}
+            className="bg-green-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-green-700 disabled:opacity-50"
           >
-            تأكيد
+            {isSubmitting ? "جاري المعالجة..." : "تأكيد"}
           </button>
         }
       >
-        <p className="text-gray-700">هل تريد قبول نتيجة التقييم لهذا المشروع؟</p>
+        <p className="text-gray-700 text-center py-4">
+          هل أنت متأكد من قبول هذا المشروع؟
+          <br />
+          <span className="text-sm text-gray-500">سيتم إرسال إشعار للمستخدم</span>
+        </p>
       </Modal>
 
-      {/* مودال الرفض */}
+      {/* مودال الرفض - فقط تأكيد */}
       <Modal
         isOpen={isRejectModalOpen}
         onClose={() => setIsRejectModalOpen(false)}
-        title="سبب الرفض"
+        title="تأكيد رفض المشروع"
         footer={
           <button
-            onClick={() => setIsRejectModalOpen(false)}
-            className="bg-red-600 text-white px-6 py-2 rounded-lg font-bold"
+            onClick={handleReject}
+            disabled={isSubmitting}
+            className="bg-red-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-red-700 disabled:opacity-50"
           >
-            إرسال
+            {isSubmitting ? "جاري المعالجة..." : "تأكيد"}
           </button>
         }
       >
-        <Textarea
-          placeholder="اكتب سبب الرفض..."
-          className="w-full border border-gray-300 rounded-lg p-3 text-right"
-        />
+        <p className="text-gray-700 text-center py-4">
+          هل أنت متأكد من رفض هذا المشروع؟
+          <br />
+          <span className="text-sm text-gray-500">سيتم إرسال إشعار للمستخدم</span>
+        </p>
       </Modal>
 
       {/* الجدول */}
-      <div className="mt-4 ">
+      <div className="mt-4">
         <DataTable columns={columns} data={projects} />
       </div>
     </div>

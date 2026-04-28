@@ -1,14 +1,17 @@
+// src/components/Forms/StepAvailability.js
 import AvailabilityScheduler from "../AvailabilityScheduler"
 
-const StepAvailability = ({ form, errors, handleAvailabilityChange }) => {
+const StepAvailability = ({ availability, errors, onAvailabilityChange }) => {
+  console.log("StepAvailability props:", { availability, errors }); // للتأكد
+
   return (
     <div>
       <AvailabilityScheduler
-        value={form.availability}
-        onChange={handleAvailabilityChange}
+        value={availability}
+        onChange={onAvailabilityChange}
       />
 
-      {errors.availability && (
+      {errors?.availability && (
         <p className="text-red-500 text-sm mt-2">{errors.availability}</p>
       )}
     </div>

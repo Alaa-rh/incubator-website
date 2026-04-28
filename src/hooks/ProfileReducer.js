@@ -10,7 +10,6 @@ export const initialProfileState = {
   mainSkills: "",
   extraSkills: "",
   cv: null,
-  link: ""
 }
 
 export function profileReducer(state, action) {

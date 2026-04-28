@@ -126,7 +126,7 @@ const CampStage = ({ onComplete }) => {
       <AlertBox message="تأكد من حضور الجلسات بنسبة 75% وعدم تأخير تسليم المهام المطلوبة لتجنب التأثير على استمرارك في الحاضنة." />
 
       {/* نسبة الحضور */}
-      <div className="bg-blue-50 p-4 rounded-lg">
+      <div className="bg-white p-4 rounded-lg w-fit shadow-lg">
         <p className="font-bold">نسبة الحضور: {attendanceRate.toFixed(1)}%</p>
         <p>الجلسات الحاضرة: {attendedSessions} من {totalSessions}</p>
       </div>

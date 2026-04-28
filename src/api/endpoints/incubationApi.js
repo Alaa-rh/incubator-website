@@ -1,4 +1,4 @@
-// src/api/endpoints/incubationApi.js
+
 import { apiSlice } from "../apiSlice";
 
 export const incubationApi = apiSlice.injectEndpoints({
@@ -139,6 +139,25 @@ export const incubationApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['Incubation'],
     }),
+    // -----------------------------
+    // جلب معلومات الاحتضان (لصفحة عرض المعلومات فقط)
+    // -----------------------------
+    getIncubationInfo: builder.query({
+      query: (userId) => `/incubation/info/${userId}/`,
+      providesTags: ['Incubation'],
+    }),
+    // -----------------------------
+    // جلب قائمة المحتضنين (لصفحة الادارة)
+    getIncubated: builder.query({
+      query: () => '/admin/incubated/',
+      providesTags: ['Incubated'],
+}),
+// -----------------------------
+// جلب تفاصيل طلب احتضان محدد
+    getIncubationRequest: builder.query({
+      query: (id) => `/admin/incubation-requests/${id}/`,
+      providesTags: (result, error, id) => [{ type: 'IncubationRequests', id }],
+}),
 
   }),
 });
@@ -166,4 +185,12 @@ export const {
   // المرحلة 4: المعرض
   useGetExhibitionDataQuery,
   useSaveExhibitionDataMutation,
+
+  // جلب معلومات الاحتضان (لصفحة عرض المعلومات فقط)
+  useGetIncubationInfoQuery,
+
+  // جلب قائمة المحتضنين (لصفحة الادارة)
+  useGetIncubatedQuery,
+  // جلب تفاصيل طلب احتضان محدد
+  useGetIncubationRequestQuery,
 } = incubationApi;
