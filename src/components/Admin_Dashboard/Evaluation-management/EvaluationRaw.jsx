@@ -1,6 +1,6 @@
 import { BiTrash } from "react-icons/bi";
 
-const EvaluationRow = ({ id, name, value, onUpdate, onDelete }) => {
+const EvaluationRow = ({ id, title, max_score, onUpdate, onDelete }) => {
   return (
     <div 
       className="flex flex-col md:flex-row items-center gap-4 p-4 border border-gray-200 rounded-xl bg-white shadow-sm"
@@ -14,8 +14,8 @@ const EvaluationRow = ({ id, name, value, onUpdate, onDelete }) => {
           <label className="text-sm pb-2 font-medium">اسم المعيار</label>
           <input 
             type="text" 
-            value={name} 
-            onChange={(e) => onUpdate(id, 'name', e.target.value)}
+            value={title} 
+            onChange={(e) => onUpdate(id, 'title', e.target.value)}
             placeholder="أدخل المعيار..."
             className="w-full p-2 border border-second-color rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-teal-700 transition-colors"
           />
@@ -26,11 +26,11 @@ const EvaluationRow = ({ id, name, value, onUpdate, onDelete }) => {
           <label className="text-sm pb-2 font-medium">الدرجة</label>
           <input 
             type="number" 
-            value={value} 
+            value={max_score} 
             onChange={(e) =>
               onUpdate(
                 id,
-                'value',
+                'max_score',
                 Math.min(5, Math.max(0, parseInt(e.target.value) || 0))
               )
             }

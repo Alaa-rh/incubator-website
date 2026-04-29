@@ -21,10 +21,10 @@ const EvaluatorsModal = ({ isOpen, onClose, evaluators = [] }) => {
                 <div key={i} className="">
 
                   <div className="flex items-center gap-5">
-                    <img src={avatar} alt="" className="w-15 h-15 rounded-full object-cover" />
+                    <img src={ev.image || avatar} alt="" className="w-15 h-15 rounded-full object-cover" />
                     <div className="overflow-hidden">
                       <p className="font-bold text-sm truncate">{ev.name}</p>
-                      <p className="text-sm text-black truncate">{ev.spec}</p>
+                      <p className="text-sm text-black truncate">{ev.specialization}</p>
                     </div>
                   </div>
                 </div>

@@ -72,17 +72,17 @@ const EvaluationDetails = ({ evaluators = [], onBack }) => {
               <div className="flex items-start justify-between mb-4">
                 <div className="flex-1">
                   <h2 className="font-bold text-md text-second-color mb-1">
-                    {ev.name}
+                    {ev.evaluator_name}
                   </h2>
                   <p className="text-sm text-black">
                     <span className="font-bold">اختصاص:</span>{" "}
-                    {ev.spec || ev.specialty}
+                    {ev.specialization}
                   </p>
                 </div>
 
                 <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-gray-100 shadow-md">
                   <img
-                    src={avatar}
+                    src={ev.evaluator_image || avatar}
                     alt="avatar"
                     className="w-full h-full object-cover"
                   />
@@ -94,7 +94,7 @@ const EvaluationDetails = ({ evaluators = [], onBack }) => {
                 <p className="text-md font-bold text-black mb-1">الملاحظات:</p>
 
                 <div className="text-sm text-black leading-relaxed space-y-1">
-                  <p>تكتب هنا ملاحظات المقيم {ev.name.split(" ")[0]}</p>
+                  <p>تكتب هنا ملاحظات المقيم {ev.evaluator_name.split(" ")[0]}</p>
                   <p className="text-black">
                     "{ev.notes || "لا يوجد ملاحظات إضافية"}"
                   </p>

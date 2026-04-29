@@ -3,43 +3,37 @@ import { useNavigate } from "react-router-dom";
 import DataTable from "../DataTable";
 import Button from "../../Button";
 
-// import { useGetProjectsForEvaluationQuery } from "../../api/endpoints/admin/evaluationApi";
+// import { useGetProjectsForEvaluationQuery } from "../../api/endpoints/evaluationApi";
 
-const projectsData = [  
+const projectsData = [
   {
     id: 1,
-    name: "منصة الكترونية",
+    title: "منصة الكترونية",
     sector: "الالكترونيات",
-    targetGroup: "التجار",
-    email: "Ayahalaboud021@gmail.com",
+    target_audience: "التجار",
+    evaluators: [
+      { id: 1, name: "أحمد محمد" },
+      { id: 2, name: "سارة خالد" },
+      { id: 3, name: "حلا أحمد" }
+    ]
   },
   {
     id: 2,
-    name: "تطبيق موبايل",
+    title: "تطبيق موبايل",
     sector: "البرمجيات",
-    targetGroup: "الشباب",
-    email: "Ayahalaboud021@gmail.com",
+    target_audience: "الشباب",
+    evaluators: []
   },
 ];
-
-const assignedEvaluatorsData = {
-  1: [
-    { id: 1, name: "أحمد محمد" },
-    { id: 2, name: "سارة خالد" },
-    { id:3, name: "حلا أحمد"}
-  ],
-  2: [],
-};
 
 const DistributionTable = () => {
   const navigate = useNavigate();
 
+  // TODO: بعد الربط هذا السطر بدل البيانات الثابتة
   // const { data: projectsFromApi, isLoading, error, refetch } = useGetProjectsForEvaluationQuery();
-  // const assignedEvaluators = projectsFromApi?.assignedEvaluators || {};
 
   // حالياً: استخدام بيانات ثابتة
   const projects = projectsData;
-  const assignedEvaluators = assignedEvaluatorsData;
   // const isLoading = false;
   // const error = null;
 
@@ -74,17 +68,17 @@ const DistributionTable = () => {
       ),
     },
     {
-      key: "targetGroup",
+      key: "target_audience",
       label: "الفئة المستهدفة",
       render: (row) => (
-        <span className="text-center block">{row.targetGroup}</span>
+        <span className="text-center block">{row.target_audience}</span>
       ),
     },
     {
       key: "evaluators",
       label: "المقيمون الحاليون",
       render: (row) => {
-        const evaluators = assignedEvaluators[row.id] || assignedEvaluators[row.id] || [];
+        const evaluators = row.evaluators || [];
 
         if (evaluators.length === 0) {
           return (
@@ -99,7 +93,7 @@ const DistributionTable = () => {
             {evaluators.map((ev, idx) => (
               <span
                 key={ev.id || idx}
-                className="bg-blue-50 text-blue-800 p-1 rounded text-xl md:text-xs border border-blue-200 whitespace-nowrap"
+                className="bg-blue-50 text-blue-800 p-1 rounded text-xs md:text-xs border border-blue-200 whitespace-nowrap"
               >
                 {ev.name}
               </span>
@@ -108,9 +102,10 @@ const DistributionTable = () => {
         );
       },
     },
-    { key: "name", label: "اسم المشروع" },
+    { key: "title", label: "اسم المشروع" },
   ];
 
+  // TODO: بعد الربط شغلي حالة التحميل
   // if (isLoading) {
   //   return (
   //     <div className="p-4">

@@ -2,57 +2,66 @@ import React, { useState } from "react";
 import EvaluationDetails from "./EvaluationDetails";
 import Modal from "../../Modal";
 import DataTable from "../DataTable";
-
-// import { useGetProjectsResultsQuery, useApproveProjectMutation, useRejectProjectMutation } from "../../api/endpoints/evaluationApi";
+// import { useGetProjectsWithEvaluatorsQuery, useApproveProjectMutation, useRejectProjectMutation } from "../../api/endpoints/evaluationApi";
+// import { useGetAssignedEvaluatorsQuery } from "../../api/endpoints/evaluationApi";
 
 const ResultsTable = () => {
-  
+ 
   const projectsData = [
     {
-      id: 1,
-      name: "منصة إلكترونية",
-      email: "platform@app.com",
+      idea_id: 1,
+      project_name: "منصة إلكترونية",
+      owner_email: "platform@app.com",
       sector: "الكترونيات",
-      score: 88
+      target_audience: "التجار",
+      evaluation_status: "تم التقييم",
+      evaluation_result: 88
     },
     {
-      id: 2,
-      name: "تطبيق توصيل",
-      email: "delivery@app.com",
+      idea_id: 2,
+      project_name: "تطبيق توصيل",
+      owner_email: "delivery@app.com",
       sector: "خدمات",
-      score: 92
+      target_audience: "المستهلكين",
+      evaluation_status: "يتم التقييم",
+      evaluation_result: null
     }
   ];
 
-  const allAssignmentsData = {
-    1: [
-      {
-        name: "أحمد المحمد",
-        spec: "UI/UX",
-        notes: "التصميم ممتاز لكن يحتاج تحسين في تجربة المستخدم."
-      },
-      {
-        name: "رانيا الأحمد",
-        spec: "تسويق رقمي",
-        notes: "الفكرة قوية ولها فرصة سوقية جيدة."
-      }
-    ],
-    2: [
-      {
-        name: "خالد حسن",
-        spec: "Mobile Apps",
-        notes: "التطبيق سريع ويحتاج تحسين في الواجهة."
-      }
-    ]
+  const getAssignedEvaluators = (idea_id) => {
+    // هذه المحاكاة للبيانات الثابتة - تتحذف بعد الربط
+    const allAssignmentsData = {
+      1: [
+        {
+          evaluator_name: "أحمد المحمد",
+          specialization: "UI/UX",
+          evaluator_image: null,
+          notes: "التصميم ممتاز لكن يحتاج تحسين في تجربة المستخدم."
+        },
+        {
+          evaluator_name: "رانيا الأحمد",
+          specialization: "تسويق رقمي",
+          evaluator_image: null,
+          notes: "الفكرة قوية ولها فرصة سوقية جيدة."
+        }
+      ],
+      2: [
+        {
+          evaluator_name: "خالد حسن",
+          specialization: "Mobile Apps",
+          evaluator_image: null,
+          notes: "التطبيق سريع ويحتاج تحسين في الواجهة."
+        }
+      ]
+    };
+    
+    // const { data } = useGetAssignedEvaluatorsQuery(idea_id);
+    // return data || [];
+    
+    return allAssignmentsData[idea_id] || [];
   };
 
-  // TODO: بعد الربط  هذا السطر بدل البيانات الثابتة
-  // const { data: projectsFromApi, isLoading, error, refetch } = useGetProjectsResultsQuery();
-  // const [approveProject, { isLoading: isApproving }] = useApproveProjectMutation();
-  // const [rejectProject, { isLoading: isRejecting }] = useRejectProjectMutation();
-
   const projects = projectsData;
-  const allAssignments = allAssignmentsData;
 
   const [view, setView] = useState("table");
   const [selectedProject, setSelectedProject] = useState(null);
@@ -62,15 +71,16 @@ const ResultsTable = () => {
   const [isRejectModalOpen, setIsRejectModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const toggleDropdown = (id) => {
-    setActiveDropdown(activeDropdown === id ? null : id);
+  const toggleDropdown = (idea_id) => {
+    setActiveDropdown(activeDropdown === idea_id ? null : idea_id);
   };
 
   const handleAccept = async () => {
     setIsSubmitting(true);
 
+  
     // try {
-    //   await approveProject(selectedProject.id).unwrap();
+    //   await approveProject(selectedProject.idea_id).unwrap();
     //   alert("تم قبول المشروع بنجاح. سيتم إرسال إشعار للمستخدم.");
     //   setIsAcceptModalOpen(false);
     // } catch (error) {
@@ -80,7 +90,7 @@ const ResultsTable = () => {
     //   setIsSubmitting(false);
     // }
 
-    console.log("قبول المشروع:", selectedProject);
+    console.log(" قبول المشروع:", selectedProject);
     setTimeout(() => {
       alert("تم قبول المشروع بنجاح (محاكاة)");
       setIsAcceptModalOpen(false);
@@ -92,7 +102,7 @@ const ResultsTable = () => {
     setIsSubmitting(true);
 
     // try {
-    //   await rejectProject(selectedProject.id).unwrap();
+    //   await rejectProject(selectedProject.idea_id).unwrap();
     //   alert("تم رفض المشروع. سيتم إرسال إشعار للمستخدم.");
     //   setIsRejectModalOpen(false);
     // } catch (error) {
@@ -102,7 +112,7 @@ const ResultsTable = () => {
     //   setIsSubmitting(false);
     // }
 
-    console.log("رفض المشروع:", selectedProject);
+    console.log(" رفض المشروع:", selectedProject);
     setTimeout(() => {
       alert("تم رفض المشروع بنجاح (محاكاة)");
       setIsRejectModalOpen(false);
@@ -110,115 +120,144 @@ const ResultsTable = () => {
     }, 500);
   };
 
-  // فتح صفحة التفاصيل
+  //فتح صفحة التفاصيل استخدام دالة getAssignedEvaluators
   if (view === "details") {
+    const evaluators = getAssignedEvaluators(selectedProject?.idea_id);
     return (
       <EvaluationDetails
-        evaluators={allAssignments[selectedProject?.id] || []}
+        evaluators={evaluators}
         onBack={() => setView("table")}
       />
     );
   }
+
+  const isEvaluationCompleted = (row) => {
+    return row.evaluation_result !== null && row.evaluation_result !== undefined;
+  };
 
   // أعمدة DataTable
   const columns = [
     {
       key: "actions",
       label: "الإجراءات",
-      render: (row) => (
-        <div className="relative inline-block text-left">
-          <button
-            onClick={() => toggleDropdown(row.id)}
-            className="text-lg p-2 hover:text-blue-600"
-          >
-            ⋮
-          </button>
+      render: (row) => {
+        const completed = isEvaluationCompleted(row);
+        
+        return (
+          <div className="relative inline-block text-left">
+            <button
+              onClick={() => toggleDropdown(row.idea_id)}
+              className="text-lg p-2 hover:text-blue-600"
+            >
+              ⋮
+            </button>
 
-          {activeDropdown === row.id && (
-            <div className="absolute right-0 top-full mt-1 w-44 bg-white shadow-2xl rounded-lg p-2 flex flex-col gap-2 z-50">
-              {/* تفاصيل التقييم */}
-              <button
-                onClick={() => {
-                  setSelectedProject(row);
-                  setView("details");
-                  setActiveDropdown(null);
-                }}
-                className="bg-main-color text-white py-2 px-4 rounded-lg text-sm font-bold hover:bg-[#1e3356]"
-              >
-                تفاصيل التقييم
-              </button>
+            {activeDropdown === row.idea_id && (
+              <div className="absolute right-0 top-full mt-1 w-44 bg-white shadow-2xl rounded-lg p-2 flex flex-col gap-2 z-50">
+                {completed && (
+                  <button
+                    onClick={() => {
+                      setSelectedProject(row);
+                      setView("details");
+                      setActiveDropdown(null);
+                    }}
+                    className="bg-main-color text-white py-2 px-4 rounded-lg text-sm font-bold hover:bg-[#1e3356]"
+                  >
+                    تفاصيل التقييم
+                  </button>
+                )}
 
-              {/* قبول */}
-              <button
-                onClick={() => {
-                  setSelectedProject(row);
-                  setIsAcceptModalOpen(true);
-                  setActiveDropdown(null);
-                }}
-                className="bg-green-600 text-white py-2 px-4 rounded-lg text-sm hover:bg-green-700"
-              >
-                قبول
-              </button>
+                {completed && (
+                  <button
+                    onClick={() => {
+                      setSelectedProject(row);
+                      setIsAcceptModalOpen(true);
+                      setActiveDropdown(null);
+                    }}
+                    className="bg-green-600 text-white py-2 px-4 rounded-lg text-sm hover:bg-green-700"
+                  >
+                    قبول
+                  </button>
+                )}
 
-              {/* رفض */}
-              <button
-                onClick={() => {
-                  setSelectedProject(row);
-                  setIsRejectModalOpen(true);
-                  setActiveDropdown(null);
-                }}
-                className="bg-red-600 text-white py-2 px-4 rounded-lg text-sm hover:bg-red-700"
-              >
-                رفض
-              </button>
-            </div>
-          )}
-        </div>
-      ),
+                {completed && (
+                  <button
+                    onClick={() => {
+                      setSelectedProject(row);
+                      setIsRejectModalOpen(true);
+                      setActiveDropdown(null);
+                    }}
+                    className="bg-red-600 text-white py-2 px-4 rounded-lg text-sm hover:bg-red-700"
+                  >
+                    رفض
+                  </button>
+                )}
+
+                {!completed && (
+                  <div className="text-center text-gray-500 text-sm py-2 px-4">
+                    ينتظر اكتمال التقييم
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        );
+      },
     },
     {
-      key: "email",
+      key: "owner_email",
       label: "البريد الإلكتروني",
       render: (row) => (
-        <span className="underline text-blue-500">{row.email}</span>
+        <span className="underline text-blue-500">{row.owner_email}</span>
       ),
     },
     {
-      key: "status",
+      key: "evaluation_status",
       label: "حالة التقييم",
       render: (row) => {
-        const hasEvaluation = !!allAssignments[row.id];
+        const completed = isEvaluationCompleted(row);
         return (
           <span
             className={`px-2 py-1 rounded text-sm font-bold ${
-              hasEvaluation
+              completed
                 ? "bg-green-100 text-green-700"
-                : "bg-gray-100 text-gray-500"
+                : "bg-yellow-100 text-yellow-700"
             }`}
           >
-            {hasEvaluation ? "تم التقييم" : "يتم التقييم"}
+            {completed ? "تم التقييم" : "يتم التقييم"}
           </span>
         );
       },
     },
     {
-      key: "score",
+      key: "evaluation_result",
       label: "نتيجة التقييم",
-      render: (row) => <span className="font-semibold">{row.score ?? "-"}</span>,
+      render: (row) => (
+        <span className="font-semibold">
+          {row.evaluation_result !== null && row.evaluation_result !== undefined
+            ? row.evaluation_result
+            : "-"}
+        </span>
+      ),
+    },
+    { 
+      key: "target_audience",
+      label: "الجمهور المستهدف",
+      render: (row) => <span>{row.target_audience ?? "-"}</span>,
     },
     {
       key: "sector",
       label: "القطاع المستهدف",
     },
     {
-      key: "name",
+      key: "project_name",
       label: "اسم المشروع",
     },
   ];
 
   return (
     <div className="p-4" dir="rtl">
-      {/* مودال القبول - فقط تأكيد */}
+      {/* مودال القبول */}
       <Modal
         isOpen={isAcceptModalOpen}
         onClose={() => setIsAcceptModalOpen(false)}
@@ -240,7 +279,7 @@ const ResultsTable = () => {
         </p>
       </Modal>
 
-      {/* مودال الرفض - فقط تأكيد */}
+      {/* مودال الرفض */}
       <Modal
         isOpen={isRejectModalOpen}
         onClose={() => setIsRejectModalOpen(false)}

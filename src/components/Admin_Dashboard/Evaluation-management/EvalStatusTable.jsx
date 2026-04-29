@@ -6,50 +6,53 @@ import Modal from "../../Modal";
 import Input from "../../Input";
 import EvaluatorsModal from "./EvaluatorsModal";
 
-// import { useGetProjectsForEvaluationQuery, useGetAssignedEvaluatorsQuery } from "../../api/endpoints/evaluationApi";
+// TODO: بعد الربط استخدمي هذه الـ hooks
+// import { useGetProjectsWithMeetingsQuery, useGetEvaluatorsForMeetingQuery, useSetMeetingDateMutation } from "../../api/endpoints/evaluationApi";
 
 export default function EvalStatusTable() {
-
-
-  const projectsData = [
+  // ✅ إضافة meeting_date لكل مشروع
+  const [projectsData, setProjectsData] = useState([
     {
       id: 1,
-      name: "منصة إلكترونية",
+      title: "منصة إلكترونية",
       sector: "الكترونيات",
-      target: "التجار",
-      email: "project1@example.com",
-      score: 85
+      target_audience: "التجار",
+      has_evaluators: true,
+      meeting_date: "2025-05-20T14:00"
     },
     {
       id: 2,
-      name: "تطبيق توصيل",
+      title: "تطبيق توصيل",
       sector: "خدمات",
-      target: "الأفراد",
-      email: "delivery@app.com",
-      score: 92
+      target_audience: "الأفراد",
+      has_evaluators: true,
+      meeting_date: null
+    },
+    {
+      id: 3,
+      title: "منصة تعليمية",
+      sector: "تعليم",
+      target_audience: "الطلاب",
+      has_evaluators: false,
+      meeting_date: "2025-05-22T10:00"
     }
-  ];
+  ]);
 
   const assignedEvaluatorsData = {
     1: [
-      { name: "أحمد المحمد", spec: "UI/UX" },
-      { name: "رانيا الأحمد", spec: "تسويق رقمي" },
+      {id: 1, name: "أحمد المحمد", specialization: "UI/UX", image: null },
+      {id: 2, name: "رانيا الأحمد", specialization: "تسويق رقمي", image: null },
     ],
     2: [
-      { name: "خالد حسن", spec: "Mobile Apps" },
-    ]
+      {id: 3, name: "خالد حسن", specialization: "Mobile Apps", image: null },
+    ],
+    3: []
   };
 
- 
-  // const { data: projectsFromApi, isLoading, error, refetch } = useGetProjectsForEvaluationQuery();
-  // const { data: evaluatorsFromApi } = useGetAssignedEvaluatorsQuery();
+  // const { data: projectsFromApi, isLoading, error, refetch } = useGetProjectsWithMeetingsQuery();
+  // const [setMeetingDate, { isLoading: isSettingMeeting }] = useSetMeetingDateMutation();
 
-  // استخدام البيانات الثابتة حالياً
-  const projects = projectsData;
   const assignedEvaluators = assignedEvaluatorsData;
-  // const isLoading = false;
-  // const error = null;
-
   const [sel, setSel] = useState([]);
   const [action, setAction] = useState("");
   const [modals, setModals] = useState({
@@ -58,14 +61,15 @@ export default function EvalStatusTable() {
     data: []
   });
   const [schedule, setSchedule] = useState(null);
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // معالجة شكل البيانات إذا كانت من API
-  let projectsList = Array.isArray(projects) ? projects : [];
-  if (projects?.results && Array.isArray(projects.results)) {
-    projectsList = projects.results;
+  let projectsList = Array.isArray(projectsData) ? projectsData : [];
+  if (projectsData?.results && Array.isArray(projectsData.results)) {
+    projectsList = projectsData.results;
   }
-  if (projects?.data && Array.isArray(projects.data)) {
-    projectsList = projects.data;
+  if (projectsData?.data && Array.isArray(projectsData.data)) {
+    projectsList = projectsData.data;
   }
 
   const toggle = (id) => {
@@ -93,19 +97,70 @@ export default function EvalStatusTable() {
     if (actionValue === "none") {
       setSel([]);
     }
-
-    if (actionValue === "schedule") {
-      setModals({ ...modals, schedule: true });
-    }
   };
 
-  const handleScheduleConfirm = () => {
-    // TODO: بعد الربط إرسال الموعد للباك للمشاريع المحددة
-    console.log("تعيين موعد للمشاريع:", sel, schedule);
-    setSel([]);
-    setModals({ ...modals, schedule: false });
-    setSchedule(null);
-    alert("تم تعيين موعد اللجنة بنجاح (محاكاة)");
+  // ✅ دالة لفتح مودال تعيين موعد لمشروع واحد
+  const openScheduleModal = (project) => {
+    setSelectedProject(project);
+    setSchedule(project.meeting_date || "");
+    setModals({ ...modals, schedule: true });
+  };
+
+  // ✅ دالة تعيين موعد لمشروع واحد مع تحديث الجدول
+  const handleSetMeeting = async () => {
+    if (!schedule) {
+      alert("الرجاء تحديد تاريخ ووقت");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    // TODO: بعد الربط استخدمي هذا الكود
+    // try {
+    //   await setMeetingDate({
+    //     idea_id: selectedProject.id,
+    //     meetingDate: schedule
+    //   }).unwrap();
+    //   
+    //   // ✅ تحديث الموعد في الـ state بعد نجاح العملية
+    //   setProjectsData(prev =>
+    //     prev.map(p =>
+    //       p.id === selectedProject.id
+    //         ? { ...p, meeting_date: schedule }
+    //         : p
+    //     )
+    //   );
+    //   
+    //   alert("تم تعيين موعد التقييم بنجاح. سيتم إرسال إشعار للمستخدم.");
+    //   setModals({ ...modals, schedule: false });
+    //   setSelectedProject(null);
+    //   setSchedule(null);
+    // } catch (error) {
+    //   console.error("Error setting meeting date:", error);
+    //   alert(error?.data?.message || "حدث خطأ في تعيين الموعد");
+    // } finally {
+    //   setIsSubmitting(false);
+    // }
+
+    // ✅ حالياً: محاكاة مع تحديث الجدول
+    console.log("📅 تعيين موعد للمشروع:", { projectId: selectedProject?.id, meetingDate: schedule });
+    
+    // ✅ تحديث الموعد في الـ state
+    setProjectsData(prev =>
+      prev.map(p =>
+        p.id === selectedProject?.id
+          ? { ...p, meeting_date: schedule }
+          : p
+      )
+    );
+    
+    setTimeout(() => {
+      alert("تم تعيين موعد التقييم بنجاح (محاكاة)");
+      setModals({ ...modals, schedule: false });
+      setSelectedProject(null);
+      setSchedule(null);
+      setIsSubmitting(false);
+    }, 500);
   };
 
   const columns = [
@@ -119,11 +174,32 @@ export default function EvalStatusTable() {
         />
       ),
     },
+    {
+      key: "meeting_action",
+      label: "تعيين موعد",
+      render: (row) => (
+        <button
+          onClick={() => openScheduleModal(row)}
+          className="bg-main-color text-white px-3 py-1 rounded-md text-sm hover:bg-[#1e3356] transition"
+        >
+          {row.meeting_date ? "تعديل الموعد" : "تعيين موعد"}
+        </button>
+      ),
+    },
+    {
+      key: "meeting_date",
+      label: "موعد التقييم",
+      render: (row) => (
+        <span className="text-sm">
+          {row.meeting_date ? new Date(row.meeting_date).toLocaleString("ar-SA") : "—"}
+        </span>
+      ),
+    },
     { key: "sector", label: "القطاع" },
     {
-      key: "target",
+      key: "target_audience",
       label: "الفئة",
-      render: (row) => row.target,
+      render: (row) => row.target_audience,
     },
     {
       key: "evaluators",
@@ -138,39 +214,13 @@ export default function EvalStatusTable() {
       ),
     },
     {
-      key: "name",
+      key: "title",
       label: "اسم المشروع",
       render: (row) => (
-        <span className="font-bold text-right block">{row.name}</span>
+        <span className="font-bold text-right block">{row.title}</span>
       ),
     },
   ];
-
-  // if (isLoading) {
-  //   return (
-  //     <div className="p-4">
-  //       <div className="space-y-4">
-  //         {[1, 2].map((i) => (
-  //           <div key={i} className="h-16 bg-gray-100 rounded animate-pulse"></div>
-  //         ))}
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
-  // if (error) {
-  //   return (
-  //     <div className="p-4 text-center">
-  //       <p className="text-red-500 mb-3">حدث خطأ في تحميل البيانات</p>
-  //       <button
-  //         onClick={refetch}
-  //         className="bg-main-color text-white px-4 py-2 rounded"
-  //       >
-  //         إعادة المحاولة
-  //       </button>
-  //     </div>
-  //   );
-  // }
 
   return (
     <div className="p-4">
@@ -186,7 +236,6 @@ export default function EvalStatusTable() {
           options={[
             { value: "all", label: "تحديد الكل" },
             { value: "none", label: "إلغاء التحديد" },
-            { value: "schedule", label: "تعيين موعد التقييم" },
           ]}
         />
       </div>
@@ -209,17 +258,22 @@ export default function EvalStatusTable() {
         evaluators={modals.data}
       />
 
-      {/* مودال تحديد الموعد */}
+      {/* ✅ مودال تعيين موعد لمشروع واحد */}
       <Modal
         isOpen={modals.schedule}
-        onClose={() => setModals({ ...modals, schedule: false })}
-        title="تعيين موعد اللجنة"
+        onClose={() => {
+          setModals({ ...modals, schedule: false });
+          setSelectedProject(null);
+          setSchedule(null);
+        }}
+        title={`تعيين موعد التقييم - ${selectedProject?.title || ""}`}
         footer={
           <button
-            onClick={handleScheduleConfirm}
-            className="bg-main-color text-white px-6 py-2 rounded-md"
+            onClick={handleSetMeeting}
+            disabled={isSubmitting}
+            className="bg-main-color text-white px-6 py-2 rounded-md hover:bg-[#1e3356] disabled:opacity-50"
           >
-            تأكيد
+            {isSubmitting ? "جاري التعيين..." : "تأكيد"}
           </button>
         }
       >
@@ -229,6 +283,9 @@ export default function EvalStatusTable() {
           onChange={(e) => setSchedule(e.target.value)}
           value={schedule || ""}
         />
+        <p className="text-sm text-gray-500 text-right mt-2">
+          سيتم إرسال إشعار للمستخدم بتعيين الموعد
+        </p>
       </Modal>
     </div>
   );

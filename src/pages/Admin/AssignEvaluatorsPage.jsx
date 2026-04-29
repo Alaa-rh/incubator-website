@@ -1,14 +1,16 @@
-import React, { useState, /*useEffect*/ } from "react";
+import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import DataTable from "../../components/Admin_Dashboard/DataTable";
 import Checkbox from "../../components/CheckBox";
 
+// TODO: بعد الربط استخدمي هذه الـ hooks
 // import { useGetAvailableEvaluatorsQuery, useAssignEvaluatorsMutation } from "../../api/endpoints/evaluationApi";
 
 const AssignEvaluatorsPage = () => {
   const { projectId } = useParams();
   const navigate = useNavigate();
 
+  // TODO: بعد الربط استخدمي هذه الـ hooks
   // const { data: evaluatorsFromApi, isLoading, error, refetch } = useGetAvailableEvaluatorsQuery();
   // const [assignEvaluators, { isLoading: isAssigning }] = useAssignEvaluatorsMutation();
 
@@ -19,16 +21,38 @@ const AssignEvaluatorsPage = () => {
 
  
   const evaluatorsData = [
-    { id: 1, name: "أحمد المحمد", spec: "UI UX", exp: ["تسويق رقمي", "تجارة إلكترونية"] },
-    { id: 2, name: "أحمد العلي", spec: "Web Design", exp: ["تطوير مواقع", "تصميم"] },
-    { id: 3, name: "خالد حسن", spec: "Mobile Apps", exp: ["Flutter", "React Native"] },
-    { id: 4, name: "ياسين الكردي", spec: "SEO", exp: ["أرشفة", "تحليل بيانات"] },
+    { 
+      id: 1, 
+      full_name: "أحمد المحمد", 
+      specialization: "UI UX", 
+      primary_skills: "UI/UX",
+      additional_skills: ["تسويق رقمي", "تجارة إلكترونية"]
+    },
+    { 
+      id: 2, 
+      full_name: "أحمد العلي", 
+      specialization: "Web Design", 
+      primary_skills: "Web Design",
+      additional_skills: ["تطوير مواقع", "تصميم"]
+    },
+    { 
+      id: 3, 
+      full_name: "خالد حسن", 
+      specialization: "Mobile Apps", 
+      primary_skills: "Mobile Development",
+      additional_skills: ["Flutter", "React Native"]
+    },
+    { 
+      id: 4, 
+      full_name: "ياسين الكردي", 
+      specialization: "SEO", 
+      primary_skills: "SEO",
+      additional_skills: ["أرشفة", "تحليل بيانات"]
+    },
   ];
 
   // استخدام البيانات الثابتة حالياً
   const evaluators = evaluatorsData;
-  // const isLoading = false;
-  // const error = null;
 
   // إضافة/إزالة مقيم
   const toggle = (id) => {
@@ -77,6 +101,7 @@ const AssignEvaluatorsPage = () => {
     }, 500);
   };
 
+  // TODO: بعد الربط شغلي حالة التحميل
   // if (isLoading) {
   //   return (
   //     <div className="container relative w-full p-6 text-center">
@@ -111,13 +136,26 @@ const AssignEvaluatorsPage = () => {
         />
       ),
     },
-    { key: "spec", label: "التخصص" },
     {
-      key: "exp",
-      label: "مجالات الخبرة",
-      render: (row) => row.exp.join(" - "),
+      key: "additional_skills",
+      label: "المهارات الإضافية",
+      render: (row) => row.additional_skills?.join(" - ") || "—",
     },
-    { key: "name", label: "الاسم" },
+    { 
+      key: "primary_skills", 
+      label: "المهارات الأساسية",
+      render: (row) => row.primary_skills || "—"
+    },
+    { 
+      key: "specialization", 
+      label: "التخصص",
+      render: (row) => row.specialization || "—"
+    },
+     { 
+      key: "full_name", 
+      label: "الاسم",
+      render: (row) => row.full_name 
+    },
   ];
 
   return (
@@ -137,7 +175,7 @@ const AssignEvaluatorsPage = () => {
       {/* العنوان */}
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-xl font-bold">
-          تعيين المقيمين للمشروع {projectId}
+          تعيين المقيمين للمشروع #{projectId}
         </h2>
 
         {/* زر التعيين */}

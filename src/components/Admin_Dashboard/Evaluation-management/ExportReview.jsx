@@ -8,8 +8,8 @@ const ExpertReview = ({ criteria, onBack }) => {
     if (criteria && criteria.length > 0) {
       const initialScores = criteria.map(item => ({
         id: item.id,
-        name: item.name,
-        value: item.value || 0
+        title: item.title,
+        max_score: item.max_score || 0
       }));
       //eslint-disable-next-line
       setScores(initialScores);
@@ -20,18 +20,12 @@ const ExpertReview = ({ criteria, onBack }) => {
     const val = parseInt(newVal) || 0;
     if (val <= 5) {
       setScores(scores.map(item => 
-        item.id === id ? { ...item, value: val } : item
+        item.id === id ? { ...item, max_score: val } : item
       ));
     }
   };
 
-  const total = scores.reduce((sum, item) => sum + (Number(item.value) || 0), 0);
-
-  const handlePublish = () => {
-    console.log("نشر المعايير:", scores);
-    // TODO: بعد الربط، إرسال البيانات للباك
-    alert("تم نشر المعايير بنجاح (محاكاة)");
-  };
+  const total = scores.reduce((sum, item) => sum + (Number(item.max_score) || 0), 0);
 
   return (
     <div className="p-8 max-w-4xl mx-auto font-sans" dir="ltr">
@@ -54,11 +48,13 @@ const ExpertReview = ({ criteria, onBack }) => {
               <div key={item.id} className="flex justify-between items-center">
                 <input
                   type="number"
-                  value={item.value}
-                  onChange={(e) => handleScoreChange(item.id, e.target.value)}
+                  value={item.max_score}
+                  min="0"
+                  max="5"
+                  onChange={(e) => handleScoreChange(item.id, e.target.max_score)}
                   className="w-24 border-2 border-second-color rounded-md p-2 text-center font-bold focus:outline-none focus:border-cyan-400"
                 />
-                <span className="text-black font-medium">{item.name}</span>
+                <span className="text-black font-medium">{item.title}</span>
               </div>
             ))
           )}
@@ -75,13 +71,6 @@ const ExpertReview = ({ criteria, onBack }) => {
 
       {/* Submit */}
       <div className="mt-10 flex justify-center items-center gap-4">
-        <button
-          onClick={handlePublish}
-          className="bg-main-color text-white px-12 py-2 rounded-md font-bold text-lg hover:bg-[#2e4361] transition shadow-lg"
-        >
-          نشر وإرسال للجنة
-        </button> 
-
         {/* زر رجوع */}
         <button
           onClick={onBack}

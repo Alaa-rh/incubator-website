@@ -8,10 +8,10 @@ import NavLinkUniversal from '../../components/NavLinkUniversal';
 // import { useSubmitEvaluationMutation } from '../../api/endpoints/evaluationApi';
 
 const EvaluationFormPage = () => {
-  // جلب projectId و seasonId من الرابط
-  const { projectId, seasonId } = useParams();
+  // جلب projectId من الرابط
+  const  projectId = useParams();
 
-  // const { data: criteriaFromApi, isLoading, error } = useGetCriteriaQuery(seasonId);
+  // const { data: criteriaFromApi, isLoading, error } = useGetCriteriaQuery();
   // const [submitEvaluation, { isLoading: isSubmitting }] = useSubmitEvaluationMutation();
 
   const fallbackCriteria = [
@@ -85,7 +85,7 @@ const EvaluationFormPage = () => {
     //   setSubmitError(error?.data?.message || 'حدث خطأ في إرسال التقييم');
     // }
 
-    console.log('Evaluation submitted:', { projectId, seasonId, scores, totalScore });
+    console.log('Evaluation submitted:', { projectId, scores, totalScore });
     setSubmitSuccess('تم إرسال التقييم بنجاح (محاكاة)');
     setTimeout(() => setSubmitSuccess(''), 3000);
   };

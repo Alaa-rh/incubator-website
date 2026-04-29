@@ -10,13 +10,23 @@ export const evaluationApi = apiSlice.injectEndpoints({
 
     // جلب المشاريع للتقييم (لصفحة التوزيع)
     getProjectsForEvaluation: builder.query({
-      query: () => '/evaluation/projects/',
+      query: () => '/admin/evaluations/assignment-dashboard/',
+      providesTags: ['Evaluation'],
+    }),
+    // جلب المشاريع للتقييم (لصفحة عرض نتائج التقييم)
+    getProjectsWithEvaluators: builder.query({
+      query: () => '/admin/evaluations/evaluation-results/',
+      providesTags: ['Evaluation'],
+    }),
+    // جلب المشاريع للتقييم (لصفحة تحديد موعد اللجنة)
+    getProjectsWithMeetings: builder.query({
+      query: () => '/admin/evaluations/meeting-dashboard/',
       providesTags: ['Evaluation'],
     }),
 
     // جلب تفاصيل مشروع معين للتقييم
     getProjectEvaluationDetails: builder.query({
-      query: (projectId) => `/evaluation/projects/${projectId}/`,
+      query: (projectId) => `/evaluations/projects/${projectId}/`,
       providesTags: (result, error, projectId) => [{ type: 'Evaluation', id: projectId }],
     }),
 
@@ -45,27 +55,35 @@ export const evaluationApi = apiSlice.injectEndpoints({
       query: (projectId) => `/evaluation/results/${projectId}/`,
       providesTags: (result, error, projectId) => [{ type: 'Evaluation', id: projectId }],
     }),
-
-    // -----------------------------
-    // 3) معايير التقييم (حسب الموسم)
-    // -----------------------------
-
-    // جلب معايير التقييم لموسم معين
-    getCriteria: builder.query({
-      query: (seasonId) => `/evaluation/criteria/${seasonId}/`,
-      providesTags: (result, error, seasonId) => [{ type: 'Criteria', id: seasonId }],
+    //تحديد موعد اللجنة للتقييم
+    setMeetingDate: builder.mutation({
+      query: ({ idea_id, meetingDate }) => ({
+        url: `/admin/evaluations/ideas/${idea_id}/set-meeting/`,
+        method: 'POST',
+        body: { meetingDate },
+      }),
+      invalidatesTags: ['Evaluation'],
     }),
 
-    // حفظ معايير التقييم لموسم معين (نشر)
+    // -----------------------------
+    // 3) معايير التقييم (ثابتة لكل المواسم)
+    // -----------------------------
+
+    // جلب معايير التقييم (ثابتة)
+    getCriteria: builder.query({
+      query: () => `/evaluation/criteria/`,
+      providesTags: ['Criteria'],
+    }),
+
+    // حفظ معايير التقييم (نشر)
     saveCriteria: builder.mutation({
-      query: ({ seasonId, criteria }) => ({
-        url: `/evaluation/criteria/${seasonId}/`,
+      query: (criteria) => ({
+        url: `/evaluation/criteria/`,
         method: 'PUT',
         body: { criteria },
       }),
-      invalidatesTags: (result, error, { seasonId }) => [{ type: 'Criteria', id: seasonId }],
+      invalidatesTags: ['Criteria'],
     }),
-
     // -----------------------------
     // 4) الملاحظات
     // -----------------------------
@@ -92,30 +110,35 @@ export const evaluationApi = apiSlice.injectEndpoints({
 
     // جلب المقيمين المتاحين للتعيين
     getAvailableEvaluators: builder.query({
-      query: () => '/evaluation/evaluators/available/',
+      query: () => '/admin/evaluations/available-evaluators/',
       providesTags: ['Evaluators'],
     }),
 
     // تعيين مقيمين لمشروع معين
     assignEvaluators: builder.mutation({
-      query: ({ projectId, evaluatorIds }) => ({
-        url: `/evaluation/projects/${projectId}/assign/`,
+      query: ({ idea_id, evaluators_ids }) => ({
+        url: `/admin/evaluations/assign-evaluators/${idea_id}/`,
         method: 'POST',
-        body: { evaluatorIds },
+        body: { evaluators_ids },
       }),
       invalidatesTags: ['Evaluation', 'Evaluators'],
     }),
 
-    // جلب المقيمين المعينين لمشروع معين
+    // جلب المقيمين المعينين لمشروع معين مع ملاحظاتن
     getAssignedEvaluators: builder.query({
-      query: (projectId) => `/evaluation/projects/${projectId}/evaluators/`,
-      providesTags: (result, error, projectId) => [{ type: 'Evaluators', id: projectId }],
+      query: (idea_id) => `admin/evaluations/evaluation-details/${idea_id}/`,
+      providesTags: (result, error, idea_id) => [{ type: 'Evaluators', id: idea_id }],
+    }),
+    //جلب المقيمين المعينين لمشروع في صفحة تحديد موعد اللجنة
+    getEvaluatorsForMeeting: builder.query({
+      query: (idea_id) => `admin/evaluations/idea-evaluators/${idea_id}/`,
+      providesTags: (result, error, idea_id) => [{ type: 'Evaluators', id: idea_id }],
     }),
 
     // قبول مشروع (بعد التقييم)
     approveProject: builder.mutation({
-      query: (projectId) => ({
-        url: `/evaluation/projects/${projectId}/approve/`,
+      query: (idea_id) => ({
+        url: `admin/evaluations/accept-idea/${idea_id}/`,
         method: 'POST',
       }),
       invalidatesTags: ['Evaluation'],
@@ -123,8 +146,8 @@ export const evaluationApi = apiSlice.injectEndpoints({
 
     // رفض مشروع (بعد التقييم)
     rejectProject: builder.mutation({
-      query: (projectId) => ({
-        url: `/evaluation/projects/${projectId}/reject/`,
+      query: (idea_id) => ({
+        url: `admin/evaluations/reject-idea/${idea_id}/`,
         method: 'POST',
       }),
       invalidatesTags: ['Evaluation'],
@@ -137,11 +160,14 @@ export const {
   // المشاريع للتقييم
   useGetProjectsForEvaluationQuery,
   useGetProjectEvaluationDetailsQuery,
+  useGetProjectsWithEvaluatorsQuery,  
+  useGetProjectsWithMeetingsQuery,
 
   // إرسال التقييم
   useSubmitEvaluationMutation,
   useGetEvaluationByProjectQuery,
   useGetEvaluationResultsQuery,
+  useSetMeetingDateMutation,
 
   // معايير التقييم
   useGetCriteriaQuery,
@@ -155,6 +181,7 @@ export const {
   useGetAvailableEvaluatorsQuery,
   useAssignEvaluatorsMutation,
   useGetAssignedEvaluatorsQuery,
+  useGetEvaluatorsForMeetingQuery,
 
   //قبول ورفض المشروع بعد التقييم
    useApproveProjectMutation,
