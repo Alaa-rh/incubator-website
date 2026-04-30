@@ -11,13 +11,11 @@ const WorkshopCard = ({ workshop, status }) => {
 
     <div className="flex items-center gap-40 p-10">
      <div className="space-y-10">
-      <p><span className="font-bold px-2">اسم الورشة:</span> {workshop.name}</p>
-      <p><span className="font-bold px-2">المدرب:</span> {workshop.trainer}</p>
-      <p><span className="font-bold px-2">تاريخ الانعقاد:</span> {workshop.date}</p>
+      <p><span className="font-bold px-2">اسم الورشة:</span> {workshop.title}</p>
+      <p><span className="font-bold px-2">تاريخ الانعقاد:</span> {workshop.start_date}</p>
       </div>
       <div className="space-y-10">
-      <p><span className="font-bold px-2">تاريخ الانتهاء:</span> {workshop.endDate}</p>
-      <p><span className="font-bold px-2"> المدة:</span> {workshop.period}</p>
+      <p><span className="font-bold px-2">تاريخ الانتهاء:</span> {workshop.end_date}</p>
       {/* الحالة */} 
      
       <p className={`font-bold px-2 ${statusStyles[status]}`}> 
@@ -26,14 +24,19 @@ const WorkshopCard = ({ workshop, status }) => {
         {status === "rejected" && "مرفوضة"}
         {status === "accepted" && "مقبولة"}
       </p>
+
       </div>
       <div className="space-y-10">
       <p><span className="font-bold">أيام الانعقاد:</span> {workshop.days}</p>
-      <p><span className="font-bold">الوقت:</span> {workshop.time}</p>
-      <p><span className="font-bold">عددالجلسات</span> {workshop.sessions}</p>
-     
+      <p><span className="font-bold">وقت الانعقاد:</span> {workshop.time_from}</p>
       </div>
-    </div>
+
+      <div className="space-y-10">
+      <p><span className="font-bold">وقت الانتهاء:</span> {workshop.time_to}</p>
+      <p><span className="font-bold">عددالجلسات:</span> {workshop.sessions}</p>
+      </div>
+    
+     </div>
       
       {/* الوصف */}
       <div className="mt-10">
@@ -42,20 +45,20 @@ const WorkshopCard = ({ workshop, status }) => {
       </div>
       <div className="mt-10">
         <h3 className="font-bold mb-2">هدف الورشة:</h3>
-        <p className="text-gray-700 leading-relaxed">{workshop.aim}</p>
+        <p className="text-gray-700 leading-relaxed">{workshop.objectives}</p>
       </div>
 
       {status === "rejected" && (
         <div className="bg-main-color text-white p-4 mt-4 rounded-md">
           <h3 className="font-bold mb-2">سبب الرفض:</h3>
-          {workshop.rejectionReason}
+          {workshop.rejection_reason}
         </div>
       )}
 
-      {(status === "pending" || status === "accepted") && (
+      {(status === "accepted") && (
         <div className="bg-main-color text-white p-4 mt-6 rounded-md">
-          <h3 className="font-bold mb-2">المسؤولين عن الورشة:</h3>
-          {workshop.managers.map((m, i) => (
+          <h3 className="font-bold mb-2">المسجلين في الورشة:</h3>
+          {workshop.registrations.map((m, i) => (
             <p key={i}>{m.name}: {m.email}</p>
           ))}
         </div>

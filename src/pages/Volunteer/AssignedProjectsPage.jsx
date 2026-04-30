@@ -19,21 +19,21 @@ const AssignedProjectsPage = () => {
 
   const consultationRequests = [
     {
-      id: 1,
-      name: "مايا المحمد",
-      email: "maya123@gmail.com",
-      consultationType: "UI UX",
-      projectTitle: "باسم المشروع",
-      helpType: "استشارة لمرة واحدة",
+      idea_id: 1,
+      requester_name: "مايا المحمد",
+      requester_email: "maya123@gmail.com",
+      required_skill: "UI UX",
+      idea_title: "باسم المشروع",
+      help_type: "استشارة لمرة واحدة",
       description: "شرح بسيط من صاحب الطلب عن ماذا يريد",
     },
     {
-      id: 2,
-      name: "مايا المحمد",
-      email: "maya123@gmail.com",
-      consultationType: "UI UX",
-      projectTitle: "باسم المشروع",
-      helpType: "متابعة دورية",
+      idea_id: 2,
+      requester_name: "مايا المحمد",
+      requester_email: "maya123@gmail.com",
+      required_skill: "UI UX",
+      idea_title: "باسم المشروع",
+      help_type: "متابعة دورية",
       description: "شرح بسيط من صاحب الطلب عن ماذا يريد",
     },
   ]
@@ -61,7 +61,7 @@ const AssignedProjectsPage = () => {
       <div className="mt-10 flex justify-between items-center">
         {selected === "tracking" && (
           consultationRequests
-            .filter(req => req.helpType !== "استشارة لمرة واحدة")
+            .filter(req => req.help_type !== "استشارة لمرة واحدة")
             .map(req => (
               <ConsultationRequestCard 
                 key={req.id}
@@ -73,7 +73,7 @@ const AssignedProjectsPage = () => {
 
         {selected === "consultations" && (
           consultationRequests
-            .filter(req => req.helpType === "استشارة لمرة واحدة")
+            .filter(req => req.help_type === "استشارة لمرة واحدة")
             .map(req => (
               <ConsultationRequestCard 
                 key={req.id}

@@ -3,36 +3,53 @@ import { useNavigate } from "react-router-dom";
 import DataTable from "./DataTable";
 import EvaluatorsModal from "./Evaluation-management/EvaluatorsModal";
 
-export default function ProjectsTable() {
-
+// import { useGetIncubatedProjectsQuery } from "../../api/endpoints/publicProjectsApi";
+//import {useGetEvaluatorsForMeetingQuery} from "../../api/endpoints/evaluationApi";
+export default function ProjectsTable({ onOpenScheduleModal }) {
   const navigate = useNavigate();
 
-  // بيانات تجريبية للمشاريع المسندة
-  const projects = [
+  // const { data: projectsFromApi, isLoading, error, refetch } = useGetIncubatedProjectsQuery();
+//  const { data: evaluatorsFromApi } = useGetEvaluatorsForMeetingQuery(projectId, { skip: !projectId });
+  
+  const projectsData = [
     {
-      id: 1,
-      name: "منصة إلكترونية",
-      nextEvalDate: "12/4/2026",
-      status: "جيد جداً",
+      idea_id: 1,
+      title: "منصة إلكترونية",
+      next_meeting: "12/4/2026",
+      progress_status: "جيد جداً",
     },
     {
-      id: 2,
-      name: "تطبيق توصيل",
-      nextEvalDate: "15/4/2026",
-      status: "ممتاز",
+      idea_id: 2,
+      title: "تطبيق توصيل",
+      next_meeting: "15/4/2026",
+      progress_status: "ممتاز",
     }
   ];
 
-  // بيانات المقيمين
-  const assignedEvaluators = {
+  const assignedEvaluatorsData = {
     1: [
-      { name: "أحمد المحمد", spec: "UI/UX" },
-      { name: "رانيا الأحمد", spec: "تسويق رقمي" },
+      { id: 1, name: "أحمد المحمد", specialization: "UI/UX", image: null },
+      { id: 2, name: "رانيا الأحمد", specialization: "تسويق رقمي", image: null },
     ],
     2: [
-      { name: "خالد حسن", spec: "Mobile Apps" },
-    ]
+      { id: 3, name: "خالد حسن", specialization: "Mobile Apps", image: null },
+    ],
   };
+
+  // استخدام البيانات الثابتة حالياً
+  const projects = projectsData;
+  const assignedEvaluators = assignedEvaluatorsData;
+  // const isLoading = false;
+  // const error = null;
+
+  // معالجة شكل البيانات إذا كانت من API
+  let projectsList = Array.isArray(projects) ? projects : [];
+  if (projects?.results && Array.isArray(projects.results)) {
+    projectsList = projects.results;
+  }
+  if (projects?.data && Array.isArray(projects.data)) {
+    projectsList = projects.data;
+  }
 
   const [modals, setModals] = useState({
     evals: false,
@@ -40,9 +57,10 @@ export default function ProjectsTable() {
   });
 
   const openEvaluators = (projectId) => {
+    const evaluators = assignedEvaluators[projectId] || [];
     setModals({
       evals: true,
-      data: assignedEvaluators[projectId] || []
+      data: evaluators
     });
   };
 
@@ -50,26 +68,56 @@ export default function ProjectsTable() {
     navigate(`/projectinfo/${projectId}`);
   };
 
-  // أعمدة الجدول
-  const columns = [
+  // حالة التحميل
+  // if (isLoading) {
+  //   return (
+  //     <div className="p-4 text-center">
+  //       <p className="text-gray-500">جاري تحميل المشاريع...</p>
+  //     </div>
+  //   );
+  // }
 
+  // حالة الخطأ
+  // if (error) {
+  //   return (
+  //     <div className="p-4 text-center">
+  //       <p className="text-red-500 mb-3">حدث خطأ في تحميل المشاريع</p>
+  //       <button
+  //         onClick={refetch}
+  //         className="bg-main-color text-white px-4 py-2 rounded"
+  //       >
+  //         إعادة المحاولة
+  //       </button>
+  //     </div>
+  //   );
+  // }
+
+  const columns = [
     {
       key: "actions",
       label: "الإجراءات",
       render: (row) => (
+        <div className="flex flex-col gap-2">
         <button
-          onClick={() => openProjectDetails(row.id)}
+          onClick={() => openProjectDetails(row.idea_id)}
           className="bg-main-color text-white px-4 py-2 rounded-lg text-sm hover:bg-[#1e3356]"
         >
           عرض التفاصيل
         </button>
+          <button
+            onClick={() => onOpenScheduleModal?.(row.idea_id)}
+            className="bg-main-color text-white px-4 py-2 rounded-lg text-sm hover:bg-[#1e3356]"
+          >
+            جدولة جلسة متابعة
+          </button>
+          </div>
       ),
     }, 
     {
-      key: "status",
+      key: "progress_status",
       label: "الوضع الحالي للمشروع",
       render: (row) => (
-        <span className="font-bold text-green-700">{row.status}</span>
+        <span className="font-bold text-green-700">{row.progress_status}</span>
       ),
     },
     {
@@ -77,31 +125,34 @@ export default function ProjectsTable() {
       label: "المقيمون الحاليون",
       render: (row) => (
         <span
-          className="text-blue-600 underline cursor-pointer"
-          onClick={() => openEvaluators(row.id)}
+          className="text-blue-600 underline cursor-pointer hover:text-blue-800"
+          onClick={() => openEvaluators(row.idea_id)}
         >
-          عرض ({assignedEvaluators[row.id]?.length || 0})
+          عرض ({assignedEvaluators[row.idea_id]?.length || 0})
         </span>
       ),
     },
     {
-      key: "nextEvalDate",
+      key: "next_meeting",
       label: "تاريخ التقييم القادم",
     },
-   
-    
     {
-      key: "name",
+      key: "title",
       label: "اسم المشروع",
     },
   ];
 
   return (
     <div className="p-4" dir="rtl">
-
-      <div className="">
-        <DataTable columns={columns} data={projects} />
-      </div>
+      {projectsList.length === 0 ? (
+        <div className="text-center py-10 text-gray-500">
+          لا توجد مشاريع محتضنة حالياً
+        </div>
+      ) : (
+        <div className="">
+          <DataTable columns={columns} data={projectsList} />
+        </div>
+      )}
 
       {/* مودال المقيمين */}
       <EvaluatorsModal

@@ -11,7 +11,7 @@ const ProfilePage = ({ userName, email }) => {
 
   // fallback data
   const fallbackUser = {
-    name: userName,
+    full_name: userName,
     email: email,
     avatar: girl
   };
@@ -20,7 +20,7 @@ const ProfilePage = ({ userName, email }) => {
   const currentUser = fallbackUser;
 
   const [form, setForm] = useState({
-    name: currentUser.name,
+    full_name: currentUser.full_name,
     email: currentUser.email
   });
 
@@ -45,7 +45,7 @@ const ProfilePage = ({ userName, email }) => {
         <div className="bg-white w-1/2 flex items-center gap-4 mb-8 p-4 rounded">
           <img src={currentUser.avatar} alt="avatar" className="w-16 h-16 rounded-full mb-2" />
           <div>
-            <p className="font-semibold">{currentUser.name}</p>
+            <p className="font-semibold">{currentUser.full_name}</p>
             <p>{currentUser.email}</p>
           </div>
         </div>
@@ -56,7 +56,7 @@ const ProfilePage = ({ userName, email }) => {
               label="الاسم الكامل"
               type="text"
               name="name"
-              value={form.name}
+              value={form.full_name}
               onChange={handleChange}
             />
 

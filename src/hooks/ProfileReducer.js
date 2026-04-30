@@ -1,15 +1,15 @@
 export const initialProfileState = {
-  name: "",
+  full_name: "",
   email: "",
   phone: "",
-  city: "",
-  projectsCount: "",
-  experience: "",
-  volunteerType: "",
-  collaborationType: "",
-  mainSkills: "",
-  extraSkills: "",
-  cv: null,
+  residence: "",
+  projects_count: "",
+  years_of_experience: "",
+  volunteer_type: "",
+  availability_type: "",
+  primary_Skills: "",
+  additional_Skills: "",
+  bio: "",
 }
 
 export function profileReducer(state, action) {

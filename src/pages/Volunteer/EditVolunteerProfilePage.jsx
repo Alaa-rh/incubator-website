@@ -23,17 +23,17 @@ const EditVolunteerProfilePage = () => {
 
     // بيانات ثابتة حالياً
     const mock = {
-      name: "مايا المحمد",
+      full_name: "مايا المحمد",
       email: "maya123@gmail.com",
       phone: "09...",
-      city: "حمص",
-      projectsCount: "5",
-      experience: "5",
-      volunteerType: "استشارة",
-      collaborationType: "تعاون طويل",
-      mainSkills: "UI UX",
-      extraSkills: "UI UX",
-      cv: null,
+      residence: "حمص",
+      projects_count: "5",
+      years_of_experience: "5",
+      volunteer_type: "استشارة",
+      availability_type: "تعاون طويل",
+      primary_Skills: "UI UX",
+      additional_Skills: "UI UX",
+      bio: "bla bla bla",
     }
 
     dispatch({ type: "SET_ALL", payload: mock })
@@ -58,9 +58,7 @@ const EditVolunteerProfilePage = () => {
     //       formData.append(key, state[key])
     //     }
     //   })
-    //   if (state.cv) {
-    //     formData.append('cv', state.cv)
-    //   }
+    
     //   await updateProfile(formData).unwrap()
     //   alert("تم حفظ التعديلات بنجاح")
     // } catch (error) {
@@ -79,7 +77,7 @@ const EditVolunteerProfilePage = () => {
       <div className="bg-white w-1/2 flex items-center gap-4 mt-4 mb-2 p-4 rounded-lg">
         <img src={girl} alt="avatar" className="w-16 h-16 rounded-full" />
         <div>
-          <p className="font-semibold">{state.name}</p>
+          <p className="font-semibold">{state.full_name}</p>
           <p>{state.email}</p>
         </div>
       </div>  
@@ -87,24 +85,24 @@ const EditVolunteerProfilePage = () => {
       <div className="bg-white-900 h-full border border-second-color rounded-xl px-8 py-2 shadow-lg">
         <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-5">
 
-          <Input label="الاسم" name="name" value={state.name} onChange={handleChange("name")} />
+          <Input label="الاسم" name="full_name" value={state.full_name} onChange={handleChange("full_name")} />
           <Input label="البريد الإلكتروني" name="email" type="email" value={state.email} onChange={handleChange("email")} />
 
           <Input label="الرقم" name="phone" value={state.phone} onChange={handleChange("phone")} />
-          <Input label="تقيم في" name="city" value={state.city} onChange={handleChange("city")} />
+          <Input label="تقيم في" name="residence" value={state.residence} onChange={handleChange("residence")} />
 
-          <Input label="عدد المشاريع التي ساعدت فيها" name="projectsCount" type="number" value={state.projectsCount > 0 ? state.projectsCount : ""} onChange={handleChange("projectsCount")} />
-          <Input label="الخبرة (بالسنوات)" name="experience" type="number" value={state.experience > 0 ? state.experience : ""} onChange={handleChange("experience")} />
+          <Input label="عدد المشاريع التي ساعدت فيها" name="projects_count" type="number" value={state.projects_count > 0 ? state.projects_count : ""} onChange={handleChange("projects_count")} />
+          <Input label="الخبرة (بالسنوات)" name="years_of_experience" type="number" value={state.years_of_experience > 0 ? state.years_of_experience : ""} onChange={handleChange("years_of_experience")} />
 
-          <Input label="نوع التطوع" name="volunteerType" value={state.volunteerType} onChange={handleChange("volunteerType")} />
-          <Input label="متاح لتعاون" name="collaborationType" value={state.collaborationType} onChange={handleChange("collaborationType")} />
+          <Input label="نوع التطوع" name="volunteer_type" value={state.volunteer_type} onChange={handleChange("volunteer_type")} />
+          <Input label="متاح لتعاون" name="availability_type" value={state.availability_type} onChange={handleChange("availability_type")} />
 
-          <Input label="المهارات الأساسية" name="mainSkills" value={state.mainSkills} onChange={handleChange("mainSkills")} />
-          <Input label="المهارات الإضافية" name="extraSkills" value={state.extraSkills} onChange={handleChange("extraSkills")} />
+          <Input label="المهارات الأساسية" name="primary_Skills" value={state.primary_Skills} onChange={handleChange("primary_Skills")} />
+          <Input label="المهارات الإضافية" name="additional_Skills" value={state.additional_Skills} onChange={handleChange("additional_Skills")} />
             <Textarea 
               label="السيرة الذاتية"
-              name="cv"
-              value={state.cv ? state.cv.name : ""}
+              name="bio"
+              value={state.bio ? state.bio : ""}
               placeholder="اكتب سيرتك الذاتية"
               onChange={handleFile}
               className="border border-second-color rounded-md px-4 py-2 bg-white"

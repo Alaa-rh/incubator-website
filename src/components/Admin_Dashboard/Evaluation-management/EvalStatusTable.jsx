@@ -6,11 +6,10 @@ import Modal from "../../Modal";
 import Input from "../../Input";
 import EvaluatorsModal from "./EvaluatorsModal";
 
-// TODO: بعد الربط استخدمي هذه الـ hooks
 // import { useGetProjectsWithMeetingsQuery, useGetEvaluatorsForMeetingQuery, useSetMeetingDateMutation } from "../../api/endpoints/evaluationApi";
 
 export default function EvalStatusTable() {
-  // ✅ إضافة meeting_date لكل مشروع
+
   const [projectsData, setProjectsData] = useState([
     {
       id: 1,
@@ -99,14 +98,13 @@ export default function EvalStatusTable() {
     }
   };
 
-  // ✅ دالة لفتح مودال تعيين موعد لمشروع واحد
+  
   const openScheduleModal = (project) => {
     setSelectedProject(project);
     setSchedule(project.meeting_date || "");
     setModals({ ...modals, schedule: true });
   };
 
-  // ✅ دالة تعيين موعد لمشروع واحد مع تحديث الجدول
   const handleSetMeeting = async () => {
     if (!schedule) {
       alert("الرجاء تحديد تاريخ ووقت");
@@ -115,14 +113,14 @@ export default function EvalStatusTable() {
 
     setIsSubmitting(true);
 
-    // TODO: بعد الربط استخدمي هذا الكود
+    // TODO: بعد الربط  هذا الكود
     // try {
     //   await setMeetingDate({
     //     idea_id: selectedProject.id,
     //     meetingDate: schedule
     //   }).unwrap();
     //   
-    //   // ✅ تحديث الموعد في الـ state بعد نجاح العملية
+    
     //   setProjectsData(prev =>
     //     prev.map(p =>
     //       p.id === selectedProject.id
@@ -142,10 +140,10 @@ export default function EvalStatusTable() {
     //   setIsSubmitting(false);
     // }
 
-    // ✅ حالياً: محاكاة مع تحديث الجدول
+ 
     console.log("📅 تعيين موعد للمشروع:", { projectId: selectedProject?.id, meetingDate: schedule });
     
-    // ✅ تحديث الموعد في الـ state
+ 
     setProjectsData(prev =>
       prev.map(p =>
         p.id === selectedProject?.id
@@ -258,7 +256,6 @@ export default function EvalStatusTable() {
         evaluators={modals.data}
       />
 
-      {/* ✅ مودال تعيين موعد لمشروع واحد */}
       <Modal
         isOpen={modals.schedule}
         onClose={() => {

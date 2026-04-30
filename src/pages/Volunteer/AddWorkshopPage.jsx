@@ -12,14 +12,17 @@ const AddWorkshopPage = () => {
   // const [addWorkshop, { isLoading }] = useAddWorkshopMutation();
 
   const [formData, setFormData] = useState({
-    startTime: "",
-    endTime: "",
+    time_from: "",
+    time_to: "",
     description: "",
-    targetGroup: "",
     title: "",
+    objectives:"",
+    target_audience:"",
+    sessions: "",
+    capacity: "",
     category: "",
-    startDate: "",
-    endDate: "",
+    start_date: "",
+    end_date: "",
     days: "",
     image: null,
   });
@@ -27,15 +30,19 @@ const AddWorkshopPage = () => {
   const handleSubmit = async () => {
     const newError = {};
     const requiredFields = [
-      "startTime",
-      "endTime",
+      "time_from",
+      "time_to",
       "description",
-      "targetGroup",
+      "target_audience",
       "title",
       "category",
-      "startDate",
-      "endDate",
+      "start_date",
+      "end_date",
       "days",
+      "sessions",
+      "capacity",
+      "objectives",
+      "image",
     ];
 
     requiredFields.forEach((field) => {
@@ -61,9 +68,9 @@ const AddWorkshopPage = () => {
   };
 
   return (
-    <div className="bg-white-color h-screen p-10">
+    <div className="bg-white-color min-h-screen p-10">
       <h1 className="text-3xl font-bold text-second-color">اضافة ورشة تدريبية</h1>
-      <div className="container mt-40 flex justify-between items-center">
+      <div className="container mt-20 flex justify-between items-center">
         <WorkshopImage image={formData.image} />
 
         <div className="w-[500px]">

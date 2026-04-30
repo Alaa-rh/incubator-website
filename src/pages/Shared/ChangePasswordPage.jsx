@@ -5,9 +5,8 @@ import NavLinkUniversal from "../../components/NavLinkUniversal";
 
 const ChangePasswordPage = () => {
   const [form, setForm] = useState({
-    oldPassword: "",
-    newPassword: "",
-    confirmPassword: "",
+    old_password: "",
+    new_password: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -25,27 +24,21 @@ const ChangePasswordPage = () => {
   const validate = () => {
     const newErrors = {};
 
-    if (!form.oldPassword)
-      newErrors.oldPassword = "الرجاء إدخال كلمة المرور الحالية";
+    if (!form.old_password)
+      newErrors.old_password = "الرجاء إدخال كلمة المرور الحالية";
 
-    if (!form.newPassword)
-      newErrors.newPassword = "الرجاء إدخال كلمة المرور الجديدة";
+    if (!form.new_password)
+      newErrors.new_password = "الرجاء إدخال كلمة المرور الجديدة";
 
      
-    if (form.newPassword.length < 8)
-      newErrors.newPassword = "كلمة المرور يجب أن تكون 8 أحرف على الأقل";
+    if (form.new_password.length < 8)
+      newErrors.new_password = "كلمة المرور يجب أن تكون 8 أحرف على الأقل";
 
-    if (!/[A-Z]/.test(form.newPassword))
-      newErrors.newPassword = "كلمة المرور يجب أن تحتوي على حرف كبير واحد على الأقل";
+    if (!/[A-Z]/.test(form.new_Password))
+      newErrors.new_password = "كلمة المرور يجب أن تحتوي على حرف كبير واحد على الأقل";
 
-    if (!/[0-9]/.test(form.newPassword))
-      newErrors.newPassword = "كلمة المرور يجب أن تحتوي على رقم واحد على الأقل";
-
-    if (!form.confirmPassword)
-      newErrors.confirmPassword = "الرجاء تأكيد كلمة المرور الجديدة";
-
-    if (form.newPassword !== form.confirmPassword)
-      newErrors.confirmPassword = "كلمتا المرور غير متطابقتين";
+    if (!/[0-9]/.test(form.new_password))
+      newErrors.new_password = "كلمة المرور يجب أن تحتوي على رقم واحد على الأقل";
 
     return newErrors;
   };
@@ -63,13 +56,13 @@ const ChangePasswordPage = () => {
     // لاحقًا: استدعاء API تغيير كلمة المرور
     // try {
     //   await changePassword({
-    //     old_password: form.oldPassword,
-    //     new_password: form.newPassword,
+    //     old_password: form.old_password,
+    //     new_password: form.new_password,
     //   }).unwrap();
     //
     //   setSuccessMsg("تم تحديث كلمة المرور بنجاح");
     // } catch (err) {
-    //   setErrors({ oldPassword: "كلمة المرور الحالية غير صحيحة" });
+    //   setErrors({ old_password: "كلمة المرور الحالية غير صحيحة" });
     // }
      
 
@@ -90,12 +83,12 @@ const ChangePasswordPage = () => {
             <Input
               className="w-1/2 bg-white"
               label="كلمة المرور الحالية"
-              name="oldPassword"
+              name="old_password"
               type="password"
               placeholder="كلمة المرور الحالية"
-              value={form.oldPassword}
+              value={form.old_password}
               onChange={handleChange}
-              error={errors.oldPassword}
+              error={errors.old_password}
             />
 
             <NavLinkUniversal
@@ -108,23 +101,12 @@ const ChangePasswordPage = () => {
           <Input
             className="w-1/2 bg-white"
             label="كلمة المرور الجديدة"
-            name="newPassword"
+            name="new_password"
             type="password"
             placeholder="كلمة المرور الجديدة"
-            value={form.newPassword}
+            value={form.new_password}
             onChange={handleChange}
-            error={errors.newPassword}
-          />
-
-          <Input
-            className="w-1/2 bg-white"
-            label="تأكيد كلمة المرور الجديدة"
-            name="confirmPassword"
-            type="password"
-            placeholder="تأكيد كلمة المرور الجديدة"
-            value={form.confirmPassword}
-            onChange={handleChange}
-            error={errors.confirmPassword}
+            error={errors.new_password}
           />
 
           <Button

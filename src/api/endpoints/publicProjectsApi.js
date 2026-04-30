@@ -15,10 +15,16 @@ export const publicProjectsApi = apiSlice.injectEndpoints({
       providesTags: ["PublicProjects"],
     }),
 
+    //جلب المشاريع المحتضنة للادارة
+    getIncubatedProjects: builder.query({
+      query: () => `/admin/incubations/projects`,
+      providesTags: ["PublicProjects"],
+    }),
   }),
 });
 
 export const {
   useGetPublicProjectByIdQuery,
   useGetPublicProjectsQuery,
+  useGetIncubatedProjectsQuery,
 } = publicProjectsApi;

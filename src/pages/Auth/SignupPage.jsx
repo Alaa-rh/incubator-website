@@ -15,10 +15,9 @@ const SignupPage = () => {
   const [register, { isLoading }] = useRegisterMutation();
 
   const [form, setForm] = useState({
-    name: "",
+    full_name: "",
     email: "",
     password: "",
-    confirmPassword: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -30,15 +29,16 @@ const SignupPage = () => {
   const validate = () => {
     const newErrors = {};
 
-    if (!form.name.trim()) newErrors.name = "الاسم مطلوب";
+    if (!form.full_name.trim()) newErrors.full_name = "الاسم مطلوب";
     if (!form.email.trim()) newErrors.email = "البريد الإلكتروني مطلوب";
 
     if (!form.password) newErrors.password = "كلمة المرور مطلوبة";
-    if (form.password.length < 6)
-      newErrors.password = "كلمة المرور يجب أن تكون 6 أحرف على الأقل";
-
-    if (form.confirmPassword !== form.password)
-      newErrors.confirmPassword = "كلمتا المرور غير متطابقتين";
+    if (form.password.length < 8)
+      newErrors.password = "كلمة المرور يجب أن تكون 8 أحرف على الأقل";
+    if (!/[A-Z]/.test(form.password))
+      newErrors.password = "كلمة المرور يجب أن تحتوي على حرف كبير واحد على الأقل";
+    if (!/[0-9]/.test(form.password))
+      newErrors.password = "كلمة المرور يجب أن تحتوي على رقم واحد على الأقل";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -51,7 +51,7 @@ const SignupPage = () => {
 
     try {
       const response = await register({
-        name: form.name,
+        full_name: form.full_name,
         email: form.email,
         password: form.password,
       }).unwrap();
@@ -94,15 +94,17 @@ const SignupPage = () => {
           <form className="space-y-5" onSubmit={handleSubmit}>
             <Input
               label="الاسم"
+              placeholder="ادخل اسمك الكامل"
               name="name"
               type="text"
-              value={form.name}
+              value={form.full_name}
               onChange={handleChange}
-              error={errors.name}
+              error={errors.full_name}
             />
 
             <Input
               label="البريد الالكتروني"
+              placeholder="ادخل بريدك الالكتروني"
               name="email"
               type="email"
               value={form.email}
@@ -113,22 +115,12 @@ const SignupPage = () => {
             <div className="relative">
               <Input
                 label="كلمة المرور"
+                placeholder="ادخل كلمة المرور"
                 name="password"
                 type="password"
                 value={form.password}
                 onChange={handleChange}
                 error={errors.password}
-              />
-            </div>
-
-            <div className="relative">
-              <Input
-                label="تأكيد كلمة المرور"
-                name="confirmPassword"
-                type="password"
-                value={form.confirmPassword}
-                onChange={handleChange}
-                error={errors.confirmPassword}
               />
             </div>
 

@@ -10,10 +10,10 @@ const WorkshopsPage = () => {
   
   // بيانات ثابتة حالياً
   const data = [
-    { id: 1, name: "روبوت سبايك", start: "10/12/2025", end: "20/12/2025", sessions: "4 جلسات", days: "سبت وثلاثاء", time: "2-5", field: "اداري", status: "مقبولة" },
-    { id: 2, name: "روبوت سبايك", start: "10/12/2025", end: "20/12/2025", sessions: "4 جلسات", days: "سبت وثلاثاء", time: "2-5", field: "اداري", status: "مرفوضة" },
-    { id: 3, name: "روبوت سبايك", start: "10/12/2025", end: "20/12/2025", sessions: "4 جلسات", days: "سبت وثلاثاء", time: "2-5", field: "اداري", status: "قيد المراجعة" },
-    { id: 4, name: "روبوت سبايك", start: "10/12/2025", end: "20/12/2025", sessions: "4 جلسات", days: "سبت وثلاثاء", time: "2-5", field: "اداري", status: "قيد المراجعة" },
+    { id: 1, title: "روبوت سبايك", start_date: "10/12/2025", end_date: "20/12/2025", sessions: "4 جلسات", days: "سبت وثلاثاء", time_from: "02:00:00",time_to:"05:00:00", category: "اداري", status: "مقبولة" },
+    { id: 2, title: "روبوت سبايك", start_date: "10/12/2025", end_date: "20/12/2025", sessions: "4 جلسات", days: "سبت وثلاثاء", time_from: "02:00:00",time_to:"05:00:00", category: "اداري", status: "مرفوضة" },
+    { id: 3, title: "روبوت سبايك", start_date: "10/12/2025", end_date: "20/12/2025", sessions: "4 جلسات", days: "سبت وثلاثاء", time_from: "02:00:00",time_to:"05:00:00", category: "اداري", status: "قيد المراجعة" },
+    { id: 4, title: "روبوت سبايك", start_date: "10/12/2025", end_date: "20/12/2025", sessions: "4 جلسات", days: "سبت وثلاثاء", time_from: "02:00:00",time_to:"05:00:00", category: "اداري", status: "قيد المراجعة" },
   ];
 
   // const workshops = workshopsFromApi.length > 0 ? workshopsFromApi : data;
@@ -81,13 +81,13 @@ const WorkshopsPage = () => {
               <tbody className="divide-y divide-gray-50">
                 {workshops.map((item) => (
                   <tr key={item.id} className="text-md">
-                    <td className="py-6 px-2">{item.name}</td>
-                    <td className="py-6 px-2">{item.start}</td>
-                    <td className="py-6 px-2">{item.end}</td>
+                    <td className="py-6 px-2">{item.title}</td>
+                    <td className="py-6 px-2">{item.start_date}</td>
+                    <td className="py-6 px-2">{item.end_date}</td>
                     <td className="py-6 px-2">{item.sessions}</td>
                     <td className="py-6 px-2 leading-relaxed">{item.days}</td>
-                    <td className="py-6 px-2">{item.time}</td>
-                    <td className="py-6 px-2">{item.field}</td>
+                    <td className="py-6 px-2">{item.time_from} - {item.time_to}</td>
+                    <td className="py-6 px-2">{item.category}</td>
                     <td className="py-6 px-2">
                       <span className={getStatusColor(item.status)}>
                         {item.status}

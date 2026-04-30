@@ -31,13 +31,13 @@ const WorkshopDetailsCard = ({ workshop }) => {
         <div className="flex flex-col items-start justify-center gap-6 text-xl">
           <p className="text-gray-700 mb-4">{workshop.description}</p>
           <p><span className="font-semibold">📅 التاريخ:</span> {workshop.date}</p>
-          <p><span className="font-semibold">⏰ الوقت:</span> {workshop.time}</p>
-          <p><span className="font-semibold">📍 المكان:</span> {workshop.location}</p>
+          <p><span className="font-semibold">⏰ الوقت:</span> {workshop.time_from} - {workshop.time_to}</p>
+          <p><span className="font-semibold">📍 الأيام:</span> {workshop.days}</p>
 
           <div>
             <p><span className="font-semibold">📌 الفئة المستهدفة:</span></p>
             <ul className="list-disc list-inside text-xl text-gray-600">
-              {workshop.audience.map((item, idx) => (
+              {workshop.target_audience.map((item, idx) => (
                 <li key={idx} className="p-2">{item}</li>
               ))}
             </ul>

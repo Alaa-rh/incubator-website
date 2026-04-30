@@ -85,6 +85,7 @@ const LoginPage = () => {
           <form className="space-y-4" onSubmit={handleSubmit}>
             <Input
               label="البريد الالكتروني"
+              placeholder="البريد الالكتروني"
               name="email"
               type="email"
               value={form.email}
@@ -95,6 +96,7 @@ const LoginPage = () => {
             <div className="relative">
               <Input
                 label="كلمة المرور"
+                placeholder="كلمة المرور"
                 name="password"
                 type="password"
                 value={form.password}

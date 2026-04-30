@@ -28,23 +28,23 @@ const VolunteerRequestsPage = () => {
   const consultationRequests = [
     {
       id: 1,
-      name: "مايا المحمد",
-      email: "maya123@gmail.com",
-      consultationType: "UI UX",
-      projectTitle: "باسم المشروع",
-      helpType: "متابعة دورية",
+      requester_name: "مايا المحمد",
+      requester_email: "maya123@gmail.com",
+      required_skill: "UI UX",
+      idea_title: "باسم المشروع",
+      help_type: "متابعة دورية",
       description: "شرح بسيط من صاحب الطلب عن ماذا يريد",
-      type: "consultation",
+      status: "consultation",
     },
     {
       id: 2,
-      name: "مايا المحمد",
-      email: "maya123@gmail.com",
-      consultationType: "UI UX",
-      projectTitle: "باسم المشروع",
-      helpType: "متابعة دورية",
+      requester_name: "مايا المحمد",
+      requester_email: "maya123@gmail.com",
+      required_skill: "UI UX",
+      idea_title: "باسم المشروع",
+      help_type: "متابعة دورية",
       description: "شرح بسيط من صاحب الطلب عن ماذا يريد",
-      type: "consultation",
+      status: "consultation",
     },
   ];
 
@@ -74,32 +74,32 @@ const VolunteerRequestsPage = () => {
   // const volunteerRequests = requestsData?.volunteers || [];
 
   // دوال الموافقة والرفض
-  const handleApprove = async (id, type) => {
+  const handleApprove = async (id, status) => {
     // TODO: بعد الربط هذا الكود
     // try {
-    //   await approveRequest({ type, id }).unwrap();
-    //   alert(`تم قبول ${type === "consultation" ? "طلب الاستشارة" : "طلب التطوع"} بنجاح`);
+    //   await approveRequest({ status, id }).unwrap();
+    //   alert(`تم قبول ${status === "consultation" ? "طلب الاستشارة" : "طلب التطوع"} بنجاح`);
     // } catch (error) {
     //   console.error("Error approving request:", error);
     //   alert("حدث خطأ في قبول الطلب");
     // }
 
-    console.log("approve", id, type);
+    console.log("approve", id, status);
   };
 
-  const handleReject = async (id, type) => {
+  const handleReject = async (id, status) => {
     // TODO: بعد الربط هذا الكود
     // const reasonText = prompt("الرجاء إدخال سبب الرفض:");
     // if (!reasonText) return;
     // try {
-    //   await rejectRequest({ type, id, reason: reasonText }).unwrap();
-    //   alert(`تم رفض ${type === "consultation" ? "طلب الاستشارة" : "طلب التطوع"}`);
+    //   await rejectRequest({ status, id, reason: reasonText }).unwrap();
+    //   alert(`تم رفض ${status === "consultation" ? "طلب الاستشارة" : "طلب التطوع"}`);
     // } catch (error) {
     //   console.error("Error rejecting request:", error);
     //   alert("حدث خطأ في رفض الطلب");
     // }
 
-    console.log("reject", id, type);
+    console.log("reject", id, status);
   };
 
   // TODO: بعد الربط شغلي حالة التحميل والخطأ

@@ -1,78 +1,87 @@
 import React from "react"
 import Input from "../Input"
-import Textarea from "../Textarea"
 import Button from "../Button"
 
 const WorkshopStepOne = ({
   formData,
   setFormData,
   onNext,
-  error
+  error,
 }) => {
 
   return (
     <div className="flex flex-col gap-6 w-full">
-      {/* صورة الدورة */}
       <div>
-        <Input
-          label="صورة للورشة (اختياري)"
-          type="file"
-          accept="image/*"
-          onChange={(e) => {
-            const file = e.target.files[0];
-            if (file) {
-              const imageURL = URL.createObjectURL(file);
-              setFormData(prev => ({ ...prev, image: imageURL }));
-            }
-          }}
-          className="w-full"
-        />
-      </div>
-
-      {/* وقت الدورة */}
-      <div className="flex gap-4">
-        <div>
-          <Input 
-            label={"من"}
-            type="time"
-            error={error.startTime}
-            value={formData.startTime}
-            onChange={(e) => setFormData({ ...formData, startTime: e.target.value })}
-            className="w-full"
-          />
-        </div>
-
-        <div>
-          <Input 
-          label={"إلى"}
-            type="time"
-            error={error.endTime}
-            value={formData.endTime}
-            onChange={(e) => setFormData({ ...formData, endTime: e.target.value })}
-            className="w-full"
-          />
-        </div>
-      </div>
-
-      {/* الوصف */}
-      <div>
-        <label className="font-bold">الوصف الذي يظهر للطالب</label>
-        <Textarea
-          value={formData.description}
-          error={error.description}
-          onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-          className="w-full"
-        />
-      </div>
-
-      {/* الفئة المستهدفة */}
-      <div>
-        <label className="font-bold">حدد الأشخاص الذين تخصص لهم هذه الورشة</label>
+        <label className="font-bold">عنوان الدورة</label>
         <Input
           type="text"
-          error={error.targetGroup}
-          value={formData.targetGroup}
-          onChange={(e) => setFormData({ ...formData, targetGroup: e.target.value })}
+          value={formData.title}
+          error={error.title} 
+          onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+          className="w-full"
+        />
+      </div>
+
+      <div>
+        <label className="font-bold">المجال</label>
+        <Input
+          type="text"
+          value={formData.category}
+          error={error.category}  
+          onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+          className="w-full"
+        />
+      </div>
+
+      <div>
+        <label className="font-bold">تاريخ بدء الدورة</label>
+        <Input
+          type="date"
+          value={formData.start_date}
+          error={error.start_date}
+          onChange={(e) => setFormData({ ...formData, start_date: e.target.value })}
+          className="w-full"
+        />
+      </div>
+
+     <div>
+        <label className="font-bold">أيام الدورة</label>
+        <Input
+          type="text"
+          value={formData.days}
+          error={error.days}  
+          onChange={(e) => setFormData({ ...formData, days: e.target.value })}
+          className="w-full"
+        />
+      </div>
+
+      <div>
+        <label className="font-bold">تاريخ انتهاء الدورة</label>
+        <Input
+          type="date"
+          value={formData.end_date}
+          error={error.endDate}
+          onChange={(e) => setFormData({ ...formData, end_date: e.target.value })}
+          className="w-full"
+        />
+      </div>
+      <div>
+        <label className="font-bold">عدد المقاعد</label>
+        <Input
+          type="number"
+          value={formData.capacity}
+          error={error.capacity}  
+          onChange={(e) => setFormData({ ...formData, capacity: e.target.value >= 0 ? e.target.value : 0 })}
+          className="w-full"
+        />
+      </div>
+      <div>
+        <label className="font-bold">عدد الجلسات</label>
+        <Input
+          type="number"
+          value={formData.sessions}
+          error={error.sessions}  
+          onChange={(e) => setFormData({ ...formData, sessions: e.target.value >= 0 ? e.target.value : 0 })}
           className="w-full"
         />
       </div>
