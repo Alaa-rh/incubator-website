@@ -5,14 +5,14 @@ import Select from "../../Select";
 import NavLinkUniversal from "../../NavLinkUniversal";
 
 const ApplicationsReview = ({ season, applications }) => {
-  const isOpen = season.statusType === "open";
+  const isOpen = season.phase === "SUBMISSION";
 
   const [sortType, setSortType] = useState("newest");
 
   const sortedApps = [...applications].sort((a, b) => {
-    if (sortType === "newest") return new Date(b.date) - new Date(a.date);
-    if (sortType === "oldest") return new Date(a.date) - new Date(b.date);
-    if (sortType === "positive") return a.projectName.localeCompare(b.projectName);
+    if (sortType === "newest") return new Date(b.submitted_at) - new Date(a.submitted_at);
+    if (sortType === "oldest") return new Date(a.submitted_at) - new Date(b.submitted_at);
+    if (sortType === "positive") return a.project_name.localeCompare(b.project_name);
     return 0;
   });
 
@@ -33,9 +33,9 @@ const ApplicationsReview = ({ season, applications }) => {
         />
       ),
     },  
-    { key: "applicant", label: "مقدم الطلب" },
-    { key: "date", label: "تاريخ التقديم" }, 
-    { key: "projectName", label: "اسم المشروع" },
+    { key: "submitted_by", label: "مقدم الطلب" },
+    { key: "submitted_at", label: "تاريخ التقديم" },
+    { key: "project_name", label: "اسم المشروع" },
   ];
 
   return (
@@ -43,7 +43,7 @@ const ApplicationsReview = ({ season, applications }) => {
       {/* العمود الأيمن */}
       <div className="flex-1 p-5">
         <h1 className="text-lg font-bold mb-6">
-          {season.title}
+          {season.name}
           <span className="text-sm text-gray-500 mr-2">(مراجعة الطلبات)</span>
         </h1>
 
@@ -71,13 +71,13 @@ const ApplicationsReview = ({ season, applications }) => {
      
         <p className="text-sm">
           <span className="font-semibold">عدد الطلبات المستلمة: </span>
-          {season.applications}
+          {season.ideas_count}
         </p>
 
         {isOpen && (
           <p className="text-sm">
             <span className="font-semibold">المتبقي لإغلاق التقديم: </span>
-            {season.remainingDays} أيام
+            {season.remaining_days} أيام
           </p>
         )}
       </div>

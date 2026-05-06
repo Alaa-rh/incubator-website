@@ -2,14 +2,17 @@ import React, { useState, useEffect } from "react";
 import Input from "../../Input";
 import Textarea from "../../Textarea";
 import Select from "../../Select";
-import { useGetIdeaFormConfigQuery } from "../../../api/endpoints/formConfigApi";
+import { useGetSeasonFormDesignQuery } from "../../../api/endpoints/formConfigApi";
 
 const FormBuilder = ({ season }) => {
-  const isOpen = season.statusType === "open";
+ 
+  const isOpen = season?.phase === "SUBMISSION";
 
-  // جلب هيكل الفورم من API
-  const { data: formConfig, isLoading } = useGetIdeaFormConfigQuery();
+  const { data: formConfig, isLoading } = useGetSeasonFormDesignQuery(season?.id);
 
+  // -----------------------------
+  // بيانات ثابتة (fallback) إلى حين الربط
+  // -----------------------------
   const fallbackFields = [
     { name: "name", label: "الاسم", type: "text", required: true, placeholder: "اكتب اسمك الكامل" },
     { name: "phone", label: "رقم الهاتف", type: "text", required: true, placeholder: "09xxxxxxxx" },
@@ -25,18 +28,17 @@ const FormBuilder = ({ season }) => {
     { name: "ideaDescription", label: "وصف الفكرة", type: "textarea", required: true, rows: 4, placeholder: "اكتب وصفاً مختصراً عن فكرتك" },
   ];
 
-  // استخدام البيانات من API إذا وجدت، وإلا استخدام fallback
   const formFields = formConfig?.fields || fallbackFields;
   const [formValues, setFormValues] = useState({});
 
-  // تحميل هيكل الفورم من الباك أو استخدام fallback
+  // تهيئة الفورم بالقيم الافتراضية
   useEffect(() => {
-    // تهيئة الفورم بالقيم الافتراضية
     const initialValues = {};
     formFields.forEach(field => {
       initialValues[field.name] = "";
     });
-    // setFormValues(initialValues);
+    //eslint-disable-next-line
+    setFormValues(initialValues);
   }, [formFields]);
 
   const handleChange = (name, value) => {
@@ -57,26 +59,11 @@ const FormBuilder = ({ season }) => {
 
     switch (field.type) {
       case "select":
-        return (
-          <Select
-            {...commonProps}
-            options={field.options || []}
-          />
-        );
+        return <Select {...commonProps} options={field.options || []} />;
       case "textarea":
-        return (
-          <Textarea
-            {...commonProps}
-            rows={field.rows || 4}
-          />
-        );
+        return <Textarea {...commonProps} rows={field.rows || 4} />;
       default:
-        return (
-          <Input
-            {...commonProps}
-            type={field.type || "text"}
-          />
-        );
+        return <Input {...commonProps} type={field.type || "text"} />;
     }
   };
 
@@ -97,35 +84,34 @@ const FormBuilder = ({ season }) => {
     <div className="flex gap-6">
       {/* العمود الأيمن */}
       <div className="flex-1 p-5">
-        {/* عنوان */}
         <h1 className="text-lg font-bold mb-6">
-          {season.title}
+          {season?.title || season?.name}
           <span className="text-sm text-gray-500 mr-2">(تصميم النموذج)</span>
         </h1>
 
-        {/* الحقول الديناميكية */}
+        {/* الحقول الديناميكية (نصية في عمودين) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
           {formFields.filter(f => f.type !== "textarea" && f.type !== "select").map(renderField)}
         </div>
 
-        {/* حقول الـ select و textarea في عمود منفصل */}
+        {/* حقول select و textarea */}
         <div className="space-y-4">
           {formFields.filter(f => f.type === "select").map(renderField)}
           {formFields.filter(f => f.type === "textarea").map(renderField)}
         </div>
       </div>
 
-      {/* العمود الأيسر */}
+      {/* العمود الأيسر - إحصائيات */}
       <div className="w-64 h-fit border border-second-color bg-white rounded-lg shadow p-4 flex flex-col gap-2">
         <p className="text-sm">
           <span className="font-semibold">عدد الطلبات المستلمة: </span>
-          {season.applications}
+          {season?.ideas_count || 0}
         </p>
 
         {isOpen && (
           <p className="text-sm">
             <span className="font-semibold">المتبقي لإغلاق التقديم: </span>
-            {season.remainingDays} أيام
+            {season?.remaining_days || 0} أيام
           </p>
         )}
       </div>

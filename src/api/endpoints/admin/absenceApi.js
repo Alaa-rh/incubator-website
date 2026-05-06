@@ -4,27 +4,19 @@ import { apiSlice } from "../apiSlice";
 export const absenceApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
 
-    // الموافقة على طلب غياب
-    approveAbsence: builder.mutation({
-      query: (requestId) => ({
-        url: `/admin/absence/${requestId}/approve/`,
+     // نقطة نهاية موحدة للقبول والتحذير
+    decideAbsence: builder.mutation({
+      query: ({ requestId, action }) => ({
+        url: `/admin/bootcamp/absence/${requestId}/decide/`,
         method: 'POST',
-      }),
-      invalidatesTags: ['AbsenceRequests'],
-    }),
-
-    // إرسال تحذير لمشارك
-    sendWarning: builder.mutation({
-      query: (requestId) => ({
-        url: `/admin/absence/${requestId}/warning/`,
-        method: 'POST',
+        body: { action },
       }),
       invalidatesTags: ['AbsenceRequests'],
     }),
 
     // جلب طلبات الغياب
     getAbsenceRequests: builder.query({
-      query: () => '/admin/absence/',
+      query: () => '/admin/bootcamp/absence/',
       providesTags: ['AbsenceRequests'],
     }),
 
@@ -32,7 +24,6 @@ export const absenceApi = apiSlice.injectEndpoints({
 });
 
 export const {
-  useApproveAbsenceMutation,
-  useSendWarningMutation,
+  useDecideAbsenceMutation,
   useGetAbsenceRequestsQuery,
 } = absenceApi;

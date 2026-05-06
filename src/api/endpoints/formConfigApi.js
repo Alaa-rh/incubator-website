@@ -10,15 +10,16 @@ export const formConfigApi = apiSlice.injectEndpoints({
       providesTags: ['FormConfig'],
     }),
 
-    // جلب هيكل فورم صاحب الفكرة
-    getIdeaFormConfig: builder.query({
-      query: () => '/admin/form-config/idea/',
-      providesTags: ['FormConfig'],
+   
+    //عرض تصميم النموذج season
+    getSeasonFormDesign: builder.query({
+      query: (id) => `/admin/seasons/${id}/form-design/`,
+      providesTags: ['IncubationSeasons'],
     }),
   }),
 });
 
 export const {
   useGetExhibitionFormConfigQuery,
-  useGetIdeaFormConfigQuery,
+  useGetSeasonFormDesignQuery,
 } = formConfigApi;

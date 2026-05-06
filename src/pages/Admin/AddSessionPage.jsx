@@ -17,7 +17,8 @@ const AddSessionPage = () => {
     trainer: "",
     tasks: "",
     location: "",
-    time: "",
+    start_time: "",
+    end_time: "",
     date: "",
   });
 
@@ -47,9 +48,10 @@ const AddSessionPage = () => {
     if (!session.title) newErrors.title = "عنوان الجلسة مطلوب";
     if (!session.trainer) newErrors.trainer = "يرجى اختيار المدرب";
     if (!session.location) newErrors.location = "موقع المعسكر مطلوب";
-    if (!session.time) newErrors.time = "وقت الجلسة مطلوب";
+    if (!session.start_time) newErrors.start_time = "وقت بدء الجلسة مطلوب";
+    if (!session.end_time) newErrors.end_time = "وقت انتهاء الجلسة مطلوب";
     if (!session.date) newErrors.date = "تاريخ الجلسة مطلوب";
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -60,7 +62,6 @@ const AddSessionPage = () => {
 
     if (!validate()) return;
 
-    // TODO: بعد الربط استخدمي هذا الكود
     // try {
     //   await addSession(session).unwrap();
     //   setSubmitSuccess("تم إضافة الجلسة بنجاح. سيتم إرسال الإشعارات للمشاركين.");
@@ -104,7 +105,7 @@ const AddSessionPage = () => {
         </div>
       )}
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-3">
         <Input
           label="عنوان الجلسة"
           value={session.title}
@@ -135,12 +136,19 @@ const AddSessionPage = () => {
         />
 
         <Input
-          label="وقت الجلسة"
-          value={session.time}
-          onChange={(e) => handleChange("time", e.target.value)}
-          error={errors.time}
+          label="وقت بدء الجلسة"
+          type="time"
+          value={session.start_time}
+          onChange={(e) => handleChange("start_time", e.target.value)}
+          error={errors.start_time}
         />
-
+        <Input
+          label="وقت انتهاء الجلسة"
+          type="time"
+          value={session.end_time}
+          onChange={(e) => handleChange("end_time", e.target.value)}
+          error={errors.end_time}
+        />
         <Input
           label="تاريخ الجلسة"
           type="date"
@@ -148,8 +156,7 @@ const AddSessionPage = () => {
           onChange={(e) => handleChange("date", e.target.value)}
           error={errors.date}
         />
-      </div>
-
+      </div> 
       <div className="flex justify-center mt-6">
         <Button
           label={/*isSubmitting ? "جاري الإرسال..." : */  "إرسال الإشعار بالموعد"}

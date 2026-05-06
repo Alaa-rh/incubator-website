@@ -6,6 +6,7 @@ import { useEffect, useRef } from "react";
 import store from "./redux/store";
 import { setNotifications } from "./redux/notificationsSlice";
 import logo from "./assets/images/logo.png";
+import { Toaster } from "react-hot-toast";
 
 // TODO: بعد الربط استخدمي هذه الـ hooks
 // import { useGetNotificationsQuery } from "./api/endpoints/notificationsApi";
@@ -14,7 +15,7 @@ import logo from "./assets/images/logo.png";
 
 function NotificationsLoader({ children }) {
   const dispatch = useDispatch();
-  const hasLoaded = useRef(false); // ✅ منع التحميل المتكرر
+  const hasLoaded = useRef(false);
 
   // TODO: بعد الربط استخدمي token من useRole
   // const { token } = useRole();
@@ -34,7 +35,7 @@ function NotificationsLoader({ children }) {
   useEffect(() => {
     async function loadNotifications() {
       // =========================================
-      // TODO: بعد الربط الحقيقي استخدمي هذا الكود:
+      // TODO: بعد الربط الحقيقي هذا الكود:
       // =========================================
       // if (apiNotifications && apiNotifications.length > 0) {
       //   dispatch(setNotifications(apiNotifications));
@@ -44,7 +45,7 @@ function NotificationsLoader({ children }) {
       // }
 
       // =========================================
-      // حالياً: بيانات ثابتة (تشيليها بعد الربط)
+      // حالياً: بيانات ثابتة
       // =========================================
       if (!hasLoaded.current) {
         const initialNotifications = [
@@ -87,12 +88,12 @@ function NotificationsLoader({ children }) {
         ];
 
         dispatch(setNotifications(initialNotifications));
-        hasLoaded.current = true; // ✅ منع التحميل مرة ثانية
+        hasLoaded.current = true; //  منع التحميل مرة ثانية
       }
     }
 
     loadNotifications();
-  }, [dispatch]); // ✅ إزالة notifications.length من الـ dependencies
+  }, [dispatch]); //  إزالة notifications.length من الـ dependencies
 
   return children;
 }
@@ -103,6 +104,39 @@ function App() {
       <RoleProvider>
         <FavoritesProvider>
           <NotificationsLoader>
+          <Toaster
+              position="top-center"
+              reverseOrder={false}
+              gutter={8}
+              containerClassName=""
+              containerStyle={{}}
+              toastOptions={{
+                duration: 3000,
+                style: {
+                  background: '#363636',
+                  color: '#fff',
+                  borderRadius: '12px',
+                  padding: '12px 20px',
+                  fontSize: '14px',
+                  fontWeight: '500',
+                  direction: 'rtl',
+                },
+                success: {
+                  duration: 2500,
+                  iconTheme: {
+                    primary: '#10b981',
+                    secondary: '#fff',
+                  },
+                },
+                  error: {
+                  duration: 3000,
+                  iconTheme: {
+                    primary: '#ef4444',
+                    secondary: '#fff',
+                  },
+            },
+        }}
+        />
             <AppRoutes />
           </NotificationsLoader>
         </FavoritesProvider>

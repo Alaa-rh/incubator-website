@@ -4,36 +4,34 @@ import SeasonSettings from "../../components/Admin_Dashboard/IncubationSeasons/S
 import FormBuilder from "../../components/Admin_Dashboard/IncubationSeasons/FormBuilder";
 import ApplicationsReview from "../../components/Admin_Dashboard/IncubationSeasons/ApplicationsReview";
 import NavLinkUniversal from "../../components/NavLinkUniversal";
-// import { useGetSeasonDetailsQuery } from "../../api/endpoints/admin/seasonsApi";
+// import { useGetSeasonDetailsQuery, useCloseSubmissionsMutation } from "../../api/endpoints/admin/seasonsApi";
 
 const SeasonDetailsPage = () => {
   // const { id } = useParams();
 
   // const { data: season, isLoading, error, refetch } = useGetSeasonDetailsQuery(id);
-
+ // const [closeSubmissions, {isLoading: isClosing}] = useCloseSubmissionsMutation();
   const seasonData = {
     id: 1,
-    title: "الموسم السادس للتكنولوجيا",
-    statusType: "open",
-    applications: 30,
-    remainingDays: 3,
-    startDate: "2025/2/10",
-    endDate: "2025/2/10",
-    name: "الخامس",
+    ideas_count: 30,
+    remaining_days: 3,
+    start_date: "2025/2/10",
+    end_date: "2025/2/10",
+    name: "الموسم الخامس",
     description: "يكتب هنا وصف الموسم",
-    successMessage: "يكتب هنا الرسالة",
-    applicationsList: [
+    phase: "SUBMISSION",
+    ideas: [
       {
         id: 1,
-        projectName: "منصة تعليمية",
-        applicant: "أحمد المحمد",
-        date: "2024-02-12",
+        project_name: "منصة تعليمية",
+        submitted_by: "أحمد المحمد",
+        submitted_at: "2024-02-12",
       },
       {
         id: 2,
-        projectName: "تطبيق طبي",
-        applicant: "سارة الأحمد",
-        date: "2024-02-10",
+        project_name: "تطبيق طبي",
+        submitted_by: "سارة الأحمد",
+        submitted_at: "2024-02-10",
       },
     ],
   };
@@ -47,9 +45,23 @@ const SeasonDetailsPage = () => {
   const [activeTab, setActiveTab] = useState("settings");
 
   // منطق إظهار التبويبات حسب حالة الموسم
-  const showSettings = season.statusType !== "camp" && season.statusType !== "finished";
-  const showForm = season.statusType === "open";
-  const showReview = season.statusType !== "finished";
+  const showSettings = season.phase !== "Bootcamp" && season.phase !== "finished";
+  const showForm = season.phase === "SUBMISSION";
+  const showReview = season.phase !== "";
+
+  const handleCloseSubmission = async (seasonId) => {
+    if (window.confirm("هل أنت متأكد من إغلاق التقديم للموسم؟")) {
+      try {
+        // await closeSubmissions(seasonId).unwrap();
+        console.log(`إغلاق التقديم للموسم ${seasonId}`);
+        alert("تم إغلاق التقديم بنجاح");
+        // refetch();
+      } catch (err) {
+        console.error(err);
+        alert(err?.data?.message || "حدث خطأ أثناء إغلاق التقديم");
+      }
+    }
+  };
 
   // if (isLoading) {
   //   return (
@@ -131,7 +143,7 @@ const SeasonDetailsPage = () => {
           <SeasonSettings
             season={season}
             onSave={(updated) => console.log("حفظ:", updated)}
-            onCloseSubmission={(id) => console.log("إغلاق التقديم:", id)}
+            onCloseSubmission={handleCloseSubmission}
           />
         )}
 
@@ -142,7 +154,7 @@ const SeasonDetailsPage = () => {
         {activeTab === "review" && showReview && (
           <ApplicationsReview 
             season={season} 
-            applications={season.applicationsList || []} 
+            applications={season.ideas || []} 
           />
         )}
       </div>

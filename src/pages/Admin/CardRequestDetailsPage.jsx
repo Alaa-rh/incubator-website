@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import InfoRow from "../../components/InfoRow";
 import Modal from "../../components/Modal";
-import Textarea from "../../components/Textarea";
 import { IoImageOutline } from "react-icons/io5";
 import Input from "../../components/Input";
 
@@ -22,7 +21,7 @@ export default function CardRequestDetailsPage() {
   sector: "التقنية",
   description: "معرض سنوي لعرض مشاريع التخرج المتميزة.",
   problem: "لا يوجد مشكلة، هذا معرض عرض فقط",
-  duration: "6 months",
+  expected_duration: "6 months",
   img: null,
 };
 
@@ -81,7 +80,7 @@ export default function CardRequestDetailsPage() {
       </InfoRow>
 
       <InfoRow label="الوقت المتوقع للإنجاز:">
-        {data?.duration}
+        {data?.expected_duration}
       </InfoRow>
       </div>
 

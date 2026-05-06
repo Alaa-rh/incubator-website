@@ -4,27 +4,19 @@ import { apiSlice } from "../apiSlice";
 export const participantsApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
 
-    // قبول مشارك  
-    approveParticipant: builder.mutation({
-      query: (participantId) => ({
-        url: `/admin/participants/${participantId}/approve/`,
+     // نقطة نهاية واحدة للقبول والرفض
+    decideParticipant: builder.mutation({
+      query: ({ idea_id, action }) => ({
+        url: `/admin/bootcamp/decisions/${idea_id}/decision/`,
         method: 'POST',
-      }),
-      invalidatesTags: ['Participants'],
-    }),
-
-    // رفض مشارك  
-    rejectParticipant: builder.mutation({
-      query: (participantId) => ({
-        url: `/admin/participants/${participantId}/reject/`,
-        method: 'POST',
+        body: { action }, // "accept" أو "reject"
       }),
       invalidatesTags: ['Participants'],
     }),
 
     // جلب قائمة المشاركين
     getParticipants: builder.query({
-      query: () => '/admin/participants/',
+      query: () => '/admin/bootcamp/decisions/ideas/',
       providesTags: ['Participants'],
     }),
 
@@ -32,7 +24,6 @@ export const participantsApi = apiSlice.injectEndpoints({
 });
 
 export const {
-  useApproveParticipantMutation,
-  useRejectParticipantMutation,
+  useDecideParticipantMutation,
   useGetParticipantsQuery,
 } = participantsApi;

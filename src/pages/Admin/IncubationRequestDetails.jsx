@@ -9,30 +9,23 @@ const IncubationRequestDetails = () => {
   // const { data: request, isLoading, error, refetch } = useGetIncubationRequestQuery(id);
 
   const requestData = {
-    projectName: "منصة الشراكة الرقمية (Digital Partnership Platform)",
-    editor: "ريم العلي",
-    productType: "منصة برمجية (SaaS) وتطبيق ويب",
-
-    personal: {
-      name: "ريم فهد العلي",
-      phone: "0987123456",
-      major: "مهندسة برمجيات",
-      email: "reem.alali@example.com",
-    },
-
+    project_title: "منصة الشراكة الرقمية (Digital Partnership Platform)",
+    editor_name: "ريم العلي",
+    product_type: "منصة برمجية (SaaS) وتطبيق ويب",
+    owner_name: "ريم فهد العلي",
+    phone: "0987123456",
+    specialization: "مهندسة برمجيات",
+    email: "reem.alali@example.com",
     team: [
       { name: "ريم العلي", email: "reem.alali@example.com" },
       { name: "أحمد محمد", email: "reem.alali@example.com" },
       { name: "سارة محمود", email: "reem.alali@example.com" },
     ],
-
-    idea: {
-      title: "منصة ربط المشاريع الناشئة بالمستشارين والمتطوعين في مجال الذكاء الاصطناعي.",
-      sector: "التقنية المالية (FinTech) والتجارة الإلكترونية",
+      idea_title: "منصة ربط المشاريع الناشئة بالمستشارين والمتطوعين في مجال الذكاء الاصطناعي.",
+      target_audience: "students",
       description: "بناء منصة SaaS لتقديم خدمة مطابقة ذكية (Smart Matching) تربط الشركات الناشئة التي تحتاج إلى تطوير حلول الذكاء الاصطناعي (AI) بالخبراء المستعدين لتقديم خدماتهم بالساعة أو مقابل حصة بسيطة.",
       problem: "المشكلة التي يحلها المشروع",
       duration: "6 أشهر",
-    },
   };
 
   // استخدام البيانات من API إذا وجدت، وإلا استخدام الثابتة
@@ -76,15 +69,15 @@ const IncubationRequestDetails = () => {
         {/* القسم الأول: معلومات عامة */}
         <div className="bg-white shadow-lg p-4 rounded-lg mb-4">
           <InfoRow label="اسم المشروع:">
-            {request.projectName}
+            {request.project_title}
           </InfoRow>
 
           <InfoRow label="مسؤول التعديل (الثاني):">
-            {request.editor}
+            {request.editor_name}
           </InfoRow>
 
           <InfoRow label="نوع المنتج:">
-            {request.productType}
+            {request.product_type}
           </InfoRow>
         </div>
 
@@ -93,19 +86,19 @@ const IncubationRequestDetails = () => {
           <h2 className="border-b border-second-color text-xl font-bold mb-4">1. معلومات شخصية وقيادية</h2>
           
           <InfoRow label="الاسم:">
-            {request.personal?.name}
+            {request.owner_name}
           </InfoRow>
 
           <InfoRow label="رقم الهاتف:">
-            {request.personal?.phone}
+            {request.phone}
           </InfoRow>
 
           <InfoRow label="الاختصاص:">
-            {request.personal?.major}
+            {request.specialization}
           </InfoRow>
 
           <InfoRow label="البريد الإلكتروني:">
-            {request.personal?.email}
+            {request.email}
           </InfoRow>
         </div>
 
@@ -127,25 +120,24 @@ const IncubationRequestDetails = () => {
         {/* القسم الرابع: معلومات الفكرة */}
         <div className="bg-white shadow-lg p-4 rounded-lg mb-2">
           <h2 className="border-b border-second-color text-xl font-bold mb-4">3. معلومات عن الفكرة</h2>
-          
           <InfoRow label="عنوان الفكرة:">
-            {request.idea?.title}
+            {request.idea_title}
           </InfoRow>
 
           <InfoRow label="القطاع المستهدف:">
-            {request.idea?.sector}
+            {request.target_audience}
           </InfoRow>
 
           <InfoRow label="وصف مختصر للفكرة:">
-            {request.idea?.description}
+            {request.description}
           </InfoRow>
 
           <InfoRow label="المشكلة التي يحلها:">
-            {request.idea?.problem}
+            {request.problem}
           </InfoRow>
 
           <InfoRow label="الوقت المتوقع للإنجاز:">
-            {request.idea?.duration}
+            {request.duration}
           </InfoRow>
         </div>
       </div>

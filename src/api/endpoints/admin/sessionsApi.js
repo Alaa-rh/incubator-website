@@ -4,19 +4,19 @@ import { apiSlice } from "../../apiSlice";
 export const sessionsApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
 
-    // إضافة جلسة جديدة
-    addSession: builder.mutation({
-      query: (sessionData) => ({
-        url: '/admin/sessions/',
-        method: 'POST',
-        body: sessionData,
-      }),
-      invalidatesTags: ['Sessions'],
-    }),
+  // إضافة جلسة جديدة  
+   addSession: builder.mutation({
+  query: (sessionData ) => ({
+    url: `/admin/bootcamp/sessions/create`,
+    method: 'POST',
+    body: sessionData,
+  }),
+  invalidatesTags: ['Sessions'],
+}),
 
-    // جلب جميع الجلسات
+ // جلب جميع الجلسات
     getSessions: builder.query({
-      query: () => '/admin/sessions/',
+      query: () => '/admin/bootcamp/sessions/',
       providesTags: ['Sessions'],
     }),
 

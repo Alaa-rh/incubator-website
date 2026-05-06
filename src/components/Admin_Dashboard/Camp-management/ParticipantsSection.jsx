@@ -3,30 +3,26 @@ import SearchBar from "../../SearchBar";
 import DataTable from "../DataTable";
 import Modal from "../../Modal";
 import Button from "../../Button";
-// import { useApproveParticipantMutation, useRejectParticipantMutation } from "../../api/endpoints/admin/participantsApi";
+import { showSuccess, showError } from "../../../Utils/toast";
+// import { useDecideParticipantMutation } from "../../api/endpoints/admin/participantsApi";
 
 const ParticipantsSection = () => {
   const [searchTerm, setSearchTerm] = useState("");
-
-  // حالة المودال
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [actionType, setActionType] = useState(null); // "accept" | "reject"
   const [selectedParticipant, setSelectedParticipant] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  //eslint-disable-next-line
+  const [localLoading, setLocalLoading] = useState(false);
 
-  // const [approveParticipant, { isLoading: isApproving }] = useApproveParticipantMutation();
-  // const [rejectParticipant, { isLoading: isRejecting }] = useRejectParticipantMutation();
+  // const [decideParticipant] = useDecideParticipantMutation();
 
-  // بيانات ثابتة حالياً
-  const participants = [
-    { id: 1, projectName: "منصة تعليمية", status: "ملتزم", absenceRate: "75%" },
-    { id: 2, projectName: "منصة تعليمية", status: "ملتزم", absenceRate: "75%" },
-    { id: 3, projectName: "منصة تعليمية", status: "ملتزم", absenceRate: "75%" },
-  ];
-
-  const filtered = participants.filter((p) =>
-    p.projectName.includes(searchTerm)
-  );
+  // بيانات ثابتة (تتحذف بعد الربط)
+  const [participants, setParticipants] = useState([
+    { idea_id: 1, idea_title: "منصة تعليمية", commitment_status: "ملتزم", absence_percentage: "75%", status: "pending" },
+    { idea_id: 2, idea_title: "منصة تعليمية", commitment_status: "ملتزم", absence_percentage: "75%", status: "pending" },
+    { idea_id: 3, idea_title: "منصة تعليمية", commitment_status: "ملتزم", absence_percentage: "75%", status: "pending" },
+  ]);
 
   const openModal = (type, participant) => {
     setActionType(type);
@@ -35,31 +31,52 @@ const ParticipantsSection = () => {
   };
 
   const handleConfirm = async () => {
+    if (!selectedParticipant) return;
     setIsSubmitting(true);
+    setLocalLoading(true);
+    try {
+      // await decideParticipant({
+      //   idea_id: selectedParticipant.idea_id,
+      //   action: actionType === "accept" ? "approve" : "reject"
+      // }).unwrap();
 
-    // try {
-    //   if (actionType === "accept") {
-    //     await approveParticipant(selectedParticipant.id).unwrap();
-    //     alert("تم قبول المشارك بنجاح. سيتم إرسال الإشعار.");
-    //   } else {
-    //     await rejectParticipant(selectedParticipant.id).unwrap();
-    //     alert("تم رفض المشارك. سيتم إرسال الإشعار.");
-    //   }
-    //   setIsModalOpen(false);
-    // } catch (error) {
-    //   console.error("Error:", error);
-    //   alert(error?.data?.message || "حدث خطأ في العملية");
-    // } finally {
-    //   setIsSubmitting(false);
-    // }
+      // محاكاة نجاح العملية
+      await new Promise(resolve => setTimeout(resolve, 500));
 
-    // حالياً: محاكاة للإرسال
-    console.log(`Action: ${actionType} for participant:`, selectedParticipant);
-    setTimeout(() => {
-      alert(`تم ${actionType === "accept" ? "قبول" : "رفض"} المشارك بنجاح (محاكاة)`);
+      setParticipants(prev =>
+        prev.map(p =>
+          p.idea_id === selectedParticipant.idea_id
+            ? { ...p, status: actionType === "accept" ? "approved" : "rejected" }
+            : p
+        )
+      );
+
+      const successMsg = actionType === "accept"
+        ? " تم قبول المشارك بنجاح. سيتم إرسال الإشعار."
+        : " تم رفض المشارك. سيتم إرسال الإشعار.";
+      showSuccess(successMsg);
       setIsModalOpen(false);
+    } catch (error) {
+      console.error(error);
+      showError(error?.data?.message || "حدث خطأ في العملية");
+    } finally {
       setIsSubmitting(false);
-    }, 500);
+      setLocalLoading(false);
+    }
+  };
+
+  const filtered = participants.filter((p) =>
+    p.idea_title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  // عرض شارة الحالة (اختياري)
+  const getStatusBadge = (status) => {
+    if (!status || status === "pending") return null;
+    if (status === "approved")
+      return <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">✅ مقبول</span>;
+    if (status === "rejected")
+      return <span className="bg-red-100 text-red-800 px-2 py-1 rounded text-xs">❌ مرفوض</span>;
+    return null;
   };
 
   const columns = [
@@ -72,32 +89,33 @@ const ParticipantsSection = () => {
             label="رفض"
             className="bg-red-color"
             onClick={() => openModal("reject", participant)}
-          /> 
+            disabled={participant.status && participant.status !== "pending"}
+          />
           <Button
             label="موافقة"
             className="bg-green-color"
             onClick={() => openModal("accept", participant)}
+            disabled={participant.status && participant.status !== "pending"}
           />
         </div>
       ),
     },
-    { key: "absenceRate", label: "نسبة الغياب" }, 
-    { key: "status", label: "الوضع الحالي" },
-    { key: "projectName", label: "اسم المشروع" },
+    {
+      key: "status_badge",
+      label: "الحالة",
+      render: (row) => getStatusBadge(row.status) || <span className="text-yellow-600">قيد الانتظار</span>,
+    },
+    { key: "absence_percentage", label: "نسبة الغياب" },
+    { key: "commitment_status", label: "الوضع الحالي" },
+    { key: "idea_title", label: "اسم المشروع" },
   ];
 
   return (
     <div className="bg-white p-6 rounded-lg shadow">
       <h2 className="text-lg font-bold mb-4">قائمة المشاركين</h2>
-
-      <SearchBar
-        placeholder="بحث باسم المشروع أو الطالب"
-        onSearch={setSearchTerm}
-      />
-
+      <SearchBar placeholder="بحث باسم المشروع" onSearch={setSearchTerm} />
       <DataTable columns={columns} data={filtered} />
 
-      {/* المودال - فقط تأكيد بدون إدخال نص */}
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
@@ -109,24 +127,24 @@ const ParticipantsSection = () => {
               onClick={handleConfirm}
               disabled={isSubmitting}
               className={`${actionType === "accept" ? "bg-green-color" : "bg-red-color"} text-white px-4 py-2 rounded`}
-            /> 
+            />
             <button
               onClick={() => setIsModalOpen(false)}
               className="border border-second-color px-4 py-2 rounded"
             >
-              إلغاء
-              </button>
+              إلغاء
+            </button>
           </div>
         }
       >
         <p className="text-center text-lg py-4">
-          {actionType === "accept" 
-            ? "هل أنت متأكد من قبول هذا المشارك؟" 
+          {actionType === "accept"
+            ? "هل أنت متأكد من قبول هذا المشارك؟"
             : "هل أنت متأكد من رفض هذا المشارك؟"}
         </p>
         <p className="text-center text-gray-500 text-sm">
-          {actionType === "accept" 
-            ? "سيتم إرسال إشعار قبول للمشارك." 
+          {actionType === "accept"
+            ? "سيتم إرسال إشعار قبول للمشارك."
             : "سيتم إرسال إشعار رفض للمشارك."}
         </p>
       </Modal>

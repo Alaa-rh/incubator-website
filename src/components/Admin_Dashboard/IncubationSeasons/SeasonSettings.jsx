@@ -3,20 +3,41 @@ import Input from "../../Input";
 import Textarea from "../../Textarea";
 import Button from "../../Button";
 
-// TODO: بعد الربط استخدمي هذا الـ hook
 // import { useUpdateIncubationSeasonMutation } from "../../../api/endpoints/seasonsApi";
 
 const SeasonSettings = ({ season, onSave, onCloseSubmission }) => {
-  const [startDate, setStartDate] = useState(season.startDate || "");
-  const [endDate, setEndDate] = useState(season.endDate || "");
+  const [start_date, setStartDate] = useState(season.start_date || "");
+  const [end_date, setEndDate] = useState(season.end_date || "");
   const [name, setName] = useState(season.name || "");
   const [description, setDescription] = useState(season.description || "");
-  const [successMessage, setSuccessMessage] = useState(season.successMessage || "");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
 
-  const isOpen = season.statusType === "open";
+  // استخدام القيم من season مباشرة
+  const remaining_days = season.remaining_days || 0;
+  const ideas_count = season.ideas_count || season.idea_count || 0;
 
+  const getPhaseStatus = () => {
+    const phase = season.phase;
+    switch (phase) {
+      case "SUBMISSION":
+        return { isOpen: true, label: "(قيد التقديم)" };
+      case "EVALUATION":
+        return { isOpen: false, label: "(قيد التقييم)" };
+      case "BOOTCAMP":
+        return { isOpen: false, label: "(مرحلة المعسكر)" };
+      case "EXHIBITION":
+        return { isOpen: false, label: "(مرحلة المعرض)" };
+      case "FINISHED":
+        return { isOpen: false, label: "(منتهي)" };
+      default:
+        return { isOpen: false, label: "" };
+    }
+  };
+
+  const { isOpen, phaseLabel } = getPhaseStatus();
+
+  // TODO: بعد الربط استخدمي هذا السطر
   // const [updateSeason, { isLoading }] = useUpdateIncubationSeasonMutation();
 
   const handleSave = async () => {
@@ -24,12 +45,12 @@ const SeasonSettings = ({ season, onSave, onCloseSubmission }) => {
     setError("");
 
     const updated = {
-      ...season,
-      startDate,
-      endDate,
+      id: season.id,
       name,
       description,
-      successMessage,
+      start_date,
+      end_date,
+      phase: season.phase,
     };
 
     // try {
@@ -65,18 +86,9 @@ const SeasonSettings = ({ season, onSave, onCloseSubmission }) => {
         {/* عنوان الموسم */}
         <div className="mb-6">
           <h1 className="text-lg font-bold mb-1">
-            {season.title}
-            {season.statusType === "open" && (
-              <span className="text-sm text-gray-500 mr-2">(قيد التقديم)</span>
-            )}
-            {season.statusType === "evaluation" && (
-              <span className="text-sm text-gray-500 mr-2">(قيد التقييم)</span>
-            )}
-            {season.statusType === "camp" && (
-              <span className="text-sm text-gray-500 mr-2">(مرحلة المعسكر)</span>
-            )}
-            {season.statusType === "finished" && (
-              <span className="text-sm text-gray-500 mr-2">(منتهي)</span>
+            {name || season.name}
+            {phaseLabel && (
+              <span className="text-sm text-gray-500 mr-2">{phaseLabel}</span>
             )}
           </h1>
         </div>
@@ -93,8 +105,8 @@ const SeasonSettings = ({ season, onSave, onCloseSubmission }) => {
           <Input
             label="تاريخ بدء التقديم"
             type="date"
-            name="startDate"
-            value={startDate}
+            name="start_date"
+            value={start_date}
             onChange={(e) => setStartDate(e.target.value)}
             disabled={isSubmitting}
           />
@@ -102,8 +114,8 @@ const SeasonSettings = ({ season, onSave, onCloseSubmission }) => {
           <Input
             label="تاريخ انتهاء التقديم"
             type="date"
-            name="endDate"
-            value={endDate}
+            name="end_date"
+            value={end_date}
             onChange={(e) => setEndDate(e.target.value)}
             disabled={isSubmitting}
           />
@@ -114,7 +126,7 @@ const SeasonSettings = ({ season, onSave, onCloseSubmission }) => {
           <Input
             label="اسم الموسم"
             type="text"
-            name="seasonName"
+            name="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
             disabled={isSubmitting}
@@ -129,19 +141,6 @@ const SeasonSettings = ({ season, onSave, onCloseSubmission }) => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             rows={3}
-            disabled={isSubmitting}
-          />
-        </div>
-
-        {/* رسالة النجاح */}
-        <div className="mb-4">
-          <Textarea
-            label="رسالة النجاح (تظهر بعد قبول الطلب)"
-            name="successMessage"
-            value={successMessage}
-            onChange={(e) => setSuccessMessage(e.target.value)}
-            rows={2}
-            placeholder="سيتم عرض هذه الرسالة للمستخدم بعد قبول طلبه"
             disabled={isSubmitting}
           />
         </div>
@@ -161,24 +160,24 @@ const SeasonSettings = ({ season, onSave, onCloseSubmission }) => {
             <Button
               label="إغلاق التقديم"
               onClick={handleCloseSubmission}
-              className="bg-red-color"
+              className="bg-main-color"
               disabled={isSubmitting}
             />
           )}
         </div>
       </div>
 
-      {/* العمود الأيسر */}
+      {/* العمود الأيسر - عرض عدد الطلبات والأيام المتبقية */}
       <div className="w-64 h-fit border border-second-color bg-white rounded-lg shadow p-4 flex flex-col gap-2">
         <p className="text-sm">
           <span className="font-semibold">عدد الطلبات المستلمة: </span>
-          {season.applications || 0}
+          {ideas_count}
         </p>
 
         {isOpen && (
           <p className="text-sm">
             <span className="font-semibold">المتبقي لإغلاق التقديم: </span>
-            {season.remainingDays || 0} أيام
+            {remaining_days} أيام
           </p>
         )}
       </div>

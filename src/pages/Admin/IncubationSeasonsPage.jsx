@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import DataTable from "../../components/Admin_Dashboard/DataTable";
 import { useNavigate } from "react-router-dom";
+import DataTable from "../../components/Admin_Dashboard/DataTable";
 import NavLinkUniversal from "../../components/NavLinkUniversal";
 import Button from "../../components/Button";
 import AdminNavbar from "../../components/AdminNavbar";
-// import { useGetIncubationSeasonsQuery } from "../../api/endpoints/incubationApi";
+import Select from "../../components/Select";
+// import { useGetIncubationSeasonsQuery } from "../../api/endpoints/seasonsApi";
 
 const IncubationSeasonsPage = () => {
-  const [year, setYear] = useState("2024");
+  const [year, setYear] = useState("2025");
   const navigate = useNavigate();
 
   // const { data: seasonsFromApi, isLoading, error, refetch } = useGetIncubationSeasonsQuery(year);
@@ -15,44 +16,61 @@ const IncubationSeasonsPage = () => {
   const seasonsData = [
     {
       id: 1,
-      season: "السادس",
-      openDate: "12/4/2025",
-      closeDate: "12/4/2025",
-      applications: 30,
-      status: "مفتوح",
-      statusType: "open",
+      year: 2025,
+      name: "السادس",
+      start_date: "12/4/2025",
+      end_date: "12/4/2025",
+      ideas_count: 30,
+       
+      status: {
+        is_open: true,
+        label: "مفتوح",
+        phase: "EXHIBITION"
+      },
     },
     {
       id: 2,
-      season: "السادس",
-      openDate: "12/4/2025",
-      closeDate: "12/4/2025",
-      applications: 30,
-      status: "مغلق - قيد التقييم",
-      statusType: "evaluation",
+      year: 2025,
+      name: "السادس",
+      start_date: "12/4/2025",
+      end_date: "12/4/2025",
+      ideas_count: 30,
+      status: {
+        is_open: false,
+        label: "مغلق - قيد التقييم",
+        phase: "EVALUATION"
+      },
     },
     {
       id: 3,
-      season: "السادس",
-      openDate: "12/4/2025",
-      closeDate: "12/4/2025",
-      applications: 30,
-      status: "مغلق - مرحلة المعسكر",
-      statusType: "camp",
+      year: 2025,
+      name: "السادس",
+      start_date: "12/4/2025",
+      end_date: "12/4/2025",
+      ideas_count: 30,
+      status: {
+        is_open: false,
+        label: "مغلق - مرحلة المعسكر",
+        phase: "BOOTCAMP"
+      },
     },
     {
       id: 4,
-      season: "السادس",
-      openDate: "12/4/2025",
-      closeDate: "12/4/2025",
-      applications: 30,
-      status: "منتهي",
-      statusType: "finished",
-    },
+      year: 2024,
+      name: "الخامس",
+      start_date: "10/3/2024",
+      end_date: "10/4/2024",
+      ideas_count: 25,
+      status: {
+        is_open: false,
+        label: "محتضن",
+        phase: "INCUBATION"
+      },
+    }
   ];
 
-  // استخدام البيانات من API إذا وجدت، وإلا استخدام الثابتة
-  const seasons = /*seasonsFromApi ||*/ seasonsData;
+  // استخدام البيانات الثابتة حالياً
+  const seasons = seasonsData;
   // const isLoading = false;
   // const error = null;
 
@@ -65,11 +83,22 @@ const IncubationSeasonsPage = () => {
     seasonsList = seasons.data;
   }
 
-  const statusColors = {
-    open: "bg-green-color text-white",
-    evaluation: "bg-red-color text-white",
-    camp: "bg-second-color text-white",
-    finished: "bg-yellow-400 text-white",
+  //  فلترة المواسم حسب السنة المختارة
+  const filteredSeasons = seasonsList.filter((season) => season.year === parseInt(year));
+
+  //  دالة تحديد لون الحالة
+  const getStatusColor = (status) => {
+    if (status.is_open) return "bg-green-color text-white";
+    switch (status.phase) {
+      case "EVALUATION":
+        return "bg-red-color text-white";
+      case "BOOTCAMP":
+        return "bg-second-color text-white";
+      case "INCUBATION":
+        return "bg-blue-500 text-white";
+      default:
+        return "bg-yellow-400 text-white";
+    }
   };
 
   const columns = [
@@ -87,22 +116,23 @@ const IncubationSeasonsPage = () => {
       key: "status",
       label: "الحالة الحالية",
       render: (row) => (
-        <span
-          className={`px-3 py-1 rounded-md text-sm ${statusColors[row.statusType]}`}
-        >
-          {row.status}
+        <span className={`px-3 py-1 rounded-md text-sm ${getStatusColor(row.status)}`}>
+          {row.status.label}
         </span>
       ),
     }, 
-    { key: "openDate", label: "تاريخ فتح" }, 
-    { key: "closeDate", label: "تاريخ إغلاق" }, 
-    { key: "applications", label: "عدد الطلبات المستلمة" },
-    { key: "season", label: "الموسم" }, 
+    { key: "start_date", label: "تاريخ فتح التقديم" }, 
+    { key: "end_date", label: "تاريخ إغلاق التقديم" }, 
+    { key: "ideas_count", label: "عدد الطلبات المستلمة" },
+    { key: "name", label: "الموسم" }, 
   ];
 
   const createSeason = () => {
     navigate("/admin/create-season");
   };
+
+  // سنوات متاحة للفلتر (مستخرجة من البيانات)
+  const availableYears = [...new Set(seasonsList.map(s => s.year))].sort((a, b) => b - a);
 
   // if (isLoading) {
   //   return (
@@ -145,28 +175,26 @@ const IncubationSeasonsPage = () => {
       />
 
       <div className="container mt-30">
-        <h1 className="text-xl font-bold">مواسم الاحتضان</h1>
+        <h1 className="text-xl font-bold mb-4">مواسم الاحتضان</h1>
 
-        {/* فلتر السنة */}
-        <div className="mb-4">
-          <select
+     
+        <div className="w-60 mb-4">
+          <Select
+            label="السنة"
             value={year}
             onChange={(e) => setYear(e.target.value)}
-            className="border border-gray-300 px-3 py-2 rounded-md"
-          >
-            <option value="2024">2024</option>
-            <option value="2025">2025</option>
-            <option value="2026">2026</option>
-          </select>
+            options={availableYears.map(y => ({ value: y.toString(), label: y.toString() }))}
+            placeholder="اختر السنة"
+          />
         </div>
 
         {/* الجدول */}
-        {seasonsList.length === 0 ? (
+        {filteredSeasons.length === 0 ? (
           <div className="text-center py-10 text-gray-500">
             لا توجد مواسم احتضان للسنة {year}
           </div>
         ) : (
-          <DataTable columns={columns} data={seasonsList} />
+          <DataTable columns={columns} data={filteredSeasons} />
         )}
       </div>
     </>
