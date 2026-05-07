@@ -6,8 +6,8 @@ export const sessionsApi = apiSlice.injectEndpoints({
 
   // إضافة جلسة جديدة  
    addSession: builder.mutation({
-  query: (sessionData ) => ({
-    url: `/admin/bootcamp/sessions/create`,
+  query: ({sessionData, season_id}) => ({
+    url: `/admin/bootcamp/sessions/${season_id}/create`,
     method: 'POST',
     body: sessionData,
   }),

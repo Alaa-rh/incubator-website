@@ -6,26 +6,44 @@ export const volunteersOptionsApi = apiSlice.injectEndpoints({
 
     // جلب المتطوعين
     getVolunteers: builder.query({
-      query: () => '/admin/volunteers/',
+      query: () => '/admin/volunteers/approved/',
       providesTags: ['Volunteers'],
     }),
 
     // جلب طلبات التطوع
     getVolunteerRequests: builder.query({
-      query: () => '/admin/volunteer-requests/',
+      query: () => '/admin/volunteer/pending/',
       providesTags: ['VolunteerRequests'],
     }),
 
     // جلب المقيمين
     getEvaluators: builder.query({
-      query: () => '/admin/evaluators/',
+      query: () => '/admin/volunteers/evaluators/',
       providesTags: ['Evaluators'],
+    }),
+
+    //ارسال دعوة تقييم
+    sendEvaluationInvitation: builder.mutation({
+      query: (evaluator_id) => ({
+        url: `/admin/volunteers/${evaluator_id}/send-invitation/`,
+        method: 'POST',
+      }),
+      invalidatesTags: ['Evaluators'],
+    }),
+
+    //ازالة دور مقيم
+    removeEvaluatorRole: builder.mutation({
+      query: (evaluator_id) => ({
+        url: `/admin/volunteers/${evaluator_id}/remove-evaluator-role/`,
+        method: 'POST',
+      }),
+      invalidatesTags: ['Evaluators'],
     }),
 
     // قبول طلب تطوع
     approveVolunteerRequest: builder.mutation({
-      query: (requestId) => ({
-        url: `/admin/volunteer-requests/${requestId}/approve/`,
+      query: (volunteer_id) => ({
+        url: `/admin/volunteers/${volunteer_id}/approve/`,
         method: 'POST',
       }),
       invalidatesTags: ['VolunteerRequests', 'Volunteers'],
@@ -33,8 +51,8 @@ export const volunteersOptionsApi = apiSlice.injectEndpoints({
 
     // رفض طلب تطوع
     rejectVolunteerRequest: builder.mutation({
-      query: (requestId) => ({
-        url: `/admin/volunteer-requests/${requestId}/reject/`,
+      query: (volunteer_id) => ({
+        url: `/admin/volunteers/${volunteer_id}/reject/`,
         method: 'POST',
       }),
       invalidatesTags: ['VolunteerRequests'],
@@ -49,4 +67,6 @@ export const {
   useGetEvaluatorsQuery,
   useApproveVolunteerRequestMutation,
   useRejectVolunteerRequestMutation,
+  useSendEvaluationInvitationMutation,
+  useRemoveEvaluatorRoleMutation,
 } = volunteersOptionsApi;

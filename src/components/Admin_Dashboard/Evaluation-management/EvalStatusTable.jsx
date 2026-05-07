@@ -5,11 +5,11 @@ import Select from "../../Select";
 import Modal from "../../Modal";
 import Input from "../../Input";
 import EvaluatorsModal from "./EvaluatorsModal";
+import { showSuccess, showError } from "../../../Utils/toast";
 
 // import { useGetProjectsWithMeetingsQuery, useGetEvaluatorsForMeetingQuery, useSetMeetingDateMutation } from "../../api/endpoints/evaluationApi";
 
 export default function EvalStatusTable() {
-
   const [projectsData, setProjectsData] = useState([
     {
       id: 1,
@@ -17,7 +17,7 @@ export default function EvalStatusTable() {
       sector: "الكترونيات",
       target_audience: "التجار",
       has_evaluators: true,
-      meeting_date: "2025-05-20T14:00"
+      meeting_date: "2025-05-20T14:00",
     },
     {
       id: 2,
@@ -25,7 +25,7 @@ export default function EvalStatusTable() {
       sector: "خدمات",
       target_audience: "الأفراد",
       has_evaluators: true,
-      meeting_date: null
+      meeting_date: null,
     },
     {
       id: 3,
@@ -33,19 +33,17 @@ export default function EvalStatusTable() {
       sector: "تعليم",
       target_audience: "الطلاب",
       has_evaluators: false,
-      meeting_date: "2025-05-22T10:00"
-    }
+      meeting_date: "2025-05-22T10:00",
+    },
   ]);
 
   const assignedEvaluatorsData = {
     1: [
-      {id: 1, name: "أحمد المحمد", specialization: "UI/UX", image: null },
-      {id: 2, name: "رانيا الأحمد", specialization: "تسويق رقمي", image: null },
+      { id: 1, name: "أحمد المحمد", specialization: "UI/UX", image: null },
+      { id: 2, name: "رانيا الأحمد", specialization: "تسويق رقمي", image: null },
     ],
-    2: [
-      {id: 3, name: "خالد حسن", specialization: "Mobile Apps", image: null },
-    ],
-    3: []
+    2: [{ id: 3, name: "خالد حسن", specialization: "Mobile Apps", image: null }],
+    3: [],
   };
 
   // const { data: projectsFromApi, isLoading, error, refetch } = useGetProjectsWithMeetingsQuery();
@@ -57,7 +55,7 @@ export default function EvalStatusTable() {
   const [modals, setModals] = useState({
     evals: false,
     schedule: false,
-    data: []
+    data: [],
   });
   const [schedule, setSchedule] = useState(null);
   const [selectedProject, setSelectedProject] = useState(null);
@@ -82,23 +80,20 @@ export default function EvalStatusTable() {
     setModals({
       ...modals,
       evals: true,
-      data: evaluators
+      data: evaluators,
     });
   };
 
   const handleAction = (e) => {
     const actionValue = e.target.value;
-
     if (actionValue === "all") {
       setSel(projectsList.map((p) => p.id));
     }
-
     if (actionValue === "none") {
       setSel([]);
     }
   };
 
-  
   const openScheduleModal = (project) => {
     setSelectedProject(project);
     setSchedule(project.meeting_date || "");
@@ -107,58 +102,35 @@ export default function EvalStatusTable() {
 
   const handleSetMeeting = async () => {
     if (!schedule) {
-      alert("الرجاء تحديد تاريخ ووقت");
+      showError("الرجاء تحديد تاريخ ووقت اللجنة");
       return;
     }
 
     setIsSubmitting(true);
 
-    // TODO: بعد الربط  هذا الكود
-    // try {
-    //   await setMeetingDate({
-    //     idea_id: selectedProject.id,
-    //     meetingDate: schedule
-    //   }).unwrap();
-    //   
-    
-    //   setProjectsData(prev =>
-    //     prev.map(p =>
-    //       p.id === selectedProject.id
-    //         ? { ...p, meeting_date: schedule }
-    //         : p
-    //     )
-    //   );
-    //   
-    //   alert("تم تعيين موعد التقييم بنجاح. سيتم إرسال إشعار للمستخدم.");
-    //   setModals({ ...modals, schedule: false });
-    //   setSelectedProject(null);
-    //   setSchedule(null);
-    // } catch (error) {
-    //   console.error("Error setting meeting date:", error);
-    //   alert(error?.data?.message || "حدث خطأ في تعيين الموعد");
-    // } finally {
-    //   setIsSubmitting(false);
-    // }
+    try {
+      // await setMeetingDate({ idea_id: selectedProject.id, meetingDate: schedule }).unwrap();
 
- 
-    console.log("📅 تعيين موعد للمشروع:", { projectId: selectedProject?.id, meetingDate: schedule });
-    
- 
-    setProjectsData(prev =>
-      prev.map(p =>
-        p.id === selectedProject?.id
-          ? { ...p, meeting_date: schedule }
-          : p
-      )
-    );
-    
-    setTimeout(() => {
-      alert("تم تعيين موعد التقييم بنجاح (محاكاة)");
+      // محاكاة نجاح العملية (تتحذف عند الربط الحقيقي)
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      // تحديث الموعد محلياً
+      setProjectsData((prev) =>
+        prev.map((p) =>
+          p.id === selectedProject.id ? { ...p, meeting_date: schedule } : p
+        )
+      );
+
+      showSuccess(` تم تعيين موعد التقييم للمشروع "${selectedProject.title}" بنجاح..`);
       setModals({ ...modals, schedule: false });
       setSelectedProject(null);
       setSchedule(null);
+    } catch (error) {
+      console.error("Error setting meeting date:", error);
+      showError(error?.data?.message || "حدث خطأ في تعيين الموعد");
+    } finally {
       setIsSubmitting(false);
-    }, 500);
+    }
   };
 
   const columns = [
@@ -166,10 +138,7 @@ export default function EvalStatusTable() {
       key: "actions",
       label: "الإجراءات",
       render: (row) => (
-        <Checkbox
-          checked={sel.includes(row.id)}
-          onChange={() => toggle(row.id)}
-        />
+        <Checkbox checked={sel.includes(row.id)} onChange={() => toggle(row.id)} />
       ),
     },
     {
@@ -214,9 +183,7 @@ export default function EvalStatusTable() {
     {
       key: "title",
       label: "اسم المشروع",
-      render: (row) => (
-        <span className="font-bold text-right block">{row.title}</span>
-      ),
+      render: (row) => <span className="font-bold text-right block">{row.title}</span>,
     },
   ];
 
@@ -238,7 +205,6 @@ export default function EvalStatusTable() {
         />
       </div>
 
-      {/* الجدول */}
       <div className="mt-4">
         {projectsList.length === 0 ? (
           <div className="text-center py-10 text-gray-500">
@@ -249,7 +215,6 @@ export default function EvalStatusTable() {
         )}
       </div>
 
-      {/* مودال عرض المقيمين */}
       <EvaluatorsModal
         isOpen={modals.evals}
         onClose={() => setModals({ ...modals, evals: false })}

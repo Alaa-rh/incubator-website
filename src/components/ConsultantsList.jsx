@@ -16,13 +16,13 @@ const ConsultantsList = ({ consultants, role = "user" }) => {
           key={c.id}
           className="flex items-center gap-4 p-4 border border-second-color shadow rounded-xl"
         >
-          <img src={c.image} className="w-20 h-20 rounded-full" />
+          <img src={c.avatar} className="w-20 h-20 rounded-full" />
 
           <div className="flex-1">
             <p className="font-bold">{c.name}</p>
-            {c.specialty && <p className="font-bold">{c.specialty}</p>}
-            {c.activeTime && (
-              <p className="font-bold">أوقات النشاط: {c.activeTime}</p>
+            {c.specialization && <p className="font-bold">{c.specialization}</p>}
+            {c.availability && (
+              <p className="font-bold">أوقات النشاط: {c.availability.join(", ")}</p>
             )}
           </div>
 

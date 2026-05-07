@@ -1,14 +1,17 @@
-import React, { useState, /*useEffect */} from "react";
+import React, { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import Input from "../../components/Input";
 import Select from "../../components/Select";
 import Button from "../../components/Button";
-import { useNavigate } from "react-router-dom";
+import { showSuccess, showError } from "../../Utils/toast";
 
 // import { useGetAvailableTrainersQuery } from "../../api/endpoints/admin/trainersApi";
 // import { useAddSessionMutation } from "../../api/endpoints/admin/sessionsApi";
 
 const AddSessionPage = () => {
+  const { season_id } = useParams();
   const navigate = useNavigate();
+
   // const { data: trainersData, isLoading: isLoadingTrainers } = useGetAvailableTrainersQuery();
   // const [addSession, { isLoading: isSubmitting }] = useAddSessionMutation();
 
@@ -23,10 +26,8 @@ const AddSessionPage = () => {
   });
 
   const [errors, setErrors] = useState({});
-  const [submitError, setSubmitError] = useState("");
-  const [submitSuccess, setSubmitSuccess] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // بيانات ثابتة (fallback) إلى حين الربط
   const fallbackTrainers = [
     { value: "1", label: "أحمد محمد" },
     { value: "2", label: "سارة خالد" },
@@ -34,13 +35,11 @@ const AddSessionPage = () => {
     { value: "4", label: "نورا حسن" },
   ];
 
-  const trainers = /*trainersData?.trainers ||*/ fallbackTrainers;
+  const trainers = fallbackTrainers;
 
   const handleChange = (field, value) => {
     setSession({ ...session, [field]: value });
-    if (errors[field]) {
-      setErrors({ ...errors, [field]: "" });
-    }
+    if (errors[field]) setErrors({ ...errors, [field]: "" });
   };
 
   const validate = () => {
@@ -51,60 +50,36 @@ const AddSessionPage = () => {
     if (!session.start_time) newErrors.start_time = "وقت بدء الجلسة مطلوب";
     if (!session.end_time) newErrors.end_time = "وقت انتهاء الجلسة مطلوب";
     if (!session.date) newErrors.date = "تاريخ الجلسة مطلوب";
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async () => {
-    setSubmitError("");
-    setSubmitSuccess("");
-
     if (!validate()) return;
+    if (!season_id) {
+      showError("لا يمكن تحديد الموسم الحالي");
+      return;
+    }
 
-    // try {
-    //   await addSession(session).unwrap();
-    //   setSubmitSuccess("تم إضافة الجلسة بنجاح. سيتم إرسال الإشعارات للمشاركين.");
-    //   setSession({
-    //     title: "",
-    //     trainer: "",
-    //     tasks: "",
-    //     location: "",
-    //     time: "",
-    //     date: "",
-    //   });
-    //   setTimeout(() => {
-    //     navigate(-1);
-    //   }, 2000);
-    // } catch (error) {
-    //   console.error("Error adding session:", error);
-    //   setSubmitError(error?.data?.message || "حدث خطأ في إضافة الجلسة");
-    // }
+    setIsSubmitting(true);
 
-    // حالياً: محاكاة
-    console.log("New session:", session);
-    setSubmitSuccess("تم إضافة الجلسة بنجاح (محاكاة)");
-    setTimeout(() => {
+    try {
+      // await addSession({ sessionData: session, season_id }).unwrap();
+      await new Promise(resolve => setTimeout(resolve, 500)); // محاكاة
+      showSuccess("تم إضافة الجلسة بنجاح. سيتم إرسال الإشعارات للمشاركين.");
       navigate(-1);
-    }, 1500);
+    } catch (err) {
+      console.error(err);
+      showError(err?.data?.message || "حدث خطأ في إضافة الجلسة");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <div className="container px-6 py-20">
       <h2 className="text-2xl text-second-color font-bold mb-8">إضافة جلسة</h2>
 
-      {/* رسائل النجاح والخطأ */}
-      {submitError && (
-        <div className="bg-red-100 text-red-700 p-3 rounded mb-4 text-center">
-          {submitError}
-        </div>
-      )}
-      {submitSuccess && (
-        <div className="bg-green-100 text-green-700 p-3 rounded mb-4 text-center">
-          {submitSuccess}
-        </div>
-      )}
-      
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-3">
         <Input
           label="عنوان الجلسة"
@@ -112,7 +87,6 @@ const AddSessionPage = () => {
           onChange={(e) => handleChange("title", e.target.value)}
           error={errors.title}
         />
-
         <Select
           label="تعيين المدرب"
           value={session.trainer}
@@ -121,20 +95,17 @@ const AddSessionPage = () => {
           placeholder="اختر المدرب"
           error={errors.trainer}
         />
-
         <Input
           label="المهام المطلوبة"
           value={session.tasks}
           onChange={(e) => handleChange("tasks", e.target.value)}
         />
-
         <Input
           label="موقع المعسكر"
           value={session.location}
           onChange={(e) => handleChange("location", e.target.value)}
           error={errors.location}
         />
-
         <Input
           label="وقت بدء الجلسة"
           type="time"
@@ -156,12 +127,13 @@ const AddSessionPage = () => {
           onChange={(e) => handleChange("date", e.target.value)}
           error={errors.date}
         />
-      </div> 
+      </div>
+
       <div className="flex justify-center mt-6">
         <Button
-          label={/*isSubmitting ? "جاري الإرسال..." : */  "إرسال الإشعار بالموعد"}
+          label={isSubmitting ? "جاري الإرسال..." : "إرسال الإشعار بالموعد"}
           onClick={handleSubmit}
-          // disabled={isSubmitting}
+          disabled={isSubmitting}
           className="bg-main-color w-50"
         />
       </div>

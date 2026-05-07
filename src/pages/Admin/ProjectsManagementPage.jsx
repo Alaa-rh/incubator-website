@@ -6,6 +6,7 @@ import Button from "../../components/Button";
 import AdminNavbar from "../../components/AdminNavbar";
 import { useNavigate } from 'react-router-dom';
 import ProjectsTable from '../../components/Admin_Dashboard/ProjectsTable';
+import { showSuccess, showError } from "../../Utils/toast";
 
 // import { useSetMeetingDateMutation } from "../../api/endpoints/evaluationApi";
 
@@ -27,40 +28,29 @@ const ProjectsManagementPage = () => {
 
   const handleSetMeeting = async () => {
     if (!schedule) {
-      alert("الرجاء تحديد تاريخ ووقت");
+      showError("الرجاء تحديد تاريخ ووقت اللجنة");
       return;
     }
 
     setIsSubmitting(true);
 
-    // TODO: بعد الربط هذا الكود
-    // try {
-    //   await setMeetingDate({
-    //     idea_id: selectedIdeaId,
-    //     meetingDate: schedule
-    //   }).unwrap();
-    //   alert("تم تعيين موعد التقييم بنجاح. سيتم إرسال إشعار للمستخدم.");
-    //   setModalOpen(false);
-    //   setSelectedIdeaId(null);
-    //   setSchedule("");
-    // } catch (error) {
-    //   console.error("Error setting meeting date:", error);
-    //   alert(error?.data?.message || "حدث خطأ في تعيين الموعد");
-    // } finally {
-    //   setIsSubmitting(false);
-    // }
+    try {
+      // await setMeetingDate({ idea_id: selectedIdeaId, meetingDate: schedule }).unwrap();
+      
+      // محاكاة نجاح العملية (تتحذف عند الربط الحقيقي)
+      await new Promise(resolve => setTimeout(resolve, 500));
 
-    // حالياً: محاكاة للإرسال
-    console.log(" تعيين موعد للمشروع:", { idea_id: selectedIdeaId, meetingDate: schedule });
-    setTimeout(() => {
-      alert(`تم تعيين موعد التقييم للمشروع رقم ${selectedIdeaId} بنجاح (محاكاة)`);
+      showSuccess(`تم تعيين موعد التقييم للمشروع رقم ${selectedIdeaId} بنجاح.`);
       setModalOpen(false);
       setSelectedIdeaId(null);
       setSchedule("");
+    } catch (error) {
+      console.error("Error setting meeting date:", error);
+      showError(error?.data?.message || "❌ حدث خطأ في تعيين الموعد");
+    } finally {
       setIsSubmitting(false);
-    }, 500);
+    }
   };
-
 
   return (
     <div>

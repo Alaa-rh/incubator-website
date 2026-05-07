@@ -4,13 +4,14 @@ import SeasonSettings from "../../components/Admin_Dashboard/IncubationSeasons/S
 import FormBuilder from "../../components/Admin_Dashboard/IncubationSeasons/FormBuilder";
 import ApplicationsReview from "../../components/Admin_Dashboard/IncubationSeasons/ApplicationsReview";
 import NavLinkUniversal from "../../components/NavLinkUniversal";
+import { showSuccess, showError } from "../../Utils/toast";
 // import { useGetSeasonDetailsQuery, useCloseSubmissionsMutation } from "../../api/endpoints/admin/seasonsApi";
 
 const SeasonDetailsPage = () => {
   // const { id } = useParams();
-
   // const { data: season, isLoading, error, refetch } = useGetSeasonDetailsQuery(id);
- // const [closeSubmissions, {isLoading: isClosing}] = useCloseSubmissionsMutation();
+  // const [closeSubmissions, { isLoading: isClosing }] = useCloseSubmissionsMutation();
+
   const seasonData = {
     id: 1,
     ideas_count: 30,
@@ -21,88 +22,41 @@ const SeasonDetailsPage = () => {
     description: "يكتب هنا وصف الموسم",
     phase: "SUBMISSION",
     ideas: [
-      {
-        id: 1,
-        project_name: "منصة تعليمية",
-        submitted_by: "أحمد المحمد",
-        submitted_at: "2024-02-12",
-      },
-      {
-        id: 2,
-        project_name: "تطبيق طبي",
-        submitted_by: "سارة الأحمد",
-        submitted_at: "2024-02-10",
-      },
+      { id: 1, project_name: "منصة تعليمية", submitted_by: "أحمد المحمد", submitted_at: "2024-02-12" },
+      { id: 2, project_name: "تطبيق طبي", submitted_by: "سارة الأحمد", submitted_at: "2024-02-10" },
     ],
   };
 
-  // استخدام البيانات من API إذا وجدت، وإلا استخدام الثابتة
   const season = seasonData;
-  // const isLoading = false;
-  // const error = null;
-
-  // التبويب الحالي
   const [activeTab, setActiveTab] = useState("settings");
 
-  // منطق إظهار التبويبات حسب حالة الموسم
-  const showSettings = season.phase !== "Bootcamp" && season.phase !== "finished";
+  const showSettings = season.phase !== "BOOTCAMP" && season.phase !== "FINISHED";
   const showForm = season.phase === "SUBMISSION";
   const showReview = season.phase !== "";
 
-  const handleCloseSubmission = async (seasonId) => {
-    if (window.confirm("هل أنت متأكد من إغلاق التقديم للموسم؟")) {
-      try {
-        // await closeSubmissions(seasonId).unwrap();
-        console.log(`إغلاق التقديم للموسم ${seasonId}`);
-        alert("تم إغلاق التقديم بنجاح");
-        // refetch();
-      } catch (err) {
-        console.error(err);
-        alert(err?.data?.message || "حدث خطأ أثناء إغلاق التقديم");
-      }
+   const handleCloseSubmission = async (seasonId) => {
+    try {
+      // await closeSubmissions(seasonId).unwrap();
+      console.log(`إغلاق التقديم للموسم ${seasonId}`);
+      showSuccess("تم إغلاق التقديم بنجاح");
+    } catch (err) {
+      showError(err?.data?.message || "حدث خطأ أثناء إغلاق التقديم");
     }
   };
-
-  // if (isLoading) {
-  //   return (
-  //     <div className="w-full min-h-screen bg-white-color pt-10">
-  //       <div className="container text-center py-20">
-  //         <p className="text-gray-500">جاري تحميل تفاصيل الموسم...</p>
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
-  // if (error) {
-  //   return (
-  //     <div className="w-full min-h-screen bg-white-color pt-10">
-  //       <div className="container text-center py-20">
-  //         <p className="text-red-500 mb-3">حدث خطأ في تحميل تفاصيل الموسم</p>
-  //         <button
-  //           onClick={refetch}
-  //           className="bg-main-color text-white px-4 py-2 rounded"
-  //         >
-  //           إعادة المحاولة
-  //         </button>
-  //       </div>
-  //     </div>
-  //   );
-  // }
 
   return (
     <div className="w-full min-h-screen bg-white-color pt-10">
       <div className="container">
         <div className="flex justify-end">
-          <NavLinkUniversal 
-            to="/admin/camp-management" 
-            label="إدارة المعسكر" 
-            className="bg-main-color text-white rounded px-3 py-1" 
+          <NavLinkUniversal
+            to="/admin/camp-management"
+            label="إدارة المعسكر"
+            className="bg-main-color text-white rounded px-3 py-1"
           />
         </div>
 
         <h1 className="text-xl font-bold mb-6">تفاصيل الموسم</h1>
 
-        {/* التبويبات */}
         <div className="flex gap-4 mb-6 border-b pb-2">
           {showSettings && (
             <button
@@ -114,7 +68,6 @@ const SeasonDetailsPage = () => {
               الإعدادات
             </button>
           )}
-
           {showForm && (
             <button
               onClick={() => setActiveTab("form")}
@@ -125,7 +78,6 @@ const SeasonDetailsPage = () => {
               تصميم النموذج
             </button>
           )}
-
           {showReview && (
             <button
               onClick={() => setActiveTab("review")}
@@ -138,7 +90,6 @@ const SeasonDetailsPage = () => {
           )}
         </div>
 
-        {/* محتوى التبويبات */}
         {activeTab === "settings" && showSettings && (
           <SeasonSettings
             season={season}
@@ -146,16 +97,9 @@ const SeasonDetailsPage = () => {
             onCloseSubmission={handleCloseSubmission}
           />
         )}
-
-        {activeTab === "form" && showForm && (
-          <FormBuilder season={season} />
-        )}
-
+        {activeTab === "form" && showForm && <FormBuilder season={season} />}
         {activeTab === "review" && showReview && (
-          <ApplicationsReview 
-            season={season} 
-            applications={season.ideas || []} 
-          />
+          <ApplicationsReview season={season} applications={season.ideas || []} />
         )}
       </div>
     </div>

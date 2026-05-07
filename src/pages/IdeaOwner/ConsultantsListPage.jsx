@@ -14,29 +14,29 @@ const ConsultantsListPage = () => {
     {
       id: 1,
       name: "رانيا الأحمد",
-      specialty: "uiux",
-      activeTime: "2:00pm إلى 4:00pm",
-      image: avatar,
+      specialization: "uiux",
+      availability: ["2:00pm إلى 4:00pm"],
+      avatar: avatar,
     },
     {
       id: 2,
       name: "محمد العلي",
-      specialty: "legal",
-      activeTime: "1:00pm إلى 3:00pm",
-      image: avatar,
+      specialization: "legal",
+      availability: ["1:00pm إلى 3:00pm"],
+      avatar: avatar,
     },
     {
       id: 3,
       name: "سارة خالد",
-      specialty: "marketing",
-      activeTime: "11:00am إلى 1:00pm",
-      image: avatar,
+      specialization: "marketing",
+      availability: ["11:00am إلى 1:00pm"],
+      avatar: avatar,
     },
   ];
 
   // تصفية المستشارين بحسب الاختصاص (للبيانات الثابتة)
   const filteredConsultants = consultantsData.filter(
-    (c) => c.specialty === categoryId
+    (c) => c.specialization === categoryId
   );
 
   // TODO: بعد الربط  هذا الكود بدل الـ filteredConsultants

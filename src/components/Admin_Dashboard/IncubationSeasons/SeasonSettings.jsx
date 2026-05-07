@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Input from "../../Input";
 import Textarea from "../../Textarea";
 import Button from "../../Button";
+import { showSuccess, showError } from "../../../Utils/toast";
+import Modal from "../../Modal";
 
 // import { useUpdateIncubationSeasonMutation } from "../../../api/endpoints/seasonsApi";
 
@@ -11,9 +13,8 @@ const SeasonSettings = ({ season, onSave, onCloseSubmission }) => {
   const [name, setName] = useState(season.name || "");
   const [description, setDescription] = useState(season.description || "");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState("");
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
-  // استخدام القيم من season مباشرة
   const remaining_days = season.remaining_days || 0;
   const ideas_count = season.ideas_count || season.idea_count || 0;
 
@@ -37,13 +38,10 @@ const SeasonSettings = ({ season, onSave, onCloseSubmission }) => {
 
   const { isOpen, phaseLabel } = getPhaseStatus();
 
-  // TODO: بعد الربط استخدمي هذا السطر
   // const [updateSeason, { isLoading }] = useUpdateIncubationSeasonMutation();
 
   const handleSave = async () => {
     setIsSubmitting(true);
-    setError("");
-
     const updated = {
       id: season.id,
       name,
@@ -53,29 +51,18 @@ const SeasonSettings = ({ season, onSave, onCloseSubmission }) => {
       phase: season.phase,
     };
 
-    // try {
-    //   await updateSeason({ id: season.id, data: updated }).unwrap();
-    //   alert("تم حفظ التغييرات بنجاح");
-    //   onSave && onSave(updated);
-    // } catch (err) {
-    //   console.error("Error updating season:", err);
-    //   setError(err?.data?.message || "حدث خطأ في حفظ التغييرات");
-    // } finally {
-    //   setIsSubmitting(false);
-    // }
+    try {
+      // await updateSeason({ id: season.id, data: updated }).unwrap();
+      // محاكاة النجاح
+      await new Promise((resolve) => setTimeout(resolve, 500));
 
-    // حالياً: محاكاة للإرسال
-    console.log("حفظ التغييرات:", updated);
-    setTimeout(() => {
-      alert("تم حفظ التغييرات بنجاح (محاكاة)");
+      showSuccess(" تم حفظ التغييرات بنجاح");
       onSave && onSave(updated);
+    } catch (err) {
+      console.error(err);
+      showError(err?.data?.message || " حدث خطأ في حفظ التغييرات");
+    } finally {
       setIsSubmitting(false);
-    }, 500);
-  };
-
-  const handleCloseSubmission = () => {
-    if (window.confirm("هل أنت متأكد من إغلاق التقديم؟")) {
-      onCloseSubmission && onCloseSubmission(season.id);
     }
   };
 
@@ -83,7 +70,6 @@ const SeasonSettings = ({ season, onSave, onCloseSubmission }) => {
     <div className="flex gap-6">
       {/* العمود الأيمن */}
       <div className="flex-1 p-5">
-        {/* عنوان الموسم */}
         <div className="mb-6">
           <h1 className="text-lg font-bold mb-1">
             {name || season.name}
@@ -93,14 +79,8 @@ const SeasonSettings = ({ season, onSave, onCloseSubmission }) => {
           </h1>
         </div>
 
-        {/* عرض الخطأ */}
-        {error && (
-          <div className="bg-red-100 text-red-700 p-3 rounded mb-4 text-center">
-            {error}
-          </div>
-        )}
+        {/* لم نعد نعرض error div، الأخطاء تظهر عبر Toast */}
 
-        {/* تواريخ التقديم */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
           <Input
             label="تاريخ بدء التقديم"
@@ -110,7 +90,6 @@ const SeasonSettings = ({ season, onSave, onCloseSubmission }) => {
             onChange={(e) => setStartDate(e.target.value)}
             disabled={isSubmitting}
           />
-
           <Input
             label="تاريخ انتهاء التقديم"
             type="date"
@@ -121,7 +100,6 @@ const SeasonSettings = ({ season, onSave, onCloseSubmission }) => {
           />
         </div>
 
-        {/* اسم الموسم */}
         <div className="mb-4">
           <Input
             label="اسم الموسم"
@@ -133,7 +111,6 @@ const SeasonSettings = ({ season, onSave, onCloseSubmission }) => {
           />
         </div>
 
-        {/* وصف الموسم */}
         <div className="mb-4">
           <Textarea
             label="وصف الموسم"
@@ -145,7 +122,6 @@ const SeasonSettings = ({ season, onSave, onCloseSubmission }) => {
           />
         </div>
 
-        {/* الأزرار */}
         <div className="flex flex-wrap gap-3 justify-between items-center">
           <div className="flex gap-3">
             <Button
@@ -155,25 +131,50 @@ const SeasonSettings = ({ season, onSave, onCloseSubmission }) => {
               disabled={isSubmitting}
             />
           </div>
-
-          {isOpen && (
-            <Button
-              label="إغلاق التقديم"
-              onClick={handleCloseSubmission}
-              className="bg-main-color"
-              disabled={isSubmitting}
-            />
-          )}
+           {isOpen && (
+          <Button
+            label="إغلاق التقديم"
+            onClick={() => setIsConfirmOpen(true)}
+            className="bg-main-color"
+            disabled={isSubmitting}
+          />
+        )}
         </div>
       </div>
+       <Modal
+        isOpen={isConfirmOpen}
+        onClose={() => setIsConfirmOpen(false)}
+        title="تأكيد إغلاق التقديم"
+        footer={
+          <div className="flex gap-3 justify-end">
+            <Button
+              label="نعم، أغلق التقديم"
+              onClick={() => {
+                onCloseSubmission(season.id);
+                setIsConfirmOpen(false);
+              }}
+              className="bg-main-color"
+            />
+            <button
+              onClick={() => setIsConfirmOpen(false)}
+              className="border border-second-color px-4 py-2 rounded"
+            >
+              إلغاء
+            </button>
+          </div>
+        }
+      >
+        <p className="text-center text-sm text-gray-500 mt-2">
+          سيتم إرسال إشعار لجميع المستخدمين بأن التقديم أغلق، ولن يتمكن أحد من تقديم أفكار جديدة.
+        </p>
+      </Modal>
 
-      {/* العمود الأيسر - عرض عدد الطلبات والأيام المتبقية */}
+      {/* العمود الأيسر */}
       <div className="w-64 h-fit border border-second-color bg-white rounded-lg shadow p-4 flex flex-col gap-2">
         <p className="text-sm">
           <span className="font-semibold">عدد الطلبات المستلمة: </span>
           {ideas_count}
         </p>
-
         {isOpen && (
           <p className="text-sm">
             <span className="font-semibold">المتبقي لإغلاق التقديم: </span>

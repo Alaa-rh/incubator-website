@@ -1,23 +1,20 @@
 import React, { useState } from "react";
 import Input from "../../Input";
 import Button from "../../Button";
-import Modal from "../../Modal";
+import { showSuccess, showError } from "../../../Utils/toast";
 
 // import { useSetExhibitionDateMutation } from "../../api/endpoints/exhibitionApi";
 
 export default function ExhibitionSchedule() {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
-  const [successModal, setSuccessModal] = useState(false);
-  const [errorModal, setErrorModal] = useState(false);
-  const [errorMessage, /*setErrorMessage*/] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // const [setExhibitionDate, { isLoading }] = useSetExhibitionDateMutation();
 
   const handleSendNotification = async () => {
     if (!date || !time) {
-      alert("يرجى إدخال تاريخ ووقت المعرض");
+      showError("يرجى إدخال تاريخ ووقت المعرض");
       return;
     }
 
@@ -30,22 +27,21 @@ export default function ExhibitionSchedule() {
 
     console.log("Payload to backend:", payload);
 
-    // try {
-    //   await setExhibitionDate(payload).unwrap();
-    //   setSuccessModal(true);
-    // } catch (error) {
-    //   console.error("Error setting exhibition date:", error);
-    //   setErrorMessage(error?.data?.message || "حدث خطأ في تحديد موعد المعرض");
-    //   setErrorModal(true);
-    // } finally {
-    //   setIsSubmitting(false);
-    // }
+    try {
+      // await setExhibitionDate(payload).unwrap();
+      // محاكاة نجاح العملية (تتحذف عند الربط الحقيقي)
+      await new Promise(resolve => setTimeout(resolve, 500));
 
-    // حالياً: محاكاة للإرسال
-    setTimeout(() => {
-      setSuccessModal(true);
+      showSuccess("تم إرسال موعد المعرض لجميع المستخدمين بنجاح.");
+      // إعادة تعيين الحقول بعد النجاح
+      setDate("");
+      setTime("");
+    } catch (error) {
+      console.error("Error setting exhibition date:", error);
+      showError(error?.data?.message || "حدث خطأ في تحديد موعد المعرض");
+    } finally {
       setIsSubmitting(false);
-    }, 500);
+    }
   };
 
   return (
@@ -74,42 +70,6 @@ export default function ExhibitionSchedule() {
           className="bg-main-color"
         />
       </div>
-
-      {/* مودال نجاح */}
-      <Modal
-        isOpen={successModal}
-        onClose={() => setSuccessModal(false)}
-        title="تم إرسال الإشعار"
-        footer={
-          <button
-            onClick={() => setSuccessModal(false)}
-            className="bg-main-color text-white px-6 py-2 rounded-lg"
-          >
-            موافق
-          </button>
-        }
-      >
-        <p className="text-gray-700">
-          تم إرسال موعد المعرض لجميع المستخدمين بنجاح.
-        </p>
-      </Modal>
-
-      {/* مودال خطأ */}
-      <Modal
-        isOpen={errorModal}
-        onClose={() => setErrorModal(false)}
-        title="حدث خطأ"
-        footer={
-          <button
-            onClick={() => setErrorModal(false)}
-            className="bg-main-color text-white px-6 py-2 rounded-lg"
-          >
-            موافق
-          </button>
-        }
-      >
-        <p className="text-gray-700">{errorMessage}</p>
-      </Modal>
     </div>
   );
 }

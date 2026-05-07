@@ -20,18 +20,16 @@ const VolunteersPage = () => {
     {
       id: 1,
       name: "رانيا الأحمد",
-      specialty: "UI/UX",
-      activeTime: "2:00pm إلى 4:00pm",
-      image: "/src/assets/images/avatar.jpg",
-      type: "volunteer",
+      specialization: "UI/UX",
+      availability: ["2:00pm إلى 4:00pm"],
+      avatar: "/src/assets/images/avatar.jpg",
     },
     {
       id: 2,
       name: "محمد علي",
-      specialty: "تطوير برمجيات",
-      activeTime: "10:00am إلى 2:00pm",
-      image: "/src/assets/images/avatar.jpg",
-      type: "volunteer",
+      specialization: "تطوير برمجيات",
+      availability: ["10:00am إلى 2:00pm"],
+      avatar: "/src/assets/images/avatar.jpg",
     },
   ];
 
@@ -39,18 +37,16 @@ const VolunteersPage = () => {
     {
       id: 10,
       name: "أحمد علي",
-      specialty: "متقدم بطلب تطوع",
-      activeTime: "—",
-      image: "/images/user1.png",
-      type: "request",
+      specialization: "متقدم بطلب تطوع",
+      availability: ["—"],
+      avatar: "/images/user1.png",
     },
     {
       id: 11,
       name: "نورا حسن",
-      specialty: "متقدم بطلب تطوع",
-      activeTime: "—",
-      image: "/images/user1.png",
-      type: "request",
+      specialization: "متقدم بطلب تطوع",
+      availability: ["—"],
+      avatar: "/images/user1.png",
     },
   ];
 
@@ -58,18 +54,16 @@ const VolunteersPage = () => {
     {
       id: 20,
       name: "خالد يوسف",
-      specialty: "مقيم مشاريع",
-      activeTime: "—",
-      image: "/images/user1.png",
-      type: "evaluator",
+      specialization: "مقيم مشاريع",
+      availability: ["—"],
+      avatar: "/images/user1.png",
     },
     {
       id: 21,
       name: "سارة أحمد",
-      specialty: "مقيم تقني",
-      activeTime: "—",
-      image: "/images/user1.png",
-      type: "evaluator",
+      specialization: "مقيم تقني",
+      availability: ["—"],
+      avatar: "/images/user1.png",
     },
   ];
 
