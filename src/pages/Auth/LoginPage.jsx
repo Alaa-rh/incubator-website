@@ -131,7 +131,7 @@ const LoginPage = () => {
               >
                 تسجيل الدخول باستخدام Google
               </a>
-              <FcGoogle className="absolute w-5 h-5 ml-6 top-1/5 left-1/2 right-1/5 translate-y-1/8" />
+              <FcGoogle className="absolute w-5 h-5 ml-6 top-1/5 left-1/2 right-1/10  translate-y-1/8" />
             </div>
           </form>
         </div>

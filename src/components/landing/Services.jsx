@@ -2,8 +2,8 @@ import React from 'react'
 import ServiceCard from '../ServiceCard';
 
 const Services = ({id}) => {
-  return (
-    <div className='services-bg w-full h-screen mb-40' id={id}>
+return (
+    <div className='services-bg w-full min-h-screen mb-40' id={id}>
         <div className='container mx-25 h-[50%] flex flex-col justify-start'> 
          <h1 className='text-second-color font-semibold text-[40px] p-5'>الخدمات</h1>
         <ServiceCard 

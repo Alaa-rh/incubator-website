@@ -117,7 +117,7 @@ const EvaluationFormPage = () => {
   //   );
   // }
 
-  return (
+ return (
     <div className="bg-white-color p-4 flex flex-col items-center justify-center">
       <div className="container">
         <h1 className="text-2xl font-bold text-second-color mb-10 text-right">
@@ -160,7 +160,7 @@ const EvaluationFormPage = () => {
                     <BiPlus size={18} />
                   </button>
                 </div>
-                <div className="text-right text-xl text-black font-medium" dir='rtl'>
+                <div className="text-right text-xs md:text-xl text-black " dir='rtl'>
                   {item.id}. {item.label}
                 </div>
               </div>

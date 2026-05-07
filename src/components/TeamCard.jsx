@@ -1,7 +1,7 @@
 import Button from "./Button"
 const TeamCard = ({ name, email, role, buttonLabel, onButtonClick }) => {
-  return (
-    <div className="p-8 border border-second-color rounded-xl shadow">
+   return (
+    <div className="p-3 md:p-8 border border-second-color rounded-xl shadow">
       
       <div className="flex flex-col items-start gap-6 mb-4">
         <p className="font-bold">الاسم: {name}</p>

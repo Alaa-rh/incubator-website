@@ -52,8 +52,7 @@ const ForgotPasswordPage = () => {
       setSuccessMessage("");
     }
   };
-
-  return (
+return (
     <div className="flex h-screen w-full font-sans antialiased" dir="ltr">
       <div className="hidden md:flex w-1/2 bg-main-color items-center justify-center p-12">
         <img src={forgetPassword} alt="Illustration" className="w-full h-full" />

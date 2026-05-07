@@ -46,10 +46,10 @@ const AssignedProjectsPage = () => {
       projectTitle: "Green Panda",
     },
   ]
-
-  return (
-    <div className='bg-white-color min-h-screen p-8'>
-    <div className="container">
+ return (
+  <div className='bg-white-color min-h-screen p-4 md:p-8'>
+    <div className="container mx-auto">
+      <div className="w-full overflow-x-auto no-scrollbar">
 
       <CategoryFilterBar 
         categories={categories}
@@ -57,8 +57,9 @@ const AssignedProjectsPage = () => {
         onSelect={setSelected}
         className="bg-white-color"
       />
+      </div>
 
-      <div className="mt-10 flex justify-between items-center">
+      <div className="mt-10 flex flex-col md:flex-row md:flex-wrap md:justify-between items-center md:items-start gap-6">
         {selected === "tracking" && (
           consultationRequests
             .filter(req => req.help_type !== "استشارة لمرة واحدة")
@@ -93,7 +94,7 @@ const AssignedProjectsPage = () => {
             <NavLinkUniversal 
             label="انتقل لمراحل الاحتضان" 
             to="/incubationinfo" 
-            className='bg-main-color w-fit text-white rounded-xl px-6 py-3 font-bold'/>
+            className= 'bg-main-color w-fit text-white rounded-xl px-6 py-3 font-bold mt-30 '/>
           </>
         ) : (
           <div className='mx-auto my-30'>

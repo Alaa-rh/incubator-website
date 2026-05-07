@@ -2,14 +2,14 @@ import React from "react"
 
 const CategoryFilterBar = ({ categories, selected, onSelect, className = "" }) => {
   return (
-    <div className={`mt-4 w-full overflow-x-auto flex gap-6 justify-between items-center py-2  bg-white ${className}`}>
+    <div className={`mt-4 w-full overflow-x-auto flex gap-6 justify-start md:justify-between items-center py-2 bg-white no-scrollbar ${className}`}>
       {categories.map((cat) => (
         <button
           key={cat.id}
           onClick={() => onSelect(cat.id)}
           className={`
-            flex items-center justify-center min-w-[80px] px-4 py-2 rounded-md transition cursor-pointer
-            ${selected === cat.id ? "bg-second-color text-white font-bold" : "border border-second-color"}
+            flex items-center justify-center shrink-0 min-w-max px-4 py-2 rounded-md transition cursor-pointer whitespace-nowrap
+            ${selected === cat.id ? "bg-second-color text-white font-bold" : "border border-second-color text-black"}
           `}
         >
           {cat.icon && <span className="inline-block text-2xl mb-1 px-2">{cat.icon}</span>}

@@ -129,9 +129,9 @@ const VolunteerRequestsPage = () => {
   //   );
   // }
 
-  return (
-    <div className="bg-white-color min-h-screen p-6">
-      <div className="container">
+     return (  <div className=" min-h-screen bg-gray-100 p-6">
+      <div className="container ">
+
         {/* شريط الفئات */}
         <CategoryFilterBar
           categories={categories}
@@ -205,7 +205,7 @@ const VolunteerRequestsPage = () => {
         )}
       </div>
     </div>
-  );
+  ); 
 };
 
 export default VolunteerRequestsPage;

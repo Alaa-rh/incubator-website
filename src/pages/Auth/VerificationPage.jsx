@@ -76,8 +76,9 @@ const VerificationPage = () => {
     }
   };
 
+
   return (
-    <div className="flex h-screen w-full font-sans antialiased bg-white">
+    <div className="flex h-screen w-full font-sans antialiased bg-white"dir="ltr">
       <div className="hidden md:flex w-1/2 bg-main-color items-center justify-center p-12">
         <img src={Entercode} alt="OTP Illustration" className="h-full w-full" />
       </div>

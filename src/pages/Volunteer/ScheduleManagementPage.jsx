@@ -247,9 +247,9 @@ const ScheduleManagementPage = () => {
 
           {/* وقت البداية والنهاية */}
           <div className="flex flex-wrap md:flex-nowrap items-center justify-start gap-x-10 mb-8">
-            <div className="flex items-center gap-2">
-              <span className="text-third-color font-medium">من</span>
-              <div className="relative flex-1 group">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-third-color font-medium ">من</span>
+              <div className="relative flex-1 group ">
                 <LuCirclePlus
                   onClick={() => incrementTime(setStartTime)}
                   className="absolute right-78 top-1/2 -translate-y-1/2 w-6 h-6 text-second-color cursor-pointer hover:scale-110" 
@@ -263,7 +263,7 @@ const ScheduleManagementPage = () => {
               </div>
             </div>
 
-            <div className="flex items-center gap-2 mr-2">
+            <div className="flex items-center gap-2 md:mr-2">
               <span className="text-third-color font-medium">إلى</span>
               <div className="relative flex-1 group">
                 <LuCirclePlus
@@ -316,7 +316,7 @@ const ScheduleManagementPage = () => {
         <div className="pb-10">
           <h2 className="text-second-color font-bold mb-4">حدد أيام الأجازة :</h2>
           <div className="flex flex-wrap md:flex-nowrap items-center justify-start gap-x-10 mb-8" dir='rtl'>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 mb-3">
               <span className="text-third-color font-medium">من</span>
               <div className="relative flex-1 group">
                 <LuCirclePlus
@@ -333,7 +333,7 @@ const ScheduleManagementPage = () => {
               </div>
             </div>
 
-            <div className="flex items-center gap-2 mr-2">
+            <div className="flex items-center gap-2 md:mr-2">
               <span className="text-third-color font-medium">إلى</span>
               <div className="relative flex-1 group">
                 <LuCirclePlus 

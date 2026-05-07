@@ -30,8 +30,9 @@ const Landing2 = () => {
       if (el) el.scrollIntoView({ behavior: "smooth" })
     }
   }, [location])
+return (
+   <div className="w-full overflow-x-hidden"> 
 
-  return (
     <MainLayout header={<Header navOptions={navLinkOptions} />} footer={<Footer />}>
       <About id="about" />
       <Exhibition id="exhibition" />
@@ -41,6 +42,7 @@ const Landing2 = () => {
       <Stages id="stages" />
 
     </MainLayout>
+    </div>
   )
 }
 

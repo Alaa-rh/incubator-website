@@ -1,6 +1,6 @@
 const GeneralInfoBox = ({ info }) => {
-  return (
-    <div className="absolute top-40 left-70 bg-white rounded-xl p-4 shadow-lg flex gap-5">
+   return (
+    <div className="relative md:absolute md:top-45 md:left-50 bg-white rounded-xl p-6 shadow-lg flex flex-col-reverse md:flex-row gap-8 w-[95%] mx-auto md:w-auto mt-6 md:mt-0" dir="rtl">
      <div>
         <h3 className="font-bold text-lg mb-2">المهارات الإضافية:</h3>
         <ul className="flex flex-col gap-1 text-gray-700">

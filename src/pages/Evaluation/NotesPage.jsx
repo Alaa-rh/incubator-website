@@ -74,9 +74,9 @@ const NotesPage = () => {
   // }
 
   return (
-    <div className="min-h-screen bg-white-color md:p-15 flex flex-col">
-      <div className="container">
-        <h2 className="text-second-color text-2xl font-bold my-10">الملاحظات</h2>
+    <div className="min-h-screen bg-white-color p-4 md:p-15 flex flex-col">
+      <div className="container mx-auto">
+        <h2 className="text-second-color text-2xl font-bold my-10 text-right">الملاحظات</h2>
 
         <div className="mb-12">
           <label className="block text-black font-semibold mb-3 text-lg text-right">
@@ -85,18 +85,26 @@ const NotesPage = () => {
           <Textarea
             value={note}
             onChange={(e) => setNote(e.target.value)}
-            className="mb-6 w-100"
+            className="mb-6 w-full md:w-200"
             rows={4}
             placeholder="اكتب ملاحظتك هنا..."
           />
-          <Button
-            label="ارسال"
-            onClick={handleSend}
-            className="bg-main-color"
-          />
+            <h2 className='font-semibold text-right'>النسبة المنجزة من التاسك المطلوبة</h2>
+          <div className="flex flex-row-reverse items-center justify-end gap-4 mt-3">
+            <Button
+              label="ارسال"
+              onClick={handleSend}
+              className="bg-main-color whitespace-nowrap" 
+            />
+            <input 
+              type="text" 
+              placeholder="60%" 
+              className="border border-second-color rounded-md p-2 w-20 text-center"
+            />
+          </div>
         </div>
 
-        <div className="w-200 bg-white shadow-md rounded-lg overflow-hidden">
+        <div className="w-full md:w-200 bg-white shadow-md rounded-lg overflow-hidden">
           <h3 className="text-black text-lg font-bold p-5 text-right border-b border-second-color">
             الملاحظات المرسلة
           </h3>

@@ -27,8 +27,9 @@ const MessagesPage = () => {
     dispatch(updatePreview({ id: selectedId, text }));
   };
 
+
   return (
-    <div className="container flex justify-center h-screen">
+  <div className="container mt-20 flex flex-col md:flex-row justify-center md:h-screen md:overflow-hidden">
       <ContactsList
         contacts={contacts}
         selectedId={selectedId}

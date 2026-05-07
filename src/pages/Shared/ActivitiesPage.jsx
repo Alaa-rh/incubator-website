@@ -74,7 +74,7 @@ const ActivitiesPage = () => {
   ];
 
   return (
-    <div className='container mt-10'>
+    <div className='container mt-20'>
       <CategoryFilterBar
         categories={status}
         selected={selectedStatus}

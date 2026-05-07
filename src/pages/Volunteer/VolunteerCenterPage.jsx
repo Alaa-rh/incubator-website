@@ -11,15 +11,16 @@ const VolunteerCenterPage = () => {
         {id:"projects" , label:"المشاريع المسندة", icon:<CgFileDocument/>, link:"/assigned-projects-page"},
         {id:"workshops" , label:"ورش العمل", icon:<GrGroup/>, link:"/workshop-page"},
     ]
-  return (
+   return (
     <div>
-        
-        <div className="container">
-          <h1 className='text-3xl font-bold text-second-color my-10'>  مركز التطوع </h1>
-            <CategoryGrid items={categories} className="grid-cols-2" />
+        <div className="container mx-auto px-4 flex flex-col items-start bg-gray-100">
+          <h1 className='text-3xl font-bold text-second-color my-10'> مركز التطوع </h1>
+          <div className="w-full">
+            <CategoryGrid items={categories} className="mt-4" />
+          </div>
         </div>
     </div>
-  )
+)
 }
 
 export default VolunteerCenterPage

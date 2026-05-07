@@ -70,19 +70,21 @@ const WorkshopInfoPage = () => {
 
   if (!workshop) {
     return (
-      <div className="bg-white-color min-h-screen bg-gray-50 p-8">
-        <div className="container text-center">
-          <p className="text-gray-700 mt-20 text-xl font-bold">الورشة غير موجودة</p>
+      <div className="bg-white-color min-h-screen bg-gray-50 p-4 md:p-8 flex items-center justify-center">
+        <div className="container mx-auto text-center">
+          <p className="text-gray-700 text-lg md:text-xl font-bold">الورشة غير موجودة</p>
         </div>
       </div>
     );
   }
-
   return (
-    <div className="bg-white-color min-h-screen bg-gray-50 p-8">
-      <div className="container">
-        <h2 className="text-second-color text-2xl font-bold m-6">تفاصيل الورشة</h2>
-        <WorkshopCard workshop={workshop} status={workshop.status} />
+   <div className="bg-white-color min-h-screen bg-gray-50 p-4 md:p-8 text-right" dir="rtl">
+      <div className="container mx-auto max-w-full overflow-x-hidden">
+        <h2 className="text-second-color text-xl md:text-2xl font-bold my-4 md:my-6 pr-2"> تفاصيل الورشة
+        </h2>
+    <div className="w-full flex flex-col gap-4">
+         <WorkshopCard workshop={workshop} status={workshop.status} />
+     </div>
       </div>
     </div>
   );

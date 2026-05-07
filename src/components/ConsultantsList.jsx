@@ -9,12 +9,13 @@ const ConsultantsList = ({ consultants, role = "user" }) => {
     navigate(`/admin/details/${c.id}?type=${c.type}`);
   };
 
+ 
   return (
     <div className="grid grid-cols-1 gap-4 mt-6">
       {consultants.map((c) => (
         <div
           key={c.id}
-          className="flex items-center gap-4 p-4 border border-second-color shadow rounded-xl"
+          className="flex items-center gap-4 p-1 md:p-4 border border-second-color shadow rounded-xl"
         >
           <img src={c.avatar} className="w-20 h-20 rounded-full" />
 

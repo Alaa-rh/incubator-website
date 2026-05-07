@@ -96,7 +96,7 @@ const VolunteerRequestDetailsPage = () => {
 
   if (!request) return <p className="text-center text-gray-500 mt-20">جاري التحميل...</p>;
 
-  return (
+   return (
     <div className="bg-white-color min-h-screen p-6">
       <div className="container">
         <h1 className="text-3xl text-second-color font-bold mb-6">تفاصيل طلب التطوع</h1>

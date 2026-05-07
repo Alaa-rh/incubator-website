@@ -8,9 +8,9 @@ const Stepper = ({ steps = [], current = 0, className = "" }) => {
           <div
             className={`
               flex items-center justify-center rounded-full font-bold border
-              w-12 h-12 text-xs px-4
-              sm:w-16 sm:h-16 sm:text-sm
-              lg:w-20 lg:h-20 lg:text-base
+              w-12 h-12 text-[10px] px-4
+              sm:w-16 sm:h-16 sm:text-xs
+              lg:w-25 lg:h-25 lg:text-base
               ${
                 idx < current
                   ? "bg-second-color text-white border-second-color"

@@ -39,13 +39,15 @@ const FaQuestions = ({id}) => {
         }
         
     ]
-  return (
-    <div className='container' id={id}>
-     <h2 className=' text-main-color text-center text-[40px] font-semibold mb-10'>الأسئلة الشائعة<FaQuestion className='inline mr-4 ' /></h2>
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+ return (
+    <div className=' w-full max-w-full overflow-x-hidden py-10' id={id}>
+          <div className='px-4 md:container md:mx-auto'>
+            
+     <h2 className=' text-main-color text-center text-[28px] font-semibold mb-10'>الأسئلة الشائعة<FaQuestion className='inline mr-4 ' /></h2>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
         {
         FAQS.map((faq, index) => (
-              <div key={index} className='flex justify-center items-center gap-8 p-5 rounded-lg'>
+              <div key={index} className='w-full block text-[10px] md:text-[10px]'>
                 <FaqItem question={faq.question} answer={faq.answer}/>
               </div>
         )
@@ -56,7 +58,7 @@ const FaQuestions = ({id}) => {
         <SignupLink label="ابدأ بقفزة" className="mt-10"/>
       </div>
     </div>
-  )
-}
+    </div>
+  )}
 
 export default FaQuestions
