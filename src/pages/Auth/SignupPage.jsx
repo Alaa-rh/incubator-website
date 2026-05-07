@@ -76,9 +76,11 @@ const SignupPage = () => {
     }
   };
 
-  return (
+ 
+return (
     <div className="flex h-screen w-full overflow-hidden font-sans">
-      <div className="w-1/2 bg-white flex items-center justify-center p-12">
+      {/* تم تغيير العرض هنا ليكون كاملاً في الموبايل ونصفاً في الشاشات الأكبر */}
+      <div className="w-full md:w-1/2 bg-white flex items-center justify-center p-12">
         <div className="w-full max-w-md">
           <h1 className="text-3xl font-bold text-second-color mb-10 text-center">
             انشاء حساب
@@ -90,7 +92,6 @@ const SignupPage = () => {
               {errors.general}
             </div>
           )}
-
           <form className="space-y-5" onSubmit={handleSubmit}>
             <Input
               label="الاسم"
@@ -101,7 +102,6 @@ const SignupPage = () => {
               onChange={handleChange}
               error={errors.full_name}
             />
-
             <Input
               label="البريد الالكتروني"
               placeholder="ادخل بريدك الالكتروني"
@@ -123,7 +123,6 @@ const SignupPage = () => {
                 error={errors.password}
               />
             </div>
-
             <Button
               label={isLoading ? "جاري إنشاء الحساب..." : "التالي"}
               type="submit"
@@ -131,7 +130,6 @@ const SignupPage = () => {
               className="flex justify-center max-w-[300px] bg-main-color mt-10 mx-auto w-full"
             />
           </form>
-
           <p className="mt-8 text-center text-sm">
             <span className="text-third-color">هل لديك حساب؟ </span>
             <NavLinkUniversal
@@ -142,14 +140,12 @@ const SignupPage = () => {
           </p>
         </div>
       </div>
-
-      <div className="w-1/2 bg-main-color relative flex items-end justify-center">
+      <div className="hidden md:flex md:w-1/2 bg-main-color relative items-end justify-center">
         <div className="absolute right-0 bottom-0 w-0 h-0 border-t-[100vh] border-t-transparent border-r-[15vw] border-r-black/10"></div>
-
         <img src={signUp} alt="Character" className="h-full w-full" />
       </div>
     </div>
-  );
+  ); 
 };
 
 export default SignupPage;

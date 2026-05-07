@@ -67,13 +67,15 @@ const AddWorkshopPage = () => {
     alert("تم حفظ الورشة بنجاح");
   };
 
-  return (
-    <div className="bg-white-color min-h-screen p-10">
-      <h1 className="text-3xl font-bold text-second-color">اضافة ورشة تدريبية</h1>
-      <div className="container mt-20 flex justify-between items-center">
-        <WorkshopImage image={formData.image} />
+ return (
+   <div className="bg-white-color min-h-screen p-6 md:p-10"dir="ltr">
+    <h1 className="text-2xl md:text-3xl font-bold text-second-color text-center md:text-right">
+      اضافة ورشة تدريبية
+    </h1>
 
-        <div className="w-[500px]">
+    <div className="container mt-10 md:mt-40 flex flex-col-reverse md:flex-row justify-between items-center gap-10 md:gap-0"dir="rtl">
+
+      <div className="w-full md:w-[500px]">
           {step === 1 && (
             <WorkshopStepOne
               formData={formData}
@@ -82,7 +84,6 @@ const AddWorkshopPage = () => {
               error={error}
             />
           )}
-
           {step === 2 && (
             <WorkshopStepTwo
               formData={formData}
@@ -93,6 +94,7 @@ const AddWorkshopPage = () => {
             />
           )}
         </div>
+          <WorkshopImage image={formData.image} />
       </div>
     </div>
   );

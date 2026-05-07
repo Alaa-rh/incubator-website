@@ -42,7 +42,7 @@ const ProfilePage = ({ userName, email }) => {
           تعديل الملف الشخصي
         </h1>
 
-        <div className="bg-white w-1/2 flex items-center gap-4 mb-8 p-4 rounded">
+        <div className="bg-white flex items-center gap-4 mb-8 p-4 rounded w-full md:w-[600px]">
           <img src={currentUser.avatar} alt="avatar" className="w-16 h-16 rounded-full mb-2" />
           <div>
             <p className="font-semibold">{currentUser.full_name}</p>
@@ -50,7 +50,7 @@ const ProfilePage = ({ userName, email }) => {
           </div>
         </div>
 
-        <div className="w-1/2 bg-white p-6 rounded">
+        <div className="w-1/2 bg-white p-6 rounded w-full md:w-[600px]">
           <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
             <Input
               label="الاسم الكامل"

@@ -9,12 +9,11 @@ import { FaRegMessage } from "react-icons/fa6"
 const UserNavbar = ({ navOptions }) => {
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-white shadow-md">
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 h-20">
+       <nav className="fixed top-0 left-0 w-full z-50 bg-white shadow-md">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 h-20 flex-nowrap overflow-x-auto scrollbar-hide">
 
-        {/* Logo */}
-        <div className="flex items-center gap-2">
-          <img
+        <div className="flex items-center gap-2 flex-shrink-0">
+      <img
             src={logo}
             alt="logo"
             className="w-16 h-16 object-contain"
@@ -29,7 +28,7 @@ const UserNavbar = ({ navOptions }) => {
         />
 
         {/* Right actions */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 flex-shrink-0">
           <NavLinkUniversal
             label={<FaRegMessage size={22} />}
             to="/messagespage"

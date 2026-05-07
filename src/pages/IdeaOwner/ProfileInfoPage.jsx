@@ -57,7 +57,7 @@ const ProfileInfoPage = () => {
   // if (error) return <div>حدث خطأ</div>
 
   return (
-    <div className="h-full">
+    <div className="h-full relative overflow-x-hidden" dir="rtl">
       <ProfileHeader profile={profileData} />
       
       <div className="container flex justify-center items-center mt-6">
@@ -65,7 +65,7 @@ const ProfileInfoPage = () => {
         <GeneralInfoBox info={generalInfo} />
       </div>
 
-      <div className="flex items-center gap-3 mr-25">
+      <div className="flex items-center gap-3 mr-20 mt-10">
         <Button label="طلب انضمام" className="bg-main-color" />
         <ConsultationRequestBtn />
       </div>

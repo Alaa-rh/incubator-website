@@ -1,6 +1,6 @@
 const AvailabilityBox = ({ availability }) => {
-  return (
-    <div className="absolute top-60 right-120 bg-white rounded-xl p-4 shadow-lg flex flex-col gap-4">
+   return (
+    <div className="relative md:absolute md:top-60 md:right-120 bg-white rounded-xl p-4 shadow-lg flex flex-col gap-4 w-[90%] mx-auto md:w-auto mt-6 md:mt-0">
 
       {/* عنوان أيام التفرغ */}
       <h3 className="font-bold text-lg">أيام التفرغ:</h3>

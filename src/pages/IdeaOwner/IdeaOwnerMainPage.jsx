@@ -14,7 +14,7 @@ const IdeaOwnerMainPage = () => {
 
   return (
     <div className='bg-white-color min-h-screen py-8'>
-      <div className="container">
+      <div className="container mt-17">
 
         {/* صندوق تطوع */}
         {!hideVolunteerOption && (

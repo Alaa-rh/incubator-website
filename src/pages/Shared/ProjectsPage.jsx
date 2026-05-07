@@ -84,7 +84,7 @@ const ProjectsPage = () => {
   if (isLoading) return <p className="text-center mt-10">جاري التحميل...</p>;
 
   return (
-    <div className='container'>
+    <div className='container mt-20'>
       <h2 className="text-xl font-bold mt-6 mb-4 text-main-color">
         {exhibitionYear ? `مشاريع معرض ${exhibitionYear}` : "جميع المشاريع"}
       </h2>

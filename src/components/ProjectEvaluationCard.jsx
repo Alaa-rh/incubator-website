@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "./Button";
 const ProjectEvaluationCard = ({ project, onViewDetails}) => {
-  return (
+ return (
     <div className="bg-white shadow-md rounded-xl p-5 border border-second-color hover:shadow-lg transition">
 
       <p className="text-gray-700 mb-2">

@@ -121,10 +121,14 @@ const CampStage = ({ onComplete }) => {
   //   );
   // }
 
+  
   return (
-    <div className="p-6 space-y-8 min-h-screen">
-      <AlertBox message="تأكد من حضور الجلسات بنسبة 75% وعدم تأخير تسليم المهام المطلوبة لتجنب التأثير على استمرارك في الحاضنة." />
+    <div className=" md:p-6 space-y-8 min-h-screen overflow-x-hidden bg-white-color">
 
+      {/* التنبيه: جعلناه يأخذ العرض كاملاً */}
+      <div className="w-full">
+        <AlertBox message="تأكد من حضور الجلسات بنسبة 75% وعدم تأخير تسليم المهام المطلوبة لتجنب التأثير على استمرارك في الحاضنة." />
+      </div>
       {/* نسبة الحضور */}
       <div className="bg-white p-4 rounded-lg w-fit shadow-lg">
         <p className="font-bold">نسبة الحضور: {attendanceRate.toFixed(1)}%</p>
@@ -167,11 +171,12 @@ const CampStage = ({ onComplete }) => {
       </div>
 
       {/* جدول الجلسات */}
-      <div>
-        <h3 className="text-xl font-bold text-second-color mb-3">جدول الجلسات</h3>
-
-        <table className="w-full text-center bg-white rounded-lg border-collapse border border-second-color shadow-lg">
-          <thead>
+      <div className="w-full">
+        <h3 className="text-xl font-bold text-second-color mb-4">جدول الجلسات</h3>
+        <div className="overflow-x-auto rounded-lg shadow-lg border border-second-color">
+            <table className="w-full text-center bg-white border-collapse min-w-[700px]">
+              <thead className="bg-gray-50">
+          
             <tr>
               <th className="p-2">عنوان الجلسة</th>
               <th className="p-2">التاريخ</th>
@@ -196,6 +201,7 @@ const CampStage = ({ onComplete }) => {
           </tbody>
         </table>
       </div>
+    </div>
     </div>
   );
 };

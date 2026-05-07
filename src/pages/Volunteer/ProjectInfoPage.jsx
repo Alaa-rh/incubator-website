@@ -37,10 +37,10 @@ const ProjectInfoPage = () => {
   // if (isLoading) return <div>جاري التحميل...</div>
   // if (error) return <div>حدث خطأ</div>
 
-  return (
-    <div className="min-h-screen bg-white-color p-4">
-      <div className="container"> 
-        <h1 className="text-second-color text-2xl font-bold mb-2">تفاصيل المشروع</h1>
+ return ( <div className="min-h-screen bg-white-color p-4">
+      <div className="container mx-auto"> 
+        <h1 className="text-second-color text-xl md:text-2xl font-bold mb-4 text-right">تفاصيل المشروع</h1>
+        
         <div className="bg-white p-8 rounded-sm shadow-md border border-gray-100 mb-6">
           <InfoRow label="اسم المشروع :">{projectData.header.projectName}</InfoRow>
           <InfoRow label="مسؤول التعديل (القائد) :">{projectData.header.manager}</InfoRow>
@@ -52,8 +52,9 @@ const ProjectInfoPage = () => {
           <InfoRow label="الاسم :" >{projectData.personalInfo.name}</InfoRow>
           <InfoRow label="رقم الهاتف :">{projectData.personalInfo.phone} </InfoRow>
           <InfoRow label="الاختصاص :">{projectData.personalInfo.specialization} </InfoRow>
-          <InfoRow label="البريد الإلكتروني :">{projectData.personalInfo.email} </InfoRow>
-        </div>
+          <InfoRow label="البريد الإلكتروني :">
+          <span className='break-all md:break-normal'>{projectData.personalInfo.email}</span> </InfoRow>
+              </div>
 
         <div className="bg-white p-8 rounded-sm shadow-sm border border-gray-100 mb-6">
           <h2 className="text-lg font-bold text-black mb-4 border-b border-second-color pb-2">2. معلومات عن الفكرة</h2>

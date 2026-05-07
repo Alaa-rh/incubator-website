@@ -8,7 +8,7 @@ import Stepper from "../../components/Stepper"
 
 const IncubationStagesPage = () => {
   // المرحلة الحالية (0 → 4)
-  const [currentStage, setCurrentStage] = useState(1)
+  const [currentStage, setCurrentStage] = useState(5)
 
   // الانتقال للمرحلة التالية
   const handleStageComplete = () => {
@@ -23,9 +23,8 @@ const IncubationStagesPage = () => {
     <FollowupStage onComplete={handleStageComplete} notes={[]} allNotesResolved={false} />,
     <ExhibitionStage onComplete={handleStageComplete} />
   ]
-
   return (
-    <div className="h-min-screen bg-white-color p-6 space-y-8 ">
+    <div className="min-h-screen bg-white-color p-4 md:p-6 space-y-8 overflow-x-hidden">
 
       
       <h1 className="text-2xl font-bold text-main-color">
@@ -44,7 +43,7 @@ const IncubationStagesPage = () => {
       </div>
 
     </div>
-  )
+    )
 }
 
 export default IncubationStagesPage

@@ -71,10 +71,10 @@ const EditVolunteerProfilePage = () => {
 
   // if (isLoading) return <div className="container mx-auto text-center mt-20">جاري تحميل البيانات...</div>
 
-  return (
-    <div className="container mx-auto" dir="rtl"> 
+   return (
+    <div className="container mx-auto bg-gray-100" dir="rtl"> 
 
-      <div className="bg-white w-1/2 flex items-center gap-4 mt-4 mb-2 p-4 rounded-lg">
+      <div className="bg-white w-full md:w-1/2 flex items-center gap-4 mt-4 mb-2 p-4 rounded-lg">
         <img src={girl} alt="avatar" className="w-16 h-16 rounded-full" />
         <div>
           <p className="font-semibold">{state.full_name}</p>
@@ -117,7 +117,7 @@ const EditVolunteerProfilePage = () => {
             <Button 
               type="submit"
               label="حفظ التعديلات"
-              className="bg-main-color h-11 mt-2"
+              className="bg-main-color h-18 md:h-10 mt-2"
             />
           </div>
 

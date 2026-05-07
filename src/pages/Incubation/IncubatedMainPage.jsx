@@ -7,7 +7,7 @@ import ConsultationRequestBtn from '../../components/ConsultationRequestBtn';
 const IncubatedMainPage = () => {
   return (
     <div className='bg-white-color min-h-screen py-8'>
-        <div className="container">
+        <div className="container mt-15">
             <NearestWorkshopCard />
             <div className='bg-white p-6 rounded-lg flex justify-between items-center shadow-lg mb-8'>
          <div>

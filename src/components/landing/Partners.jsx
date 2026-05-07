@@ -3,12 +3,12 @@ import partner from '../../assets/images/men.png'
 import SignupLink from '../SignupLink';
 const Partners = ({id}) => {
   return (
-    <div className='partners-bg w-full h-screen mb-40' id={id}>
-        <div className="container flex justify-between items-center gap-20 pt-55">
-             <div className='w-[40%] h-[500px]'>
+    <div className='partners-bg w-full min-h-screen mb-20 lg:mb-40' id={id}>
+    <div className="container flex flex-col lg:flex-row justify-between items-center gap-10 lg:gap-20 pt-20 lg:pt-55">
+       <div className='w-full lg:w-[40%] h-[350px] lg:h-[500px]'>
                  <img src={partner} alt="about us" className='w-full h-full object-cover' />
              </div>
-             <div className="w-[50%]">
+      <div className="w-full lg:w-[50%] text-right">
                 <h1 className='text-second-color font-semibold text-[40px] mt-5'>كن شريك نجاحنا</h1>
                 <p className='text-[25px] font-medium my-5'>نحن نؤمن بأن مفتاح نجاح أي مشروع ريادي هو قوة المعرفة المشتركة وتبادل الخبرات.
                 ادعُ خبرتك لتكون جزءاً من قصة نجاحنا. يمكنك المساهمة بعدة طرق فعالة:

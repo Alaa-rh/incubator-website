@@ -6,11 +6,11 @@ const WorkshopCard = ({ workshop, status }) => {
     accepted: "text-green-color"
   }
 
-  return (
-    <div className="bg-white p-6 rounded-lg shadow-lg">
-
-    <div className="flex items-center gap-40 p-10">
-     <div className="space-y-10">
+return (
+     <div className="bg-white p-4 md:p-6 rounded-lg shadow-lg text-right" dir="rtl">
+    
+    <div className="flex flex-col md:flex-row md:items-start md:gap-20 lg:gap-40 p-4 md:p-10 space-y-8 md:space-y-0">
+      <div className="space-y-10">
       <p><span className="font-bold px-2">اسم الورشة:</span> {workshop.title}</p>
       <p><span className="font-bold px-2">تاريخ الانعقاد:</span> {workshop.start_date}</p>
       </div>

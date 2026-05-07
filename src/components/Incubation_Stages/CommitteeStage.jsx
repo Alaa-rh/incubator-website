@@ -49,7 +49,7 @@ const CommitteeStage = ({ onComplete, committeeResult }) => {
   //   );
   // }
 
-  return (
+   return (
     <div className="p-6 rounded-xl space-y-8 min-h-screen bg-white-color">
       {/* عنوان المرحلة */}
       <h2 className="text-2xl font-bold text-second-color">
@@ -57,7 +57,7 @@ const CommitteeStage = ({ onComplete, committeeResult }) => {
       </h2>
 
       {/* معلومات الحالة */}
-      <div className="space-y-3 bg-white p-4 rounded-lg shadow-lg w-100">
+      <div className="space-y-3 bg-white p-4 rounded-lg shadow-lg w-75 md:w-100">
         <p>
           <span className="font-bold pl-2">الحالة:</span>
           {committeeResult ? "تم التقييم" : "بانتظار التقييم"}

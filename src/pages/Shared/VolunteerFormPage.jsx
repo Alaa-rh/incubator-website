@@ -23,7 +23,7 @@ const VolunteerFormPage = () => {
   }
 
   return (
-    <div className='bg-white-color h-screen w-full'>
+    <div className='bg-white-color min-h-screen w-full'>
       <div className='container pt-10'>
         <h1 className='text-2xl font-bold'>أهلا بك كمتطوع!</h1>
         <p className='text-gray-600'>

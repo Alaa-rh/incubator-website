@@ -1,17 +1,17 @@
 import { GrCubes } from "react-icons/gr";
 import { SlScreenDesktop } from "react-icons/sl";
 const ProjectsSection = ({ projects }) => {
-  return (
+   return (
     <div>
 
       {/* العنوان */}
-      <div className="flex gap-3 font-bold mr-25">
+      <div className="flex gap-3 font-bold  mr-25">
       <SlScreenDesktop className="text-4xl text-second-color" />
       <h3 className="text-4xl">مشاريعي</h3>
       </div>
 
       {/* قائمة المشاريع */}
-      <div className="flex items-center justify-center gap-10">
+      <div className="flex items-center justify-center gap-10 mb-10 mt-19">
         {projects.map((project, index) => (
           <div 
             key={index}

@@ -75,9 +75,9 @@ const NewPasswordPage = () => {
     }
   };
 
-  return (
+ return (
     <div className="flex h-screen w-full overflow-hidden font-sans">
-      <div className="w-1/2 bg-white flex items-center justify-center p-12">
+      <div className="w-full md:w-1/2 bg-white flex items-center justify-center p-12">
         <div className="w-full max-w-md">
           <h1 className="text-3xl font-bold text-second-color mb-10 text-center">
             إدخال كلمة مرور جديدة
@@ -114,7 +114,6 @@ const NewPasswordPage = () => {
                 inputClassName="pl-10"
               />
             </div>
-
             <Button
               label={isLoading ? "جاري التغيير..." : "التالي"}
               type="submit"
@@ -124,8 +123,7 @@ const NewPasswordPage = () => {
           </form>
         </div>
       </div>
-
-      <div className="w-1/2 bg-main-color relative flex items-end justify-center">
+      <div className="hidden md:flex md:w-1/2 bg-main-color relative items-end justify-center">
         <img src={newpassword} alt="Character" className="h-full w-full" />
       </div>
     </div>
